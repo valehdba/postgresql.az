@@ -1,1 +1,1 @@
-# postgresql.az
+# postgresql.az web saytının kodu
