@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/pgyum.css">
+    <title>Admin Panel - AZERPUG</title>
+    <style>
+      :root {
+        --pg-blue-dark: #336791;
+        --pg-blue-light: #e7eef4;
+        --pg-blue-hover: #264d6f;
+        --pg-text: #515151;
+        --pg-text-light: #6c757d;
+        --pg-border: #d8dde3;
+        --pg-bg-light: #f5f5f5;
+        --pg-white: #ffffff;
+        --pg-success: #28a745;
+        --pg-danger: #dc3545;
+        --pg-warning: #e8a33d;
+      }
+
+      .admin-wrapper { max-width: 1100px; margin: 0 auto; padding: 0 15px; margin-top: 1rem; }
+
+      /* Header */
+      .admin-header { background: var(--pg-blue-dark); color: var(--pg-white); padding: 20px 28px; border-radius: 6px 6px 0 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+      .admin-header h1 { font-family: 'Maven Pro', sans-serif; font-size: 1.3rem; font-weight: 700; margin: 0; text-transform: uppercase; letter-spacing: 0.5px; }
+      .admin-header-actions { display: flex; gap: 10px; align-items: center; }
+      .admin-user { font-size: 0.82rem; opacity: 0.85; }
+
+      /* Login */
+      .admin-login { max-width: 400px; margin: 80px auto; background: var(--pg-white); border: 1px solid var(--pg-border); border-radius: 6px; overflow: hidden; }
+      .admin-login-header { background: var(--pg-blue-dark); color: var(--pg-white); padding: 16px 24px; font-family: 'Maven Pro', sans-serif; font-size: 1rem; font-weight: 700; text-transform: uppercase; }
+      .admin-login-body { padding: 24px; }
+      .admin-login-body label { font-family: 'Maven Pro', sans-serif; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--pg-text); display: block; margin-bottom: 4px; }
+      .admin-login-body input { width: 100%; padding: 8px 12px; font-size: 0.9rem; border: 1px solid var(--pg-border); border-radius: 3px; margin-bottom: 14px; }
+      .admin-login-body input:focus { border-color: var(--pg-blue-dark); outline: none; box-shadow: 0 0 0 3px rgba(51,103,145,0.15); }
+
+      /* Stats */
+      .admin-stats { display: flex; gap: 12px; margin: 20px 0; flex-wrap: wrap; }
+      .admin-stat { background: var(--pg-white); border: 1px solid var(--pg-border); border-radius: 4px; padding: 16px 20px; flex: 1; min-width: 120px; text-align: center; }
+      .admin-stat-num { font-family: 'Maven Pro', sans-serif; font-size: 2rem; font-weight: 700; line-height: 1; }
+      .admin-stat-num.pending { color: var(--pg-warning); }
+      .admin-stat-num.published { color: var(--pg-success); }
+      .admin-stat-num.total { color: var(--pg-blue-dark); }
+      .admin-stat-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--pg-text-light); letter-spacing: 0.4px; margin-top: 4px; }
+
+      /* Tabs */
+      .admin-tabs { display: flex; border-bottom: 2px solid var(--pg-border); margin-bottom: 20px; gap: 0; }
+      .admin-tab { padding: 10px 20px; font-family: 'Maven Pro', sans-serif; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; color: var(--pg-text-light); cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all 0.15s ease; background: none; border-top: none; border-left: none; border-right: none; }
+      .admin-tab:hover { color: var(--pg-blue-dark); }
+      .admin-tab.active { color: var(--pg-blue-dark); border-bottom-color: var(--pg-blue-dark); }
+      .admin-tab .badge { background: var(--pg-warning); color: var(--pg-white); font-size: 0.65rem; padding: 2px 7px; border-radius: 10px; margin-left: 6px; }
+
+      /* Post cards */
+      .admin-post { background: var(--pg-white); border: 1px solid var(--pg-border); border-radius: 4px; margin-bottom: 12px; overflow: hidden; }
+      .admin-post.highlight { border-left: 4px solid var(--pg-warning); }
+      .admin-post-header { padding: 16px 20px; display: flex; align-items: flex-start; gap: 14px; }
+      .admin-post-info { flex: 1; min-width: 0; }
+      .admin-post-title { font-family: 'Maven Pro', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--pg-text); margin: 0 0 4px 0; text-transform: none; }
+      .admin-post-meta { font-size: 0.8rem; color: var(--pg-text-light); display: flex; gap: 14px; flex-wrap: wrap; }
+      .admin-post-meta i { margin-right: 3px; }
+      .admin-post-excerpt { font-size: 0.85rem; color: var(--pg-text); padding: 0 20px 12px 20px; line-height: 1.5; }
+      .admin-post-tags { padding: 0 20px 12px 20px; display: flex; gap: 5px; flex-wrap: wrap; }
+      .pg-tag { display: inline-block; padding: 2px 10px; background: var(--pg-blue-light); color: var(--pg-blue-dark); font-size: 0.72rem; font-weight: 600; border-radius: 12px; }
+
+      .admin-post-actions { padding: 12px 20px; background: var(--pg-bg-light); border-top: 1px solid var(--pg-border); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+      .admin-note-input { flex: 1; min-width: 200px; padding: 6px 10px; font-size: 0.82rem; border: 1px solid var(--pg-border); border-radius: 3px; }
+      .admin-note-input:focus { border-color: var(--pg-blue-dark); outline: none; }
+
+      /* Preview modal */
+      .admin-preview-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 9999; overflow-y: auto; padding: 40px 20px; }
+      .admin-preview-modal { max-width: 800px; margin: 0 auto; background: var(--pg-white); border-radius: 6px; overflow: hidden; }
+      .admin-preview-header { background: var(--pg-blue-dark); color: var(--pg-white); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+      .admin-preview-header h2 { font-family: 'Maven Pro', sans-serif; font-size: 1rem; font-weight: 700; margin: 0; text-transform: uppercase; }
+      .admin-preview-close { background: none; border: none; color: var(--pg-white); font-size: 1.4rem; cursor: pointer; opacity: 0.8; }
+      .admin-preview-close:hover { opacity: 1; }
+      .admin-preview-body { padding: 28px; font-size: 0.95rem; line-height: 1.75; color: var(--pg-text); }
+      .admin-preview-body h1, .admin-preview-body h2, .admin-preview-body h3 { text-transform: none; }
+      .admin-preview-body pre { background: #f6f8fa; border: 1px solid var(--pg-border); border-radius: 4px; padding: 16px; overflow-x: auto; }
+      .admin-preview-body code { background: #f6f8fa; padding: 2px 6px; border-radius: 3px; font-size: 0.88rem; }
+      .admin-preview-body pre code { background: none; padding: 0; }
+      .admin-preview-body blockquote { border-left: 4px solid var(--pg-blue-dark); padding: 10px 20px; background: var(--pg-blue-light); border-radius: 0 4px 4px 0; margin: 1em 0; }
+
+      /* Buttons */
+      .btn-pg { display: inline-flex; align-items: center; gap: 5px; font-family: 'Maven Pro', sans-serif; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; padding: 6px 14px; border: none; border-radius: 3px; cursor: pointer; transition: all 0.15s ease; }
+      .btn-approve { background: var(--pg-success); color: var(--pg-white); }
+      .btn-approve:hover { background: #218838; }
+      .btn-reject { background: var(--pg-danger); color: var(--pg-white); }
+      .btn-reject:hover { background: #c82333; }
+      .btn-preview { background: var(--pg-blue-dark); color: var(--pg-white); }
+      .btn-preview:hover { background: var(--pg-blue-hover); }
+      .btn-unpublish { background: var(--pg-text-light); color: var(--pg-white); }
+      .btn-unpublish:hover { background: #555; }
+      .btn-back { background: transparent; color: var(--pg-blue-dark); border: 1px solid var(--pg-border); }
+      .btn-back:hover { background: var(--pg-blue-light); }
+      .btn-logout { background: transparent; color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.3); }
+      .btn-logout:hover { background: rgba(255,255,255,0.1); color: var(--pg-white); }
+
+      /* Status badges */
+      .status { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; flex-shrink: 0; }
+      .status-draft { background: #e0e0e0; color: #555; }
+      .status-pending { background: #fff3cd; color: #856404; }
+      .status-published { background: #d4edda; color: #155724; }
+      .status-rejected { background: #f8d7da; color: #721c24; }
+
+      .pg-alert { padding: 12px 18px; border-radius: 3px; margin-bottom: 1rem; font-size: 0.88rem; }
+      .pg-alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+      .pg-alert-danger { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+
+      .pg-loading { text-align: center; padding: 3rem; color: var(--pg-text-light); }
+      .pg-loading i { font-size: 2rem; color: var(--pg-blue-dark); margin-bottom: 0.75rem; display: block; }
+      .pg-empty { text-align: center; padding: 2.5rem; color: var(--pg-text-light); font-size: 0.9rem; }
+
+      @media (max-width: 768px) {
+        .admin-post-header { flex-direction: column; }
+        .admin-post-actions { flex-direction: column; }
+        .admin-note-input { min-width: auto; width: 100%; }
+        .admin-stats { flex-direction: column; }
+        .admin-header { flex-direction: column; text-align: center; }
+      }
+    </style>
+  </head>
+<body>
+    <div class="container-fluid">
+      <!-- Nav -->
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand p-0" href="/"><img class="logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG Logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="pgNavbar">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2"><a href="/">Home</a></li>
+                <li class="nav-item p-2"><a href="/blogs/">Blog Posts</a></li>
+                <li class="nav-item p-2"><a href="/registration/">Registration</a></li>
+                <li class="nav-item p-2"><a href="/members/">Members</a></li>
+                <li class="nav-item p-2"><a href="/links/">Useful Links</a></li>
+                <li class="nav-item p-2"><a href="/about/">About</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Login Screen -->
+      <div id="loginScreen" class="admin-login">
+        <div class="admin-login-header"><i class="fas fa-lock"></i>&nbsp; Admin Login</div>
+        <div class="admin-login-body">
+          <label>Email</label>
+          <input type="email" id="loginEmail" placeholder="admin@postgresql.az">
+          <label>Password</label>
+          <input type="password" id="loginPassword" placeholder="Your password">
+          <div id="loginError" style="color:var(--pg-danger);font-size:0.82rem;margin-bottom:10px;display:none;"></div>
+          <button class="btn-pg btn-preview" style="width:100%;justify-content:center;padding:10px;" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> Log In</button>
+          <div style="margin-top:12px;font-size:0.78rem;color:var(--pg-text-light);text-align:center;">Admin access only. <a href="/blogs/">Back to Blog</a></div>
+        </div>
+      </div>
+
+      <!-- Admin Panel (hidden until login) -->
+      <div id="adminPanel" style="display:none;" class="admin-wrapper">
+
+        <div class="admin-header">
+          <h1><i class="fas fa-shield-alt"></i> AZERPUG Admin Panel</h1>
+          <div class="admin-header-actions">
+            <span class="admin-user"><i class="fas fa-user"></i> <span id="adminName"></span></span>
+            <button class="btn-pg btn-logout" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Log Out</button>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="admin-stats">
+          <div class="admin-stat"><div class="admin-stat-num pending" id="statPending">—</div><div class="admin-stat-label">Pending Review</div></div>
+          <div class="admin-stat"><div class="admin-stat-num published" id="statPublished">—</div><div class="admin-stat-label">Published</div></div>
+          <div class="admin-stat"><div class="admin-stat-num" id="statDrafts" style="color:var(--pg-text-light);">—</div><div class="admin-stat-label">Drafts</div></div>
+          <div class="admin-stat"><div class="admin-stat-num total" id="statMembers">—</div><div class="admin-stat-label">Members</div></div>
+        </div>
+
+        <div id="globalAlert"></div>
+
+        <!-- Tabs -->
+        <div class="admin-tabs">
+          <button class="admin-tab active" data-status="pending" onclick="switchTab('pending')">Pending <span class="badge" id="pendingBadge" style="display:none;"></span></button>
+          <button class="admin-tab" data-status="published" onclick="switchTab('published')">Published</button>
+          <button class="admin-tab" data-status="draft" onclick="switchTab('draft')">Drafts</button>
+          <button class="admin-tab" data-status="rejected" onclick="switchTab('rejected')">Rejected</button>
+          <button class="admin-tab" data-status="" onclick="switchTab('')">All</button>
+        </div>
+
+        <!-- Posts List -->
+        <div id="postsList">
+          <div class="pg-loading"><i class="fas fa-spinner fa-spin"></i><div>Loading posts...</div></div>
+        </div>
+      </div>
+
+      <!-- Preview Modal -->
+      <div class="admin-preview-overlay" id="previewOverlay" onclick="if(event.target===this)closePreview()">
+        <div class="admin-preview-modal">
+          <div class="admin-preview-header">
+            <h2><i class="fas fa-eye"></i> Post Preview</h2>
+            <button class="admin-preview-close" onclick="closePreview()">&times;</button>
+          </div>
+          <div class="admin-preview-body" id="previewBody"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <script>
+      var SUPABASE_URL = 'https://qlyqwwhimwfcvuqdrxov.supabase.co';
+      var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFseXF3d2hpbXdmY3Z1cWRyeG92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjg2ODYsImV4cCI6MjA4OTcwNDY4Nn0.6MKz72wGwthRL8hs-Iv3L9Iw_W4DdGh3UjrwcagtKfM';
+
+      var admin = JSON.parse(sessionStorage.getItem('azerpug_admin') || 'null');
+      var allPosts = [];
+      var currentTab = 'pending';
+
+      async function rpc(fn, params) {
+        var r = await fetch(SUPABASE_URL + '/rest/v1/rpc/' + fn, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
+          body: JSON.stringify(params)
+        });
+        if (!r.ok) { var e = await r.text(); throw new Error(e); }
+        return await r.json();
+      }
+
+      async function hashPassword(pw) {
+        var d = new TextEncoder().encode(pw);
+        var b = await crypto.subtle.digest('SHA-256', d);
+        return Array.from(new Uint8Array(b)).map(function(x) { return x.toString(16).padStart(2,'0'); }).join('');
+      }
+
+      // =============================================
+      // AUTH
+      // =============================================
+      async function doLogin() {
+        var email = document.getElementById('loginEmail').value.trim();
+        var pw = document.getElementById('loginPassword').value;
+        var err = document.getElementById('loginError');
+        if (!email || !pw) { err.textContent = 'Enter email and password.'; err.style.display = 'block'; return; }
+
+        try {
+          err.style.display = 'none';
+          var hash = await hashPassword(pw);
+          var result = await rpc('member_login', { login_email: email, login_password_hash: hash });
+
+          if (!result || !result.id) { err.textContent = 'Invalid credentials.'; err.style.display = 'block'; return; }
+          if (!result.is_admin) { err.textContent = 'Access denied. Admin privileges required.'; err.style.display = 'block'; return; }
+
+          admin = result;
+          sessionStorage.setItem('azerpug_admin', JSON.stringify(admin));
+          showPanel();
+        } catch (e) {
+          err.textContent = 'Login failed.'; err.style.display = 'block';
+        }
+      }
+
+      function doLogout() {
+        admin = null;
+        sessionStorage.removeItem('azerpug_admin');
+        document.getElementById('adminPanel').style.display = 'none';
+        document.getElementById('loginScreen').style.display = 'block';
+      }
+
+      function showPanel() {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('adminPanel').style.display = 'block';
+        document.getElementById('adminName').textContent = admin.first_name + ' ' + admin.last_name;
+        loadStats();
+        loadPosts();
+      }
+
+      // =============================================
+      // STATS
+      // =============================================
+      async function loadStats() {
+        try {
+          var stats = await rpc('admin_get_stats', { p_admin_id: admin.id });
+          document.getElementById('statPending').textContent = stats.pending_posts;
+          document.getElementById('statPublished').textContent = stats.published_posts;
+          document.getElementById('statDrafts').textContent = stats.draft_posts;
+          document.getElementById('statMembers').textContent = stats.total_members;
+
+          var badge = document.getElementById('pendingBadge');
+          if (stats.pending_posts > 0) { badge.textContent = stats.pending_posts; badge.style.display = 'inline'; }
+          else { badge.style.display = 'none'; }
+        } catch (e) { console.error('Stats error:', e); }
+      }
+
+      // =============================================
+      // POSTS
+      // =============================================
+      async function loadPosts() {
+        var container = document.getElementById('postsList');
+        container.innerHTML = '<div class="pg-loading"><i class="fas fa-spinner fa-spin"></i><div>Loading posts...</div></div>';
+
+        try {
+          allPosts = await rpc('admin_get_all_posts', { p_admin_id: admin.id });
+          renderPosts();
+        } catch (e) {
+          container.innerHTML = '<div class="pg-alert pg-alert-danger">Failed to load posts: ' + esc(e.message) + '</div>';
+        }
+      }
+
+      function switchTab(status) {
+        currentTab = status;
+        document.querySelectorAll('.admin-tab').forEach(function(t) { t.classList.remove('active'); });
+        document.querySelector('[data-status="' + status + '"]').classList.add('active');
+        renderPosts();
+      }
+
+      function renderPosts() {
+        var container = document.getElementById('postsList');
+        var filtered = currentTab ? allPosts.filter(function(p) { return p.status === currentTab; }) : allPosts;
+
+        if (filtered.length === 0) {
+          container.innerHTML = '<div class="pg-empty"><i class="fas fa-inbox"></i> No ' + (currentTab || '') + ' posts found.</div>';
+          return;
+        }
+
+        var html = '';
+        filtered.forEach(function(post) {
+          var date = post.updated_at ? new Date(post.updated_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+          var tags = (post.tags || []).map(function(t) { return '<span class="pg-tag">' + esc(t) + '</span>'; }).join('');
+          var isPending = post.status === 'pending';
+
+          html += '<div class="admin-post' + (isPending ? ' highlight' : '') + '">' +
+            '<div class="admin-post-header">' +
+              '<span class="status status-' + post.status + '">' + esc(post.status) + '</span>' +
+              '<div class="admin-post-info">' +
+                '<div class="admin-post-title">' + esc(post.title) + '</div>' +
+                '<div class="admin-post-meta">' +
+                  '<span><i class="fas fa-user"></i> ' + esc(post.author_first_name) + ' ' + esc(post.author_last_name) + '</span>' +
+                  '<span><i class="fas fa-envelope"></i> ' + esc(post.author_email) + '</span>' +
+                  '<span><i class="fas fa-clock"></i> ' + date + '</span>' +
+                  (post.views_count ? '<span><i class="fas fa-eye"></i> ' + post.views_count + '</span>' : '') +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+            (post.excerpt ? '<div class="admin-post-excerpt">' + esc(post.excerpt) + '</div>' : '') +
+            (tags ? '<div class="admin-post-tags">' + tags + '</div>' : '') +
+            (post.admin_note ? '<div style="padding:0 20px 10px;font-size:0.82rem;color:var(--pg-warning);"><i class="fas fa-comment"></i> Note: ' + esc(post.admin_note) + '</div>' : '') +
+            '<div class="admin-post-actions">' +
+              '<button class="btn-pg btn-preview" onclick="previewPost(\'' + post.id + '\')"><i class="fas fa-eye"></i> Preview</button>' +
+              (post.status !== 'published' ? '<button class="btn-pg btn-approve" onclick="updateStatus(\'' + post.id + '\', \'published\')"><i class="fas fa-check"></i> Publish</button>' : '') +
+              (post.status !== 'rejected' ? '<button class="btn-pg btn-reject" onclick="updateStatus(\'' + post.id + '\', \'rejected\')"><i class="fas fa-times"></i> Reject</button>' : '') +
+              (post.status === 'published' ? '<button class="btn-pg btn-unpublish" onclick="updateStatus(\'' + post.id + '\', \'pending\')"><i class="fas fa-undo"></i> Unpublish</button>' : '') +
+              '<input type="text" class="admin-note-input" id="note-' + post.id + '" placeholder="Admin note (optional)..." value="' + esc(post.admin_note || '') + '">' +
+            '</div>' +
+          '</div>';
+        });
+
+        container.innerHTML = html;
+      }
+
+      async function updateStatus(postId, newStatus) {
+        var noteEl = document.getElementById('note-' + postId);
+        var note = noteEl ? noteEl.value.trim() : '';
+        var label = { published: 'publish', rejected: 'reject', pending: 'unpublish' }[newStatus] || newStatus;
+        if (!confirm('Are you sure you want to ' + label + ' this post?')) return;
+
+        try {
+          await rpc('admin_update_post_status', {
+            p_admin_id: admin.id,
+            p_post_id: postId,
+            p_status: newStatus,
+            p_admin_note: note || null
+          });
+
+          document.getElementById('globalAlert').innerHTML = '<div class="pg-alert pg-alert-success"><i class="fas fa-check-circle"></i> Post ' + label + (label.endsWith('e') ? 'd' : 'ed') + ' successfully.</div>';
+          loadStats();
+          loadPosts();
+          setTimeout(function() { document.getElementById('globalAlert').innerHTML = ''; }, 3000);
+        } catch (e) {
+          document.getElementById('globalAlert').innerHTML = '<div class="pg-alert pg-alert-danger">Failed: ' + esc(e.message) + '</div>';
+        }
+      }
+
+      // =============================================
+      // PREVIEW
+      // =============================================
+      function previewPost(postId) {
+        var post = allPosts.find(function(p) { return p.id === postId; });
+        if (!post) return;
+
+        var content = post.content || '';
+        if (post.content_format === 'markdown') {
+          content = marked.parse(content);
+        } else if (post.content_format === 'plain') {
+          content = '<p>' + esc(content).replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>') + '</p>';
+        }
+
+        document.getElementById('previewBody').innerHTML =
+          '<h1 style="text-transform:none;">' + esc(post.title) + '</h1>' +
+          '<div style="font-size:0.82rem;color:var(--pg-text-light);margin-bottom:20px;">By ' + esc(post.author_first_name) + ' ' + esc(post.author_last_name) + '</div>' +
+          '<div>' + content + '</div>';
+
+        document.getElementById('previewOverlay').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+
+        document.querySelectorAll('#previewBody pre code').forEach(function(b) { hljs.highlightElement(b); });
+      }
+
+      function closePreview() {
+        document.getElementById('previewOverlay').style.display = 'none';
+        document.body.style.overflow = '';
+      }
+
+      document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closePreview(); });
+
+      // =============================================
+      // UTIL
+      // =============================================
+      function esc(t) { if (!t) return ''; var d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+
+      // =============================================
+      // INIT
+      // =============================================
+      if (admin && admin.is_admin) { showPanel(); }
+    </script>
+</body>
+</html>
