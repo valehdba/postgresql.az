@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NDMJ7KJ');</script>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="About the AZERPUG website - technology stack, open source, and how it was built">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/pgyum.css">
+    <title>About the Website - Azerbaijan PostgreSQL User Group</title>
+    <style>
+      :root{--pg-blue-dark:#336791;--pg-blue-light:#e7eef4;--pg-blue-hover:#264d6f;--pg-text:#515151;--pg-text-light:#6c757d;--pg-border:#d8dde3;--pg-bg-light:#f5f5f5;--pg-white:#fff}
+      .pg-page-wrapper{max-width:800px;margin:0 auto;padding:0 15px;margin-top:1rem}
+      .pg-page-title{font-family:'Maven Pro',sans-serif;font-size:1.6rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin-bottom:.25rem;padding-bottom:10px;border-bottom:2px solid var(--pg-border)}
+      .pg-page-subtitle{font-size:.95rem;color:var(--pg-text-light);margin-bottom:1.5rem;line-height:1.6}
+      .pg-section-title{font-family:'Maven Pro',sans-serif;font-size:1.05rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;padding-bottom:8px;border-bottom:2px solid var(--pg-border);margin:1.75rem 0 1.25rem;display:flex;align-items:center;gap:8px}.pg-section-title i{color:var(--pg-blue-dark)}
+      .pg-card{background:var(--pg-white);border:1px solid var(--pg-border);border-radius:4px;padding:24px;margin-bottom:1.25rem}
+      .pg-card p{font-size:.92rem;line-height:1.7;color:var(--pg-text);margin-bottom:.75rem}.pg-card p:last-child{margin-bottom:0}
+      .pg-card a{color:var(--pg-blue-dark);font-weight:600}
+      .pg-tech-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:1.5rem}
+      .pg-tech-item{background:var(--pg-white);border:1px solid var(--pg-border);border-radius:6px;padding:18px;display:flex;align-items:center;gap:12px;transition:border-color .15s}
+      .pg-tech-item:hover{border-color:var(--pg-blue-dark)}
+      .pg-tech-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--pg-white);flex-shrink:0}
+      .pg-tech-item h4{font-family:'Maven Pro',sans-serif;font-size:.82rem;font-weight:700;margin:0;text-transform:uppercase;color:var(--pg-text)}
+      .pg-tech-item p{font-size:.75rem;color:var(--pg-text-light);margin:2px 0 0}
+      .pg-btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--pg-blue-dark);color:var(--pg-white);font-family:'Maven Pro',sans-serif;font-size:.82rem;font-weight:700;text-transform:uppercase;padding:9px 22px;border-radius:3px;text-decoration:none;transition:background .15s}.pg-btn-primary:hover{background:var(--pg-blue-hover);color:var(--pg-white);text-decoration:none}
+      #footer img.footer-logo{height:36px;margin-bottom:10px;opacity:.6;transition:opacity .2s}#footer img.footer-logo:hover{opacity:1}
+      @media(max-width:480px){.pg-tech-grid{grid-template-columns:1fr}}
+    </style>
+  </head>
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDMJ7KJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="container-fluid"><div class="row justify-content-md-center"><div class="col">
+      <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand p-0" href="/"><img class="logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="pgNavbar"><ul class="navbar-nav mr-auto">
+          <li class="nav-item p-2"><a href="/">Home</a></li><li class="nav-item p-2"><a href="/blogs/">Blog Posts</a></li><li class="nav-item p-2"><a href="/events/">Events</a></li><li class="nav-item p-2"><a href="/registration/">Registration</a></li><li class="nav-item p-2"><a href="/members/">Members</a></li><li class="nav-item p-2"><a href="/community/">Global Community</a></li><li class="nav-item p-2"><a href="/profile/">My Profile</a></li><li class="nav-item p-2"><a href="/about/">About</a></li>
+        </ul></div>
+      </nav>
+    </div></div>
+
+    <div class="pg-page-wrapper">
+      <h1 class="pg-page-title">About This Website</h1>
+      <p class="pg-page-subtitle">postgresql.az is the official website of the Azerbaijan PostgreSQL User Group (AZERPUG). It was built by the community, for the community — and it's powered by PostgreSQL.</p>
+
+      <h2 class="pg-section-title"><i class="fas fa-code"></i> Technology Stack</h2>
+      <div class="pg-tech-grid">
+        <div class="pg-tech-item"><div class="pg-tech-icon" style="background:#336791"><i class="fas fa-database"></i></div><div><h4>PostgreSQL</h4><p>Database via Supabase</p></div></div>
+        <div class="pg-tech-item"><div class="pg-tech-icon" style="background:#3ecf8e"><i class="fas fa-bolt"></i></div><div><h4>Supabase</h4><p>Backend-as-a-Service</p></div></div>
+        <div class="pg-tech-item"><div class="pg-tech-icon" style="background:#e44d26"><i class="fab fa-html5"></i></div><div><h4>HTML5 / CSS3</h4><p>Frontend markup & styling</p></div></div>
+        <div class="pg-tech-item"><div class="pg-tech-icon" style="background:#f7df1e"><i class="fab fa-js"></i></div><div><h4>JavaScript</h4><p>Client-side logic</p></div></div>
+        <div class="pg-tech-item"><div class="pg-tech-icon" style="background:#563d7c"><i class="fab fa-bootstrap"></i></div><div><h4>Bootstrap 4</h4><p>Responsive framework</p></div></div>
+        <div class="pg-tech-item"><div class="pg-tech-icon" style="background:#333"><i class="fab fa-github"></i></div><div><h4>GitHub Pages</h4><p>Hosting & deployment</p></div></div>
+      </div>
+
+      <h2 class="pg-section-title"><i class="fas fa-lock-open"></i> Open Source</h2>
+      <div class="pg-card">
+        <p>This website is fully open source. The complete source code is available on GitHub. We believe in transparency and community-driven development — contributions, bug reports, and suggestions are welcome.</p>
+        <p>The website is built as a static site hosted on GitHub Pages, with Supabase providing the PostgreSQL database backend for member registration, blog posts, events, job board, and other dynamic features. This architecture means the site is fast, free to host, and — most importantly — powered by PostgreSQL.</p>
+        <a href="https://github.com/valehdba/postgresql.az" target="_blank" rel="noopener" class="pg-btn-primary"><i class="fab fa-github"></i> View Source on GitHub</a>
+      </div>
+
+      <h2 class="pg-section-title"><i class="fas fa-palette"></i> Design</h2>
+      <div class="pg-card">
+        <p>The website design is inspired by the official <a href="https://www.postgresql.org/" target="_blank" rel="noopener">postgresql.org</a> website — using the signature PostgreSQL blue (#336791), Maven Pro and Open Sans typefaces, and a clean, professional layout familiar to the global PostgreSQL community.</p>
+      </div>
+
+      <h2 class="pg-section-title"><i class="fas fa-list"></i> Features</h2>
+      <div class="pg-card">
+        <p>The website includes: member registration and profiles, a blog platform with rich text and Markdown editors, an events system with RSVP, a job board, photo gallery, contact form, FAQ, news section, resources library, sponsors page, global community links, admin panel for content moderation, RSS feed, SEO optimization with sitemap, and responsive design for all devices.</p>
+        <p>All dynamic data is stored in a PostgreSQL database via Supabase, making this website a practical demonstration of what PostgreSQL can power.</p>
+      </div>
+
+      <h2 class="pg-section-title"><i class="fas fa-hands-helping"></i> Contributing</h2>
+      <div class="pg-card">
+        <p>Want to help improve the website? Here's how:</p>
+        <p><strong>Report issues</strong> — found a bug or broken link? <a href="https://github.com/valehdba/postgresql.az/issues" target="_blank" rel="noopener">Open an issue on GitHub</a>.</p>
+        <p><strong>Suggest features</strong> — have an idea? Let us know via the <a href="/contact/">Contact page</a> or GitHub issues.</p>
+        <p><strong>Submit code</strong> — fork the repo, make your changes, and submit a pull request.</p>
+        <p><strong>Write content</strong> — <a href="/registration/">register</a> and write blog posts to share your PostgreSQL knowledge.</p>
+      </div>
+    </div>
+
+    <footer id="footer"><div class="container">
+      <a href="/"><img class="footer-logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a><br/>
+      <div style="margin-bottom:12px;"><a href="https://www.facebook.com/groups/www.postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;"><i class="fab fa-facebook"></i></a> <a href="https://github.com/valehdba/postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;"><i class="fab fa-github"></i></a></div>
+      <a href="/about/privacypolicy/">Privacy policy</a> | <a href="/about/website/">About the website</a><br/>
+      Copyright &copy; 2018-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
+    </div></footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/js/navbar-auth.js"></script>
+</body>
+</html>
