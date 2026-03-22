@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,17 +7,561 @@
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-NDMJ7KJ');</script>
-<!-- End Google Tag Manager -->
+    <!-- End Google Tag Manager -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Register to join the Azerbaijan PostgreSQL User Group community - AZERPUG">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <link rel="stylesheet" href="/css/pgyum.css">
 
-    <title>Welcome - Azerbaijan PostgreSQL User Group</title>
+    <title>Registration - Azerbaijan PostgreSQL User Group</title>
 
+    <style>
+      /* ============================================
+         PostgreSQL.org Official Style — Registration
+         ============================================ */
+
+      :root {
+        --pg-blue-dark: #336791;
+        --pg-blue-medium: #2f6289;
+        --pg-blue-light: #e7eef4;
+        --pg-blue-hover: #264d6f;
+        --pg-text: #515151;
+        --pg-text-light: #6c757d;
+        --pg-border: #d8dde3;
+        --pg-bg-light: #f5f5f5;
+        --pg-white: #ffffff;
+        --pg-success: #28a745;
+        --pg-danger: #dc3545;
+        --pg-warning: #e8a33d;
+      }
+
+      /* Page layout */
+      .pg-page-wrapper {
+        max-width: 1140px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+
+      .pg-content-area {
+        display: flex;
+        gap: 30px;
+        margin-top: 1rem;
+      }
+
+      /* Sidebar */
+      .pg-sidebar {
+        flex: 0 0 220px;
+        min-width: 220px;
+      }
+
+      /* Sidebar Logo Block */
+      .pg-sidebar-logo {
+        text-align: center;
+        padding: 16px 10px 20px 10px;
+        margin-bottom: 1.5rem;
+        border-bottom: 2px solid var(--pg-border);
+      }
+
+      .pg-sidebar-logo img {
+        max-width: 160px;
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      .pg-sidebar-logo .pg-sidebar-logo-text {
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--pg-blue-dark);
+        letter-spacing: 0.8px;
+        line-height: 1.4;
+      }
+
+      .pg-sidebar-section {
+        margin-bottom: 2rem;
+      }
+
+      .pg-sidebar-section h3 {
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--pg-blue-dark);
+        letter-spacing: 0.5px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid var(--pg-blue-dark);
+        margin-bottom: 10px;
+      }
+
+      .pg-sidebar-section ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .pg-sidebar-section ul li {
+        padding: 0;
+        margin: 0;
+      }
+
+      .pg-sidebar-section ul li a {
+        display: block;
+        padding: 5px 10px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--pg-blue-dark);
+        border-left: 3px solid transparent;
+        transition: all 0.15s ease;
+      }
+
+      .pg-sidebar-section ul li a:hover,
+      .pg-sidebar-section ul li a.active {
+        background: var(--pg-blue-light);
+        border-left-color: var(--pg-blue-dark);
+        text-decoration: none;
+      }
+
+      /* Main content */
+      .pg-main-content {
+        flex: 1;
+        min-width: 0;
+      }
+
+      /* Page title */
+      .pg-page-title {
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--pg-text);
+        text-transform: uppercase;
+        margin-bottom: 0.25rem;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--pg-border);
+      }
+
+      .pg-page-subtitle {
+        font-size: 0.95rem;
+        color: var(--pg-text-light);
+        margin-bottom: 1.5rem;
+      }
+
+      /* Registration Form Card */
+      .pg-form-card {
+        background: var(--pg-white);
+        border: 1px solid var(--pg-border);
+        border-radius: 4px;
+        padding: 0;
+        margin-bottom: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Watermark logo behind the form */
+      .pg-form-card::before {
+        content: '';
+        position: absolute;
+        bottom: -40px;
+        right: -40px;
+        width: 320px;
+        height: 320px;
+        background: url('/pict/smal_AZERPUG.png') no-repeat center center;
+        background-size: contain;
+        opacity: 0.03;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .pg-form-card-header {
+        position: relative;
+        z-index: 1;
+        background: var(--pg-blue-dark);
+        color: var(--pg-white);
+        padding: 12px 24px;
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-radius: 3px 3px 0 0;
+      }
+
+      .pg-form-card-header i {
+        margin-right: 8px;
+        opacity: 0.85;
+      }
+
+      .pg-form-card-body {
+        padding: 24px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Form styles */
+      .pg-form-group {
+        margin-bottom: 1.25rem;
+      }
+
+      .pg-form-group label {
+        display: block;
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--pg-text);
+        text-transform: uppercase;
+        margin-bottom: 5px;
+        letter-spacing: 0.3px;
+      }
+
+      .pg-form-group label .required {
+        color: var(--pg-danger);
+        margin-left: 2px;
+      }
+
+      .pg-form-group .form-hint {
+        font-size: 0.8rem;
+        color: var(--pg-text-light);
+        margin-top: 3px;
+        font-style: italic;
+      }
+
+      .pg-form-control {
+        display: block;
+        width: 100%;
+        padding: 8px 12px;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 0.9rem;
+        color: var(--pg-text);
+        background: var(--pg-white);
+        border: 1px solid var(--pg-border);
+        border-radius: 3px;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      }
+
+      .pg-form-control:focus {
+        border-color: var(--pg-blue-dark);
+        box-shadow: 0 0 0 3px rgba(51, 103, 145, 0.15);
+        outline: none;
+      }
+
+      .pg-form-control::placeholder {
+        color: #adb5bd;
+      }
+
+      select.pg-form-control {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23515151' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        padding-right: 32px;
+      }
+
+      textarea.pg-form-control {
+        resize: vertical;
+        min-height: 80px;
+      }
+
+      /* Form row for side-by-side fields */
+      .pg-form-row {
+        display: flex;
+        gap: 20px;
+      }
+
+      .pg-form-row .pg-form-group {
+        flex: 1;
+      }
+
+      /* Password strength meter */
+      .pg-password-wrapper {
+        position: relative;
+      }
+
+      .pg-password-toggle {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--pg-text-light);
+        cursor: pointer;
+        padding: 0;
+        font-size: 0.9rem;
+      }
+
+      .pg-password-toggle:hover {
+        color: var(--pg-blue-dark);
+      }
+
+      .pg-password-strength {
+        display: flex;
+        gap: 4px;
+        margin-top: 6px;
+      }
+
+      .pg-password-strength-bar {
+        height: 3px;
+        flex: 1;
+        background: #e0e0e0;
+        border-radius: 2px;
+        transition: background 0.3s ease;
+      }
+
+      /* Form section divider */
+      .pg-form-section {
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--pg-blue-dark);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid var(--pg-border);
+        margin: 1.75rem 0 1.25rem 0;
+      }
+
+      .pg-form-section i {
+        margin-right: 6px;
+        font-size: 0.75rem;
+      }
+
+      /* Checkbox / Agreement */
+      .pg-checkbox-group {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 1rem;
+      }
+
+      .pg-checkbox-group input[type="checkbox"] {
+        margin-top: 3px;
+        accent-color: var(--pg-blue-dark);
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+      }
+
+      .pg-checkbox-group label {
+        font-size: 0.85rem;
+        color: var(--pg-text);
+        font-weight: 400;
+        text-transform: none;
+        margin-bottom: 0;
+        line-height: 1.5;
+      }
+
+      .pg-checkbox-group label a {
+        color: var(--pg-blue-dark);
+        text-decoration: underline;
+      }
+
+      /* Submit button */
+      .pg-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--pg-blue-dark);
+        color: var(--pg-white);
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 10px 28px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: background 0.15s ease, transform 0.1s ease;
+      }
+
+      .pg-btn-primary:hover {
+        background: var(--pg-blue-hover);
+        text-decoration: none;
+        color: var(--pg-white);
+      }
+
+      .pg-btn-primary:active {
+        transform: translateY(1px);
+      }
+
+      .pg-btn-primary:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .pg-btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: transparent;
+        color: var(--pg-blue-dark);
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 10px 20px;
+        border: 1px solid var(--pg-border);
+        border-radius: 3px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      .pg-btn-secondary:hover {
+        background: var(--pg-blue-light);
+        border-color: var(--pg-blue-dark);
+      }
+
+      .pg-form-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 1.5rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--pg-border);
+      }
+
+      /* Info box */
+      .pg-info-box {
+        background: var(--pg-blue-light);
+        border-left: 4px solid var(--pg-blue-dark);
+        padding: 14px 18px;
+        margin-bottom: 1.5rem;
+        border-radius: 0 3px 3px 0;
+      }
+
+      .pg-info-box p {
+        margin: 0;
+        font-size: 0.88rem;
+        color: var(--pg-text);
+        line-height: 1.6;
+      }
+
+      .pg-info-box p i {
+        color: var(--pg-blue-dark);
+        margin-right: 6px;
+      }
+
+      /* Benefits list */
+      .pg-benefits {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .pg-benefits li {
+        padding: 8px 0;
+        font-size: 0.88rem;
+        color: var(--pg-text);
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        border-bottom: 1px solid #eef1f3;
+      }
+
+      .pg-benefits li:last-child {
+        border-bottom: none;
+      }
+
+      .pg-benefits li i {
+        color: var(--pg-blue-dark);
+        margin-top: 3px;
+        flex-shrink: 0;
+        font-size: 0.75rem;
+      }
+
+      /* Validation states */
+      .pg-form-control.is-invalid {
+        border-color: var(--pg-danger);
+      }
+
+      .pg-form-control.is-valid {
+        border-color: var(--pg-success);
+      }
+
+      .pg-invalid-feedback {
+        font-size: 0.8rem;
+        color: var(--pg-danger);
+        margin-top: 4px;
+      }
+
+      /* Success message */
+      .pg-success-message {
+        display: none;
+        text-align: center;
+        padding: 3rem 2rem;
+      }
+
+      .pg-success-message i {
+        font-size: 3rem;
+        color: var(--pg-success);
+        margin-bottom: 1rem;
+      }
+
+      .pg-success-message h3 {
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 1.4rem;
+        color: var(--pg-text);
+        margin-bottom: 0.5rem;
+      }
+
+      .pg-success-message p {
+        color: var(--pg-text-light);
+        font-size: 0.95rem;
+      }
+
+      /* Footer with logo */
+      #footer img.footer-logo {
+        height: 36px;
+        margin-bottom: 10px;
+        opacity: 0.6;
+        transition: opacity 0.2s ease;
+      }
+
+      #footer img.footer-logo:hover {
+        opacity: 1;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .pg-content-area {
+          flex-direction: column;
+        }
+
+        .pg-sidebar {
+          flex: auto;
+          min-width: auto;
+          order: 2;
+        }
+
+        .pg-main-content {
+          order: 1;
+        }
+
+        .pg-form-row {
+          flex-direction: column;
+          gap: 0;
+        }
+
+        .pg-form-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .pg-btn-primary,
+        .pg-btn-secondary {
+          justify-content: center;
+        }
+      }
+    </style>
   </head>
 
 <body>
@@ -28,7 +571,7 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <div class="container-fluid">
- <!-- Nav -->
+      <!-- Nav -->
       <div class="row justify-content-md-center">
          <div class="col">
            <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
@@ -47,33 +590,384 @@
                  <li class="nav-item p-2"><a href="/links/" title="Useful Links">Useful Links</a></li>
                  <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
                </ul>
-             </div> <!-- pgNavBar -->
+             </div>
 	       </nav>
-         </div> <!-- col -->
-      </div> <!-- row -->
+         </div>
+      </div>
       <!-- End Nav -->
 
- 
-<center><h2><bold>⚡ UNDER CONSTRUCTION ⚡</bold></h2></center>
- 
+      <!-- Page Content -->
+      <div class="pg-page-wrapper" style="margin-top: 1rem;">
+        <div class="pg-content-area">
+
+          <!-- Sidebar -->
+          <aside class="pg-sidebar">
+            <!-- Sidebar Logo -->
+            <div class="pg-sidebar-logo">
+              <a href="/">
+                <img src="/pict/smal_AZERPUG.png" alt="AZERPUG — Azerbaijan PostgreSQL User Group">
+              </a>
+              <div class="pg-sidebar-logo-text">Azerbaijan PostgreSQL<br>User Group</div>
+            </div>
+
+            <div class="pg-sidebar-section">
+              <h3>Community</h3>
+              <ul>
+                <li><a href="/registration/" class="active">Registration</a></li>
+                <li><a href="/members/">Members</a></li>
+                <li><a href="/blogs/">Blog Posts</a></li>
+                <li><a href="/news/">News</a></li>
+                <li><a href="/links/">Useful Links</a></li>
+              </ul>
+            </div>
+
+            <div class="pg-sidebar-section">
+              <h3>Member Benefits</h3>
+              <ul class="pg-benefits">
+                <li><i class="fas fa-check"></i> Access to community meetups and events</li>
+                <li><i class="fas fa-check"></i> PostgreSQL knowledge sharing sessions</li>
+                <li><i class="fas fa-check"></i> Networking with PostgreSQL professionals in Azerbaijan</li>
+                <li><i class="fas fa-check"></i> Early access to workshop registrations</li>
+                <li><i class="fas fa-check"></i> Community blog posting privileges</li>
+              </ul>
+            </div>
+
+            <div class="pg-sidebar-section">
+              <h3>Quick Links</h3>
+              <ul>
+                <li><a href="https://www.postgresql.org/" target="_blank" rel="noopener">PostgreSQL.org</a></li>
+                <li><a href="https://www.postgresql.org/docs/" target="_blank" rel="noopener">Documentation</a></li>
+                <li><a href="https://www.postgresql.org/download/" target="_blank" rel="noopener">Download PostgreSQL</a></li>
+                <li><a href="https://wiki.postgresql.org/" target="_blank" rel="noopener">PostgreSQL Wiki</a></li>
+              </ul>
+            </div>
+          </aside>
+
+          <!-- Main Content -->
+          <main class="pg-main-content">
+            <h1 class="pg-page-title">Member Registration</h1>
+            <p class="pg-page-subtitle">Join the Azerbaijan PostgreSQL User Group (AZERPUG) — the official PostgreSQL community in Azerbaijan.</p>
+
+            <div class="pg-info-box">
+              <p><i class="fas fa-info-circle"></i> Registration is free and open to everyone interested in PostgreSQL — developers, DBAs, students, and enthusiasts. Fill out the form below to become a member of AZERPUG.</p>
+            </div>
+
+            <!-- Registration Form -->
+            <div class="pg-form-card">
+              <div class="pg-form-card-header">
+                <i class="fas fa-user-plus"></i> Create Your Account
+              </div>
+              <div class="pg-form-card-body">
+                <form id="registrationForm" novalidate>
+
+                  <!-- Account Information -->
+                  <div class="pg-form-section">
+                    <i class="fas fa-key"></i> Account Information
+                  </div>
+
+                  <div class="pg-form-row">
+                    <div class="pg-form-group">
+                      <label for="firstName">First Name <span class="required">*</span></label>
+                      <input type="text" class="pg-form-control" id="firstName" name="firstName" placeholder="e.g. Elvin" required>
+                      <div class="pg-invalid-feedback" id="firstNameError"></div>
+                    </div>
+                    <div class="pg-form-group">
+                      <label for="lastName">Last Name <span class="required">*</span></label>
+                      <input type="text" class="pg-form-control" id="lastName" name="lastName" placeholder="e.g. Məmmədov" required>
+                      <div class="pg-invalid-feedback" id="lastNameError"></div>
+                    </div>
+                  </div>
+
+                  <div class="pg-form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" class="pg-form-control" id="email" name="email" placeholder="you@example.com" required>
+                    <div class="pg-invalid-feedback" id="emailError"></div>
+                  </div>
+
+                  <div class="pg-form-row">
+                    <div class="pg-form-group">
+                      <label for="password">Password <span class="required">*</span></label>
+                      <div class="pg-password-wrapper">
+                        <input type="password" class="pg-form-control" id="password" name="password" placeholder="Minimum 8 characters" required minlength="8">
+                        <button type="button" class="pg-password-toggle" onclick="togglePassword('password', this)" aria-label="Toggle password visibility">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                      </div>
+                      <div class="pg-password-strength" id="passwordStrength">
+                        <div class="pg-password-strength-bar"></div>
+                        <div class="pg-password-strength-bar"></div>
+                        <div class="pg-password-strength-bar"></div>
+                        <div class="pg-password-strength-bar"></div>
+                      </div>
+                      <div class="pg-invalid-feedback" id="passwordError"></div>
+                    </div>
+                    <div class="pg-form-group">
+                      <label for="confirmPassword">Confirm Password <span class="required">*</span></label>
+                      <div class="pg-password-wrapper">
+                        <input type="password" class="pg-form-control" id="confirmPassword" name="confirmPassword" placeholder="Re-enter your password" required>
+                        <button type="button" class="pg-password-toggle" onclick="togglePassword('confirmPassword', this)" aria-label="Toggle password visibility">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                      </div>
+                      <div class="pg-invalid-feedback" id="confirmPasswordError"></div>
+                    </div>
+                  </div>
+
+                  <!-- Professional Information -->
+                  <div class="pg-form-section">
+                    <i class="fas fa-briefcase"></i> Professional Information
+                  </div>
+
+                  <div class="pg-form-row">
+                    <div class="pg-form-group">
+                      <label for="company">Company / Organization</label>
+                      <input type="text" class="pg-form-control" id="company" name="company" placeholder="Your company or organization">
+                    </div>
+                    <div class="pg-form-group">
+                      <label for="jobTitle">Job Title / Role</label>
+                      <input type="text" class="pg-form-control" id="jobTitle" name="jobTitle" placeholder="e.g. Database Administrator">
+                    </div>
+                  </div>
+
+                  <div class="pg-form-row">
+                    <div class="pg-form-group">
+                      <label for="pgExperience">PostgreSQL Experience Level <span class="required">*</span></label>
+                      <select class="pg-form-control" id="pgExperience" name="pgExperience" required>
+                        <option value="">— Select your level —</option>
+                        <option value="beginner">Beginner — Just getting started</option>
+                        <option value="intermediate">Intermediate — Comfortable with basics</option>
+                        <option value="advanced">Advanced — Deep knowledge &amp; production use</option>
+                        <option value="expert">Expert — Contributor / Core expertise</option>
+                        <option value="curious">Curious — Haven't used it yet</option>
+                      </select>
+                      <div class="pg-invalid-feedback" id="pgExperienceError"></div>
+                    </div>
+                    <div class="pg-form-group">
+                      <label for="phone">Phone Number</label>
+                      <input type="tel" class="pg-form-control" id="phone" name="phone" placeholder="+994 XX XXX XX XX">
+                      <div class="form-hint">Optional — for event notifications via SMS</div>
+                    </div>
+                  </div>
+
+                  <!-- Additional Info -->
+                  <div class="pg-form-section">
+                    <i class="fas fa-comment-alt"></i> Additional Information
+                  </div>
+
+                  <div class="pg-form-group">
+                    <label for="personalNotes">Personal Notes</label>
+                    <textarea class="pg-form-control" id="personalNotes" name="personalNotes" rows="3" placeholder="Tell us about yourself — your interests in PostgreSQL, what you hope to gain from the community, or anything else you'd like to share..."></textarea>
+                    <div class="form-hint">Optional — help us get to know you better</div>
+                  </div>
+
+                  <!-- Agreements -->
+                  <div class="pg-form-section">
+                    <i class="fas fa-shield-alt"></i> Terms &amp; Privacy
+                  </div>
+
+                  <div class="pg-checkbox-group">
+                    <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                    <label for="agreeTerms">I agree to the <a href="/about/privacypolicy/" target="_blank">Privacy Policy</a> and consent to AZERPUG storing my registration data. <span class="required">*</span></label>
+                  </div>
+
+                  <div class="pg-checkbox-group">
+                    <input type="checkbox" id="agreeNewsletter" name="agreeNewsletter" checked>
+                    <label for="agreeNewsletter">I would like to receive community news, event invitations, and PostgreSQL updates via email.</label>
+                  </div>
+
+                  <!-- Form Actions -->
+                  <div class="pg-form-actions">
+                    <button type="submit" class="pg-btn-primary" id="submitBtn">
+                      <i class="fas fa-user-plus"></i> Register
+                    </button>
+                    <button type="reset" class="pg-btn-secondary" onclick="resetForm()">
+                      <i class="fas fa-undo"></i> Reset
+                    </button>
+                  </div>
+
+                </form>
+
+                <!-- Success Message (hidden by default) -->
+                <div class="pg-success-message" id="successMessage">
+                  <i class="fas fa-check-circle"></i>
+                  <h3>Qeydiyyat Uğurla Tamamlandı!</h3>
+                  <h3>Registration Successful!</h3>
+                  <p>Welcome to the Azerbaijan PostgreSQL User Group. A confirmation email has been sent to your address. Please check your inbox to verify your account.</p>
+                  <br>
+                  <a href="/" class="pg-btn-primary"><i class="fas fa-home"></i> Back to Home</a>
+                </div>
+              </div>
+            </div>
+          </main>
+
+        </div>
+      </div>
+      <!-- End Page Content -->
+
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="container">
+        <a href="/">
+          <img class="footer-logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG Logo">
+        </a>
+        <br/>
+        <a href="/about/privacypolicy/">Privacy policy</a> | <a href="/about/website/">About the website</a>
+        <br/>
+        Copyright &copy; 2008-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
+      </div>
+    </footer>
+    <!-- End Footer -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+      // Toggle password visibility
+      function togglePassword(fieldId, btn) {
+        var field = document.getElementById(fieldId);
+        var icon = btn.querySelector('i');
+        if (field.type === 'password') {
+          field.type = 'text';
+          icon.classList.remove('fa-eye');
+          icon.classList.add('fa-eye-slash');
+        } else {
+          field.type = 'password';
+          icon.classList.remove('fa-eye-slash');
+          icon.classList.add('fa-eye');
+        }
+      }
+
+      // Password strength meter
+      document.getElementById('password').addEventListener('input', function() {
+        var val = this.value;
+        var strength = 0;
+        if (val.length >= 8) strength++;
+        if (/[a-z]/.test(val) && /[A-Z]/.test(val)) strength++;
+        if (/\d/.test(val)) strength++;
+        if (/[^a-zA-Z0-9]/.test(val)) strength++;
+
+        var bars = document.querySelectorAll('#passwordStrength .pg-password-strength-bar');
+        var colors = ['#dc3545', '#e8a33d', '#ffc107', '#28a745'];
+        bars.forEach(function(bar, i) {
+          if (i < strength) {
+            bar.style.background = colors[Math.min(strength - 1, 3)];
+          } else {
+            bar.style.background = '#e0e0e0';
+          }
+        });
+      });
+
+      // Form validation & submission
+      document.getElementById('registrationForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var isValid = true;
+
+        // Clear previous errors
+        document.querySelectorAll('.pg-invalid-feedback').forEach(function(el) { el.textContent = ''; });
+        document.querySelectorAll('.pg-form-control').forEach(function(el) {
+          el.classList.remove('is-invalid', 'is-valid');
+        });
+
+        // First Name
+        var firstName = document.getElementById('firstName');
+        if (!firstName.value.trim()) {
+          firstName.classList.add('is-invalid');
+          document.getElementById('firstNameError').textContent = 'First name is required.';
+          isValid = false;
+        } else {
+          firstName.classList.add('is-valid');
+        }
+
+        // Last Name
+        var lastName = document.getElementById('lastName');
+        if (!lastName.value.trim()) {
+          lastName.classList.add('is-invalid');
+          document.getElementById('lastNameError').textContent = 'Last name is required.';
+          isValid = false;
+        } else {
+          lastName.classList.add('is-valid');
+        }
+
+        // Email
+        var email = document.getElementById('email');
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email.value.trim()) {
+          email.classList.add('is-invalid');
+          document.getElementById('emailError').textContent = 'Email address is required.';
+          isValid = false;
+        } else if (!emailRegex.test(email.value)) {
+          email.classList.add('is-invalid');
+          document.getElementById('emailError').textContent = 'Please enter a valid email address.';
+          isValid = false;
+        } else {
+          email.classList.add('is-valid');
+        }
+
+        // Password
+        var password = document.getElementById('password');
+        if (!password.value) {
+          password.classList.add('is-invalid');
+          document.getElementById('passwordError').textContent = 'Password is required.';
+          isValid = false;
+        } else if (password.value.length < 8) {
+          password.classList.add('is-invalid');
+          document.getElementById('passwordError').textContent = 'Password must be at least 8 characters.';
+          isValid = false;
+        } else {
+          password.classList.add('is-valid');
+        }
+
+        // Confirm Password
+        var confirmPassword = document.getElementById('confirmPassword');
+        if (!confirmPassword.value) {
+          confirmPassword.classList.add('is-invalid');
+          document.getElementById('confirmPasswordError').textContent = 'Please confirm your password.';
+          isValid = false;
+        } else if (confirmPassword.value !== password.value) {
+          confirmPassword.classList.add('is-invalid');
+          document.getElementById('confirmPasswordError').textContent = 'Passwords do not match.';
+          isValid = false;
+        } else {
+          confirmPassword.classList.add('is-valid');
+        }
+
+        // PostgreSQL Experience
+        var pgExperience = document.getElementById('pgExperience');
+        if (!pgExperience.value) {
+          pgExperience.classList.add('is-invalid');
+          document.getElementById('pgExperienceError').textContent = 'Please select your experience level.';
+          isValid = false;
+        } else {
+          pgExperience.classList.add('is-valid');
+        }
+
+        // Terms agreement
+        var agreeTerms = document.getElementById('agreeTerms');
+        if (!agreeTerms.checked) {
+          isValid = false;
+          alert('Please agree to the Privacy Policy to continue.');
+        }
+
+        if (isValid) {
+          // Show success message
+          document.getElementById('registrationForm').style.display = 'none';
+          document.getElementById('successMessage').style.display = 'block';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+
+      // Reset form
+      function resetForm() {
+        document.querySelectorAll('.pg-invalid-feedback').forEach(function(el) { el.textContent = ''; });
+        document.querySelectorAll('.pg-form-control').forEach(function(el) {
+          el.classList.remove('is-invalid', 'is-valid');
+        });
+        var bars = document.querySelectorAll('#passwordStrength .pg-password-strength-bar');
+        bars.forEach(function(bar) { bar.style.background = '#e0e0e0'; });
+      }
+    </script>
+
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
+</html>
