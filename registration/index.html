@@ -797,9 +797,9 @@
                   <i class="fas fa-check-circle"></i>
                   <h3>Qeydiyyat Uğurla Tamamlandı!</h3>
                   <h3>Registration Successful!</h3>
-                  <p>Welcome to the Azerbaijan PostgreSQL User Group. A confirmation email has been sent to your address. Please check your inbox to verify your account.</p>
+                  <p>Welcome to the Azerbaijan PostgreSQL User Group. You are now logged in and will be redirected to the home page.</p>
                   <br>
-                  <a href="/" class="pg-btn-primary"><i class="fas fa-home"></i> Back to Home</a>
+                  <a href="/" class="pg-btn-primary"><i class="fas fa-home"></i> Go to Home</a>
                 </div>
               </div>
             </div>
@@ -1139,10 +1139,27 @@
             return;
           }
 
-          // Show success message
+          // Auto-login: store user session and redirect to home
+          try {
+            var loginHash = await hashPassword(password.value);
+            var loginResult = await fetch(SUPABASE_URL + '/rest/v1/rpc/member_login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
+              body: JSON.stringify({ login_email: email.value.trim().toLowerCase(), login_password_hash: loginHash })
+            });
+            if (loginResult.ok) {
+              var userData = await loginResult.json();
+              if (userData && userData.id) {
+                sessionStorage.setItem('azerpug_user', JSON.stringify(userData));
+              }
+            }
+          } catch(loginErr) { console.warn('Auto-login failed:', loginErr); }
+
+          // Show success message briefly, then redirect
           document.getElementById('registrationForm').style.display = 'none';
           document.getElementById('successMessage').style.display = 'block';
           window.scrollTo({ top: 0, behavior: 'smooth' });
+          setTimeout(function() { window.location.href = '/'; }, 2000);
 
         } catch (error) {
           console.error('Registration error:', error);

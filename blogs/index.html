@@ -476,7 +476,7 @@
 
           currentUser = result;
           sessionStorage.setItem('azerpug_user', JSON.stringify(currentUser));
-          updateAuthUI();
+          window.location.href = '/';  // Go to welcome page
         } catch (e) {
           errEl.textContent = 'Login failed. Please try again.';
           errEl.style.display = 'block';
