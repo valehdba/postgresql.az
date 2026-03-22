@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,74 +7,450 @@
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-NDMJ7KJ');</script>
-<!-- End Google Tag Manager -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
+    <meta name="description" content="About AZERPUG - Azerbaijan PostgreSQL User Group. Founded in 2018, an open-source community for PostgreSQL enthusiasts in Azerbaijan.">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/css/pgyum.css">
+    <title>About - Azerbaijan PostgreSQL User Group</title>
+    <style>
+      :root {
+        --pg-blue-dark: #336791;
+        --pg-blue-light: #e7eef4;
+        --pg-blue-hover: #264d6f;
+        --pg-text: #515151;
+        --pg-text-light: #6c757d;
+        --pg-border: #d8dde3;
+        --pg-bg-light: #f5f5f5;
+        --pg-white: #ffffff;
+        --pg-success: #28a745;
+      }
 
-    <title>Welcome - Azerbaijan PostgreSQL User Group</title>
+      .pg-page-wrapper { max-width: 1140px; margin: 0 auto; padding: 0 15px; }
+      .pg-content-area { display: flex; gap: 30px; margin-top: 1rem; }
 
+      .pg-sidebar { flex: 0 0 220px; min-width: 220px; }
+      .pg-sidebar-logo { text-align: center; padding: 16px 10px 20px 10px; margin-bottom: 1.5rem; border-bottom: 2px solid var(--pg-border); }
+      .pg-sidebar-logo img { max-width: 160px; height: auto; margin-bottom: 10px; }
+      .pg-sidebar-logo .pg-sidebar-logo-text { font-family: 'Maven Pro', sans-serif; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--pg-blue-dark); letter-spacing: 0.8px; line-height: 1.4; }
+      .pg-sidebar-section { margin-bottom: 2rem; }
+      .pg-sidebar-section h3 { font-family: 'Maven Pro', sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--pg-blue-dark); letter-spacing: 0.5px; padding-bottom: 8px; border-bottom: 2px solid var(--pg-blue-dark); margin-bottom: 10px; }
+      .pg-sidebar-section ul { list-style: none; padding: 0; margin: 0; }
+      .pg-sidebar-section ul li a { display: block; padding: 5px 10px; font-size: 0.9rem; font-weight: 600; color: var(--pg-blue-dark); border-left: 3px solid transparent; transition: all 0.15s ease; }
+      .pg-sidebar-section ul li a:hover, .pg-sidebar-section ul li a.active { background: var(--pg-blue-light); border-left-color: var(--pg-blue-dark); text-decoration: none; }
+
+      .pg-main-content { flex: 1; min-width: 0; }
+      .pg-page-title { font-family: 'Maven Pro', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--pg-text); text-transform: uppercase; margin-bottom: 0.25rem; padding-bottom: 10px; border-bottom: 2px solid var(--pg-border); }
+      .pg-page-subtitle { font-size: 0.95rem; color: var(--pg-text-light); margin-bottom: 1.5rem; line-height: 1.6; }
+
+      /* Hero banner */
+      .pg-about-hero {
+        background: linear-gradient(135deg, var(--pg-blue-dark) 0%, #1a3d5c 100%);
+        color: var(--pg-white);
+        border-radius: 6px;
+        padding: 36px 40px;
+        margin-bottom: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .pg-about-hero::after {
+        content: '';
+        position: absolute;
+        top: -40px;
+        right: -40px;
+        width: 240px;
+        height: 240px;
+        background: url('/pict/smal_AZERPUG.png') no-repeat center center;
+        background-size: contain;
+        opacity: 0.07;
+        pointer-events: none;
+      }
+      .pg-about-hero h1 { font-family: 'Maven Pro', sans-serif; font-size: 1.5rem; font-weight: 700; margin: 0 0 6px 0; text-transform: none; color: var(--pg-white); }
+      .pg-about-hero .pg-hero-subtitle { font-size: 1rem; opacity: 0.9; margin-bottom: 12px; line-height: 1.6; }
+      .pg-about-hero .pg-hero-founded { font-size: 0.82rem; opacity: 0.7; display: inline-flex; align-items: center; gap: 6px; }
+      .pg-about-hero .pg-hero-founded i { font-size: 0.75rem; }
+
+      /* Section titles */
+      .pg-section-title {
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--pg-text);
+        text-transform: uppercase;
+        padding-bottom: 8px;
+        border-bottom: 2px solid var(--pg-border);
+        margin: 2rem 0 1.25rem 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .pg-section-title i { color: var(--pg-blue-dark); font-size: 0.9rem; }
+
+      /* Card */
+      .pg-card { background: var(--pg-white); border: 1px solid var(--pg-border); border-radius: 4px; padding: 24px; margin-bottom: 1.25rem; }
+      .pg-card p { font-size: 0.92rem; line-height: 1.7; color: var(--pg-text); margin-bottom: 0.75rem; }
+      .pg-card p:last-child { margin-bottom: 0; }
+
+      /* Values grid */
+      .pg-values-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-bottom: 1.5rem; }
+      .pg-value-card {
+        background: var(--pg-white);
+        border: 1px solid var(--pg-border);
+        border-radius: 6px;
+        padding: 24px 20px;
+        text-align: center;
+        transition: box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+      .pg-value-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-color: var(--pg-blue-dark); }
+      .pg-value-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        color: var(--pg-white);
+        margin: 0 auto 14px auto;
+      }
+      .pg-value-card h3 { font-family: 'Maven Pro', sans-serif; font-size: 0.88rem; font-weight: 700; color: var(--pg-text); text-transform: uppercase; margin: 0 0 8px 0; }
+      .pg-value-card p { font-size: 0.82rem; color: var(--pg-text-light); line-height: 1.5; margin: 0; }
+
+      /* Timeline */
+      .pg-timeline { position: relative; padding-left: 28px; margin-bottom: 1.5rem; }
+      .pg-timeline::before { content: ''; position: absolute; left: 8px; top: 6px; bottom: 6px; width: 2px; background: var(--pg-border); }
+      .pg-timeline-item { position: relative; margin-bottom: 20px; }
+      .pg-timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -24px;
+        top: 6px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--pg-blue-dark);
+        border: 2px solid var(--pg-white);
+        box-shadow: 0 0 0 2px var(--pg-blue-dark);
+      }
+      .pg-timeline-year { font-family: 'Maven Pro', sans-serif; font-size: 0.78rem; font-weight: 700; color: var(--pg-blue-dark); text-transform: uppercase; }
+      .pg-timeline-text { font-size: 0.88rem; color: var(--pg-text); line-height: 1.5; margin-top: 2px; }
+
+      /* Social links */
+      .pg-social-links { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+      .pg-social-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 18px;
+        background: var(--pg-white);
+        border: 1px solid var(--pg-border);
+        border-radius: 4px;
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--pg-text);
+        text-decoration: none;
+        transition: all 0.15s ease;
+      }
+      .pg-social-link:hover { border-color: var(--pg-blue-dark); background: var(--pg-blue-light); text-decoration: none; color: var(--pg-blue-dark); }
+      .pg-social-link i { font-size: 1.1rem; }
+      .pg-social-link .fa-facebook { color: #1877f2; }
+      .pg-social-link .fa-telegram-plane { color: #0088cc; }
+      .pg-social-link .fa-twitter { color: #1da1f2; }
+      .pg-social-link .fa-linkedin { color: #0077b5; }
+      .pg-social-link .fa-youtube { color: #ff0000; }
+
+      /* Contact */
+      .pg-contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 2rem; }
+      .pg-contact-card {
+        background: var(--pg-white);
+        border: 1px solid var(--pg-border);
+        border-radius: 4px;
+        padding: 20px;
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+      }
+      .pg-contact-icon { width: 40px; height: 40px; border-radius: 8px; background: var(--pg-blue-light); color: var(--pg-blue-dark); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+      .pg-contact-card h4 { font-family: 'Maven Pro', sans-serif; font-size: 0.82rem; font-weight: 700; margin: 0 0 4px 0; text-transform: uppercase; color: var(--pg-text); }
+      .pg-contact-card p { font-size: 0.85rem; color: var(--pg-text-light); margin: 0; }
+      .pg-contact-card a { color: var(--pg-blue-dark); font-weight: 600; }
+
+      /* CTA */
+      .pg-cta-box {
+        background: var(--pg-blue-light);
+        border: 1px solid var(--pg-border);
+        border-radius: 6px;
+        padding: 28px 32px;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      .pg-cta-box h3 { font-family: 'Maven Pro', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--pg-blue-dark); margin: 0 0 8px 0; text-transform: none; }
+      .pg-cta-box p { font-size: 0.9rem; color: var(--pg-text); margin: 0 0 16px 0; }
+      .pg-btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--pg-blue-dark); color: var(--pg-white); font-family: 'Maven Pro', sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; padding: 10px 24px; border-radius: 3px; text-decoration: none; transition: background 0.15s ease; }
+      .pg-btn-primary:hover { background: var(--pg-blue-hover); color: var(--pg-white); text-decoration: none; }
+
+      /* Stats row */
+      .pg-about-stats { display: flex; gap: 0; margin-bottom: 2rem; border: 1px solid var(--pg-border); border-radius: 6px; overflow: hidden; }
+      .pg-about-stat { flex: 1; text-align: center; padding: 20px 16px; background: var(--pg-white); border-right: 1px solid var(--pg-border); }
+      .pg-about-stat:last-child { border-right: none; }
+      .pg-about-stat-num { font-family: 'Maven Pro', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--pg-blue-dark); line-height: 1; }
+      .pg-about-stat-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--pg-text-light); letter-spacing: 0.4px; margin-top: 4px; }
+
+      #footer img.footer-logo { height: 36px; margin-bottom: 10px; opacity: 0.6; transition: opacity 0.2s ease; }
+      #footer img.footer-logo:hover { opacity: 1; }
+
+      @media (max-width: 768px) {
+        .pg-content-area { flex-direction: column; }
+        .pg-sidebar { flex: auto; min-width: auto; order: 2; }
+        .pg-main-content { order: 1; }
+        .pg-values-grid { grid-template-columns: 1fr; }
+        .pg-about-stats { flex-direction: column; }
+        .pg-about-stat { border-right: none; border-bottom: 1px solid var(--pg-border); }
+        .pg-about-stat:last-child { border-bottom: none; }
+        .pg-about-hero { padding: 24px; }
+        .pg-contact-grid { grid-template-columns: 1fr; }
+      }
+    </style>
   </head>
-
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDMJ7KJ"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDMJ7KJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="container-fluid">
- <!-- Nav -->
       <div class="row justify-content-md-center">
-         <div class="col">
-           <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-             <a class="navbar-brand p-0" href="/">
-               <img class="logo" src="/pict/smal_AZERPUG.png" alt="Azerbaijan PostgreSQL User Group Logo">
-             </a>
-             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
-               <span class="navbar-toggler-icon"></span>
-             </button>
-             <div class="collapse navbar-collapse" id="pgNavbar">
-               <ul class="navbar-nav mr-auto">
-                 <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
-                 <li class="nav-item p-2"><a href="/blogs/" title="Blog Posts">Blog Posts</a></li>
-                 <li class="nav-item p-2"><a href="/registration/" title="Registration">Registration</a></li>
-                 <li class="nav-item p-2"><a href="/members/" title="Members">Members</a></li>
-                 <li class="nav-item p-2"><a href="/community/" title="Global Community">Global Community</a></li>
-                 <li class="nav-item p-2"><a href="/profile/" title="My Profile">My Profile</a></li>
-                 <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
-               </ul>
-             </div> <!-- pgNavBar -->
-	       </nav>
-         </div> <!-- col -->
-      </div> <!-- row -->
-      <!-- End Nav -->
+        <div class="col">
+          <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand p-0" href="/"><img class="logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG Logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="pgNavbar">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
+                <li class="nav-item p-2"><a href="/blogs/" title="Blog Posts">Blog Posts</a></li>
+                <li class="nav-item p-2"><a href="/registration/" title="Registration">Registration</a></li>
+                <li class="nav-item p-2"><a href="/members/" title="Members">Members</a></li>
+                <li class="nav-item p-2"><a href="/community/" title="Global Community">Global Community</a></li>
+                <li class="nav-item p-2"><a href="/profile/" title="My Profile">My Profile</a></li>
+                <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
 
- 
-<center><h2><bold>⚡ UNDER CONSTRUCTION ⚡</bold></h2></center>
- 
+      <div class="pg-page-wrapper" style="margin-top: 1rem;">
+        <div class="pg-content-area">
+
+          <aside class="pg-sidebar">
+            <div class="pg-sidebar-logo">
+              <a href="/"><img src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a>
+              <div class="pg-sidebar-logo-text">Azerbaijan PostgreSQL<br>User Group</div>
+            </div>
+            <div class="pg-sidebar-section">
+              <h3>On This Page</h3>
+              <ul>
+                <li><a href="#mission">Our Mission</a></li>
+                <li><a href="#values">Community Values</a></li>
+                <li><a href="#history">History</a></li>
+                <li><a href="#connect">Connect With Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+              </ul>
+            </div>
+            <div class="pg-sidebar-section">
+              <h3>Community</h3>
+              <ul>
+                <li><a href="/registration/">Registration</a></li>
+                <li><a href="/members/">Members</a></li>
+                <li><a href="/blogs/">Blog Posts</a></li>
+                <li><a href="/community/">Global Community</a></li>
+                <li><a href="/about/" class="active">About</a></li>
+              </ul>
+            </div>
+          </aside>
+
+          <main class="pg-main-content">
+
+            <!-- Hero -->
+            <div class="pg-about-hero">
+              <h1>Azərbaycan PostgreSQL İstifadəçiləri Qrupu</h1>
+              <div class="pg-hero-subtitle">Azerbaijan PostgreSQL User Group (AZERPUG) — an open-source community bringing together PostgreSQL enthusiasts, developers, database administrators, and students across Azerbaijan.</div>
+              <span class="pg-hero-founded"><i class="fas fa-calendar-alt"></i> Founded in 2018 · Baku, Azerbaijan</span>
+            </div>
+
+            <!-- Live stats -->
+            <div class="pg-about-stats">
+              <div class="pg-about-stat">
+                <div class="pg-about-stat-num" id="statMembers">—</div>
+                <div class="pg-about-stat-label">Community Members</div>
+              </div>
+              <div class="pg-about-stat">
+                <div class="pg-about-stat-num" id="statPosts">—</div>
+                <div class="pg-about-stat-label">Blog Posts</div>
+              </div>
+              <div class="pg-about-stat">
+                <div class="pg-about-stat-num">2018</div>
+                <div class="pg-about-stat-label">Year Founded</div>
+              </div>
+              <div class="pg-about-stat">
+                <div class="pg-about-stat-num"><i class="fas fa-globe" style="font-size:1.4rem;"></i></div>
+                <div class="pg-about-stat-label">Open Source</div>
+              </div>
+            </div>
+
+            <!-- Mission -->
+            <h2 class="pg-section-title" id="mission"><i class="fas fa-bullseye"></i> Our Mission</h2>
+            <div class="pg-card">
+              <p>AZERPUG exists to grow and strengthen the PostgreSQL community in Azerbaijan. We believe that knowledge is most powerful when it's shared freely, and that open-source technology is the foundation of innovation.</p>
+              <p>Our mission is to provide a platform where anyone — from curious beginners to seasoned database experts — can learn, share, and collaborate around PostgreSQL. We organize meetups, publish educational content, and connect professionals who work with the world's most advanced open-source relational database.</p>
+              <p>As an open community, AZERPUG has no hierarchy — every registered member is an equal participant. We welcome developers, DBAs, students, IT managers, and anyone interested in PostgreSQL to join us and contribute to the community.</p>
+            </div>
+
+            <!-- Values -->
+            <h2 class="pg-section-title" id="values"><i class="fas fa-heart"></i> Community Values</h2>
+            <div class="pg-values-grid">
+              <div class="pg-value-card">
+                <div class="pg-value-icon" style="background: #336791;"><i class="fas fa-lock-open"></i></div>
+                <h3>Open Source</h3>
+                <p>We champion open-source software and the collaborative development model that makes PostgreSQL great.</p>
+              </div>
+              <div class="pg-value-card">
+                <div class="pg-value-icon" style="background: #2e7d32;"><i class="fas fa-equals"></i></div>
+                <h3>Equality</h3>
+                <p>Every member has an equal voice. There is no hierarchy — we grow together as a flat, open community.</p>
+              </div>
+              <div class="pg-value-card">
+                <div class="pg-value-icon" style="background: #e65100;"><i class="fas fa-graduation-cap"></i></div>
+                <h3>Knowledge Sharing</h3>
+                <p>We learn from each other through blog posts, meetups, workshops, and mentorship. Teaching is the best way to learn.</p>
+              </div>
+              <div class="pg-value-card">
+                <div class="pg-value-icon" style="background: #7b1fa2;"><i class="fas fa-hands-helping"></i></div>
+                <h3>Inclusivity</h3>
+                <p>Everyone is welcome regardless of experience level, background, or profession. Curiosity is the only requirement.</p>
+              </div>
+            </div>
+
+            <!-- History -->
+            <h2 class="pg-section-title" id="history"><i class="fas fa-history"></i> Our History</h2>
+            <div class="pg-card">
+              <div class="pg-timeline">
+                <div class="pg-timeline-item">
+                  <div class="pg-timeline-year">2018</div>
+                  <div class="pg-timeline-text">AZERPUG was founded in Baku as the first dedicated PostgreSQL user group in Azerbaijan, with the goal of building a local community around the world's most advanced open-source database.</div>
+                </div>
+                <div class="pg-timeline-item">
+                  <div class="pg-timeline-year">2019</div>
+                  <div class="pg-timeline-text">The community grew steadily with regular meetups and knowledge-sharing sessions among PostgreSQL professionals in Baku.</div>
+                </div>
+                <div class="pg-timeline-item">
+                  <div class="pg-timeline-year">2020–2021</div>
+                  <div class="pg-timeline-text">During the global pandemic, the community moved to online events and social media, expanding reach across Azerbaijan.</div>
+                </div>
+                <div class="pg-timeline-item">
+                  <div class="pg-timeline-year">2022–2024</div>
+                  <div class="pg-timeline-text">AZERPUG continued to grow, connecting with the global PostgreSQL community and establishing the postgresql.az website as a hub for Azerbaijani PostgreSQL users.</div>
+                </div>
+                <div class="pg-timeline-item">
+                  <div class="pg-timeline-year">2025</div>
+                  <div class="pg-timeline-text">The website was rebuilt with member registration, blog platform, and community features — powered by PostgreSQL via Supabase.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Connect -->
+            <h2 class="pg-section-title" id="connect"><i class="fas fa-share-alt"></i> Connect With Us</h2>
+            <div class="pg-social-links">
+              <a href="https://www.facebook.com/groups/www.postgresql.az" target="_blank" rel="noopener" class="pg-social-link"><i class="fab fa-facebook"></i> Facebook Group</a>
+              <a href="#" class="pg-social-link" title="Coming soon"><i class="fab fa-telegram-plane"></i> Telegram</a>
+              <a href="#" class="pg-social-link" title="Coming soon"><i class="fab fa-twitter"></i> Twitter / X</a>
+              <a href="#" class="pg-social-link" title="Coming soon"><i class="fab fa-linkedin"></i> LinkedIn</a>
+              <a href="#" class="pg-social-link" title="Coming soon"><i class="fab fa-youtube"></i> YouTube</a>
+            </div>
+
+            <!-- Contact -->
+            <h2 class="pg-section-title" id="contact"><i class="fas fa-envelope"></i> Contact</h2>
+            <div class="pg-contact-grid">
+              <div class="pg-contact-card">
+                <div class="pg-contact-icon"><i class="fas fa-envelope"></i></div>
+                <div>
+                  <h4>Email</h4>
+                  <p><a href="mailto:info@postgresql.az">info@postgresql.az</a></p>
+                </div>
+              </div>
+              <div class="pg-contact-card">
+                <div class="pg-contact-icon"><i class="fas fa-globe"></i></div>
+                <div>
+                  <h4>Website</h4>
+                  <p><a href="https://postgresql.az">postgresql.az</a></p>
+                </div>
+              </div>
+              <div class="pg-contact-card">
+                <div class="pg-contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div>
+                  <h4>Location</h4>
+                  <p>Baku, Azerbaijan</p>
+                </div>
+              </div>
+              <div class="pg-contact-card">
+                <div class="pg-contact-icon"><i class="fab fa-facebook"></i></div>
+                <div>
+                  <h4>Facebook</h4>
+                  <p><a href="https://www.facebook.com/groups/www.postgresql.az" target="_blank" rel="noopener">AZERPUG Group</a></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Join CTA -->
+            <div class="pg-cta-box">
+              <h3>Join the Azerbaijan PostgreSQL Community</h3>
+              <p>Registration is free and open to everyone. Become a member, write blog posts, attend events, and connect with PostgreSQL professionals in Azerbaijan.</p>
+              <a href="/registration/" class="pg-btn-primary"><i class="fas fa-user-plus"></i> Register Now</a>
+            </div>
+
+            <!-- Privacy & Legal -->
+            <div class="pg-card" style="font-size:0.82rem;color:var(--pg-text-light);">
+              <p><strong>Privacy:</strong> AZERPUG respects your privacy. We only collect information you provide during registration and do not share it with third parties. See our <a href="/about/privacypolicy/">Privacy Policy</a> for details.</p>
+              <p><strong>Open Source:</strong> This website is open source and built with PostgreSQL (via Supabase), HTML, CSS, and JavaScript. The source code is available on <a href="https://github.com/valehdba/postgresql.az" target="_blank" rel="noopener">GitHub</a>.</p>
+            </div>
+
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <footer id="footer">
+      <div class="container">
+        <a href="/"><img class="footer-logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a><br/>
+        <a href="/about/privacypolicy/">Privacy policy</a> | <a href="/about/website/">About the website</a><br/>
+        Copyright &copy; 2018-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
+      </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="/js/navbar-auth.js"></script>
+
+    <script>
+      var SUPABASE_URL = 'https://qlyqwwhimwfcvuqdrxov.supabase.co';
+      var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFseXF3d2hpbXdmY3Z1cWRyeG92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjg2ODYsImV4cCI6MjA4OTcwNDY4Nn0.6MKz72wGwthRL8hs-Iv3L9Iw_W4DdGh3UjrwcagtKfM';
+
+      // Load live stats
+      async function loadStats() {
+        try {
+          var r = await fetch(SUPABASE_URL + '/rest/v1/public_members?select=id', {
+            headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
+          });
+          if (r.ok) { var m = await r.json(); document.getElementById('statMembers').textContent = m.length; }
+        } catch(e) {}
+
+        try {
+          var r2 = await fetch(SUPABASE_URL + '/rest/v1/public_blog_posts?select=id', {
+            headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
+          });
+          if (r2.ok) { var p = await r2.json(); document.getElementById('statPosts').textContent = p.length; }
+        } catch(e) {}
+      }
+      loadStats();
+    </script>
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
+</html>
