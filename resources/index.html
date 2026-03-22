@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NDMJ7KJ');</script>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="PostgreSQL learning resources - tutorials, books, tools, and guides curated by AZERPUG">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/pgyum.css">
+    <title>Resources - Azerbaijan PostgreSQL User Group</title>
+    <style>
+      :root{--pg-blue-dark:#336791;--pg-blue-light:#e7eef4;--pg-blue-hover:#264d6f;--pg-text:#515151;--pg-text-light:#6c757d;--pg-border:#d8dde3;--pg-bg-light:#f5f5f5;--pg-white:#fff}
+      .pg-page-wrapper{max-width:1140px;margin:0 auto;padding:0 15px}.pg-content-area{display:flex;gap:30px;margin-top:1rem}
+      .pg-sidebar{flex:0 0 220px;min-width:220px}.pg-sidebar-logo{text-align:center;padding:16px 10px 20px;margin-bottom:1.5rem;border-bottom:2px solid var(--pg-border)}.pg-sidebar-logo img{max-width:160px;height:auto;margin-bottom:10px}.pg-sidebar-logo .pg-sidebar-logo-text{font-family:'Maven Pro',sans-serif;font-size:.72rem;font-weight:700;text-transform:uppercase;color:var(--pg-blue-dark);letter-spacing:.8px;line-height:1.4}
+      .pg-sidebar-section{margin-bottom:2rem}.pg-sidebar-section h3{font-family:'Maven Pro',sans-serif;font-size:.85rem;font-weight:700;text-transform:uppercase;color:var(--pg-blue-dark);letter-spacing:.5px;padding-bottom:8px;border-bottom:2px solid var(--pg-blue-dark);margin-bottom:10px}.pg-sidebar-section ul{list-style:none;padding:0;margin:0}.pg-sidebar-section ul li a{display:block;padding:5px 10px;font-size:.9rem;font-weight:600;color:var(--pg-blue-dark);border-left:3px solid transparent;transition:all .15s ease}.pg-sidebar-section ul li a:hover,.pg-sidebar-section ul li a.active{background:var(--pg-blue-light);border-left-color:var(--pg-blue-dark);text-decoration:none}
+      .pg-main-content{flex:1;min-width:0}.pg-page-title{font-family:'Maven Pro',sans-serif;font-size:1.6rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin-bottom:.25rem;padding-bottom:10px;border-bottom:2px solid var(--pg-border)}.pg-page-subtitle{font-size:.95rem;color:var(--pg-text-light);margin-bottom:1.5rem;line-height:1.6}
+      .pg-section-title{font-family:'Maven Pro',sans-serif;font-size:1.05rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;padding-bottom:8px;border-bottom:2px solid var(--pg-border);margin:1.75rem 0 1.25rem;display:flex;align-items:center;gap:8px}.pg-section-title i{color:var(--pg-blue-dark)}
+      .pg-resource-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:1.5rem}
+      .pg-resource-card{background:var(--pg-white);border:1px solid var(--pg-border);border-radius:6px;padding:20px;transition:box-shadow .2s ease,border-color .2s ease;display:flex;flex-direction:column}
+      .pg-resource-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.06);border-color:var(--pg-blue-dark)}
+      .pg-resource-card-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:12px}
+      .pg-resource-icon{width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--pg-white);flex-shrink:0}
+      .pg-resource-card h3{font-family:'Maven Pro',sans-serif;font-size:.92rem;font-weight:700;margin:0;text-transform:none;color:var(--pg-text)}
+      .pg-resource-card .pg-resource-type{font-size:.72rem;font-weight:700;text-transform:uppercase;color:var(--pg-text-light);margin-top:2px}
+      .pg-resource-card p{font-size:.82rem;color:var(--pg-text-light);line-height:1.5;margin:0 0 12px;flex:1}
+      .pg-resource-card .pg-resource-level{display:inline-block;padding:2px 10px;border-radius:12px;font-size:.68rem;font-weight:700;text-transform:uppercase;margin-bottom:10px}
+      .level-beginner{background:#e8f5e9;color:#2e7d32}.level-intermediate{background:#e3f2fd;color:#1565c0}.level-advanced{background:#fff3e0;color:#e65100}.level-all{background:var(--pg-blue-light);color:var(--pg-blue-dark)}
+      .pg-resource-link{display:inline-flex;align-items:center;gap:6px;font-family:'Maven Pro',sans-serif;font-size:.78rem;font-weight:700;color:var(--pg-blue-dark);text-decoration:none;text-transform:uppercase;letter-spacing:.3px;margin-top:auto}
+      .pg-resource-link:hover{color:var(--pg-blue-hover);text-decoration:none}
+      .pg-resource-link i{font-size:.7rem}
+      #footer img.footer-logo{height:36px;margin-bottom:10px;opacity:.6;transition:opacity .2s ease}#footer img.footer-logo:hover{opacity:1}
+      @media(max-width:768px){.pg-content-area{flex-direction:column}.pg-sidebar{flex:auto;order:2}.pg-main-content{order:1}.pg-resource-grid{grid-template-columns:1fr}}
+    </style>
+  </head>
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDMJ7KJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="container-fluid"><div class="row justify-content-md-center"><div class="col">
+      <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand p-0" href="/"><img class="logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="pgNavbar"><ul class="navbar-nav mr-auto">
+          <li class="nav-item p-2"><a href="/">Home</a></li><li class="nav-item p-2"><a href="/blogs/">Blog Posts</a></li><li class="nav-item p-2"><a href="/events/">Events</a></li><li class="nav-item p-2"><a href="/registration/">Registration</a></li><li class="nav-item p-2"><a href="/members/">Members</a></li><li class="nav-item p-2"><a href="/community/">Global Community</a></li><li class="nav-item p-2"><a href="/profile/">My Profile</a></li><li class="nav-item p-2"><a href="/about/">About</a></li>
+        </ul></div>
+      </nav>
+    </div></div>
+
+    <div class="pg-page-wrapper" style="margin-top:1rem;"><div class="pg-content-area">
+      <aside class="pg-sidebar">
+        <div class="pg-sidebar-logo"><a href="/"><img src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a><div class="pg-sidebar-logo-text">Azerbaijan PostgreSQL<br>User Group</div></div>
+        <div class="pg-sidebar-section"><h3>Categories</h3><ul>
+          <li><a href="#official" class="active">Official Docs</a></li>
+          <li><a href="#tutorials">Tutorials</a></li>
+          <li><a href="#books">Books</a></li>
+          <li><a href="#tools">Tools & GUIs</a></li>
+          <li><a href="#courses">Courses & Videos</a></li>
+        </ul></div>
+        <div class="pg-sidebar-section"><h3>Community</h3><ul>
+          <li><a href="/blogs/">Blog Posts</a></li><li><a href="/events/">Events</a></li><li><a href="/members/">Members</a></li>
+        </ul></div>
+      </aside>
+
+      <main class="pg-main-content">
+        <h1 class="pg-page-title">PostgreSQL Resources</h1>
+        <p class="pg-page-subtitle">A curated collection of the best resources for learning and working with PostgreSQL — from beginner guides to advanced tools, recommended by the AZERPUG community.</p>
+
+        <!-- Official Documentation -->
+        <h2 class="pg-section-title" id="official"><i class="fas fa-book"></i> Official Documentation</h2>
+        <div class="pg-resource-grid">
+          <div class="pg-resource-card">
+            <div class="pg-resource-card-top"><div class="pg-resource-icon" style="background:#336791;"><i class="fas fa-database"></i></div><div><h3>PostgreSQL Official Documentation</h3><div class="pg-resource-type">Reference Manual</div></div></div>
+            <span class="pg-resource-level level-all">All Levels</span>
+            <p>The comprehensive, authoritative reference for PostgreSQL. Covers installation, SQL language, administration, server configuration, and all features across every version.</p>
+            <a href="https://www.postgresql.org/docs/current/" target="_blank" rel="noopener" class="pg-resource-link"><i class="fas fa-external-link-alt"></i> Visit Documentation</a>
+          </div>
+          <div class="pg-resource-card">
+            <div class="pg-resource-card-top"><div class="pg-resource-icon" style="background:#336791;"><i class="fas fa-graduation-cap"></i></div><div><h3>PostgreSQL Tutorial</h3><div class="pg-resource-type">Official Getting Started</div></div></div>
+            <span class="pg-resource-level level-beginner">Beginner</span>
+            <p>The official tutorial from postgresql.org. Walks through creating databases, tables, queries, joins, views, transactions, and window functions step by step.</p>
+            <a href="https://www.postgresql.org/docs/current/tutorial.html" target="_blank" rel="noopener" class="pg-resource-link"><i class="fas fa-external-link-alt"></i> Start Tutorial</a>
+          </div>
+          <div class="pg-resource-card">
+            <div class="pg-resource-card-top"><div class="pg-resource-icon" style="background:#336791;"><i class="fas fa-cogs"></i></div><div><h3>PostgreSQL Wiki</h3><div class="pg-resource-type">Community Knowledge Base</div></div></div>
+            <span class="pg-resource-level level-all">All Levels</span>
+            <p>Community-maintained wiki with how-to guides, performance tips, migration guides, replication setup, and best practices from real-world PostgreSQL users.</p>
+            <a href="https://wiki.postgresql.org/" target="_blank" rel="noopener" class="pg-resource-link"><i class="fas fa-external-link-alt"></i> Browse Wiki</a>
+          </div>
+        </div>
+
+        <!-- Tutorials -->
+        <h2 class="pg-section-title" id="tutorials"><i class="fas fa-laptop-code"></i> Interactive Tutorials</h2>
+        <div class="pg-resource-grid">
+          <div class="pg-resource-card">
+            <div class="pg-resource-card-top"><div class="pg-resource-icon" style="background:#2e7d32;"><i class="fas fa-terminal"></i></div><div><h3>PostgreSQL Exercises</h3><div class="pg-resource-type">Interactive Practice</div></div></div>
+            <span class="pg-resource-level level-beginner">Beginner</span>
+            <p>Free interactive SQL exercises designed specifically for PostgreSQL. Practice queries against a real database in your browser — perfect for building practical SQL skills.</p>
+            <a href="https://pgexercises.com/" target="_blank" rel="noopener" class="pg-resource-link"><i class="fas fa-external-link-alt"></i> Start Practicing</a>
+          </div>
+          <div class="pg-resource-card">
+            <div class="pg-resource-card-top"><div class="pg-resource-icon" style="background:#2e7d32;"><i class="fas fa-play-circle"></i></div><div><h3>PostgreSQL Tutorial (postgresqltutorial.com)</h3><div class="pg-resource-type">Step-by-Step Guides</div></div></div>
+            <span class="pg-resource-level level-beginner">Beginner</span>
+            <p>Clear, well-organized tutorials covering PostgreSQL from basics to advanced topics including JSON, full-text search, stored procedures, and administration.</p>
+            <a href="https://www.postgresqltutorial.com/" target="_blank" rel="noopener" class="pg-resource-link"><i class="fas fa-external-link-alt"></i> Visit Tutorials</a>
+          </div>
+          <div class="pg-resource-card">
+            <div class="pg-resource-card-top"><div class="pg-resource-icon" style="background:#2e7d32;"><i class="fas fa-globe"></i></div><div><h3>Planet PostgreSQL</h3><div class="pg-resource-type">Community Blog Aggregator</div></div></div>
+            <span class="pg-resource-level level-intermediate">Intermediate</span>
+            <p>Aggregated blog posts from PostgreSQL contributors and community members worldwide. Great for staying current with tips, new features, and real-world experiences.</p>
+            <a href="https://planet.postgresql.org/" target="_blank" rel="noopener" class="pg-resource-link"><i class="fas fa-external-link-alt"></i> Read Posts</a>
+          </div>
+        </div>
+
+        <!-- Books -->
+        <h2 class="pg-section-title" id="books"><i class="fas fa-book-open"></i> Recommended Books</h2>
+        <div class="pg-resource-grid">
+          <div class="pg-resource-card">
+            <div class="pg-resource-card-top"><div class="pg-resource-icon" style="background:#7b1fa2;"><i class="fas fa-book"></i></div><div><h3>The Art of PostgreSQL</h3><div class="pg-resource-type">by Dimitri Fontaine</div></div></div>
+            <span class="pg-resource-level level-intermediate">Intermediate</span>
+            <p>Turn thousands of lines of code into simple SQL queries. Covers advanced SQL, data modeling, and how to get the most out of PostgreSQL's unique features in real applications.</p>
+            <a href="https://theartofpostgresql.com/" target="_blank" rel="noopener" class="pg-resource-link"><i class="fas fa-external-link-alt"></i> Learn More</a>
+          </div>
+          <div class="pg-resource-card">
+            <div class="pg-resource-card-top"><div class="pg-resource-icon" style="background:#7b1fa2;"><i class="fas fa-book"></i></div><div><h3>PostgreSQL: Up and Running</h3><div class="pg-resource-type">by Regina Obe & Leo Hsu</div></div></div>
+            <span class="pg-resource-level level-beginner">Beginner</span>
+            <p>A practical guide to getting productive with PostgreSQL quickly. Covers installation, queries, extensions, replication, and performance tuning with real examples.</p>
+            <a href="https://www.oreilly.com/library/view/postgresql-up-and/9781491963401/" target="_blank" rel="noopener" class="pg-resource-link"><i class="fas fa-external-link-alt"></i> O'Reilly</a>
+          </div>
+          <div class="pg-resource-card">
+            <div class="pg-resource-card-top"><div class="pg-resource-icon" style="background:#7b1fa2;"><i class="fas fa-book"></i></div><div><h3>Mastering PostgreSQL in Application Development</h3><div class="pg-resource-type">by Dimitri Fontaine</div></div></div>
+            <span class="pg-resource-level level-advanced">Advanced</span>
+            <p>Focused on developers building applications with PostgreSQL. Deep dives into SQL design, indexing strategies, data types, and leveraging PostgreSQL as an application platform.</p>
+            <a href="https://masteringpostgresql.com/" target="_blank" rel="noopener" class="pg-resource-link"><i class="fas fa-external-link-alt"></i> Learn More</a>
+          </div>
+        </div>
+
+        <!-- Tools -->
+        <h2 class="pg-section-title" id="tools"><i class="fas fa-wrench"></i> Tools & GUIs</h2>
+        <div class="pg-resource-grid">
+          <div class="pg-resource-card">
+            <div class="pg-resource-card-top"><div class="pg-resource-icon" style="background:#e65100;"><i class="fas fa-desktop"></i></div><div><h3>pgAdmin 4</h3><div class="pg-resource-type">Official GUI Tool</div></div></div>
+            <span class="pg-resource-level level-all">All Levels</span>
+            <p>The official graphical management tool for PostgreSQL. Browse databases, write queries, manage users, monitor performance — all from a web-based interface.</p>
+            <a href="https://www.pgadmin.org/" target="_blank" rel="noopener" class="pg-resource-link"><i class="fas fa-external-link-alt"></i> Download pgAdmin</a>
+          </div>
+          <div class="pg-resource-card">
+            <div class="pg-resource-card-top"><div class="pg-resource-icon" style="background:#e65100;"><i class="fas fa-terminal"></i></div><div><h3>psql</h3><div class="pg-resource-type">Command-Line Client</div></div></div>
+            <span class="pg-resource-level level-intermediate">Intermediate</span>
+            <p>The built-in PostgreSQL command-line client. Fast, powerful, and scriptable. Essential for DBAs and developers who prefer the terminal.</p>
+            <a href="https://www.postgresql.org/docs/current/app-psql.html" target="_blank" rel="noopener" class="pg-resource-link"><i class="fas fa-external-link-alt"></i> psql Docs</a>
+          </div>
+          <div class="pg-resource-card">
+            <div class="pg-resource-card-top"><div class="pg-resource-icon" style="background:#e65100;"><i class="fas fa-code"></i></div><div><h3>DBeaver Community</h3><div class="pg-resource-type">Universal Database Tool</div></div></div>
+            <span class="pg-resource-level level-all">All Levels</span>
+            <p>Free, open-source universal database tool. Supports PostgreSQL with ER diagrams, data export/import, SQL editor with auto-completion, and visual query builder.</p>
+            <a href="https://dbeaver.io/" target="_blank" rel="noopener" class="pg-resource-link"><i class="fas fa-external-link-alt"></i> Download DBeaver</a>
+          </div>
+        </div>
+
+        <!-- Courses -->
+        <h2 class="pg-section-title" id="courses"><i class="fas fa-video"></i> Courses & Video Tutorials</h2>
+        <div class="pg-resource-grid">
+          <div class="pg-resource-card">
+            <div class="pg-resource-card-top"><div class="pg-resource-icon" style="background:#c62828;"><i class="fab fa-youtube"></i></div><div><h3>PostgreSQL Tutorial for Beginners</h3><div class="pg-resource-type">YouTube — Free</div></div></div>
+            <span class="pg-resource-level level-beginner">Beginner</span>
+            <p>Free full-length PostgreSQL courses available on YouTube. Search for "PostgreSQL full course" to find comprehensive video tutorials from top educators.</p>
+            <a href="https://www.youtube.com/results?search_query=postgresql+full+course" target="_blank" rel="noopener" class="pg-resource-link"><i class="fas fa-external-link-alt"></i> Search YouTube</a>
+          </div>
+          <div class="pg-resource-card">
+            <div class="pg-resource-card-top"><div class="pg-resource-icon" style="background:#c62828;"><i class="fas fa-chalkboard-teacher"></i></div><div><h3>PostgreSQL Conference Talks</h3><div class="pg-resource-type">PGConf Recordings — Free</div></div></div>
+            <span class="pg-resource-level level-intermediate">Intermediate</span>
+            <p>Recorded talks from PGConf.EU, PGCon, and other PostgreSQL conferences. Deep technical content from core developers and expert practitioners.</p>
+            <a href="https://www.youtube.com/results?search_query=pgconf+postgresql" target="_blank" rel="noopener" class="pg-resource-link"><i class="fas fa-external-link-alt"></i> Watch Talks</a>
+          </div>
+          <div class="pg-resource-card">
+            <div class="pg-resource-card-top"><div class="pg-resource-icon" style="background:#c62828;"><i class="fas fa-certificate"></i></div><div><h3>PostgreSQL DBA Courses</h3><div class="pg-resource-type">Professional Training</div></div></div>
+            <span class="pg-resource-level level-advanced">Advanced</span>
+            <p>Professional DBA training courses covering replication, high availability, performance tuning, backup strategies, and enterprise PostgreSQL administration.</p>
+            <a href="https://www.postgresql.org/about/events/" target="_blank" rel="noopener" class="pg-resource-link"><i class="fas fa-external-link-alt"></i> Find Training</a>
+          </div>
+        </div>
+
+      </main>
+    </div></div></div>
+
+    <footer id="footer"><div class="container">
+      <a href="/"><img class="footer-logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a><br/>
+      <div style="margin-bottom:12px;"><a href="https://www.facebook.com/groups/www.postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="Facebook"><i class="fab fa-facebook"></i></a> <a href="https://github.com/valehdba/postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="GitHub"><i class="fab fa-github"></i></a></div>
+      <a href="/about/privacypolicy/">Privacy policy</a> | <a href="/about/website/">About the website</a><br/>
+      Copyright &copy; 2018-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
+    </div></footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/js/navbar-auth.js"></script>
+</body>
+</html>

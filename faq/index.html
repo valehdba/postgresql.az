@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NDMJ7KJ');</script>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Frequently asked questions about AZERPUG and PostgreSQL">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/pgyum.css">
+    <title>FAQ - Azerbaijan PostgreSQL User Group</title>
+    <style>
+      :root{--pg-blue-dark:#336791;--pg-blue-light:#e7eef4;--pg-blue-hover:#264d6f;--pg-text:#515151;--pg-text-light:#6c757d;--pg-border:#d8dde3;--pg-bg-light:#f5f5f5;--pg-white:#fff}
+      .pg-page-wrapper{max-width:1140px;margin:0 auto;padding:0 15px}.pg-content-area{display:flex;gap:30px;margin-top:1rem}
+      .pg-sidebar{flex:0 0 220px;min-width:220px}.pg-sidebar-logo{text-align:center;padding:16px 10px 20px;margin-bottom:1.5rem;border-bottom:2px solid var(--pg-border)}.pg-sidebar-logo img{max-width:160px;height:auto;margin-bottom:10px}.pg-sidebar-logo .pg-sidebar-logo-text{font-family:'Maven Pro',sans-serif;font-size:.72rem;font-weight:700;text-transform:uppercase;color:var(--pg-blue-dark);letter-spacing:.8px;line-height:1.4}
+      .pg-sidebar-section{margin-bottom:2rem}.pg-sidebar-section h3{font-family:'Maven Pro',sans-serif;font-size:.85rem;font-weight:700;text-transform:uppercase;color:var(--pg-blue-dark);letter-spacing:.5px;padding-bottom:8px;border-bottom:2px solid var(--pg-blue-dark);margin-bottom:10px}.pg-sidebar-section ul{list-style:none;padding:0;margin:0}.pg-sidebar-section ul li a{display:block;padding:5px 10px;font-size:.9rem;font-weight:600;color:var(--pg-blue-dark);border-left:3px solid transparent;transition:all .15s ease}.pg-sidebar-section ul li a:hover,.pg-sidebar-section ul li a.active{background:var(--pg-blue-light);border-left-color:var(--pg-blue-dark);text-decoration:none}
+      .pg-main-content{flex:1;min-width:0}.pg-page-title{font-family:'Maven Pro',sans-serif;font-size:1.6rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin-bottom:.25rem;padding-bottom:10px;border-bottom:2px solid var(--pg-border)}.pg-page-subtitle{font-size:.95rem;color:var(--pg-text-light);margin-bottom:1.5rem;line-height:1.6}
+      .pg-section-title{font-family:'Maven Pro',sans-serif;font-size:1.05rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;padding-bottom:8px;border-bottom:2px solid var(--pg-border);margin:1.75rem 0 1.25rem;display:flex;align-items:center;gap:8px}.pg-section-title i{color:var(--pg-blue-dark)}
+
+      /* FAQ accordion */
+      .pg-faq-item{background:var(--pg-white);border:1px solid var(--pg-border);border-radius:4px;margin-bottom:10px;overflow:hidden}
+      .pg-faq-question{padding:16px 20px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;transition:background .15s ease;font-family:'Maven Pro',sans-serif;font-size:.92rem;font-weight:700;color:var(--pg-text)}
+      .pg-faq-question:hover{background:var(--pg-blue-light)}
+      .pg-faq-question.open{background:var(--pg-blue-light);color:var(--pg-blue-dark)}
+      .pg-faq-question i.toggle{color:var(--pg-blue-dark);transition:transform .2s ease;font-size:.8rem}
+      .pg-faq-question.open i.toggle{transform:rotate(180deg)}
+      .pg-faq-answer{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease}
+      .pg-faq-answer.open{padding:0 20px 20px;max-height:600px}
+      .pg-faq-answer p{font-size:.88rem;color:var(--pg-text);line-height:1.7;margin:0 0 .5rem}
+      .pg-faq-answer p:last-child{margin:0}
+      .pg-faq-answer a{color:var(--pg-blue-dark);font-weight:600}
+      .pg-faq-answer ul{margin:.5rem 0;padding-left:20px;font-size:.88rem;color:var(--pg-text);line-height:1.8}
+
+      .pg-cta-box{background:var(--pg-blue-light);border:1px solid var(--pg-border);border-radius:6px;padding:24px 28px;text-align:center;margin:2rem 0}
+      .pg-cta-box h3{font-family:'Maven Pro',sans-serif;font-size:1rem;font-weight:700;color:var(--pg-blue-dark);margin:0 0 8px;text-transform:none}
+      .pg-cta-box p{font-size:.88rem;color:var(--pg-text);margin:0 0 14px}
+      .pg-btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--pg-blue-dark);color:var(--pg-white);font-family:'Maven Pro',sans-serif;font-size:.82rem;font-weight:700;text-transform:uppercase;padding:9px 22px;border-radius:3px;text-decoration:none;transition:background .15s ease}.pg-btn-primary:hover{background:var(--pg-blue-hover);color:var(--pg-white);text-decoration:none}
+
+      #footer img.footer-logo{height:36px;margin-bottom:10px;opacity:.6;transition:opacity .2s ease}#footer img.footer-logo:hover{opacity:1}
+      @media(max-width:768px){.pg-content-area{flex-direction:column}.pg-sidebar{flex:auto;order:2}.pg-main-content{order:1}}
+    </style>
+  </head>
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDMJ7KJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="container-fluid"><div class="row justify-content-md-center"><div class="col">
+      <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand p-0" href="/"><img class="logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="pgNavbar"><ul class="navbar-nav mr-auto">
+          <li class="nav-item p-2"><a href="/">Home</a></li><li class="nav-item p-2"><a href="/blogs/">Blog Posts</a></li><li class="nav-item p-2"><a href="/events/">Events</a></li><li class="nav-item p-2"><a href="/registration/">Registration</a></li><li class="nav-item p-2"><a href="/members/">Members</a></li><li class="nav-item p-2"><a href="/community/">Global Community</a></li><li class="nav-item p-2"><a href="/profile/">My Profile</a></li><li class="nav-item p-2"><a href="/about/">About</a></li>
+        </ul></div>
+      </nav>
+    </div></div>
+
+    <div class="pg-page-wrapper" style="margin-top:1rem;"><div class="pg-content-area">
+      <aside class="pg-sidebar">
+        <div class="pg-sidebar-logo"><a href="/"><img src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a><div class="pg-sidebar-logo-text">Azerbaijan PostgreSQL<br>User Group</div></div>
+        <div class="pg-sidebar-section"><h3>FAQ Topics</h3><ul>
+          <li><a href="#about-azerpug" class="active">About AZERPUG</a></li>
+          <li><a href="#membership">Membership</a></li>
+          <li><a href="#about-pg">About PostgreSQL</a></li>
+        </ul></div>
+        <div class="pg-sidebar-section"><h3>Need Help?</h3><ul>
+          <li><a href="/contact/">Contact Us</a></li>
+          <li><a href="/about/">About AZERPUG</a></li>
+          <li><a href="/resources/">Resources</a></li>
+        </ul></div>
+      </aside>
+
+      <main class="pg-main-content">
+        <h1 class="pg-page-title">Frequently Asked Questions</h1>
+        <p class="pg-page-subtitle">Find answers to common questions about AZERPUG membership, events, and PostgreSQL.</p>
+
+        <!-- About AZERPUG -->
+        <h2 class="pg-section-title" id="about-azerpug"><i class="fas fa-info-circle"></i> About AZERPUG</h2>
+
+        <div class="pg-faq-item"><div class="pg-faq-question" onclick="toggleFaq(this)">What is AZERPUG?<i class="fas fa-chevron-down toggle"></i></div><div class="pg-faq-answer"><p>AZERPUG (Azerbaijan PostgreSQL User Group) is an open-source community founded in 2018 in Baku, Azerbaijan. We bring together PostgreSQL enthusiasts — developers, database administrators, students, and IT professionals — to learn, share knowledge, and grow together. We are the first and only dedicated PostgreSQL user group in Azerbaijan.</p></div></div>
+
+        <div class="pg-faq-item"><div class="pg-faq-question" onclick="toggleFaq(this)">Is AZERPUG an official PostgreSQL organization?<i class="fas fa-chevron-down toggle"></i></div><div class="pg-faq-answer"><p>AZERPUG is a community-driven local user group, part of the broader global PostgreSQL community. We are recognized as a PostgreSQL user group and listed among community organizations worldwide. We are not a commercial entity — we are a volunteer-run open-source community.</p></div></div>
+
+        <div class="pg-faq-item"><div class="pg-faq-question" onclick="toggleFaq(this)">Does AZERPUG have a hierarchy or leadership structure?<i class="fas fa-chevron-down toggle"></i></div><div class="pg-faq-answer"><p>No. AZERPUG is a flat, open community. Every registered member is an equal participant — there are no titles, ranks, or hierarchy. All members can write blog posts, attend events, and contribute to the community. Community decisions are made collaboratively.</p></div></div>
+
+        <div class="pg-faq-item"><div class="pg-faq-question" onclick="toggleFaq(this)">How can I contribute to AZERPUG?<i class="fas fa-chevron-down toggle"></i></div><div class="pg-faq-answer"><p>There are many ways to contribute:</p><ul><li>Write blog posts sharing your PostgreSQL knowledge</li><li>Attend and participate in meetups and events</li><li>Suggest topics for workshops or talks</li><li>Help other members in discussions</li><li>Spread the word about AZERPUG</li><li>Contribute to our open-source website on <a href="https://github.com/valehdba/postgresql.az" target="_blank">GitHub</a></li></ul></div></div>
+
+        <!-- Membership -->
+        <h2 class="pg-section-title" id="membership"><i class="fas fa-users"></i> Membership</h2>
+
+        <div class="pg-faq-item"><div class="pg-faq-question" onclick="toggleFaq(this)">Is membership free?<i class="fas fa-chevron-down toggle"></i></div><div class="pg-faq-answer"><p>Yes, AZERPUG membership is completely free and always will be. We are an open-source community — no fees, no subscriptions, no hidden costs.</p></div></div>
+
+        <div class="pg-faq-item"><div class="pg-faq-question" onclick="toggleFaq(this)">Who can join AZERPUG?<i class="fas fa-chevron-down toggle"></i></div><div class="pg-faq-answer"><p>Anyone interested in PostgreSQL! You don't need to be a database expert — beginners, students, developers, DBAs, managers, and curious learners are all welcome. You don't even need to be from Azerbaijan, though our focus is on the local community.</p></div></div>
+
+        <div class="pg-faq-item"><div class="pg-faq-question" onclick="toggleFaq(this)">How do I register?<i class="fas fa-chevron-down toggle"></i></div><div class="pg-faq-answer"><p>Visit our <a href="/registration/">Registration page</a> and fill out the form. You'll need to provide your name, email, password, and PostgreSQL experience level. After registration you can immediately log in, write blog posts, and RSVP for events.</p></div></div>
+
+        <div class="pg-faq-item"><div class="pg-faq-question" onclick="toggleFaq(this)">Can I write blog posts as a member?<i class="fas fa-chevron-down toggle"></i></div><div class="pg-faq-answer"><p>Yes! All members can write blog posts. Go to the <a href="/blogs/">Blog Posts</a> page, log in, and click "Write New Post." You can use the rich text editor, Markdown, or plain text. Posts are submitted for review before publishing to ensure quality.</p></div></div>
+
+        <div class="pg-faq-item"><div class="pg-faq-question" onclick="toggleFaq(this)">How do I update my profile or change my password?<i class="fas fa-chevron-down toggle"></i></div><div class="pg-faq-answer"><p>Log in and go to <a href="/profile/">My Profile</a>. From there you can edit your personal details (name, company, phone, etc.) and change your password. Your email cannot be changed — contact an admin if you need to update it.</p></div></div>
+
+        <!-- About PostgreSQL -->
+        <h2 class="pg-section-title" id="about-pg"><i class="fas fa-database"></i> About PostgreSQL</h2>
+
+        <div class="pg-faq-item"><div class="pg-faq-question" onclick="toggleFaq(this)">What is PostgreSQL?<i class="fas fa-chevron-down toggle"></i></div><div class="pg-faq-answer"><p>PostgreSQL is a powerful, open-source object-relational database system with over 35 years of active development. It has earned a strong reputation for reliability, feature robustness, and performance. PostgreSQL is used by companies of all sizes — from startups to enterprises like Apple, Instagram, Spotify, and NASA.</p></div></div>
+
+        <div class="pg-faq-item"><div class="pg-faq-question" onclick="toggleFaq(this)">Is PostgreSQL free to use?<i class="fas fa-chevron-down toggle"></i></div><div class="pg-faq-answer"><p>Yes. PostgreSQL is released under the PostgreSQL License, a liberal open-source license similar to BSD/MIT. You can use, modify, and distribute it freely for any purpose — personal, commercial, or academic — without any licensing fees.</p></div></div>
+
+        <div class="pg-faq-item"><div class="pg-faq-question" onclick="toggleFaq(this)">How do I get started with PostgreSQL?<i class="fas fa-chevron-down toggle"></i></div><div class="pg-faq-answer"><p>Start by downloading PostgreSQL from <a href="https://www.postgresql.org/download/" target="_blank">postgresql.org/download</a>. Then follow the <a href="https://www.postgresql.org/docs/current/tutorial.html" target="_blank">official tutorial</a>. For more resources, check our <a href="/resources/">Resources page</a> with curated tutorials, books, and tools.</p></div></div>
+
+        <div class="pg-faq-item"><div class="pg-faq-question" onclick="toggleFaq(this)">What is the latest version of PostgreSQL?<i class="fas fa-chevron-down toggle"></i></div><div class="pg-faq-answer"><p>PostgreSQL 17 is the latest major release (September 2024), with regular point releases for maintenance. PostgreSQL follows a yearly major release cycle. Visit <a href="https://www.postgresql.org/" target="_blank">postgresql.org</a> for the most current version information.</p></div></div>
+
+        <div class="pg-faq-item"><div class="pg-faq-question" onclick="toggleFaq(this)">Why choose PostgreSQL over other databases?<i class="fas fa-chevron-down toggle"></i></div><div class="pg-faq-answer"><p>PostgreSQL stands out for several reasons:</p><ul><li><strong>Standards compliant</strong> — most SQL-standard-compliant database</li><li><strong>Extensible</strong> — custom data types, functions, operators, and extensions</li><li><strong>Advanced features</strong> — JSON/JSONB, full-text search, geospatial (PostGIS), partitioning, logical replication</li><li><strong>Reliability</strong> — ACID compliant, MVCC, point-in-time recovery</li><li><strong>Community</strong> — large, active open-source community with excellent documentation</li><li><strong>No vendor lock-in</strong> — truly free and open source</li></ul></div></div>
+
+        <!-- CTA -->
+        <div class="pg-cta-box">
+          <h3>Still have questions?</h3>
+          <p>Can't find what you're looking for? Reach out to us directly.</p>
+          <a href="/contact/" class="pg-btn-primary"><i class="fas fa-envelope"></i> Contact Us</a>
+        </div>
+
+      </main>
+    </div></div></div>
+
+    <footer id="footer"><div class="container">
+      <a href="/"><img class="footer-logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a><br/>
+      <div style="margin-bottom:12px;"><a href="https://www.facebook.com/groups/www.postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="Facebook"><i class="fab fa-facebook"></i></a> <a href="https://github.com/valehdba/postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="GitHub"><i class="fab fa-github"></i></a></div>
+      <a href="/about/privacypolicy/">Privacy policy</a> | <a href="/about/website/">About the website</a><br/>
+      Copyright &copy; 2018-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
+    </div></footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/js/navbar-auth.js"></script>
+    <script>
+      function toggleFaq(el) {
+        var answer = el.nextElementSibling;
+        var isOpen = el.classList.contains('open');
+        // Close all
+        document.querySelectorAll('.pg-faq-question').forEach(function(q) { q.classList.remove('open'); });
+        document.querySelectorAll('.pg-faq-answer').forEach(function(a) { a.classList.remove('open'); });
+        // Toggle current
+        if (!isOpen) { el.classList.add('open'); answer.classList.add('open'); }
+      }
+    </script>
+</body>
+</html>
