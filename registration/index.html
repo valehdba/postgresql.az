@@ -1062,17 +1062,22 @@
         setSubmitLoading(true);
 
         try {
-          // Check if email already exists
-          var emailExists = await supabaseRpc('check_email_exists', {
-            check_email: email.value.trim().toLowerCase()
-          });
+          // Check if email already exists (skip if RPC fails)
+          try {
+            var emailExists = await supabaseRpc('check_email_exists', {
+              check_email: email.value.trim().toLowerCase()
+            });
 
-          if (emailExists) {
-            email.classList.remove('is-valid');
-            email.classList.add('is-invalid');
-            showError('emailError', 'This email is already registered. Please use a different email or log in.');
-            setSubmitLoading(false);
-            return;
+            if (emailExists) {
+              email.classList.remove('is-valid');
+              email.classList.add('is-invalid');
+              showError('emailError', 'This email is already registered. Please use a different email or log in.');
+              setSubmitLoading(false);
+              return;
+            }
+          } catch (rpcError) {
+            // RPC check failed — proceed anyway, the DB unique constraint will catch duplicates
+            console.warn('Email check RPC failed (non-critical):', rpcError);
           }
 
           // Hash the password
@@ -1092,8 +1097,46 @@
             newsletter: document.getElementById('agreeNewsletter').checked
           };
 
+          console.log('Submitting to Supabase:', SUPABASE_URL + '/rest/v1/members');
+          console.log('Data:', JSON.stringify(memberData, null, 2));
+
           // Insert into Supabase
-          await supabaseInsert('members', memberData);
+          var response = await fetch(SUPABASE_URL + '/rest/v1/members', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+              'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify(memberData)
+          });
+
+          console.log('Response status:', response.status);
+
+          if (!response.ok) {
+            var errorBody = await response.text();
+            console.error('Supabase error response:', errorBody);
+
+            // Try to parse as JSON for specific error handling
+            try {
+              var errorJson = JSON.parse(errorBody);
+              if (errorJson.code === '23505') {
+                email.classList.remove('is-valid');
+                email.classList.add('is-invalid');
+                showError('emailError', 'This email is already registered.');
+                setSubmitLoading(false);
+                return;
+              }
+              // Show the actual error for debugging
+              showFormError('Registration failed: ' + (errorJson.message || errorJson.msg || errorBody));
+            } catch (parseErr) {
+              showFormError('Registration failed: ' + errorBody);
+            }
+
+            setSubmitLoading(false);
+            return;
+          }
 
           // Show success message
           document.getElementById('registrationForm').style.display = 'none';
@@ -1102,16 +1145,7 @@
 
         } catch (error) {
           console.error('Registration error:', error);
-
-          // Handle duplicate email from DB constraint
-          if (error && error.code === '23505') {
-            email.classList.remove('is-valid');
-            email.classList.add('is-invalid');
-            showError('emailError', 'This email is already registered.');
-          } else {
-            showFormError('Registration failed. Please try again later or contact us at info@postgresql.az');
-          }
-
+          showFormError('Registration failed: ' + (error.message || 'Network error. Please check your connection and try again.'));
           setSubmitLoading(false);
         }
       });
