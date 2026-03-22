@@ -617,9 +617,9 @@
 
       function updateStats(members) {
         document.getElementById('statTotal').textContent = members.length;
-        document.getElementById('statLinkedin').textContent = companies.size;
         var companies = new Set();
         members.forEach(function(m) { if (m.company) companies.add(m.company.toLowerCase().trim()); });
+        document.getElementById('statLinkedin').textContent = companies.size;
         document.getElementById('statCompanies').textContent = members.filter(function(m) { return m.linkedin; }).length;
       }
 
