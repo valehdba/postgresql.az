@@ -98,11 +98,14 @@
       /* Single blog post view */
       .pg-blog-full { background: var(--pg-white); border: 1px solid var(--pg-border); border-radius: 4px; padding: 32px; margin-bottom: 2rem; }
       .pg-blog-full h1 { font-family: 'Maven Pro', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--pg-text); text-transform: none; margin-bottom: 12px; }
-      .pg-blog-full .pg-blog-content { font-size: 0.95rem; line-height: 1.75; color: var(--pg-text); }
+      .pg-blog-full .pg-blog-content { font-size: 0.95rem; line-height: 1.75; color: var(--pg-text); overflow-wrap: break-word; word-wrap: break-word; }
       .pg-blog-full .pg-blog-content h1, .pg-blog-full .pg-blog-content h2, .pg-blog-full .pg-blog-content h3 { text-transform: none; margin-top: 1.5em; }
-      .pg-blog-full .pg-blog-content pre { background: #f6f8fa; border: 1px solid var(--pg-border); border-radius: 4px; padding: 16px; overflow-x: auto; font-size: 0.88rem; }
+      .pg-blog-full .pg-blog-content pre { background: #f6f8fa; border: 1px solid var(--pg-border); border-radius: 4px; padding: 16px; overflow-x: auto; font-size: 0.88rem; max-width: 100%; }
       .pg-blog-full .pg-blog-content code { background: #f6f8fa; padding: 2px 6px; border-radius: 3px; font-size: 0.88rem; }
       .pg-blog-full .pg-blog-content pre code { background: none; padding: 0; }
+      .pg-blog-full .pg-blog-content img { max-width: 100%; height: auto; }
+      .pg-blog-full .pg-blog-content table { max-width: 100%; overflow-x: auto; display: block; }
+      .pg-main-content { overflow-x: hidden; }
       .pg-blog-full .pg-blog-content blockquote { border-left: 4px solid var(--pg-blue-dark); padding: 10px 20px; margin: 1em 0; background: var(--pg-blue-light); border-radius: 0 4px 4px 0; }
       .pg-blog-full .pg-blog-content img { max-width: 100%; height: auto; border-radius: 4px; }
 
@@ -210,7 +213,7 @@
       <div class="row justify-content-md-center">
         <div class="col">
           <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand p-0" href="/"><img class="logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG Logo"></a>
+            <a class="navbar-brand p-0" aria-label="AZERPUG Home" href="/"><img class="logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG Logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="pgNavbar">
               <ul class="navbar-nav mr-auto">
@@ -411,9 +414,9 @@
     <footer id="footer">
       <div class="container">
         <a href="/"><img class="footer-logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG Logo"></a><br/>
-        <div style="margin-bottom:12px;"><a href="https://www.facebook.com/groups/www.postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="Facebook"><i class="fab fa-facebook"></i></a> <a href="https://github.com/valehdba/postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="GitHub"><i class="fab fa-github"></i></a></div>
+        <div style="margin-bottom:12px;"><a href="https://www.facebook.com/groups/www.postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="Facebook" aria-label="AZERPUG Facebook Group"><i class="fab fa-facebook"></i></a> <a href="https://github.com/valehdba/postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="GitHub" aria-label="AZERPUG GitHub Repository"><i class="fab fa-github"></i></a></div>
         <a href="/about/privacypolicy/">Privacy policy</a> | <a href="/about/website/">About the website</a><br/>
-        Copyright &copy; 2008-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
+        Copyright &copy; 2018-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
       </div>
     </footer>
 
@@ -861,7 +864,21 @@
       // INIT
       // =============================================
       updateAuthUI();
-      initQuill();
+
+      // FINDING-006 fix: Remove auth-gated sections from DOM for anonymous users
+      if (!currentUser) {
+        var authSections = ['viewDashboard', 'viewEditor'];
+        authSections.forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) el.parentNode.removeChild(el);
+        });
+        // Hide user panel completely
+        var up = document.getElementById('userPanel');
+        if (up) up.parentNode.removeChild(up);
+      } else {
+        initQuill();
+      }
+
       route();
     </script>
 

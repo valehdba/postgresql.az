@@ -71,7 +71,7 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDMJ7KJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="container-fluid"><div class="row justify-content-md-center"><div class="col">
       <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand p-0" href="/"><img class="logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a>
+        <a class="navbar-brand p-0" aria-label="AZERPUG Home" href="/"><img class="logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="pgNavbar"><ul class="navbar-nav mr-auto">
           <li class="nav-item p-2"><a href="/">Home</a></li><li class="nav-item p-2"><a href="/blogs/">Blog Posts</a></li><li class="nav-item p-2"><a href="/events/">Events</a></li><li class="nav-item p-2"><a href="/registration/">Registration</a></li><li class="nav-item p-2"><a href="/members/">Members</a></li><li class="nav-item p-2"><a href="/community/">Global Community</a></li><li class="nav-item p-2"><a href="/profile/">My Profile</a></li><li class="nav-item p-2"><a href="/about/">About</a></li>
@@ -117,7 +117,7 @@
           <div id="postAlert"></div>
 
           <div id="postLoginMsg" style="display:none;" class="pg-info-box">
-            <i class="fas fa-sign-in-alt"></i> You need to <a href="/profile/">log in</a> to post a job.
+            <i class="fas fa-sign-in-alt"></i> You need to <a href="/login/">log in</a> to post a job.
           </div>
 
           <div class="pg-card" id="postForm">
@@ -156,7 +156,7 @@
 
     <footer id="footer"><div class="container">
       <a href="/"><img class="footer-logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a><br/>
-      <div style="margin-bottom:12px;"><a href="https://www.facebook.com/groups/www.postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="Facebook"><i class="fab fa-facebook"></i></a> <a href="https://github.com/valehdba/postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="GitHub"><i class="fab fa-github"></i></a></div>
+      <div style="margin-bottom:12px;"><a href="https://www.facebook.com/groups/www.postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="Facebook" aria-label="AZERPUG Facebook Group"><i class="fab fa-facebook"></i></a> <a href="https://github.com/valehdba/postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="GitHub" aria-label="AZERPUG GitHub Repository"><i class="fab fa-github"></i></a></div>
       <a href="/about/privacypolicy/">Privacy policy</a> | <a href="/about/website/">About the website</a><br/>
       Copyright &copy; 2018-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
     </div></footer>
@@ -233,6 +233,8 @@
       }
 
       loadJobs();
+      // FINDING-011: Remove post form from DOM for anonymous users
+      if(!user){var vp=document.getElementById('viewPost');if(vp)vp.parentNode.removeChild(vp);}
       if(window.location.hash==='#post')showView('post');
     </script>
 </body>

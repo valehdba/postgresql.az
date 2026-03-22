@@ -38,13 +38,23 @@
       }
     } else {
       authDiv.innerHTML =
-        '<a href="/profile/" style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:#336791;color:#fff;border-radius:20px;font-size:0.82rem;font-weight:600;text-decoration:none;transition:background 0.15s ease;font-family:\'Maven Pro\',sans-serif;" ' +
+        '<a href="/login/" style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:#336791;color:#fff;border-radius:20px;font-size:0.82rem;font-weight:600;text-decoration:none;transition:background 0.15s ease;font-family:\'Maven Pro\',sans-serif;" ' +
         'onmouseover="this.style.background=\'#264d6f\'" onmouseout="this.style.background=\'#336791\'">' +
           '<i class="fas fa-sign-in-alt"></i> Log In' +
         '</a>';
     }
 
     navbar.appendChild(authDiv);
+
+    // FINDING-018: Hide Registration link when logged in
+    if (user && user.id) {
+      var navLinks = navbar.querySelectorAll('a');
+      navLinks.forEach(function(link) {
+        if (link.getAttribute('href') === '/registration/' || link.textContent.trim() === 'Registration') {
+          link.parentElement.style.display = 'none';
+        }
+      });
+    }
   }
 
   if (document.readyState === 'loading') {
