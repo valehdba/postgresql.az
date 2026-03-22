@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,17 +7,386 @@
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-NDMJ7KJ');</script>
-<!-- End Google Tag Manager -->
+    <!-- End Google Tag Manager -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Members of the Azerbaijan PostgreSQL User Group - AZERPUG">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <link rel="stylesheet" href="/css/pgyum.css">
 
-    <title>Welcome - Azerbaijan PostgreSQL User Group</title>
+    <title>Members - Azerbaijan PostgreSQL User Group</title>
 
+    <style>
+      :root {
+        --pg-blue-dark: #336791;
+        --pg-blue-medium: #2f6289;
+        --pg-blue-light: #e7eef4;
+        --pg-blue-hover: #264d6f;
+        --pg-text: #515151;
+        --pg-text-light: #6c757d;
+        --pg-border: #d8dde3;
+        --pg-bg-light: #f5f5f5;
+        --pg-white: #ffffff;
+        --pg-success: #28a745;
+      }
+
+      .pg-page-wrapper {
+        max-width: 1140px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+
+      .pg-content-area {
+        display: flex;
+        gap: 30px;
+        margin-top: 1rem;
+      }
+
+      .pg-sidebar {
+        flex: 0 0 220px;
+        min-width: 220px;
+      }
+
+      .pg-sidebar-logo {
+        text-align: center;
+        padding: 16px 10px 20px 10px;
+        margin-bottom: 1.5rem;
+        border-bottom: 2px solid var(--pg-border);
+      }
+
+      .pg-sidebar-logo img {
+        max-width: 160px;
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      .pg-sidebar-logo .pg-sidebar-logo-text {
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--pg-blue-dark);
+        letter-spacing: 0.8px;
+        line-height: 1.4;
+      }
+
+      .pg-sidebar-section { margin-bottom: 2rem; }
+
+      .pg-sidebar-section h3 {
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--pg-blue-dark);
+        letter-spacing: 0.5px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid var(--pg-blue-dark);
+        margin-bottom: 10px;
+      }
+
+      .pg-sidebar-section ul { list-style: none; padding: 0; margin: 0; }
+
+      .pg-sidebar-section ul li a {
+        display: block;
+        padding: 5px 10px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--pg-blue-dark);
+        border-left: 3px solid transparent;
+        transition: all 0.15s ease;
+      }
+
+      .pg-sidebar-section ul li a:hover,
+      .pg-sidebar-section ul li a.active {
+        background: var(--pg-blue-light);
+        border-left-color: var(--pg-blue-dark);
+        text-decoration: none;
+      }
+
+      .pg-main-content { flex: 1; min-width: 0; }
+
+      .pg-page-title {
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--pg-text);
+        text-transform: uppercase;
+        margin-bottom: 0.25rem;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--pg-border);
+      }
+
+      .pg-page-subtitle {
+        font-size: 0.95rem;
+        color: var(--pg-text-light);
+        margin-bottom: 1.5rem;
+      }
+
+      /* Stats */
+      .pg-stats-bar { display: flex; gap: 20px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+
+      .pg-stat-item {
+        background: var(--pg-blue-light);
+        border-left: 4px solid var(--pg-blue-dark);
+        padding: 12px 20px;
+        border-radius: 0 4px 4px 0;
+        flex: 1;
+        min-width: 140px;
+      }
+
+      .pg-stat-number {
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--pg-blue-dark);
+        line-height: 1;
+      }
+
+      .pg-stat-label {
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--pg-text-light);
+        letter-spacing: 0.4px;
+        margin-top: 2px;
+      }
+
+      /* Toolbar */
+      .pg-toolbar { display: flex; gap: 12px; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; }
+
+      .pg-search-wrapper { position: relative; flex: 1; min-width: 200px; }
+
+      .pg-search-wrapper i {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--pg-text-light);
+        font-size: 0.85rem;
+      }
+
+      .pg-search-input {
+        width: 100%;
+        padding: 8px 12px 8px 36px;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 0.9rem;
+        color: var(--pg-text);
+        border: 1px solid var(--pg-border);
+        border-radius: 3px;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      }
+
+      .pg-search-input:focus {
+        border-color: var(--pg-blue-dark);
+        box-shadow: 0 0 0 3px rgba(51, 103, 145, 0.15);
+        outline: none;
+      }
+
+      .pg-filter-select {
+        padding: 8px 32px 8px 12px;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 0.9rem;
+        color: var(--pg-text);
+        border: 1px solid var(--pg-border);
+        border-radius: 3px;
+        background: var(--pg-white);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23515151' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+
+      .pg-filter-select:focus {
+        border-color: var(--pg-blue-dark);
+        box-shadow: 0 0 0 3px rgba(51, 103, 145, 0.15);
+        outline: none;
+      }
+
+      /* Members card */
+      .pg-members-card {
+        background: var(--pg-white);
+        border: 1px solid var(--pg-border);
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 2rem;
+      }
+
+      .pg-members-card-header {
+        background: var(--pg-blue-dark);
+        color: var(--pg-white);
+        padding: 12px 24px;
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .pg-members-card-header i { margin-right: 8px; opacity: 0.85; }
+
+      .pg-member-count-badge {
+        background: rgba(255,255,255,0.2);
+        padding: 2px 10px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+      }
+
+      /* Table */
+      .pg-members-table { width: 100%; border-collapse: collapse; }
+
+      .pg-members-table thead th {
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        color: var(--pg-text-light);
+        padding: 12px 16px;
+        border-bottom: 2px solid var(--pg-border);
+        background: var(--pg-bg-light);
+        white-space: nowrap;
+      }
+
+      .pg-members-table tbody td {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+        color: var(--pg-text);
+        border-bottom: 1px solid #eef1f3;
+        vertical-align: middle;
+      }
+
+      .pg-members-table tbody tr:hover { background: var(--pg-blue-light); }
+      .pg-members-table tbody tr:last-child td { border-bottom: none; }
+
+      .pg-member-name { display: flex; align-items: center; gap: 10px; }
+
+      .pg-member-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--pg-blue-dark);
+        color: var(--pg-white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Maven Pro', sans-serif;
+        font-weight: 700;
+        font-size: 0.8rem;
+        flex-shrink: 0;
+      }
+
+      .pg-member-name-text { font-weight: 600; }
+
+      /* Experience badges */
+      .pg-badge {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+      }
+
+      .pg-badge-beginner { background: #e8f5e9; color: #2e7d32; }
+      .pg-badge-intermediate { background: #e3f2fd; color: #1565c0; }
+      .pg-badge-advanced { background: #fff3e0; color: #e65100; }
+      .pg-badge-expert { background: #fce4ec; color: #c62828; }
+      .pg-badge-curious { background: #f3e5f5; color: #7b1fa2; }
+
+      /* States */
+      .pg-loading { text-align: center; padding: 3rem; color: var(--pg-text-light); }
+      .pg-loading i { font-size: 2rem; color: var(--pg-blue-dark); margin-bottom: 0.75rem; display: block; }
+
+      .pg-empty-state { text-align: center; padding: 3rem 2rem; color: var(--pg-text-light); }
+      .pg-empty-state i { font-size: 2.5rem; color: var(--pg-border); margin-bottom: 0.75rem; display: block; }
+
+      .pg-error-state {
+        text-align: center;
+        padding: 2rem;
+        color: #dc3545;
+        background: #fef2f2;
+        border: 1px solid #fca5a5;
+        border-radius: 4px;
+        margin: 1rem;
+      }
+
+      .pg-no-results { text-align: center; padding: 2rem; color: var(--pg-text-light); font-size: 0.9rem; }
+
+      /* Join CTA */
+      .pg-join-cta {
+        background: var(--pg-blue-light);
+        border: 1px solid var(--pg-border);
+        border-radius: 4px;
+        padding: 20px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .pg-join-cta p { margin: 0; font-size: 0.92rem; color: var(--pg-text); }
+      .pg-join-cta p strong { color: var(--pg-blue-dark); }
+
+      .pg-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--pg-blue-dark);
+        color: var(--pg-white);
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 9px 22px;
+        border: none;
+        border-radius: 3px;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: background 0.15s ease;
+      }
+
+      .pg-btn-primary:hover { background: var(--pg-blue-hover); color: var(--pg-white); text-decoration: none; }
+
+      /* Footer */
+      #footer img.footer-logo { height: 36px; margin-bottom: 10px; opacity: 0.6; transition: opacity 0.2s ease; }
+      #footer img.footer-logo:hover { opacity: 1; }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .pg-content-area { flex-direction: column; }
+        .pg-sidebar { flex: auto; min-width: auto; order: 2; }
+        .pg-main-content { order: 1; }
+
+        .pg-members-table thead { display: none; }
+        .pg-members-table tbody tr { display: block; padding: 12px 16px; border-bottom: 1px solid var(--pg-border); }
+        .pg-members-table tbody td { display: block; padding: 4px 0; border-bottom: none; }
+        .pg-members-table tbody td:before {
+          content: attr(data-label);
+          font-weight: 700;
+          font-size: 0.75rem;
+          text-transform: uppercase;
+          color: var(--pg-text-light);
+          display: block;
+        }
+
+        .pg-stats-bar { gap: 10px; }
+        .pg-stat-item { min-width: 100px; }
+        .pg-join-cta { flex-direction: column; text-align: center; }
+      }
+    </style>
   </head>
 
 <body>
@@ -28,7 +396,7 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <div class="container-fluid">
- <!-- Nav -->
+      <!-- Nav -->
       <div class="row justify-content-md-center">
          <div class="col">
            <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
@@ -47,33 +415,240 @@
                  <li class="nav-item p-2"><a href="/links/" title="Useful Links">Useful Links</a></li>
                  <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
                </ul>
-             </div> <!-- pgNavBar -->
+             </div>
 	       </nav>
-         </div> <!-- col -->
-      </div> <!-- row -->
+         </div>
+      </div>
       <!-- End Nav -->
 
- 
-<center><h2><bold>⚡ UNDER CONSTRUCTION ⚡</bold></h2></center>
- 
+      <!-- Page Content -->
+      <div class="pg-page-wrapper" style="margin-top: 1rem;">
+        <div class="pg-content-area">
+
+          <!-- Sidebar -->
+          <aside class="pg-sidebar">
+            <div class="pg-sidebar-logo">
+              <a href="/"><img src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a>
+              <div class="pg-sidebar-logo-text">Azerbaijan PostgreSQL<br>User Group</div>
+            </div>
+            <div class="pg-sidebar-section">
+              <h3>Community</h3>
+              <ul>
+                <li><a href="/registration/">Registration</a></li>
+                <li><a href="/members/" class="active">Members</a></li>
+                <li><a href="/blogs/">Blog Posts</a></li>
+                <li><a href="/news/">News</a></li>
+                <li><a href="/links/">Useful Links</a></li>
+              </ul>
+            </div>
+            <div class="pg-sidebar-section">
+              <h3>Quick Links</h3>
+              <ul>
+                <li><a href="https://www.postgresql.org/" target="_blank" rel="noopener">PostgreSQL.org</a></li>
+                <li><a href="https://www.postgresql.org/docs/" target="_blank" rel="noopener">Documentation</a></li>
+                <li><a href="https://www.postgresql.org/download/" target="_blank" rel="noopener">Download PostgreSQL</a></li>
+              </ul>
+            </div>
+          </aside>
+
+          <!-- Main Content -->
+          <main class="pg-main-content">
+            <h1 class="pg-page-title">Community Members</h1>
+            <p class="pg-page-subtitle">Meet the PostgreSQL enthusiasts, developers, and database administrators who make up the AZERPUG community.</p>
+
+            <!-- Stats -->
+            <div class="pg-stats-bar">
+              <div class="pg-stat-item">
+                <div class="pg-stat-number" id="statTotal">&mdash;</div>
+                <div class="pg-stat-label">Total Members</div>
+              </div>
+              <div class="pg-stat-item">
+                <div class="pg-stat-number" id="statExperts">&mdash;</div>
+                <div class="pg-stat-label">Advanced / Expert</div>
+              </div>
+              <div class="pg-stat-item">
+                <div class="pg-stat-number" id="statCompanies">&mdash;</div>
+                <div class="pg-stat-label">Organizations</div>
+              </div>
+            </div>
+
+            <!-- Join CTA -->
+            <div class="pg-join-cta">
+              <p><strong>Want to join the community?</strong> Registration is free and open to everyone interested in PostgreSQL.</p>
+              <a href="/registration/" class="pg-btn-primary"><i class="fas fa-user-plus"></i> Register Now</a>
+            </div>
+
+            <!-- Search & Filter -->
+            <div class="pg-toolbar">
+              <div class="pg-search-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" class="pg-search-input" id="searchInput" placeholder="Search by name, company, or role...">
+              </div>
+              <select class="pg-filter-select" id="filterExperience">
+                <option value="">All Levels</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+                <option value="expert">Expert</option>
+                <option value="curious">Curious</option>
+              </select>
+            </div>
+
+            <!-- Members Table -->
+            <div class="pg-members-card">
+              <div class="pg-members-card-header">
+                <span><i class="fas fa-users"></i> Registered Members</span>
+                <span class="pg-member-count-badge" id="displayCount">Loading...</span>
+              </div>
+              <div class="pg-loading" id="loadingState">
+                <i class="fas fa-spinner fa-spin"></i>
+                <div>Loading members from PostgreSQL database...</div>
+              </div>
+              <div class="pg-error-state" id="errorState" style="display:none;"></div>
+              <table class="pg-members-table" id="membersTable" style="display:none;">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Company / Organization</th>
+                    <th>Role</th>
+                    <th>PG Experience</th>
+                    <th>Joined</th>
+                  </tr>
+                </thead>
+                <tbody id="membersTableBody"></tbody>
+              </table>
+              <div class="pg-empty-state" id="emptyState" style="display:none;">
+                <i class="fas fa-user-friends"></i>
+                <div>No members found. Be the first to <a href="/registration/">register</a>!</div>
+              </div>
+              <div class="pg-no-results" id="noResults" style="display:none;">No members match your search.</div>
+            </div>
+          </main>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="container">
+        <a href="/"><img class="footer-logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG Logo"></a><br/>
+        <a href="/about/privacypolicy/">Privacy policy</a> | <a href="/about/website/">About the website</a><br/>
+        Copyright &copy; 2008-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
+      </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+      var SUPABASE_URL = 'https://qlyqwwhimwfcvuqdrxov.supabase.co';
+      var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFseXF3d2hpbXdmY3Z1cWRyeG92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjg2ODYsImV4cCI6MjA4OTcwNDY4Nn0.6MKz72wGwthRL8hs-Iv3L9Iw_W4DdGh3UjrwcagtKfM';
+
+      var allMembers = [];
+
+      async function loadMembers() {
+        try {
+          var response = await fetch(SUPABASE_URL + '/rest/v1/public_members?select=*&order=created_at.desc', {
+            headers: {
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
+            }
+          });
+
+          if (!response.ok) {
+            var errText = await response.text();
+            console.error('Supabase error:', errText);
+            throw new Error(errText);
+          }
+
+          allMembers = await response.json();
+          updateStats(allMembers);
+          renderMembers(allMembers);
+
+        } catch (error) {
+          console.error('Failed to load members:', error);
+          document.getElementById('loadingState').style.display = 'none';
+          var errorEl = document.getElementById('errorState');
+          errorEl.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Failed to load members. Please try again later.<br><small>' + (error.message || '') + '</small>';
+          errorEl.style.display = 'block';
+        }
+      }
+
+      function updateStats(members) {
+        document.getElementById('statTotal').textContent = members.length;
+        document.getElementById('statExperts').textContent = members.filter(function(m) {
+          return m.pg_experience === 'advanced' || m.pg_experience === 'expert';
+        }).length;
+        var companies = new Set();
+        members.forEach(function(m) { if (m.company) companies.add(m.company.toLowerCase().trim()); });
+        document.getElementById('statCompanies').textContent = companies.size;
+      }
+
+      function renderMembers(members) {
+        document.getElementById('loadingState').style.display = 'none';
+        document.getElementById('errorState').style.display = 'none';
+
+        if (members.length === 0 && allMembers.length === 0) {
+          document.getElementById('membersTable').style.display = 'none';
+          document.getElementById('emptyState').style.display = 'block';
+          document.getElementById('noResults').style.display = 'none';
+          document.getElementById('displayCount').textContent = '0';
+          return;
+        }
+
+        if (members.length === 0) {
+          document.getElementById('membersTable').style.display = 'none';
+          document.getElementById('noResults').style.display = 'block';
+          document.getElementById('displayCount').textContent = '0 / ' + allMembers.length;
+          return;
+        }
+
+        document.getElementById('emptyState').style.display = 'none';
+        document.getElementById('noResults').style.display = 'none';
+        document.getElementById('membersTable').style.display = 'table';
+        document.getElementById('displayCount').textContent = members.length + (members.length !== allMembers.length ? ' / ' + allMembers.length : '');
+
+        var tbody = document.getElementById('membersTableBody');
+        tbody.innerHTML = '';
+
+        var labels = { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced', expert: 'Expert', curious: 'Curious' };
+
+        members.forEach(function(m, i) {
+          var initials = ((m.first_name || '')[0] || '') + ((m.last_name || '')[0] || '');
+          var joined = m.created_at ? new Date(m.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
+          var row = document.createElement('tr');
+          row.innerHTML =
+            '<td data-label="#">' + (i + 1) + '</td>' +
+            '<td data-label="Name"><div class="pg-member-name"><div class="pg-member-avatar">' + esc(initials).toUpperCase() + '</div><span class="pg-member-name-text">' + esc(m.first_name) + ' ' + esc(m.last_name) + '</span></div></td>' +
+            '<td data-label="Company">' + esc(m.company || '—') + '</td>' +
+            '<td data-label="Role">' + esc(m.job_title || '—') + '</td>' +
+            '<td data-label="Experience"><span class="pg-badge pg-badge-' + (m.pg_experience || 'curious') + '">' + (labels[m.pg_experience] || m.pg_experience) + '</span></td>' +
+            '<td data-label="Joined">' + joined + '</td>';
+          tbody.appendChild(row);
+        });
+      }
+
+      function filterMembers() {
+        var q = document.getElementById('searchInput').value.toLowerCase().trim();
+        var lvl = document.getElementById('filterExperience').value;
+        var filtered = allMembers.filter(function(m) {
+          var matchSearch = !q || (m.first_name + ' ' + m.last_name).toLowerCase().includes(q) || (m.company || '').toLowerCase().includes(q) || (m.job_title || '').toLowerCase().includes(q);
+          var matchLevel = !lvl || m.pg_experience === lvl;
+          return matchSearch && matchLevel;
+        });
+        renderMembers(filtered);
+      }
+
+      document.getElementById('searchInput').addEventListener('input', filterMembers);
+      document.getElementById('filterExperience').addEventListener('change', filterMembers);
+
+      function esc(t) { if (!t) return ''; var d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+
+      loadMembers();
+    </script>
+
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
+</html>
