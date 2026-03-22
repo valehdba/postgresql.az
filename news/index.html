@@ -1,82 +1,186 @@
-
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-NDMJ7KJ');</script>
-<!-- End Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NDMJ7KJ');</script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
+    <meta name="description" content="AZERPUG News - PostgreSQL announcements, releases, and community updates">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/css/pgyum.css">
+    <title>News - Azerbaijan PostgreSQL User Group</title>
+    <style>
+      :root { --pg-blue-dark:#336791; --pg-blue-light:#e7eef4; --pg-blue-hover:#264d6f; --pg-text:#515151; --pg-text-light:#6c757d; --pg-border:#d8dde3; --pg-bg-light:#f5f5f5; --pg-white:#fff; }
+      .pg-page-wrapper { max-width:1140px; margin:0 auto; padding:0 15px; }
+      .pg-content-area { display:flex; gap:30px; margin-top:1rem; }
+      .pg-sidebar { flex:0 0 220px; min-width:220px; }
+      .pg-sidebar-logo { text-align:center; padding:16px 10px 20px; margin-bottom:1.5rem; border-bottom:2px solid var(--pg-border); }
+      .pg-sidebar-logo img { max-width:160px; height:auto; margin-bottom:10px; }
+      .pg-sidebar-logo .pg-sidebar-logo-text { font-family:'Maven Pro',sans-serif; font-size:.72rem; font-weight:700; text-transform:uppercase; color:var(--pg-blue-dark); letter-spacing:.8px; line-height:1.4; }
+      .pg-sidebar-section { margin-bottom:2rem; }
+      .pg-sidebar-section h3 { font-family:'Maven Pro',sans-serif; font-size:.85rem; font-weight:700; text-transform:uppercase; color:var(--pg-blue-dark); letter-spacing:.5px; padding-bottom:8px; border-bottom:2px solid var(--pg-blue-dark); margin-bottom:10px; }
+      .pg-sidebar-section ul { list-style:none; padding:0; margin:0; }
+      .pg-sidebar-section ul li a { display:block; padding:5px 10px; font-size:.9rem; font-weight:600; color:var(--pg-blue-dark); border-left:3px solid transparent; transition:all .15s ease; }
+      .pg-sidebar-section ul li a:hover,.pg-sidebar-section ul li a.active { background:var(--pg-blue-light); border-left-color:var(--pg-blue-dark); text-decoration:none; }
+      .pg-main-content { flex:1; min-width:0; }
+      .pg-page-title { font-family:'Maven Pro',sans-serif; font-size:1.6rem; font-weight:700; color:var(--pg-text); text-transform:uppercase; margin-bottom:.25rem; padding-bottom:10px; border-bottom:2px solid var(--pg-border); }
+      .pg-page-subtitle { font-size:.95rem; color:var(--pg-text-light); margin-bottom:1.5rem; line-height:1.6; }
+      .pg-section-title { font-family:'Maven Pro',sans-serif; font-size:1.05rem; font-weight:700; color:var(--pg-text); text-transform:uppercase; padding-bottom:8px; border-bottom:2px solid var(--pg-border); margin:1.75rem 0 1.25rem; display:flex; align-items:center; gap:8px; }
+      .pg-section-title i { color:var(--pg-blue-dark); }
 
-    <title>Welcome - Azerbaijan PostgreSQL User Group</title>
+      /* News cards */
+      .pg-news-card { background:var(--pg-white); border:1px solid var(--pg-border); border-radius:4px; padding:20px 24px; margin-bottom:1rem; transition:box-shadow .15s ease; }
+      .pg-news-card:hover { box-shadow:0 2px 8px rgba(0,0,0,.06); }
+      .pg-news-card h3 { font-family:'Maven Pro',sans-serif; font-size:1rem; font-weight:700; margin:0 0 6px; text-transform:none; }
+      .pg-news-card h3 a { color:var(--pg-blue-dark); text-decoration:none; }
+      .pg-news-card h3 a:hover { color:var(--pg-blue-hover); }
+      .pg-news-meta { font-size:.78rem; color:var(--pg-text-light); margin-bottom:8px; }
+      .pg-news-meta i { margin-right:3px; }
+      .pg-news-desc { font-size:.88rem; color:var(--pg-text); line-height:1.6; }
+      .pg-news-badge { display:inline-block; padding:2px 10px; border-radius:12px; font-size:.68rem; font-weight:700; text-transform:uppercase; margin-right:6px; }
+      .pg-badge-release { background:#d4edda; color:#155724; }
+      .pg-badge-community { background:var(--pg-blue-light); color:var(--pg-blue-dark); }
+      .pg-badge-security { background:#f8d7da; color:#721c24; }
 
+      /* Quick links card */
+      .pg-quick-links { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:1.5rem; }
+      .pg-quick-link { display:flex; align-items:center; gap:10px; padding:14px 16px; background:var(--pg-white); border:1px solid var(--pg-border); border-radius:4px; text-decoration:none; color:var(--pg-text); font-size:.85rem; font-weight:600; transition:all .15s ease; }
+      .pg-quick-link:hover { border-color:var(--pg-blue-dark); background:var(--pg-blue-light); text-decoration:none; color:var(--pg-blue-dark); }
+      .pg-quick-link i { color:var(--pg-blue-dark); font-size:1rem; width:20px; text-align:center; }
+
+      #footer img.footer-logo { height:36px; margin-bottom:10px; opacity:.6; transition:opacity .2s ease; }
+      #footer img.footer-logo:hover { opacity:1; }
+      @media (max-width:768px) {
+        .pg-content-area { flex-direction:column; }
+        .pg-sidebar { flex:auto; order:2; }
+        .pg-main-content { order:1; }
+        .pg-quick-links { grid-template-columns:1fr; }
+      }
+    </style>
   </head>
-
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDMJ7KJ"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDMJ7KJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="container-fluid">
- <!-- Nav -->
-      <div class="row justify-content-md-center">
-         <div class="col">
-           <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-             <a class="navbar-brand p-0" href="/">
-               <img class="logo" src="/pict/smal_AZERPUG.png" alt="Azerbaijan PostgreSQL User Group Logo">
-             </a>
-             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
-               <span class="navbar-toggler-icon"></span>
-             </button>
-             <div class="collapse navbar-collapse" id="pgNavbar">
-               <ul class="navbar-nav mr-auto">
-                 <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
-                 <li class="nav-item p-2"><a href="/blogs/" title="Blog Posts">Blog Posts</a></li>
-                 <li class="nav-item p-2"><a href="/events/" title="Events">Events</a></li>
-                 <li class="nav-item p-2"><a href="/registration/" title="Registration">Registration</a></li>
-                 <li class="nav-item p-2"><a href="/members/" title="Members">Members</a></li>
-                 <li class="nav-item p-2"><a href="/community/" title="Global Community">Global Community</a></li>
-                 <li class="nav-item p-2"><a href="/profile/" title="My Profile">My Profile</a></li>
-                 <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
-               </ul>
-             </div> <!-- pgNavBar -->
-	       </nav>
-         </div> <!-- col -->
-      </div> <!-- row -->
-      <!-- End Nav -->
+      <div class="row justify-content-md-center"><div class="col">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand p-0" href="/"><img class="logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="pgNavbar">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item p-2"><a href="/">Home</a></li>
+              <li class="nav-item p-2"><a href="/blogs/">Blog Posts</a></li>
+              <li class="nav-item p-2"><a href="/events/">Events</a></li>
+              <li class="nav-item p-2"><a href="/registration/">Registration</a></li>
+              <li class="nav-item p-2"><a href="/members/">Members</a></li>
+              <li class="nav-item p-2"><a href="/community/">Global Community</a></li>
+              <li class="nav-item p-2"><a href="/profile/">My Profile</a></li>
+              <li class="nav-item p-2"><a href="/about/">About</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div></div>
 
- 
-<center><h2><bold>⚡ UNDER CONSTRUCTION ⚡</bold></h2></center>
- 
+      <div class="pg-page-wrapper" style="margin-top:1rem;">
+        <div class="pg-content-area">
+          <aside class="pg-sidebar">
+            <div class="pg-sidebar-logo">
+              <a href="/"><img src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a>
+              <div class="pg-sidebar-logo-text">Azerbaijan PostgreSQL<br>User Group</div>
+            </div>
+            <div class="pg-sidebar-section">
+              <h3>News Sources</h3>
+              <ul>
+                <li><a href="https://www.postgresql.org/about/newsarchive/" target="_blank" rel="noopener">PostgreSQL News Archive</a></li>
+                <li><a href="https://planet.postgresql.org/" target="_blank" rel="noopener">Planet PostgreSQL</a></li>
+                <li><a href="https://www.postgresql.org/support/security/" target="_blank" rel="noopener">Security Notices</a></li>
+              </ul>
+            </div>
+            <div class="pg-sidebar-section">
+              <h3>Community</h3>
+              <ul>
+                <li><a href="/events/">Events</a></li>
+                <li><a href="/blogs/">Blog Posts</a></li>
+                <li><a href="/members/">Members</a></li>
+                <li><a href="/community/">Global Community</a></li>
+              </ul>
+            </div>
+          </aside>
+
+          <main class="pg-main-content">
+            <h1 class="pg-page-title">News & Announcements</h1>
+            <p class="pg-page-subtitle">Stay up to date with the latest PostgreSQL releases, security updates, and AZERPUG community news.</p>
+
+            <!-- Quick Links -->
+            <div class="pg-quick-links">
+              <a href="https://www.postgresql.org/about/newsarchive/" target="_blank" rel="noopener" class="pg-quick-link"><i class="fas fa-database"></i> PostgreSQL News Archive</a>
+              <a href="https://planet.postgresql.org/" target="_blank" rel="noopener" class="pg-quick-link"><i class="fas fa-globe"></i> Planet PostgreSQL Blog</a>
+              <a href="https://www.postgresql.org/support/security/" target="_blank" rel="noopener" class="pg-quick-link"><i class="fas fa-shield-alt"></i> Security Notices</a>
+              <a href="https://www.postgresql.org/developer/roadmap/" target="_blank" rel="noopener" class="pg-quick-link"><i class="fas fa-road"></i> Development Roadmap</a>
+            </div>
+
+            <!-- Latest PostgreSQL Releases -->
+            <h2 class="pg-section-title"><i class="fas fa-rocket"></i> Latest PostgreSQL Releases</h2>
+
+            <div class="pg-news-card">
+              <span class="pg-news-badge pg-badge-release">Release</span>
+              <h3><a href="https://www.postgresql.org/about/news/postgresql-183-179-1613-1517-and-1422-released-3246/" target="_blank" rel="noopener">PostgreSQL 18.3, 17.9, 16.13, 15.17, and 14.22 Released</a></h3>
+              <div class="pg-news-meta"><i class="fas fa-calendar"></i> February 26, 2026</div>
+              <div class="pg-news-desc">The PostgreSQL Global Development Group has released an update to all supported versions. This release includes bug fixes and improvements across all active branches.</div>
+            </div>
+
+            <div class="pg-news-card">
+              <span class="pg-news-badge pg-badge-release">Major Release</span>
+              <h3><a href="https://www.postgresql.org/about/news/postgresql-17-released-2936/" target="_blank" rel="noopener">PostgreSQL 17 Released</a></h3>
+              <div class="pg-news-meta"><i class="fas fa-calendar"></i> September 26, 2024</div>
+              <div class="pg-news-desc">PostgreSQL 17 brings significant improvements to overall performance, with notable gains for in-memory and on-disk sorting. New SQL/JSON capabilities, improved vacuum performance, and enhanced logical replication features.</div>
+            </div>
+
+            <!-- AZERPUG News -->
+            <h2 class="pg-section-title"><i class="fas fa-bullhorn"></i> AZERPUG Community News</h2>
+
+            <div class="pg-news-card">
+              <span class="pg-news-badge pg-badge-community">Community</span>
+              <h3>AZERPUG Website Rebuilt with PostgreSQL</h3>
+              <div class="pg-news-meta"><i class="fas fa-calendar"></i> March 2025</div>
+              <div class="pg-news-desc">The AZERPUG website has been completely rebuilt with a modern design, member registration, blog platform, event system, and admin panel — all powered by PostgreSQL via Supabase. The source code is open source on GitHub.</div>
+            </div>
+
+            <div class="pg-news-card">
+              <span class="pg-news-badge pg-badge-community">Community</span>
+              <h3>AZERPUG Founded in Baku</h3>
+              <div class="pg-news-meta"><i class="fas fa-calendar"></i> 2018</div>
+              <div class="pg-news-desc">The Azerbaijan PostgreSQL User Group (AZERPUG) was established in Baku as the first dedicated PostgreSQL community in Azerbaijan, with the mission of promoting open-source database technology and knowledge sharing.</div>
+            </div>
+
+            <!-- Resources -->
+            <h2 class="pg-section-title"><i class="fas fa-rss"></i> Stay Connected</h2>
+            <div class="pg-news-card" style="background:var(--pg-blue-light);border-color:var(--pg-blue-dark);">
+              <div class="pg-news-desc" style="margin:0;">
+                <strong>Want the latest PostgreSQL news?</strong> Follow these resources to stay informed:
+                <ul style="margin:10px 0 0;padding-left:20px;line-height:2;">
+                  <li><a href="https://www.postgresql.org/list/" target="_blank" rel="noopener">PostgreSQL Mailing Lists</a> — official announcements and discussions</li>
+                  <li><a href="https://planet.postgresql.org/" target="_blank" rel="noopener">Planet PostgreSQL</a> — aggregated blog posts from the community</li>
+                  <li><a href="https://www.facebook.com/groups/www.postgresql.az" target="_blank" rel="noopener">AZERPUG Facebook Group</a> — local community discussions</li>
+                  <li><a href="/blogs/">AZERPUG Blog</a> — articles from our members</li>
+                </ul>
+              </div>
+            </div>
+
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <footer id="footer">
+      <div class="container">
+        <a href="/"><img class="footer-logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a><br/>
+        <a href="/about/privacypolicy/">Privacy policy</a> | <a href="/about/website/">About the website</a><br/>
+        Copyright &copy; 2018-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
+      </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="/js/navbar-auth.js"></script>
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
+</html>
