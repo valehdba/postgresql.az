@@ -617,10 +617,14 @@
 
       function updateStats(members) {
         document.getElementById('statTotal').textContent = members.length;
-        var companies = new Set();
-        members.forEach(function(m) { if (m.company) companies.add(m.company.toLowerCase().trim()); });
-        document.getElementById('statLinkedin').textContent = companies.size;
-        document.getElementById('statCompanies').textContent = members.filter(function(m) { return m.linkedin; }).length;
+        try {
+          var companies = new Set();
+          members.forEach(function(m) { if (m && m.company) companies.add(m.company.toLowerCase().trim()); });
+          document.getElementById('statLinkedin').textContent = companies.size;
+        } catch(e) { document.getElementById('statLinkedin').textContent = '0'; }
+        try {
+          document.getElementById('statCompanies').textContent = members.filter(function(m) { return m && m.linkedin; }).length;
+        } catch(e) { document.getElementById('statCompanies').textContent = '0'; }
       }
 
       function renderMembers(members) {
