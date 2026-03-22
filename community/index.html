@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NDMJ7KJ');</script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="PostgreSQL Global Community - Official resources, organizations, conferences, and how to support the project">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/pgyum.css">
+    <title>PostgreSQL Global Community - Azerbaijan PostgreSQL User Group</title>
+    <style>
+      :root {
+        --pg-blue-dark: #336791;
+        --pg-blue-light: #e7eef4;
+        --pg-blue-hover: #264d6f;
+        --pg-text: #515151;
+        --pg-text-light: #6c757d;
+        --pg-border: #d8dde3;
+        --pg-bg-light: #f5f5f5;
+        --pg-white: #ffffff;
+        --pg-success: #28a745;
+        --pg-danger: #dc3545;
+      }
+
+      .pg-page-wrapper { max-width: 1140px; margin: 0 auto; padding: 0 15px; }
+      .pg-content-area { display: flex; gap: 30px; margin-top: 1rem; }
+
+      .pg-sidebar { flex: 0 0 220px; min-width: 220px; }
+      .pg-sidebar-logo { text-align: center; padding: 16px 10px 20px 10px; margin-bottom: 1.5rem; border-bottom: 2px solid var(--pg-border); }
+      .pg-sidebar-logo img { max-width: 160px; height: auto; margin-bottom: 10px; }
+      .pg-sidebar-logo .pg-sidebar-logo-text { font-family: 'Maven Pro', sans-serif; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--pg-blue-dark); letter-spacing: 0.8px; line-height: 1.4; }
+      .pg-sidebar-section { margin-bottom: 2rem; }
+      .pg-sidebar-section h3 { font-family: 'Maven Pro', sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--pg-blue-dark); letter-spacing: 0.5px; padding-bottom: 8px; border-bottom: 2px solid var(--pg-blue-dark); margin-bottom: 10px; }
+      .pg-sidebar-section ul { list-style: none; padding: 0; margin: 0; }
+      .pg-sidebar-section ul li a { display: block; padding: 5px 10px; font-size: 0.9rem; font-weight: 600; color: var(--pg-blue-dark); border-left: 3px solid transparent; transition: all 0.15s ease; }
+      .pg-sidebar-section ul li a:hover, .pg-sidebar-section ul li a.active { background: var(--pg-blue-light); border-left-color: var(--pg-blue-dark); text-decoration: none; }
+
+      .pg-main-content { flex: 1; min-width: 0; }
+      .pg-page-title { font-family: 'Maven Pro', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--pg-text); text-transform: uppercase; margin-bottom: 0.25rem; padding-bottom: 10px; border-bottom: 2px solid var(--pg-border); }
+      .pg-page-subtitle { font-size: 0.95rem; color: var(--pg-text-light); margin-bottom: 1.5rem; line-height: 1.6; }
+
+      /* Community cards */
+      .pg-community-card {
+        background: var(--pg-white);
+        border: 1px solid var(--pg-border);
+        border-radius: 6px;
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+        transition: box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+      .pg-community-card:hover {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        border-color: var(--pg-blue-dark);
+      }
+
+      .pg-community-card-header {
+        padding: 20px 24px 0 24px;
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .pg-community-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        color: var(--pg-white);
+        flex-shrink: 0;
+      }
+
+      .pg-community-card-header h2 {
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--pg-text);
+        margin: 0 0 4px 0;
+        text-transform: none;
+      }
+
+      .pg-community-url {
+        font-size: 0.82rem;
+        color: var(--pg-blue-dark);
+        font-weight: 600;
+        word-break: break-all;
+      }
+
+      .pg-community-card-body {
+        padding: 16px 24px 20px 24px;
+      }
+
+      .pg-community-desc {
+        font-size: 0.9rem;
+        color: var(--pg-text);
+        line-height: 1.7;
+        margin-bottom: 16px;
+      }
+
+      .pg-community-highlights {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+      }
+
+      .pg-highlight {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 12px;
+        background: var(--pg-blue-light);
+        color: var(--pg-blue-dark);
+        font-size: 0.78rem;
+        font-weight: 600;
+        border-radius: 20px;
+      }
+
+      .pg-highlight i { font-size: 0.7rem; }
+
+      .pg-community-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--pg-blue-dark);
+        color: var(--pg-white);
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        padding: 9px 20px;
+        border-radius: 3px;
+        text-decoration: none;
+        transition: background 0.15s ease;
+      }
+      .pg-community-link:hover { background: var(--pg-blue-hover); color: var(--pg-white); text-decoration: none; }
+
+      .pg-community-link.donate {
+        background: var(--pg-danger);
+      }
+      .pg-community-link.donate:hover { background: #c82333; }
+
+      /* Info box */
+      .pg-info-box {
+        background: var(--pg-blue-light);
+        border-left: 4px solid var(--pg-blue-dark);
+        padding: 14px 18px;
+        margin-bottom: 1.5rem;
+        border-radius: 0 3px 3px 0;
+        font-size: 0.88rem;
+        color: var(--pg-text);
+        line-height: 1.6;
+      }
+      .pg-info-box i { color: var(--pg-blue-dark); margin-right: 6px; }
+
+      /* Footer */
+      #footer img.footer-logo { height: 36px; margin-bottom: 10px; opacity: 0.6; transition: opacity 0.2s ease; }
+      #footer img.footer-logo:hover { opacity: 1; }
+
+      @media (max-width: 768px) {
+        .pg-content-area { flex-direction: column; }
+        .pg-sidebar { flex: auto; min-width: auto; order: 2; }
+        .pg-main-content { order: 1; }
+        .pg-community-card-header { flex-direction: column; align-items: center; text-align: center; }
+      }
+    </style>
+  </head>
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDMJ7KJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <div class="container-fluid">
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand p-0" href="/"><img class="logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG Logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="pgNavbar">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
+                <li class="nav-item p-2"><a href="/blogs/" title="Blog Posts">Blog Posts</a></li>
+                <li class="nav-item p-2"><a href="/registration/" title="Registration">Registration</a></li>
+                <li class="nav-item p-2"><a href="/members/" title="Members">Members</a></li>
+                <li class="nav-item p-2"><a href="/community/" title="Global Community">Global Community</a></li>
+                <li class="nav-item p-2"><a href="/profile/" title="My Profile">My Profile</a></li>
+                <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+
+      <div class="pg-page-wrapper" style="margin-top: 1rem;">
+        <div class="pg-content-area">
+
+          <aside class="pg-sidebar">
+            <div class="pg-sidebar-logo">
+              <a href="/"><img src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a>
+              <div class="pg-sidebar-logo-text">Azerbaijan PostgreSQL<br>User Group</div>
+            </div>
+            <div class="pg-sidebar-section">
+              <h3>On This Page</h3>
+              <ul>
+                <li><a href="#postgresql-org">PostgreSQL.org</a></li>
+                <li><a href="#pgca">PostgreSQL Community Association</a></li>
+                <li><a href="#pgconf-eu">PGConf.EU Conference</a></li>
+                <li><a href="#donate">Donate to PostgreSQL</a></li>
+              </ul>
+            </div>
+            <div class="pg-sidebar-section">
+              <h3>Community</h3>
+              <ul>
+                <li><a href="/registration/">Registration</a></li>
+                <li><a href="/members/">Members</a></li>
+                <li><a href="/blogs/">Blog Posts</a></li>
+                <li><a href="/community/" class="active">Global Community</a></li>
+              </ul>
+            </div>
+          </aside>
+
+          <main class="pg-main-content">
+            <h1 class="pg-page-title">PostgreSQL Global Community</h1>
+            <p class="pg-page-subtitle">PostgreSQL is more than a database — it's a worldwide open-source community of developers, contributors, and organizations dedicated to building the world's most advanced relational database. Here are the key organizations and resources that power the PostgreSQL ecosystem.</p>
+
+            <div class="pg-info-box">
+              <i class="fas fa-globe"></i> AZERPUG is proud to be part of the global PostgreSQL community. We encourage all our members to engage with these organizations and support the open-source mission.
+            </div>
+
+            <!-- PostgreSQL.org -->
+            <div class="pg-community-card" id="postgresql-org">
+              <div class="pg-community-card-header">
+                <div class="pg-community-icon" style="background: #336791;">
+                  <i class="fas fa-database"></i>
+                </div>
+                <div>
+                  <h2>PostgreSQL — The Official Website</h2>
+                  <div class="pg-community-url"><i class="fas fa-link"></i> www.postgresql.org</div>
+                </div>
+              </div>
+              <div class="pg-community-card-body">
+                <div class="pg-community-desc">
+                  The official home of the PostgreSQL project. PostgreSQL is a powerful, open-source object-relational database system with over 35 years of active development. The website serves as the central hub for documentation, downloads, community news, release announcements, and developer resources. Whether you're just getting started or you're a seasoned database administrator, postgresql.org is the definitive resource for everything PostgreSQL.
+                </div>
+                <div class="pg-community-highlights">
+                  <span class="pg-highlight"><i class="fas fa-book"></i> Official Documentation</span>
+                  <span class="pg-highlight"><i class="fas fa-download"></i> Downloads &amp; Installers</span>
+                  <span class="pg-highlight"><i class="fas fa-newspaper"></i> Release Announcements</span>
+                  <span class="pg-highlight"><i class="fas fa-users"></i> Community &amp; Mailing Lists</span>
+                  <span class="pg-highlight"><i class="fas fa-code-branch"></i> Developer Resources</span>
+                </div>
+                <a href="https://www.postgresql.org/" target="_blank" rel="noopener" class="pg-community-link"><i class="fas fa-external-link-alt"></i> Visit PostgreSQL.org</a>
+              </div>
+            </div>
+
+            <!-- PGCA -->
+            <div class="pg-community-card" id="pgca">
+              <div class="pg-community-card-header">
+                <div class="pg-community-icon" style="background: #2e7d32;">
+                  <i class="fas fa-shield-alt"></i>
+                </div>
+                <div>
+                  <h2>PostgreSQL Community Association (PGCA)</h2>
+                  <div class="pg-community-url"><i class="fas fa-link"></i> www.postgres.ca</div>
+                </div>
+              </div>
+              <div class="pg-community-card-body">
+                <div class="pg-community-desc">
+                  The PostgreSQL Community Association (PGCA) is an official non-profit organization chartered by the PostgreSQL Core Team in 2011 to protect and manage the PostgreSQL brand assets. PGCA safeguards the Postgres trademarks — including the PostgreSQL name and the iconic Slonik elephant logo — ensuring they are used fairly and not misrepresented. The entire Postgres ecosystem, worth billions of dollars and used by millions worldwide, relies on PGCA's stewardship of these critical brand assets.
+                </div>
+                <div class="pg-community-highlights">
+                  <span class="pg-highlight"><i class="fas fa-trademark"></i> Trademark Protection</span>
+                  <span class="pg-highlight"><i class="fas fa-globe-americas"></i> Global Responsibility</span>
+                  <span class="pg-highlight"><i class="fas fa-gavel"></i> Brand Asset Management</span>
+                  <span class="pg-highlight"><i class="fas fa-certificate"></i> Chartered by Core Team</span>
+                </div>
+                <a href="https://www.postgres.ca/" target="_blank" rel="noopener" class="pg-community-link"><i class="fas fa-external-link-alt"></i> Visit PGCA</a>
+              </div>
+            </div>
+
+            <!-- PGConf.EU -->
+            <div class="pg-community-card" id="pgconf-eu">
+              <div class="pg-community-card-header">
+                <div class="pg-community-icon" style="background: #e65100;">
+                  <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div>
+                  <h2>PGConf.EU — European PostgreSQL Conference</h2>
+                  <div class="pg-community-url"><i class="fas fa-link"></i> pgconf.eu</div>
+                </div>
+              </div>
+              <div class="pg-community-card-body">
+                <div class="pg-community-desc">
+                  PGConf.EU is the premier European PostgreSQL conference, organized by PostgreSQL Europe (PGEU). It brings together PostgreSQL developers, administrators, architects, and enthusiasts from around the world for talks, workshops, and networking. The conference features sessions ranging from beginner tutorials to advanced internals, performance tuning, and new feature previews. PGConf.EU 2026 will be held in Valencia, Spain on October 20–23.
+                </div>
+                <div class="pg-community-highlights">
+                  <span class="pg-highlight"><i class="fas fa-microphone-alt"></i> Expert Talks &amp; Workshops</span>
+                  <span class="pg-highlight"><i class="fas fa-handshake"></i> Networking</span>
+                  <span class="pg-highlight"><i class="fas fa-map-marker-alt"></i> Valencia, Spain 2026</span>
+                  <span class="pg-highlight"><i class="fas fa-calendar-check"></i> Oct 20–23, 2026</span>
+                </div>
+                <a href="https://pgconf.eu/" target="_blank" rel="noopener" class="pg-community-link"><i class="fas fa-external-link-alt"></i> Visit PGConf.EU</a>
+              </div>
+            </div>
+
+            <!-- Donate -->
+            <div class="pg-community-card" id="donate">
+              <div class="pg-community-card-header">
+                <div class="pg-community-icon" style="background: #c62828;">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <div>
+                  <h2>Donate to PostgreSQL</h2>
+                  <div class="pg-community-url"><i class="fas fa-link"></i> www.postgresql.org/about/donate</div>
+                </div>
+              </div>
+              <div class="pg-community-card-body">
+                <div class="pg-community-desc">
+                  PostgreSQL is free and open source, but the project depends on donations to sustain its infrastructure, development, and community efforts. Contributions go to recognized non-profit organizations that support the project: the PostgreSQL Community Association (PGCA) for trademark and brand protection, PostgreSQL Europe (PGEU) for European community support, PostgreSQL United States (PgUS) for education and advocacy, and Software in the Public Interest (SPI) for general project funding. Every donation, no matter the size, helps keep PostgreSQL free, reliable, and growing.
+                </div>
+                <div class="pg-community-highlights">
+                  <span class="pg-highlight"><i class="fas fa-hand-holding-heart"></i> Support Open Source</span>
+                  <span class="pg-highlight"><i class="fas fa-server"></i> Infrastructure &amp; Hosting</span>
+                  <span class="pg-highlight"><i class="fas fa-graduation-cap"></i> Education &amp; Advocacy</span>
+                  <span class="pg-highlight"><i class="fas fa-shield-alt"></i> Trademark Protection</span>
+                </div>
+                <a href="https://www.postgresql.org/about/donate/" target="_blank" rel="noopener" class="pg-community-link donate"><i class="fas fa-heart"></i> Donate to PostgreSQL</a>
+              </div>
+            </div>
+
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <footer id="footer">
+      <div class="container">
+        <a href="/"><img class="footer-logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a><br/>
+        <a href="/about/privacypolicy/">Privacy policy</a> | <a href="/about/website/">About the website</a><br/>
+        Copyright &copy; 2008-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
+      </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/js/navbar-auth.js"></script>
+</body>
+</html>
