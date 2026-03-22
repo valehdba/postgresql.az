@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NDMJ7KJ');</script>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="AZERPUG Photo Gallery - Photos from PostgreSQL meetups and events in Azerbaijan">
+    <meta property="og:title" content="Photo Gallery - AZERPUG"><meta property="og:description" content="Photos from PostgreSQL meetups and events in Azerbaijan"><meta property="og:type" content="website"><meta property="og:url" content="https://postgresql.az/gallery/">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/pgyum.css">
+    <title>Photo Gallery - Azerbaijan PostgreSQL User Group</title>
+    <style>
+      :root{--pg-blue-dark:#336791;--pg-blue-light:#e7eef4;--pg-blue-hover:#264d6f;--pg-text:#515151;--pg-text-light:#6c757d;--pg-border:#d8dde3;--pg-bg-light:#f5f5f5;--pg-white:#fff}
+      .pg-page-wrapper{max-width:1140px;margin:0 auto;padding:0 15px}.pg-content-area{display:flex;gap:30px;margin-top:1rem}
+      .pg-sidebar{flex:0 0 220px;min-width:220px}.pg-sidebar-logo{text-align:center;padding:16px 10px 20px;margin-bottom:1.5rem;border-bottom:2px solid var(--pg-border)}.pg-sidebar-logo img{max-width:160px;height:auto;margin-bottom:10px}.pg-sidebar-logo .pg-sidebar-logo-text{font-family:'Maven Pro',sans-serif;font-size:.72rem;font-weight:700;text-transform:uppercase;color:var(--pg-blue-dark);letter-spacing:.8px;line-height:1.4}
+      .pg-sidebar-section{margin-bottom:2rem}.pg-sidebar-section h3{font-family:'Maven Pro',sans-serif;font-size:.85rem;font-weight:700;text-transform:uppercase;color:var(--pg-blue-dark);letter-spacing:.5px;padding-bottom:8px;border-bottom:2px solid var(--pg-blue-dark);margin-bottom:10px}.pg-sidebar-section ul{list-style:none;padding:0;margin:0}.pg-sidebar-section ul li a{display:block;padding:5px 10px;font-size:.9rem;font-weight:600;color:var(--pg-blue-dark);border-left:3px solid transparent;transition:all .15s ease}.pg-sidebar-section ul li a:hover,.pg-sidebar-section ul li a.active{background:var(--pg-blue-light);border-left-color:var(--pg-blue-dark);text-decoration:none}
+      .pg-main-content{flex:1;min-width:0}.pg-page-title{font-family:'Maven Pro',sans-serif;font-size:1.6rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin-bottom:.25rem;padding-bottom:10px;border-bottom:2px solid var(--pg-border)}.pg-page-subtitle{font-size:.95rem;color:var(--pg-text-light);margin-bottom:1.5rem;line-height:1.6}
+
+      /* Album grid */
+      .pg-album-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;margin-bottom:2rem}
+      .pg-album-card{background:var(--pg-white);border:1px solid var(--pg-border);border-radius:6px;overflow:hidden;cursor:pointer;transition:box-shadow .2s,transform .2s}
+      .pg-album-card:hover{box-shadow:0 6px 20px rgba(0,0,0,.1);transform:translateY(-2px)}
+      .pg-album-cover{width:100%;height:180px;object-fit:cover;background:var(--pg-bg-light);display:flex;align-items:center;justify-content:center;color:var(--pg-border);font-size:3rem}
+      .pg-album-info{padding:16px}
+      .pg-album-info h3{font-family:'Maven Pro',sans-serif;font-size:.92rem;font-weight:700;margin:0 0 4px;text-transform:none;color:var(--pg-text)}
+      .pg-album-info p{font-size:.8rem;color:var(--pg-text-light);margin:0}
+      .pg-album-count{font-size:.72rem;font-weight:700;color:var(--pg-blue-dark);margin-top:6px}
+
+      /* Photo grid inside album */
+      .pg-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:2rem}
+      .pg-photo-thumb{width:100%;height:160px;object-fit:cover;border-radius:4px;cursor:pointer;border:1px solid var(--pg-border);transition:opacity .15s,transform .15s}
+      .pg-photo-thumb:hover{opacity:.85;transform:scale(1.02)}
+
+      /* Lightbox */
+      .pg-lightbox{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.9);z-index:10000;align-items:center;justify-content:center;padding:20px}
+      .pg-lightbox.active{display:flex}
+      .pg-lightbox img{max-width:90vw;max-height:85vh;border-radius:4px;box-shadow:0 4px 30px rgba(0,0,0,.5)}
+      .pg-lightbox-close{position:absolute;top:20px;right:30px;color:#fff;font-size:2rem;cursor:pointer;opacity:.7;transition:opacity .15s}.pg-lightbox-close:hover{opacity:1}
+      .pg-lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:2rem;cursor:pointer;opacity:.5;transition:opacity .15s;padding:20px}.pg-lightbox-nav:hover{opacity:1}
+      .pg-lightbox-prev{left:10px}.pg-lightbox-next{right:10px}
+      .pg-lightbox-caption{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:#fff;font-size:.88rem;text-align:center;background:rgba(0,0,0,.5);padding:6px 16px;border-radius:4px;max-width:80vw}
+
+      .pg-btn{display:inline-flex;align-items:center;gap:6px;font-family:'Maven Pro',sans-serif;font-size:.78rem;font-weight:700;text-transform:uppercase;padding:7px 16px;border:none;border-radius:3px;cursor:pointer;transition:all .15s;text-decoration:none}
+      .pg-btn-secondary{background:transparent;color:var(--pg-blue-dark);border:1px solid var(--pg-border)}.pg-btn-secondary:hover{background:var(--pg-blue-light);text-decoration:none;color:var(--pg-blue-dark)}
+      .pg-empty{text-align:center;padding:3rem 2rem;color:var(--pg-text-light)}.pg-empty i{font-size:2.5rem;color:var(--pg-border);margin-bottom:.75rem;display:block}
+      .pg-loading{text-align:center;padding:3rem;color:var(--pg-text-light)}.pg-loading i{font-size:2rem;color:var(--pg-blue-dark);margin-bottom:.75rem;display:block}
+      .pg-info-box{background:var(--pg-blue-light);border-left:4px solid var(--pg-blue-dark);padding:14px 18px;margin-bottom:1.5rem;border-radius:0 3px 3px 0;font-size:.88rem;color:var(--pg-text);line-height:1.6}.pg-info-box i{color:var(--pg-blue-dark);margin-right:6px}
+
+      #footer img.footer-logo{height:36px;margin-bottom:10px;opacity:.6;transition:opacity .2s}#footer img.footer-logo:hover{opacity:1}
+      @media(max-width:768px){.pg-content-area{flex-direction:column}.pg-sidebar{flex:auto;order:2}.pg-main-content{order:1}.pg-album-grid{grid-template-columns:1fr 1fr}.pg-photo-grid{grid-template-columns:1fr 1fr}}
+      @media(max-width:480px){.pg-album-grid{grid-template-columns:1fr}.pg-photo-grid{grid-template-columns:1fr}}
+    </style>
+  </head>
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDMJ7KJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="container-fluid"><div class="row justify-content-md-center"><div class="col">
+      <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand p-0" href="/"><img class="logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="pgNavbar"><ul class="navbar-nav mr-auto">
+          <li class="nav-item p-2"><a href="/">Home</a></li><li class="nav-item p-2"><a href="/blogs/">Blog Posts</a></li><li class="nav-item p-2"><a href="/events/">Events</a></li><li class="nav-item p-2"><a href="/registration/">Registration</a></li><li class="nav-item p-2"><a href="/members/">Members</a></li><li class="nav-item p-2"><a href="/community/">Global Community</a></li><li class="nav-item p-2"><a href="/profile/">My Profile</a></li><li class="nav-item p-2"><a href="/about/">About</a></li>
+        </ul></div>
+      </nav>
+    </div></div>
+
+    <div class="pg-page-wrapper" style="margin-top:1rem;"><div class="pg-content-area">
+      <aside class="pg-sidebar">
+        <div class="pg-sidebar-logo"><a href="/"><img src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a><div class="pg-sidebar-logo-text">Azerbaijan PostgreSQL<br>User Group</div></div>
+        <div class="pg-sidebar-section"><h3>Gallery</h3><ul>
+          <li><a href="/gallery/" class="active">All Albums</a></li>
+        </ul></div>
+        <div class="pg-sidebar-section"><h3>Community</h3><ul>
+          <li><a href="/events/">Events</a></li><li><a href="/blogs/">Blog Posts</a></li><li><a href="/members/">Members</a></li>
+        </ul></div>
+      </aside>
+
+      <main class="pg-main-content">
+        <h1 class="pg-page-title" id="pageTitle">Photo Gallery</h1>
+        <p class="pg-page-subtitle" id="pageSubtitle">Photos from AZERPUG meetups, workshops, and PostgreSQL community events in Azerbaijan.</p>
+
+        <div id="backBtn" style="display:none;margin-bottom:16px;">
+          <button class="pg-btn pg-btn-secondary" onclick="showAlbums()"><i class="fas fa-arrow-left"></i> Back to Albums</button>
+        </div>
+
+        <div id="content">
+          <div class="pg-loading"><i class="fas fa-spinner fa-spin"></i><div>Loading gallery...</div></div>
+        </div>
+      </main>
+    </div></div>
+
+    <!-- Lightbox -->
+    <div class="pg-lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+      <span class="pg-lightbox-close" onclick="closeLightbox()">&times;</span>
+      <span class="pg-lightbox-nav pg-lightbox-prev" onclick="navLightbox(-1)"><i class="fas fa-chevron-left"></i></span>
+      <img id="lightboxImg" src="">
+      <span class="pg-lightbox-nav pg-lightbox-next" onclick="navLightbox(1)"><i class="fas fa-chevron-right"></i></span>
+      <div class="pg-lightbox-caption" id="lightboxCaption"></div>
+    </div>
+
+    <footer id="footer"><div class="container">
+      <a href="/"><img class="footer-logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a><br/>
+      <div style="margin-bottom:12px;"><a href="https://www.facebook.com/groups/www.postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;"><i class="fab fa-facebook"></i></a> <a href="https://github.com/valehdba/postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;"><i class="fab fa-github"></i></a></div>
+      <a href="/about/privacypolicy/">Privacy policy</a> | <a href="/about/website/">About the website</a><br/>
+      Copyright &copy; 2018-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
+    </div></footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/js/navbar-auth.js"></script>
+
+    <script>
+      var SB='https://qlyqwwhimwfcvuqdrxov.supabase.co',KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFseXF3d2hpbXdmY3Z1cWRyeG92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjg2ODYsImV4cCI6MjA4OTcwNDY4Nn0.6MKz72wGwthRL8hs-Iv3L9Iw_W4DdGh3UjrwcagtKfM';
+      var allPhotos=[],currentIdx=0;
+      function esc(t){if(!t)return'';var d=document.createElement('div');d.textContent=t;return d.innerHTML}
+
+      async function loadAlbums(){
+        document.getElementById('backBtn').style.display='none';
+        document.getElementById('pageTitle').textContent='Photo Gallery';
+        document.getElementById('pageSubtitle').textContent='Photos from AZERPUG meetups, workshops, and PostgreSQL community events in Azerbaijan.';
+        var el=document.getElementById('content');
+        try{
+          var r=await fetch(SB+'/rest/v1/public_albums?select=*',{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}});
+          if(!r.ok)throw new Error();
+          var albums=await r.json();
+          if(!albums.length){el.innerHTML='<div class="pg-empty"><i class="fas fa-images"></i>No photo albums yet. Photos from upcoming events will appear here!</div>';return;}
+          var html='<div class="pg-album-grid">';
+          albums.forEach(function(a){
+            html+='<div class="pg-album-card" onclick="loadAlbum(\''+a.id+'\',\''+esc(a.title).replace(/'/g,"\\'")+'\')">'+
+              (a.cover_url?'<img class="pg-album-cover" src="'+esc(a.cover_url)+'" alt="'+esc(a.title)+'">':'<div class="pg-album-cover"><i class="fas fa-images"></i></div>')+
+              '<div class="pg-album-info"><h3>'+esc(a.title)+'</h3>'+(a.description?'<p>'+esc(a.description)+'</p>':'')+
+              '<div class="pg-album-count"><i class="fas fa-image"></i> '+(a.photo_count||0)+' photos</div></div></div>';
+          });
+          html+='</div>';el.innerHTML=html;
+        }catch(e){el.innerHTML='<div class="pg-empty"><i class="fas fa-images"></i>No photo albums yet. Photos from upcoming events will appear here!</div>';}
+      }
+
+      async function loadAlbum(albumId,title){
+        document.getElementById('backBtn').style.display='block';
+        document.getElementById('pageTitle').textContent=title;
+        document.getElementById('pageSubtitle').textContent='';
+        var el=document.getElementById('content');
+        el.innerHTML='<div class="pg-loading"><i class="fas fa-spinner fa-spin"></i></div>';
+        try{
+          var r=await fetch(SB+'/rest/v1/public_photos?album_id=eq.'+albumId+'&select=*&order=sort_order,created_at',{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}});
+          if(!r.ok)throw new Error();
+          allPhotos=await r.json();
+          if(!allPhotos.length){el.innerHTML='<div class="pg-empty"><i class="fas fa-image"></i>No photos in this album yet.</div>';return;}
+          var html='<div class="pg-photo-grid">';
+          allPhotos.forEach(function(p,i){html+='<img class="pg-photo-thumb" src="'+esc(p.url)+'" alt="'+esc(p.caption||'')+'" onclick="openLightbox('+i+')" loading="lazy">';});
+          html+='</div>';el.innerHTML=html;
+        }catch(e){el.innerHTML='<div class="pg-empty"><i class="fas fa-image"></i>Failed to load photos.</div>';}
+      }
+
+      function showAlbums(){loadAlbums();}
+      function openLightbox(idx){currentIdx=idx;var p=allPhotos[idx];if(!p)return;document.getElementById('lightboxImg').src=p.url;document.getElementById('lightboxCaption').textContent=p.caption||'';document.getElementById('lightbox').classList.add('active');document.body.style.overflow='hidden';}
+      function closeLightbox(){document.getElementById('lightbox').classList.remove('active');document.body.style.overflow='';}
+      function navLightbox(dir){currentIdx=(currentIdx+dir+allPhotos.length)%allPhotos.length;openLightbox(currentIdx);}
+      document.addEventListener('keydown',function(e){if(!document.getElementById('lightbox').classList.contains('active'))return;if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')navLightbox(-1);if(e.key==='ArrowRight')navLightbox(1);});
+
+      loadAlbums();
+    </script>
+</body>
+</html>
