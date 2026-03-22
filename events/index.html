@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NDMJ7KJ');</script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="AZERPUG Events - PostgreSQL meetups, workshops, and conferences in Azerbaijan">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/pgyum.css">
+    <title>Events & Meetups - Azerbaijan PostgreSQL User Group</title>
+    <style>
+      :root { --pg-blue-dark:#336791; --pg-blue-light:#e7eef4; --pg-blue-hover:#264d6f; --pg-text:#515151; --pg-text-light:#6c757d; --pg-border:#d8dde3; --pg-bg-light:#f5f5f5; --pg-white:#fff; --pg-success:#28a745; --pg-danger:#dc3545; --pg-warning:#e8a33d; }
+      .pg-page-wrapper { max-width:1140px; margin:0 auto; padding:0 15px; }
+      .pg-content-area { display:flex; gap:30px; margin-top:1rem; }
+      .pg-sidebar { flex:0 0 220px; min-width:220px; }
+      .pg-sidebar-logo { text-align:center; padding:16px 10px 20px; margin-bottom:1.5rem; border-bottom:2px solid var(--pg-border); }
+      .pg-sidebar-logo img { max-width:160px; height:auto; margin-bottom:10px; }
+      .pg-sidebar-logo .pg-sidebar-logo-text { font-family:'Maven Pro',sans-serif; font-size:0.72rem; font-weight:700; text-transform:uppercase; color:var(--pg-blue-dark); letter-spacing:0.8px; line-height:1.4; }
+      .pg-sidebar-section { margin-bottom:2rem; }
+      .pg-sidebar-section h3 { font-family:'Maven Pro',sans-serif; font-size:0.85rem; font-weight:700; text-transform:uppercase; color:var(--pg-blue-dark); letter-spacing:0.5px; padding-bottom:8px; border-bottom:2px solid var(--pg-blue-dark); margin-bottom:10px; }
+      .pg-sidebar-section ul { list-style:none; padding:0; margin:0; }
+      .pg-sidebar-section ul li a { display:block; padding:5px 10px; font-size:0.9rem; font-weight:600; color:var(--pg-blue-dark); border-left:3px solid transparent; transition:all .15s ease; }
+      .pg-sidebar-section ul li a:hover,.pg-sidebar-section ul li a.active { background:var(--pg-blue-light); border-left-color:var(--pg-blue-dark); text-decoration:none; }
+      .pg-main-content { flex:1; min-width:0; }
+      .pg-page-title { font-family:'Maven Pro',sans-serif; font-size:1.6rem; font-weight:700; color:var(--pg-text); text-transform:uppercase; margin-bottom:.25rem; padding-bottom:10px; border-bottom:2px solid var(--pg-border); }
+      .pg-page-subtitle { font-size:.95rem; color:var(--pg-text-light); margin-bottom:1.5rem; line-height:1.6; }
+      .pg-section-title { font-family:'Maven Pro',sans-serif; font-size:1.05rem; font-weight:700; color:var(--pg-text); text-transform:uppercase; padding-bottom:8px; border-bottom:2px solid var(--pg-border); margin:1.75rem 0 1.25rem; display:flex; align-items:center; gap:8px; }
+      .pg-section-title i { color:var(--pg-blue-dark); }
+
+      /* Event cards */
+      .pg-event-card { background:var(--pg-white); border:1px solid var(--pg-border); border-radius:6px; margin-bottom:1.25rem; overflow:hidden; transition:box-shadow .2s ease; }
+      .pg-event-card:hover { box-shadow:0 4px 12px rgba(0,0,0,.06); }
+      .pg-event-card.upcoming { border-left:4px solid var(--pg-blue-dark); }
+      .pg-event-card.completed { opacity:.85; }
+      .pg-event-card.cancelled { opacity:.6; }
+
+      .pg-event-body { padding:20px 24px; display:flex; gap:20px; }
+      .pg-event-date-box { min-width:64px; text-align:center; flex-shrink:0; }
+      .pg-event-month { font-family:'Maven Pro',sans-serif; font-size:.7rem; font-weight:700; text-transform:uppercase; color:var(--pg-white); background:var(--pg-blue-dark); padding:3px 10px; border-radius:4px 4px 0 0; letter-spacing:.5px; }
+      .pg-event-day { font-family:'Maven Pro',sans-serif; font-size:1.6rem; font-weight:700; color:var(--pg-text); background:var(--pg-bg-light); padding:4px 10px; border-radius:0 0 4px 4px; border:1px solid var(--pg-border); border-top:0; line-height:1.2; }
+      .pg-event-info { flex:1; min-width:0; }
+      .pg-event-info h3 { font-family:'Maven Pro',sans-serif; font-size:1.05rem; font-weight:700; color:var(--pg-text); margin:0 0 6px; text-transform:none; }
+      .pg-event-meta { display:flex; gap:14px; flex-wrap:wrap; font-size:.8rem; color:var(--pg-text-light); margin-bottom:8px; }
+      .pg-event-meta i { margin-right:3px; color:var(--pg-blue-dark); }
+      .pg-event-desc { font-size:.88rem; color:var(--pg-text); line-height:1.6; margin-bottom:10px; }
+      .pg-event-tags { display:flex; gap:5px; flex-wrap:wrap; margin-bottom:10px; }
+      .pg-tag { display:inline-block; padding:2px 10px; background:var(--pg-blue-light); color:var(--pg-blue-dark); font-size:.72rem; font-weight:600; border-radius:12px; }
+
+      .pg-event-footer { padding:12px 24px; background:var(--pg-bg-light); border-top:1px solid var(--pg-border); display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+      .pg-event-attendees { font-size:.82rem; color:var(--pg-text-light); display:flex; align-items:center; gap:6px; }
+      .pg-event-attendees i { color:var(--pg-blue-dark); }
+
+      /* Type badges */
+      .pg-event-type { display:inline-block; padding:3px 10px; border-radius:12px; font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.3px; }
+      .pg-type-meetup { background:#e3f2fd; color:#1565c0; }
+      .pg-type-workshop { background:#e8f5e9; color:#2e7d32; }
+      .pg-type-conference { background:#fff3e0; color:#e65100; }
+      .pg-type-webinar { background:#f3e5f5; color:#7b1fa2; }
+      .pg-type-hackathon { background:#fce4ec; color:#c62828; }
+      .pg-type-other { background:#e0e0e0; color:#555; }
+
+      /* Status badges */
+      .pg-event-status { display:inline-block; padding:3px 10px; border-radius:12px; font-size:.7rem; font-weight:700; text-transform:uppercase; }
+      .pg-status-upcoming { background:#d4edda; color:#155724; }
+      .pg-status-ongoing { background:#fff3cd; color:#856404; }
+      .pg-status-completed { background:#e0e0e0; color:#555; }
+      .pg-status-cancelled { background:#f8d7da; color:#721c24; }
+
+      /* Buttons */
+      .pg-btn { display:inline-flex; align-items:center; gap:6px; font-family:'Maven Pro',sans-serif; font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.3px; padding:7px 16px; border:none; border-radius:3px; cursor:pointer; transition:all .15s ease; text-decoration:none; }
+      .pg-btn-primary { background:var(--pg-blue-dark); color:var(--pg-white); }
+      .pg-btn-primary:hover { background:var(--pg-blue-hover); color:var(--pg-white); text-decoration:none; }
+      .pg-btn-success { background:var(--pg-success); color:var(--pg-white); }
+      .pg-btn-success:hover { background:#218838; color:var(--pg-white); }
+      .pg-btn-outline { background:transparent; color:var(--pg-blue-dark); border:1px solid var(--pg-border); }
+      .pg-btn-outline:hover { background:var(--pg-blue-light); border-color:var(--pg-blue-dark); text-decoration:none; color:var(--pg-blue-dark); }
+      .pg-btn-rsvp-active { background:var(--pg-success); color:var(--pg-white); }
+
+      /* Empty / loading */
+      .pg-loading { text-align:center; padding:3rem; color:var(--pg-text-light); }
+      .pg-loading i { font-size:2rem; color:var(--pg-blue-dark); margin-bottom:.75rem; display:block; }
+      .pg-empty { text-align:center; padding:3rem 2rem; color:var(--pg-text-light); }
+      .pg-empty i { font-size:2.5rem; color:var(--pg-border); margin-bottom:.75rem; display:block; }
+
+      /* Info box */
+      .pg-info-box { background:var(--pg-blue-light); border-left:4px solid var(--pg-blue-dark); padding:14px 18px; margin-bottom:1.5rem; border-radius:0 3px 3px 0; font-size:.88rem; color:var(--pg-text); line-height:1.6; }
+      .pg-info-box i { color:var(--pg-blue-dark); margin-right:6px; }
+
+      #footer img.footer-logo { height:36px; margin-bottom:10px; opacity:.6; transition:opacity .2s ease; }
+      #footer img.footer-logo:hover { opacity:1; }
+      @media (max-width:768px) {
+        .pg-content-area { flex-direction:column; }
+        .pg-sidebar { flex:auto; min-width:auto; order:2; }
+        .pg-main-content { order:1; }
+        .pg-event-body { flex-direction:column; }
+        .pg-event-footer { flex-direction:column; align-items:flex-start; }
+      }
+    </style>
+  </head>
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDMJ7KJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="container-fluid">
+      <div class="row justify-content-md-center"><div class="col">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand p-0" href="/"><img class="logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="pgNavbar">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item p-2"><a href="/">Home</a></li>
+              <li class="nav-item p-2"><a href="/blogs/">Blog Posts</a></li>
+              <li class="nav-item p-2"><a href="/events/">Events</a></li>
+              <li class="nav-item p-2"><a href="/registration/">Registration</a></li>
+              <li class="nav-item p-2"><a href="/members/">Members</a></li>
+              <li class="nav-item p-2"><a href="/community/">Global Community</a></li>
+              <li class="nav-item p-2"><a href="/profile/">My Profile</a></li>
+              <li class="nav-item p-2"><a href="/about/">About</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div></div>
+
+      <div class="pg-page-wrapper" style="margin-top:1rem;">
+        <div class="pg-content-area">
+          <aside class="pg-sidebar">
+            <div class="pg-sidebar-logo">
+              <a href="/"><img src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a>
+              <div class="pg-sidebar-logo-text">Azerbaijan PostgreSQL<br>User Group</div>
+            </div>
+            <div class="pg-sidebar-section">
+              <h3>Events</h3>
+              <ul>
+                <li><a href="#upcoming" class="active">Upcoming Events</a></li>
+                <li><a href="#past">Past Events</a></li>
+              </ul>
+            </div>
+            <div class="pg-sidebar-section">
+              <h3>Community</h3>
+              <ul>
+                <li><a href="/registration/">Registration</a></li>
+                <li><a href="/members/">Members</a></li>
+                <li><a href="/blogs/">Blog Posts</a></li>
+                <li><a href="/community/">Global Community</a></li>
+              </ul>
+            </div>
+          </aside>
+
+          <main class="pg-main-content">
+            <h1 class="pg-page-title">Events & Meetups</h1>
+            <p class="pg-page-subtitle">Join us at PostgreSQL meetups, workshops, webinars, and conferences in Azerbaijan. All events are open to AZERPUG members.</p>
+
+            <div class="pg-info-box">
+              <i class="fas fa-calendar-check"></i> Want to attend an event? Log in and click <strong>RSVP</strong> to let us know you're coming. Want to suggest or organize an event? <a href="mailto:info@postgresql.az">Contact us</a>.
+            </div>
+
+            <!-- Upcoming Events -->
+            <h2 class="pg-section-title" id="upcoming"><i class="fas fa-calendar-alt"></i> Upcoming Events</h2>
+            <div id="upcomingEvents">
+              <div class="pg-loading"><i class="fas fa-spinner fa-spin"></i><div>Loading events...</div></div>
+            </div>
+
+            <!-- Past Events -->
+            <h2 class="pg-section-title" id="past"><i class="fas fa-history"></i> Past Events</h2>
+            <div id="pastEvents">
+              <div class="pg-loading"><i class="fas fa-spinner fa-spin"></i><div>Loading events...</div></div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <footer id="footer">
+      <div class="container">
+        <a href="/"><img class="footer-logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a><br/>
+        <a href="/about/privacypolicy/">Privacy policy</a> | <a href="/about/website/">About the website</a><br/>
+        Copyright &copy; 2018-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
+      </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/js/navbar-auth.js"></script>
+
+    <script>
+      var SB = 'https://qlyqwwhimwfcvuqdrxov.supabase.co';
+      var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFseXF3d2hpbXdmY3Z1cWRyeG92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjg2ODYsImV4cCI6MjA4OTcwNDY4Nn0.6MKz72wGwthRL8hs-Iv3L9Iw_W4DdGh3UjrwcagtKfM';
+      var user = null;
+      try { user = JSON.parse(sessionStorage.getItem('azerpug_user')); } catch(e) {}
+
+      function esc(t) { if(!t) return ''; var d=document.createElement('div'); d.textContent=t; return d.innerHTML; }
+
+      var typeLabels = { meetup:'Meetup', workshop:'Workshop', conference:'Conference', webinar:'Webinar', hackathon:'Hackathon', other:'Event' };
+      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+      function renderEvent(ev, isPast) {
+        var d = new Date(ev.start_date);
+        var month = months[d.getMonth()];
+        var day = d.getDate();
+        var time = d.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+        var endStr = ev.end_date ? ' — ' + new Date(ev.end_date).toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' }) : '';
+        var dateStr = d.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+        var typeClass = 'pg-type-' + (ev.event_type || 'other');
+        var statusClass = 'pg-status-' + (ev.status || 'upcoming');
+        var cardClass = isPast ? 'completed' : (ev.status === 'cancelled' ? 'cancelled' : 'upcoming');
+        var tags = (ev.tags || []).map(function(t) { return '<span class="pg-tag">' + esc(t) + '</span>'; }).join('');
+        var location = ev.is_online ? '<i class="fas fa-video"></i> Online' : (ev.location ? '<i class="fas fa-map-marker-alt"></i> ' + esc(ev.location) : '');
+
+        var rsvpBtn = '';
+        if (!isPast && user) {
+          rsvpBtn = '<button class="pg-btn pg-btn-success" onclick="doRsvp(\'' + ev.id + '\',this)"><i class="fas fa-check"></i> RSVP</button>';
+        } else if (!isPast && !user) {
+          rsvpBtn = '<a href="/profile/" class="pg-btn pg-btn-outline"><i class="fas fa-sign-in-alt"></i> Log in to RSVP</a>';
+        }
+
+        return '<div class="pg-event-card ' + cardClass + '">' +
+          '<div class="pg-event-body">' +
+            '<div class="pg-event-date-box">' +
+              '<div class="pg-event-month">' + month + '</div>' +
+              '<div class="pg-event-day">' + day + '</div>' +
+            '</div>' +
+            '<div class="pg-event-info">' +
+              '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px;">' +
+                '<span class="pg-event-type ' + typeClass + '">' + (typeLabels[ev.event_type] || 'Event') + '</span>' +
+                (ev.status !== 'upcoming' ? '<span class="pg-event-status ' + statusClass + '">' + esc(ev.status) + '</span>' : '') +
+              '</div>' +
+              '<h3>' + esc(ev.title) + '</h3>' +
+              '<div class="pg-event-meta">' +
+                '<span><i class="fas fa-calendar"></i> ' + dateStr + '</span>' +
+                '<span><i class="fas fa-clock"></i> ' + time + endStr + '</span>' +
+                (location ? '<span>' + location + '</span>' : '') +
+                (ev.speaker ? '<span><i class="fas fa-microphone-alt"></i> ' + esc(ev.speaker) + '</span>' : '') +
+              '</div>' +
+              (ev.description ? '<div class="pg-event-desc">' + esc(ev.description) + '</div>' : '') +
+              (tags ? '<div class="pg-event-tags">' + tags + '</div>' : '') +
+            '</div>' +
+          '</div>' +
+          '<div class="pg-event-footer">' +
+            '<div class="pg-event-attendees"><i class="fas fa-users"></i> ' + (ev.going_count || 0) + ' going' + (ev.maybe_count > 0 ? ' · ' + ev.maybe_count + ' maybe' : '') +
+              (ev.max_attendees ? ' / ' + ev.max_attendees + ' max' : '') +
+            '</div>' +
+            rsvpBtn +
+          '</div>' +
+        '</div>';
+      }
+
+      async function loadEvents() {
+        try {
+          var r = await fetch(SB + '/rest/v1/public_events?select=*&order=start_date.desc', {
+            headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY }
+          });
+          if (!r.ok) throw new Error(await r.text());
+          var events = await r.json();
+
+          var now = new Date();
+          var upcoming = events.filter(function(e) { return new Date(e.start_date) >= now && e.status !== 'completed'; });
+          var past = events.filter(function(e) { return new Date(e.start_date) < now || e.status === 'completed'; });
+
+          // Sort upcoming ascending (soonest first)
+          upcoming.sort(function(a,b) { return new Date(a.start_date) - new Date(b.start_date); });
+
+          var upEl = document.getElementById('upcomingEvents');
+          var pastEl = document.getElementById('pastEvents');
+
+          if (upcoming.length === 0) {
+            upEl.innerHTML = '<div class="pg-empty"><i class="fas fa-calendar-plus"></i>No upcoming events at the moment. Check back soon or <a href="mailto:info@postgresql.az">suggest an event</a>!</div>';
+          } else {
+            upEl.innerHTML = upcoming.map(function(e) { return renderEvent(e, false); }).join('');
+          }
+
+          if (past.length === 0) {
+            pastEl.innerHTML = '<div class="pg-empty"><i class="fas fa-history"></i>No past events recorded yet.</div>';
+          } else {
+            pastEl.innerHTML = past.map(function(e) { return renderEvent(e, true); }).join('');
+          }
+        } catch(e) {
+          console.error('Events error:', e);
+          document.getElementById('upcomingEvents').innerHTML = '<div class="pg-empty"><i class="fas fa-calendar-plus"></i>No upcoming events at the moment. Check back soon!</div>';
+          document.getElementById('pastEvents').innerHTML = '<div class="pg-empty"><i class="fas fa-history"></i>No past events recorded yet.</div>';
+        }
+      }
+
+      async function doRsvp(eventId, btn) {
+        if (!user) return;
+        try {
+          var r = await fetch(SB + '/rest/v1/rpc/event_rsvp', {
+            method: 'POST',
+            headers: { 'Content-Type':'application/json', 'apikey':KEY, 'Authorization':'Bearer '+KEY },
+            body: JSON.stringify({ p_member_id: user.id, p_event_id: eventId })
+          });
+          if (r.ok) {
+            btn.innerHTML = '<i class="fas fa-check-circle"></i> Going!';
+            btn.classList.remove('pg-btn-success');
+            btn.classList.add('pg-btn-rsvp-active');
+            btn.disabled = true;
+          }
+        } catch(e) { alert('RSVP failed. Please try again.'); }
+      }
+
+      loadEvents();
+    </script>
+</body>
+</html>
