@@ -775,6 +775,10 @@
                     <label for="agreeNewsletter">I would like to receive community news, event invitations, and PostgreSQL updates via email.</label>
                   </div>
 
+                  <!-- Form Error Banner -->
+                  <div id="formError" style="display:none; background:#fef2f2; border:1px solid #fca5a5; color:#dc3545; padding:10px 16px; border-radius:3px; font-size:0.88rem; margin-top:1rem;">
+                  </div>
+
                   <!-- Form Actions -->
                   <div class="pg-form-actions">
                     <button type="submit" class="pg-btn-primary" id="submitBtn">
@@ -824,7 +828,70 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script>
+      // =============================================
+      // SUPABASE CONFIGURATION
+      // Replace these with your Supabase project values
+      // Found at: Supabase Dashboard → Settings → API
+      // =============================================
+      var SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
+      var SUPABASE_ANON_KEY = 'YOUR_ANON_KEY_HERE';
+
+      // =============================================
+      // Simple SHA-256 hash for password
+      // (Not meant for production auth — use Supabase Auth for that)
+      // =============================================
+      async function hashPassword(password) {
+        var encoder = new TextEncoder();
+        var data = encoder.encode(password);
+        var hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        var hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+      }
+
+      // =============================================
+      // Supabase REST API helper
+      // =============================================
+      async function supabaseInsert(table, data) {
+        var response = await fetch(SUPABASE_URL + '/rest/v1/' + table, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+          var errorBody = await response.json();
+          throw errorBody;
+        }
+
+        return true;
+      }
+
+      async function supabaseRpc(fnName, params) {
+        var response = await fetch(SUPABASE_URL + '/rest/v1/rpc/' + fnName, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
+          },
+          body: JSON.stringify(params)
+        });
+
+        if (!response.ok) {
+          throw new Error('RPC call failed');
+        }
+
+        return await response.json();
+      }
+
+      // =============================================
       // Toggle password visibility
+      // =============================================
       function togglePassword(fieldId, btn) {
         var field = document.getElementById(fieldId);
         var icon = btn.querySelector('i');
@@ -839,7 +906,9 @@
         }
       }
 
+      // =============================================
       // Password strength meter
+      // =============================================
       document.getElementById('password').addEventListener('input', function() {
         var val = this.value;
         var strength = 0;
@@ -859,10 +928,45 @@
         });
       });
 
-      // Form validation & submission
-      document.getElementById('registrationForm').addEventListener('submit', function(e) {
+      // =============================================
+      // Error / Loading UI helpers
+      // =============================================
+      function showError(elementId, message) {
+        var el = document.getElementById(elementId);
+        if (el) el.textContent = message;
+      }
+
+      function setSubmitLoading(loading) {
+        var btn = document.getElementById('submitBtn');
+        if (loading) {
+          btn.disabled = true;
+          btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Registering...';
+        } else {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fas fa-user-plus"></i> Register';
+        }
+      }
+
+      function showFormError(message) {
+        var errorDiv = document.getElementById('formError');
+        if (errorDiv) {
+          errorDiv.textContent = message;
+          errorDiv.style.display = 'block';
+        }
+      }
+
+      function hideFormError() {
+        var errorDiv = document.getElementById('formError');
+        if (errorDiv) errorDiv.style.display = 'none';
+      }
+
+      // =============================================
+      // Form validation & submission to Supabase
+      // =============================================
+      document.getElementById('registrationForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         var isValid = true;
+        hideFormError();
 
         // Clear previous errors
         document.querySelectorAll('.pg-invalid-feedback').forEach(function(el) { el.textContent = ''; });
@@ -874,7 +978,7 @@
         var firstName = document.getElementById('firstName');
         if (!firstName.value.trim()) {
           firstName.classList.add('is-invalid');
-          document.getElementById('firstNameError').textContent = 'First name is required.';
+          showError('firstNameError', 'First name is required.');
           isValid = false;
         } else {
           firstName.classList.add('is-valid');
@@ -884,7 +988,7 @@
         var lastName = document.getElementById('lastName');
         if (!lastName.value.trim()) {
           lastName.classList.add('is-invalid');
-          document.getElementById('lastNameError').textContent = 'Last name is required.';
+          showError('lastNameError', 'Last name is required.');
           isValid = false;
         } else {
           lastName.classList.add('is-valid');
@@ -895,11 +999,11 @@
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!email.value.trim()) {
           email.classList.add('is-invalid');
-          document.getElementById('emailError').textContent = 'Email address is required.';
+          showError('emailError', 'Email address is required.');
           isValid = false;
         } else if (!emailRegex.test(email.value)) {
           email.classList.add('is-invalid');
-          document.getElementById('emailError').textContent = 'Please enter a valid email address.';
+          showError('emailError', 'Please enter a valid email address.');
           isValid = false;
         } else {
           email.classList.add('is-valid');
@@ -909,11 +1013,11 @@
         var password = document.getElementById('password');
         if (!password.value) {
           password.classList.add('is-invalid');
-          document.getElementById('passwordError').textContent = 'Password is required.';
+          showError('passwordError', 'Password is required.');
           isValid = false;
         } else if (password.value.length < 8) {
           password.classList.add('is-invalid');
-          document.getElementById('passwordError').textContent = 'Password must be at least 8 characters.';
+          showError('passwordError', 'Password must be at least 8 characters.');
           isValid = false;
         } else {
           password.classList.add('is-valid');
@@ -923,11 +1027,11 @@
         var confirmPassword = document.getElementById('confirmPassword');
         if (!confirmPassword.value) {
           confirmPassword.classList.add('is-invalid');
-          document.getElementById('confirmPasswordError').textContent = 'Please confirm your password.';
+          showError('confirmPasswordError', 'Please confirm your password.');
           isValid = false;
         } else if (confirmPassword.value !== password.value) {
           confirmPassword.classList.add('is-invalid');
-          document.getElementById('confirmPasswordError').textContent = 'Passwords do not match.';
+          showError('confirmPasswordError', 'Passwords do not match.');
           isValid = false;
         } else {
           confirmPassword.classList.add('is-valid');
@@ -937,7 +1041,7 @@
         var pgExperience = document.getElementById('pgExperience');
         if (!pgExperience.value) {
           pgExperience.classList.add('is-invalid');
-          document.getElementById('pgExperienceError').textContent = 'Please select your experience level.';
+          showError('pgExperienceError', 'Please select your experience level.');
           isValid = false;
         } else {
           pgExperience.classList.add('is-valid');
@@ -947,18 +1051,74 @@
         var agreeTerms = document.getElementById('agreeTerms');
         if (!agreeTerms.checked) {
           isValid = false;
-          alert('Please agree to the Privacy Policy to continue.');
+          showFormError('Please agree to the Privacy Policy to continue.');
         }
 
-        if (isValid) {
+        if (!isValid) return;
+
+        // =============================================
+        // Submit to Supabase
+        // =============================================
+        setSubmitLoading(true);
+
+        try {
+          // Check if email already exists
+          var emailExists = await supabaseRpc('check_email_exists', {
+            check_email: email.value.trim().toLowerCase()
+          });
+
+          if (emailExists) {
+            email.classList.remove('is-valid');
+            email.classList.add('is-invalid');
+            showError('emailError', 'This email is already registered. Please use a different email or log in.');
+            setSubmitLoading(false);
+            return;
+          }
+
+          // Hash the password
+          var passwordHash = await hashPassword(password.value);
+
+          // Prepare member data
+          var memberData = {
+            first_name: firstName.value.trim(),
+            last_name: lastName.value.trim(),
+            email: email.value.trim().toLowerCase(),
+            password_hash: passwordHash,
+            company: document.getElementById('company').value.trim() || null,
+            job_title: document.getElementById('jobTitle').value.trim() || null,
+            pg_experience: pgExperience.value,
+            phone: document.getElementById('phone').value.trim() || null,
+            personal_notes: document.getElementById('personalNotes').value.trim() || null,
+            newsletter: document.getElementById('agreeNewsletter').checked
+          };
+
+          // Insert into Supabase
+          await supabaseInsert('members', memberData);
+
           // Show success message
           document.getElementById('registrationForm').style.display = 'none';
           document.getElementById('successMessage').style.display = 'block';
           window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        } catch (error) {
+          console.error('Registration error:', error);
+
+          // Handle duplicate email from DB constraint
+          if (error && error.code === '23505') {
+            email.classList.remove('is-valid');
+            email.classList.add('is-invalid');
+            showError('emailError', 'This email is already registered.');
+          } else {
+            showFormError('Registration failed. Please try again later or contact us at info@postgresql.az');
+          }
+
+          setSubmitLoading(false);
         }
       });
 
+      // =============================================
       // Reset form
+      // =============================================
       function resetForm() {
         document.querySelectorAll('.pg-invalid-feedback').forEach(function(el) { el.textContent = ''; });
         document.querySelectorAll('.pg-form-control').forEach(function(el) {
@@ -966,6 +1126,7 @@
         });
         var bars = document.querySelectorAll('#passwordStrength .pg-password-strength-bar');
         bars.forEach(function(bar) { bar.style.background = '#e0e0e0'; });
+        hideFormError();
       }
     </script>
 
