@@ -1,381 +1,224 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-NDMJ7KJ');</script>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Azerbaijan PostgreSQL User Group - AZERPUG Community">
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NDMJ7KJ');</script>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="AZERPUG - Azerbaijan PostgreSQL User Group. Join the open-source PostgreSQL community in Azerbaijan.">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/css/pgyum.css">
-    <title>Welcome - Azerbaijan PostgreSQL User Group</title>
-    <script>
-      var __user = null;
-      try { __user = JSON.parse(sessionStorage.getItem('azerpug_user')); } catch(e) {}
-      if (!__user || !__user.id) { window.location.replace('/members/'); }
-    </script>
+    <title>AZERPUG - Azerbaijan PostgreSQL User Group</title>
     <style>
-      :root {
-        --pg-blue-dark: #336791;
-        --pg-blue-light: #e7eef4;
-        --pg-blue-hover: #264d6f;
-        --pg-text: #515151;
-        --pg-text-light: #6c757d;
-        --pg-border: #d8dde3;
-        --pg-bg-light: #f5f5f5;
-        --pg-white: #ffffff;
-        --pg-success: #28a745;
-      }
+      :root{--pg-blue-dark:#336791;--pg-blue-light:#e7eef4;--pg-blue-hover:#264d6f;--pg-text:#515151;--pg-text-light:#6c757d;--pg-border:#d8dde3;--pg-bg-light:#f5f5f5;--pg-white:#fff;--pg-success:#28a745}
+      .pg-page-wrapper{max-width:1140px;margin:0 auto;padding:0 15px}
 
-      .pg-page-wrapper { max-width: 1140px; margin: 0 auto; padding: 0 15px; }
-      .pg-content-area { display: flex; gap: 30px; margin-top: 1rem; }
+      /* Hero */
+      .pg-hero{background:linear-gradient(135deg,var(--pg-blue-dark) 0%,#1a3d5c 100%);color:var(--pg-white);border-radius:8px;padding:48px 44px;margin-top:1rem;margin-bottom:2rem;position:relative;overflow:hidden;text-align:center}
+      .pg-hero::after{content:'';position:absolute;bottom:-60px;right:-60px;width:300px;height:300px;background:url('/pict/smal_AZERPUG.png') no-repeat center;background-size:contain;opacity:.06;pointer-events:none}
+      .pg-hero h1{font-family:'Maven Pro',sans-serif;font-size:2rem;font-weight:700;margin:0 0 8px;text-transform:none;color:var(--pg-white)}
+      .pg-hero .subtitle{font-size:1.05rem;opacity:.9;margin-bottom:6px;line-height:1.6}
+      .pg-hero .subtitle-az{font-size:.92rem;opacity:.7;font-style:italic;margin-bottom:20px}
+      .pg-hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+      .pg-hero-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:4px;font-family:'Maven Pro',sans-serif;font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;text-decoration:none;transition:all .15s ease}
+      .pg-hero-btn-primary{background:var(--pg-white);color:var(--pg-blue-dark)}.pg-hero-btn-primary:hover{background:#e0e8ef;color:var(--pg-blue-dark);text-decoration:none}
+      .pg-hero-btn-outline{background:transparent;color:var(--pg-white);border:2px solid rgba(255,255,255,.4)}.pg-hero-btn-outline:hover{background:rgba(255,255,255,.1);border-color:var(--pg-white);color:var(--pg-white);text-decoration:none}
+      .pg-hero-stats{display:flex;justify-content:center;gap:40px;margin-top:28px;flex-wrap:wrap}
+      .pg-hero-stat-num{font-family:'Maven Pro',sans-serif;font-size:1.8rem;font-weight:700;line-height:1}
+      .pg-hero-stat-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;opacity:.7;margin-top:2px}
 
-      .pg-sidebar { flex: 0 0 220px; min-width: 220px; }
-      .pg-sidebar-logo { text-align: center; padding: 16px 10px 20px 10px; margin-bottom: 1.5rem; border-bottom: 2px solid var(--pg-border); }
-      .pg-sidebar-logo img { max-width: 160px; height: auto; margin-bottom: 10px; }
-      .pg-sidebar-logo .pg-sidebar-logo-text { font-family: 'Maven Pro', sans-serif; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--pg-blue-dark); letter-spacing: 0.8px; line-height: 1.4; }
-      .pg-sidebar-section { margin-bottom: 2rem; }
-      .pg-sidebar-section h3 { font-family: 'Maven Pro', sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--pg-blue-dark); letter-spacing: 0.5px; padding-bottom: 8px; border-bottom: 2px solid var(--pg-blue-dark); margin-bottom: 10px; }
-      .pg-sidebar-section ul { list-style: none; padding: 0; margin: 0; }
-      .pg-sidebar-section ul li a { display: block; padding: 5px 10px; font-size: 0.9rem; font-weight: 600; color: var(--pg-blue-dark); border-left: 3px solid transparent; transition: all 0.15s ease; }
-      .pg-sidebar-section ul li a:hover { background: var(--pg-blue-light); border-left-color: var(--pg-blue-dark); text-decoration: none; }
+      /* Features grid */
+      .pg-features{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;margin-bottom:2.5rem}
+      .pg-feature{background:var(--pg-white);border:1px solid var(--pg-border);border-radius:6px;padding:28px 24px;text-align:center;transition:box-shadow .2s,border-color .2s,transform .2s;text-decoration:none;color:var(--pg-text);display:block}
+      .pg-feature:hover{box-shadow:0 6px 20px rgba(0,0,0,.08);border-color:var(--pg-blue-dark);transform:translateY(-2px);text-decoration:none;color:var(--pg-text)}
+      .pg-feature-icon{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--pg-white);margin:0 auto 16px}
+      .pg-feature h3{font-family:'Maven Pro',sans-serif;font-size:.92rem;font-weight:700;margin:0 0 8px;text-transform:uppercase;color:var(--pg-text)}
+      .pg-feature p{font-size:.82rem;color:var(--pg-text-light);line-height:1.5;margin:0}
 
-      .pg-main-content { flex: 1; min-width: 0; }
+      /* Section titles */
+      .pg-section-title{font-family:'Maven Pro',sans-serif;font-size:1.1rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;padding-bottom:8px;border-bottom:2px solid var(--pg-border);margin:0 0 1.25rem;display:flex;align-items:center;gap:8px}.pg-section-title i{color:var(--pg-blue-dark)}
 
-      /* Welcome banner */
-      .pg-welcome-banner {
-        background: linear-gradient(135deg, var(--pg-blue-dark) 0%, #264d6f 100%);
-        color: var(--pg-white);
-        border-radius: 6px;
-        padding: 32px 36px;
-        margin-bottom: 1.5rem;
-        position: relative;
-        overflow: hidden;
-      }
-      .pg-welcome-banner::after {
-        content: '';
-        position: absolute;
-        top: -30px;
-        right: -30px;
-        width: 200px;
-        height: 200px;
-        background: url('/pict/smal_AZERPUG.png') no-repeat center center;
-        background-size: contain;
-        opacity: 0.08;
-        pointer-events: none;
-      }
-      .pg-welcome-banner h1 {
-        font-family: 'Maven Pro', sans-serif;
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin: 0 0 6px 0;
-        text-transform: none;
-        color: var(--pg-white);
-      }
-      .pg-welcome-banner p { margin: 0; font-size: 0.95rem; opacity: 0.9; }
-      .pg-welcome-date { font-size: 0.8rem; opacity: 0.7; margin-top: 8px; }
+      /* Recent posts */
+      .pg-posts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:2rem}
+      .pg-post-card{background:var(--pg-white);border:1px solid var(--pg-border);border-radius:4px;padding:20px;transition:box-shadow .15s}
+      .pg-post-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
+      .pg-post-card h4{font-family:'Maven Pro',sans-serif;font-size:.92rem;font-weight:700;margin:0 0 6px;text-transform:none}
+      .pg-post-card h4 a{color:var(--pg-blue-dark);text-decoration:none}.pg-post-card h4 a:hover{color:var(--pg-blue-hover)}
+      .pg-post-meta{font-size:.78rem;color:var(--pg-text-light)}.pg-post-meta i{margin-right:3px}
+      .pg-post-excerpt{font-size:.82rem;color:var(--pg-text);line-height:1.5;margin-top:8px}
 
-      /* Quick action cards */
-      .pg-actions-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 1.5rem; }
-      .pg-action-card {
-        background: var(--pg-white);
-        border: 1px solid var(--pg-border);
-        border-radius: 4px;
-        padding: 20px;
-        display: flex;
-        align-items: flex-start;
-        gap: 14px;
-        transition: box-shadow 0.15s ease, border-color 0.15s ease;
-        text-decoration: none;
-        color: var(--pg-text);
-      }
-      .pg-action-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-color: var(--pg-blue-dark); text-decoration: none; color: var(--pg-text); }
-      .pg-action-icon { width: 44px; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; color: var(--pg-white); }
-      .pg-action-card h3 { font-family: 'Maven Pro', sans-serif; font-size: 0.92rem; font-weight: 700; margin: 0 0 4px 0; text-transform: none; color: var(--pg-text); }
-      .pg-action-card p { font-size: 0.8rem; color: var(--pg-text-light); margin: 0; line-height: 1.4; }
+      /* Welcome dashboard (logged in) */
+      .pg-welcome{background:linear-gradient(135deg,var(--pg-blue-dark),#1a3d5c);color:var(--pg-white);border-radius:8px;padding:32px 36px;margin-top:1rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+      .pg-welcome::after{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:url('/pict/smal_AZERPUG.png') no-repeat center;background-size:contain;opacity:.07;pointer-events:none}
+      .pg-welcome h1{font-family:'Maven Pro',sans-serif;font-size:1.5rem;font-weight:700;margin:0 0 6px;text-transform:none;color:var(--pg-white)}
+      .pg-welcome p{margin:0;font-size:.95rem;opacity:.9}.pg-welcome .pg-welcome-date{font-size:.8rem;opacity:.7;margin-top:8px}
 
-      /* Recent posts section */
-      .pg-section-title {
-        font-family: 'Maven Pro', sans-serif;
-        font-size: 1rem;
-        font-weight: 700;
-        color: var(--pg-text);
-        text-transform: uppercase;
-        padding-bottom: 8px;
-        border-bottom: 2px solid var(--pg-border);
-        margin-bottom: 16px;
-      }
-      .pg-section-title i { color: var(--pg-blue-dark); margin-right: 6px; }
+      .pg-actions-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-bottom:1.5rem}
+      .pg-action-card{background:var(--pg-white);border:1px solid var(--pg-border);border-radius:4px;padding:20px;display:flex;align-items:flex-start;gap:14px;transition:box-shadow .15s,border-color .15s;text-decoration:none;color:var(--pg-text)}
+      .pg-action-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.08);border-color:var(--pg-blue-dark);text-decoration:none;color:var(--pg-text)}
+      .pg-action-icon{width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--pg-white);flex-shrink:0}
+      .pg-action-card h3{font-family:'Maven Pro',sans-serif;font-size:.92rem;font-weight:700;margin:0 0 4px;text-transform:none;color:var(--pg-text)}.pg-action-card p{font-size:.8rem;color:var(--pg-text-light);margin:0;line-height:1.4}
 
-      .pg-post-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid #eef1f3; align-items: flex-start; }
-      .pg-post-item:last-child { border-bottom: none; }
-      .pg-post-item-date { font-family: 'Maven Pro', sans-serif; font-size: 0.72rem; font-weight: 700; color: var(--pg-text-light); text-transform: uppercase; min-width: 70px; padding-top: 2px; }
-      .pg-post-item h4 { font-family: 'Maven Pro', sans-serif; font-size: 0.9rem; font-weight: 700; margin: 0; text-transform: none; }
-      .pg-post-item h4 a { color: var(--pg-blue-dark); text-decoration: none; }
-      .pg-post-item h4 a:hover { color: var(--pg-blue-hover); }
-      .pg-post-item-author { font-size: 0.78rem; color: var(--pg-text-light); }
+      .pg-admin-bar{background:#fef2f2;border:1px solid #fca5a5;border-radius:4px;padding:14px 20px;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+      .pg-admin-bar-text{font-size:.88rem;color:#991b1b}.pg-admin-bar-text i{margin-right:6px}.pg-admin-bar-text strong{color:#c62828}
+      .pg-admin-btn{display:inline-flex;align-items:center;gap:6px;background:#c62828;color:#fff;padding:6px 16px;border-radius:3px;font-family:'Maven Pro',sans-serif;font-size:.78rem;font-weight:700;text-transform:uppercase;text-decoration:none;transition:background .15s}.pg-admin-btn:hover{background:#a31c1c;color:#fff;text-decoration:none}
 
-      .pg-card { background: var(--pg-white); border: 1px solid var(--pg-border); border-radius: 4px; padding: 20px; margin-bottom: 1.5rem; }
+      .pg-card{background:var(--pg-white);border:1px solid var(--pg-border);border-radius:4px;padding:20px;margin-bottom:1.5rem}
+      .pg-empty-posts{text-align:center;padding:1.5rem;color:var(--pg-text-light);font-size:.88rem}.pg-empty-posts i{font-size:1.5rem;color:var(--pg-border);display:block;margin-bottom:8px}
 
-      .pg-empty-posts { text-align: center; padding: 2rem; color: var(--pg-text-light); font-size: 0.88rem; }
-      .pg-empty-posts i { font-size: 1.5rem; color: var(--pg-border); display: block; margin-bottom: 8px; }
+      .pg-stat-row{display:flex;gap:0;margin-bottom:1.5rem;border:1px solid var(--pg-border);border-radius:6px;overflow:hidden}
+      .pg-stat-item{flex:1;text-align:center;padding:18px 14px;background:var(--pg-white);border-right:1px solid var(--pg-border)}.pg-stat-item:last-child{border-right:none}
+      .pg-stat-num{font-family:'Maven Pro',sans-serif;font-size:1.6rem;font-weight:700;color:var(--pg-blue-dark);line-height:1}
+      .pg-stat-label{font-size:.7rem;font-weight:700;text-transform:uppercase;color:var(--pg-text-light);margin-top:4px}
 
-      /* Admin quick stats (only for admins) */
-      .pg-admin-bar {
-        background: #fef2f2;
-        border: 1px solid #fca5a5;
-        border-radius: 4px;
-        padding: 14px 20px;
-        margin-bottom: 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
-      .pg-admin-bar-text { font-size: 0.88rem; color: #991b1b; }
-      .pg-admin-bar-text i { margin-right: 6px; }
-      .pg-admin-bar-text strong { color: #c62828; }
-      .pg-admin-btn { display: inline-flex; align-items: center; gap: 6px; background: #c62828; color: #fff; padding: 6px 16px; border-radius: 3px; font-family: 'Maven Pro', sans-serif; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; text-decoration: none; transition: background 0.15s ease; }
-      .pg-admin-btn:hover { background: #a31c1c; color: #fff; text-decoration: none; }
-
-      #footer img.footer-logo { height: 36px; margin-bottom: 10px; opacity: 0.6; transition: opacity 0.2s ease; }
-      #footer img.footer-logo:hover { opacity: 1; }
-
-      @media (max-width: 768px) {
-        .pg-content-area { flex-direction: column; }
-        .pg-sidebar { flex: auto; min-width: auto; order: 2; }
-        .pg-main-content { order: 1; }
-        .pg-actions-grid { grid-template-columns: 1fr; }
-        .pg-welcome-banner { padding: 24px; }
-        .pg-admin-bar { flex-direction: column; text-align: center; }
-      }
+      #footer img.footer-logo{height:36px;margin-bottom:10px;opacity:.6;transition:opacity .2s}#footer img.footer-logo:hover{opacity:1}
+      @media(max-width:768px){.pg-hero{padding:28px 20px}.pg-hero h1{font-size:1.4rem}.pg-hero-stats{gap:20px}.pg-features{grid-template-columns:1fr 1fr}.pg-posts-grid{grid-template-columns:1fr}.pg-stat-row{flex-direction:column}.pg-stat-item{border-right:none;border-bottom:1px solid var(--pg-border)}.pg-stat-item:last-child{border-bottom:none}.pg-admin-bar{flex-direction:column;text-align:center}}
+      @media(max-width:480px){.pg-features{grid-template-columns:1fr}}
     </style>
   </head>
 <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDMJ7KJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="container-fluid"><div class="row justify-content-md-center"><div class="col">
+      <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand p-0" href="/"><img class="logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="pgNavbar"><ul class="navbar-nav mr-auto">
+          <li class="nav-item p-2"><a href="/">Home</a></li><li class="nav-item p-2"><a href="/blogs/">Blog Posts</a></li><li class="nav-item p-2"><a href="/events/">Events</a></li><li class="nav-item p-2"><a href="/registration/">Registration</a></li><li class="nav-item p-2"><a href="/members/">Members</a></li><li class="nav-item p-2"><a href="/community/">Global Community</a></li><li class="nav-item p-2"><a href="/profile/">My Profile</a></li><li class="nav-item p-2"><a href="/about/">About</a></li>
+        </ul></div>
+      </nav>
+    </div></div>
 
-    <div class="container-fluid">
-      <div class="row justify-content-md-center">
-        <div class="col">
-          <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand p-0" href="/"><img class="logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG Logo"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="pgNavbar">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
-                <li class="nav-item p-2"><a href="/blogs/" title="Blog Posts">Blog Posts</a></li>
-                <li class="nav-item p-2"><a href="/events/" title="Events">Events</a></li>
-                 <li class="nav-item p-2"><a href="/registration/" title="Registration">Registration</a></li>
-                <li class="nav-item p-2"><a href="/members/" title="Members">Members</a></li>
-                <li class="nav-item p-2"><a href="/community/" title="Global Community">Global Community</a></li>
-                 <li class="nav-item p-2"><a href="/profile/" title="My Profile">My Profile</a></li>
-                <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
-              </ul>
-            </div>
-          </nav>
+    <div class="pg-page-wrapper">
+
+      <!-- ============ GUEST VIEW ============ -->
+      <div id="guestView">
+        <div class="pg-hero">
+          <h1>Azerbaijan PostgreSQL User Group</h1>
+          <div class="subtitle">The open-source community for PostgreSQL enthusiasts in Azerbaijan</div>
+          <div class="subtitle-az">Azərbaycan PostgreSQL İstifadəçiləri Qrupu</div>
+          <div class="pg-hero-actions">
+            <a href="/registration/" class="pg-hero-btn pg-hero-btn-primary"><i class="fas fa-user-plus"></i> Join the Community</a>
+            <a href="/profile/" class="pg-hero-btn pg-hero-btn-outline"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+          </div>
+          <div class="pg-hero-stats">
+            <div><div class="pg-hero-stat-num" id="gStatMembers">—</div><div class="pg-hero-stat-label">Members</div></div>
+            <div><div class="pg-hero-stat-num" id="gStatPosts">—</div><div class="pg-hero-stat-label">Blog Posts</div></div>
+            <div><div class="pg-hero-stat-num">2018</div><div class="pg-hero-stat-label">Founded</div></div>
+            <div><div class="pg-hero-stat-num"><i class="fas fa-globe" style="font-size:1.4rem"></i></div><div class="pg-hero-stat-label">Open Source</div></div>
+          </div>
+        </div>
+
+        <!-- Features -->
+        <div class="pg-features">
+          <a href="/blogs/" class="pg-feature"><div class="pg-feature-icon" style="background:#336791"><i class="fas fa-pen"></i></div><h3>Blog Posts</h3><p>Read and write articles about PostgreSQL — tutorials, tips, and real-world experiences</p></a>
+          <a href="/events/" class="pg-feature"><div class="pg-feature-icon" style="background:#e65100"><i class="fas fa-calendar-alt"></i></div><h3>Events & Meetups</h3><p>Join workshops, meetups, webinars, and conferences with the community</p></a>
+          <a href="/members/" class="pg-feature"><div class="pg-feature-icon" style="background:#2e7d32"><i class="fas fa-users"></i></div><h3>Community Members</h3><p>Connect with PostgreSQL professionals, developers, and DBAs in Azerbaijan</p></a>
+          <a href="/resources/" class="pg-feature"><div class="pg-feature-icon" style="background:#7b1fa2"><i class="fas fa-book-open"></i></div><h3>Resources</h3><p>Curated tutorials, books, tools, and courses for learning PostgreSQL</p></a>
+          <a href="/jobs/" class="pg-feature"><div class="pg-feature-icon" style="background:#c62828"><i class="fas fa-briefcase"></i></div><h3>Job Board</h3><p>Find PostgreSQL-related jobs in Azerbaijan and remote positions</p></a>
+          <a href="/community/" class="pg-feature"><div class="pg-feature-icon" style="background:#1565c0"><i class="fas fa-globe"></i></div><h3>Global Community</h3><p>Connect with the worldwide PostgreSQL ecosystem and organizations</p></a>
+        </div>
+
+        <!-- Recent posts -->
+        <div class="pg-section-title"><i class="fas fa-newspaper"></i> Latest Blog Posts</div>
+        <div id="guestPosts" class="pg-posts-grid"></div>
+      </div>
+
+      <!-- ============ LOGGED-IN VIEW ============ -->
+      <div id="userView" style="display:none;">
+        <div class="pg-welcome">
+          <h1 id="welcomeMsg">Xoş gəldiniz!</h1>
+          <p>You're part of the Azerbaijan PostgreSQL User Group community.</p>
+          <div class="pg-welcome-date" id="welcomeDate"></div>
+        </div>
+
+        <div class="pg-admin-bar" id="adminBar" style="display:none;">
+          <div class="pg-admin-bar-text"><i class="fas fa-shield-alt"></i> <strong id="pendingCount">0</strong> posts pending review</div>
+          <a href="/admin/" class="pg-admin-btn"><i class="fas fa-cog"></i> Admin Panel</a>
+        </div>
+
+        <div class="pg-actions-grid">
+          <a href="/blogs/#editor" class="pg-action-card"><div class="pg-action-icon" style="background:#336791"><i class="fas fa-pen"></i></div><div><h3>Write a Blog Post</h3><p>Share your PostgreSQL knowledge</p></div></a>
+          <a href="/profile/" class="pg-action-card"><div class="pg-action-icon" style="background:#2e7d32"><i class="fas fa-user"></i></div><div><h3>My Profile</h3><p>View and edit your details</p></div></a>
+          <a href="/events/" class="pg-action-card"><div class="pg-action-icon" style="background:#e65100"><i class="fas fa-calendar-alt"></i></div><div><h3>Events</h3><p>Upcoming meetups and workshops</p></div></a>
+          <a href="/jobs/" class="pg-action-card"><div class="pg-action-icon" style="background:#c62828"><i class="fas fa-briefcase"></i></div><div><h3>Job Board</h3><p>Browse or post PostgreSQL jobs</p></div></a>
+        </div>
+
+        <div class="pg-section-title"><i class="fas fa-newspaper"></i> Latest Blog Posts</div>
+        <div id="userPosts" class="pg-posts-grid"></div>
+
+        <div class="pg-section-title"><i class="fas fa-chart-bar"></i> Community</div>
+        <div class="pg-stat-row">
+          <div class="pg-stat-item"><div class="pg-stat-num" id="uStatMembers">—</div><div class="pg-stat-label">Members</div></div>
+          <div class="pg-stat-item"><div class="pg-stat-num" id="uStatPosts">—</div><div class="pg-stat-label">Blog Posts</div></div>
+          <div class="pg-stat-item"><div class="pg-stat-num" id="uStatOrgs">—</div><div class="pg-stat-label">Organizations</div></div>
         </div>
       </div>
 
-      <div class="pg-page-wrapper" style="margin-top: 1rem;">
-        <div class="pg-content-area">
-
-          <aside class="pg-sidebar">
-            <div class="pg-sidebar-logo">
-              <a href="/"><img src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a>
-              <div class="pg-sidebar-logo-text">Azerbaijan PostgreSQL<br>User Group</div>
-            </div>
-            <div class="pg-sidebar-section">
-              <h3>Quick Links</h3>
-              <ul>
-                <li><a href="/blogs/#editor"><i class="fas fa-pen" style="width:16px;"></i> Write a Blog Post</a></li>
-                <li><a href="/blogs/#dashboard"><i class="fas fa-th-list" style="width:16px;"></i> My Blog Posts</a></li>
-                <li><a href="/profile/#edit"><i class="fas fa-user-edit" style="width:16px;"></i> Edit Profile</a></li>
-                <li><a href="/members/"><i class="fas fa-users" style="width:16px;"></i> Community Members</a></li>
-              </ul>
-            </div>
-            <div class="pg-sidebar-section">
-              <h3>PostgreSQL Resources</h3>
-              <ul>
-                <li><a href="https://www.postgresql.org/" target="_blank" rel="noopener">PostgreSQL.org</a></li>
-                <li><a href="https://www.postgresql.org/docs/" target="_blank" rel="noopener">Documentation</a></li>
-                <li><a href="https://www.postgresql.org/download/" target="_blank" rel="noopener">Download PostgreSQL</a></li>
-                <li><a href="https://wiki.postgresql.org/" target="_blank" rel="noopener">PostgreSQL Wiki</a></li>
-              </ul>
-            </div>
-          </aside>
-
-          <main class="pg-main-content">
-
-            <!-- Welcome Banner -->
-            <div class="pg-welcome-banner">
-              <h1 id="welcomeHeading">Welcome back!</h1>
-              <p>You're part of the Azerbaijan PostgreSQL User Group community.</p>
-              <div class="pg-welcome-date" id="welcomeDate"></div>
-            </div>
-
-            <!-- Admin Bar (hidden by default) -->
-            <div class="pg-admin-bar" id="adminBar" style="display:none;">
-              <div class="pg-admin-bar-text">
-                <i class="fas fa-shield-alt"></i> <strong id="pendingCount">0</strong> posts pending review
-              </div>
-              <a href="/admin/" class="pg-admin-btn"><i class="fas fa-cog"></i> Open Admin Panel</a>
-            </div>
-
-            <!-- Quick Actions -->
-            <div class="pg-section-title"><i class="fas fa-bolt"></i> Quick Actions</div>
-            <div class="pg-actions-grid">
-              <a href="/blogs/#editor" class="pg-action-card">
-                <div class="pg-action-icon" style="background:#336791;"><i class="fas fa-pen"></i></div>
-                <div><h3>Write a Blog Post</h3><p>Share your PostgreSQL knowledge with the community</p></div>
-              </a>
-              <a href="/profile/" class="pg-action-card">
-                <div class="pg-action-icon" style="background:#2e7d32;"><i class="fas fa-user"></i></div>
-                <div><h3>My Profile</h3><p>View and edit your profile details</p></div>
-              </a>
-              <a href="/members/" class="pg-action-card">
-                <div class="pg-action-icon" style="background:#e65100;"><i class="fas fa-users"></i></div>
-                <div><h3>Browse Members</h3><p>See who's part of the AZERPUG community</p></div>
-              </a>
-              <a href="/blogs/" class="pg-action-card">
-                <div class="pg-action-icon" style="background:#7b1fa2;"><i class="fas fa-newspaper"></i></div>
-                <div><h3>Read Blog Posts</h3><p>Latest articles and tutorials from members</p></div>
-              </a>
-            </div>
-
-            <!-- Recent Blog Posts -->
-            <div class="pg-section-title"><i class="fas fa-newspaper"></i> Recent Blog Posts</div>
-            <div class="pg-card" id="recentPostsCard">
-              <div id="recentPosts" style="text-align:center;padding:1rem;color:var(--pg-text-light);"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
-            </div>
-
-            <!-- Community Stats -->
-            <div class="pg-section-title"><i class="fas fa-chart-bar"></i> Community Stats</div>
-            <div class="pg-actions-grid" style="margin-bottom:2rem;">
-              <div class="pg-card" style="text-align:center;margin-bottom:0;">
-                <div style="font-family:'Maven Pro',sans-serif;font-size:2rem;font-weight:700;color:var(--pg-blue-dark);" id="statMembers">—</div>
-                <div style="font-size:0.78rem;font-weight:700;text-transform:uppercase;color:var(--pg-text-light);">Members</div>
-              </div>
-              <div class="pg-card" style="text-align:center;margin-bottom:0;">
-                <div style="font-family:'Maven Pro',sans-serif;font-size:2rem;font-weight:700;color:var(--pg-blue-dark);" id="statPosts">—</div>
-                <div style="font-size:0.78rem;font-weight:700;text-transform:uppercase;color:var(--pg-text-light);">Blog Posts</div>
-              </div>
-              <div class="pg-card" style="text-align:center;margin-bottom:0;">
-                <div style="font-family:'Maven Pro',sans-serif;font-size:2rem;font-weight:700;color:var(--pg-blue-dark);" id="statOrgs">—</div>
-                <div style="font-size:0.78rem;font-weight:700;text-transform:uppercase;color:var(--pg-text-light);">Organizations</div>
-              </div>
-            </div>
-
-          </main>
-        </div>
-      </div>
     </div>
 
-    <footer id="footer">
-      <div class="container">
-        <a href="/"><img class="footer-logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a><br/>
-        <div style="margin-bottom:12px;"><a href="https://www.facebook.com/groups/www.postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="Facebook"><i class="fab fa-facebook"></i></a> <a href="https://github.com/valehdba/postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="GitHub"><i class="fab fa-github"></i></a></div>
-        <a href="/about/privacypolicy/">Privacy policy</a> | <a href="/about/website/">About the website</a><br/>
-        Copyright &copy; 2008-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
-      </div>
-    </footer>
+    <footer id="footer"><div class="container">
+      <a href="/"><img class="footer-logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a><br/>
+      <div style="margin-bottom:12px;"><a href="https://www.facebook.com/groups/www.postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="Facebook"><i class="fab fa-facebook"></i></a> <a href="https://github.com/valehdba/postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="GitHub"><i class="fab fa-github"></i></a></div>
+      <a href="/about/privacypolicy/">Privacy policy</a> | <a href="/about/website/">About the website</a><br/>
+      Copyright &copy; 2018-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
+    </div></footer>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="/js/navbar-auth.js"></script>
 
     <script>
-      var SUPABASE_URL = 'https://qlyqwwhimwfcvuqdrxov.supabase.co';
-      var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFseXF3d2hpbXdmY3Z1cWRyeG92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjg2ODYsImV4cCI6MjA4OTcwNDY4Nn0.6MKz72wGwthRL8hs-Iv3L9Iw_W4DdGh3UjrwcagtKfM';
-      var user = __user;
+      var SB='https://qlyqwwhimwfcvuqdrxov.supabase.co';
+      var KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFseXF3d2hpbXdmY3Z1cWRyeG92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjg2ODYsImV4cCI6MjA4OTcwNDY4Nn0.6MKz72wGwthRL8hs-Iv3L9Iw_W4DdGh3UjrwcagtKfM';
+      var user=null;try{user=JSON.parse(sessionStorage.getItem('azerpug_user'));}catch(e){}
+      function esc(t){if(!t)return'';var d=document.createElement('div');d.textContent=t;return d.innerHTML}
 
-      function esc(t) { if (!t) return ''; var d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+      // Show correct view
+      if(user&&user.id){
+        document.getElementById('guestView').style.display='none';
+        document.getElementById('userView').style.display='block';
+        document.getElementById('welcomeMsg').textContent='Xoş gəldiniz, '+user.first_name+'!';
+        document.getElementById('welcomeDate').textContent=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+        if(user.is_admin){document.getElementById('adminBar').style.display='flex';loadAdminPending();}
+      }
 
-      // Welcome message
-      if (user) {
-        document.getElementById('welcomeHeading').textContent = 'Xoş gəldiniz, ' + user.first_name + '!';
-        var now = new Date();
-        document.getElementById('welcomeDate').textContent = now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+      async function loadAdminPending(){
+        try{var r=await fetch(SB+'/rest/v1/rpc/admin_get_stats',{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY},body:JSON.stringify({p_admin_id:user.id})});
+        if(r.ok){var s=await r.json();document.getElementById('pendingCount').textContent=s.pending_posts||0;if(!s.pending_posts)document.getElementById('adminBar').style.display='none';}}catch(e){}
+      }
 
-        // Show admin bar if admin
-        if (user.is_admin) {
-          document.getElementById('adminBar').style.display = 'flex';
-          loadAdminStats();
+      // Load posts
+      async function loadPosts(){
+        try{
+          var r=await fetch(SB+'/rest/v1/public_blog_posts?select=title,slug,published_at,author_first_name,author_last_name,excerpt,content&order=published_at.desc&limit=4',{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}});
+          if(!r.ok)throw new Error();var posts=await r.json();
+          var targets=user?['userPosts']:['guestPosts'];
+          targets.forEach(function(tid){
+            var el=document.getElementById(tid);if(!el)return;
+            if(!posts.length){el.innerHTML='<div class="pg-empty-posts"><i class="fas fa-newspaper"></i>No blog posts yet. <a href="/blogs/#editor">Be the first to write one!</a></div>';return;}
+            el.innerHTML=posts.map(function(p){
+              var d=p.published_at?new Date(p.published_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'';
+              var ex=p.excerpt||(p.content?p.content.replace(/<[^>]*>/g,'').substring(0,120)+'...':'');
+              return '<div class="pg-post-card"><h4><a href="/blogs/#post/'+esc(p.slug)+'">'+esc(p.title)+'</a></h4><div class="pg-post-meta"><i class="fas fa-user"></i> '+esc(p.author_first_name)+' '+esc(p.author_last_name)+' &middot; <i class="fas fa-calendar"></i> '+d+'</div><div class="pg-post-excerpt">'+esc(ex)+'</div></div>';
+            }).join('');
+          });
+          // Stats
+          document.getElementById(user?'uStatPosts':'gStatPosts').textContent=posts.length;
+        }catch(e){
+          ['guestPosts','userPosts'].forEach(function(id){var el=document.getElementById(id);if(el)el.innerHTML='<div class="pg-empty-posts"><i class="fas fa-newspaper"></i>No blog posts yet.</div>';});
         }
       }
 
-      // Load admin pending count
-      async function loadAdminStats() {
-        try {
-          var r = await fetch(SUPABASE_URL + '/rest/v1/rpc/admin_get_stats', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
-            body: JSON.stringify({ p_admin_id: user.id })
-          });
-          if (r.ok) {
-            var stats = await r.json();
-            document.getElementById('pendingCount').textContent = stats.pending_posts || 0;
-            if (stats.pending_posts === 0) document.getElementById('adminBar').style.display = 'none';
-          }
-        } catch(e) {}
+      async function loadStats(){
+        try{
+          var r=await fetch(SB+'/rest/v1/public_members?select=id,company',{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}});
+          if(!r.ok)return;var m=await r.json();
+          var count=m.length;var orgs=new Set();m.forEach(function(x){if(x.company)orgs.add(x.company.toLowerCase().trim())});
+          ['gStatMembers','uStatMembers'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=count;});
+          var orgEl=document.getElementById('uStatOrgs');if(orgEl)orgEl.textContent=orgs.size;
+        }catch(e){}
       }
 
-      // Load recent blog posts
-      async function loadRecentPosts() {
-        try {
-          var r = await fetch(SUPABASE_URL + '/rest/v1/public_blog_posts?select=title,slug,published_at,author_first_name,author_last_name&order=published_at.desc&limit=5', {
-            headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
-          });
-          if (!r.ok) throw new Error();
-          var posts = await r.json();
-
-          var container = document.getElementById('recentPosts');
-          if (posts.length === 0) {
-            container.innerHTML = '<div class="pg-empty-posts"><i class="fas fa-newspaper"></i>No blog posts yet. <a href="/blogs/#editor">Be the first to write one!</a></div>';
-            document.getElementById('statPosts').textContent = '0';
-            return;
-          }
-
-          document.getElementById('statPosts').textContent = posts.length;
-
-          var html = '';
-          posts.forEach(function(p) {
-            var date = p.published_at ? new Date(p.published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : '';
-            html += '<div class="pg-post-item">' +
-              '<div class="pg-post-item-date">' + date + '</div>' +
-              '<div><h4><a href="/blogs/#post/' + esc(p.slug) + '">' + esc(p.title) + '</a></h4>' +
-              '<div class="pg-post-item-author">by ' + esc(p.author_first_name) + ' ' + esc(p.author_last_name) + '</div></div>' +
-            '</div>';
-          });
-          container.innerHTML = html;
-        } catch(e) {
-          document.getElementById('recentPosts').innerHTML = '<div class="pg-empty-posts"><i class="fas fa-newspaper"></i>Could not load posts.</div>';
-        }
-      }
-
-      // Load community stats
-      async function loadCommunityStats() {
-        try {
-          var r = await fetch(SUPABASE_URL + '/rest/v1/public_members?select=company', {
-            headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
-          });
-          if (!r.ok) throw new Error();
-          var members = await r.json();
-          document.getElementById('statMembers').textContent = members.length;
-
-          var orgs = new Set();
-          members.forEach(function(m) { if (m.company) orgs.add(m.company.toLowerCase().trim()); });
-          document.getElementById('statOrgs').textContent = orgs.size;
-        } catch(e) {}
-      }
-
-      loadRecentPosts();
-      loadCommunityStats();
+      loadPosts();loadStats();
     </script>
 </body>
 </html>
