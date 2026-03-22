@@ -744,16 +744,9 @@
 
                   <div class="pg-form-row">
                     <div class="pg-form-group">
-                      <label for="pgExperience">PostgreSQL Experience Level <span class="required">*</span></label>
-                      <select class="pg-form-control" id="pgExperience" name="pgExperience" required>
-                        <option value="">— Select your level —</option>
-                        <option value="beginner">Beginner — Just getting started</option>
-                        <option value="intermediate">Intermediate — Comfortable with basics</option>
-                        <option value="advanced">Advanced — Deep knowledge &amp; production use</option>
-                        <option value="expert">Expert — Contributor / Core expertise</option>
-                        <option value="curious">Curious — Haven't used it yet</option>
-                      </select>
-                      <div class="pg-invalid-feedback" id="pgExperienceError"></div>
+                      <label for="linkedin">LinkedIn Profile</label>
+                      <input type="url" class="pg-form-control" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourname">
+                      <div class="form-hint">Optional — your public LinkedIn profile URL</div>
                     </div>
                     <div class="pg-form-group">
                       <label for="phone">Phone Number</label>
@@ -1051,16 +1044,6 @@
           confirmPassword.classList.add('is-valid');
         }
 
-        // PostgreSQL Experience
-        var pgExperience = document.getElementById('pgExperience');
-        if (!pgExperience.value) {
-          pgExperience.classList.add('is-invalid');
-          showError('pgExperienceError', 'Please select your experience level.');
-          isValid = false;
-        } else {
-          pgExperience.classList.add('is-valid');
-        }
-
         // Terms agreement
         var agreeTerms = document.getElementById('agreeTerms');
         if (!agreeTerms.checked) {
@@ -1105,7 +1088,7 @@
             password_hash: passwordHash,
             company: document.getElementById('company').value.trim() || null,
             job_title: document.getElementById('jobTitle').value.trim() || null,
-            pg_experience: pgExperience.value,
+            linkedin: document.getElementById('linkedin').value.trim() || null,
             phone: document.getElementById('phone').value.trim() || null,
             personal_notes: document.getElementById('personalNotes').value.trim() || null,
             newsletter: document.getElementById('agreeNewsletter').checked

@@ -257,7 +257,7 @@
                     <div class="pg-form-group"><label>Job Title / Role</label><div class="pg-form-control" style="background:var(--pg-bg-light);" id="pJobTitle"></div></div>
                   </div>
                   <div class="pg-form-row">
-                    <div class="pg-form-group"><label>PostgreSQL Experience</label><div class="pg-form-control" style="background:var(--pg-bg-light);" id="pExperience"></div></div>
+                    <div class="pg-form-group"><label>LinkedIn</label><div class="pg-form-control" style="background:var(--pg-bg-light);" id="pLinkedin"></div></div>
                     <div class="pg-form-group"><label>Phone</label><div class="pg-form-control" style="background:var(--pg-bg-light);" id="pPhone"></div></div>
                   </div>
                   <div class="pg-form-group"><label>Personal Notes</label><div class="pg-form-control" style="background:var(--pg-bg-light);min-height:50px;" id="pNotes"></div></div>
@@ -296,14 +296,8 @@
                   </div>
                   <div class="pg-form-row">
                     <div class="pg-form-group">
-                      <label>PostgreSQL Experience</label>
-                      <select class="pg-form-control" id="editExperience">
-                        <option value="beginner">Beginner</option>
-                        <option value="intermediate">Intermediate</option>
-                        <option value="advanced">Advanced</option>
-                        <option value="expert">Expert</option>
-                        <option value="curious">Curious</option>
-                      </select>
+                      <label>LinkedIn Profile</label>
+                      <input type="url" class="pg-form-control" id="editLinkedin" placeholder="https://linkedin.com/in/yourname">
                     </div>
                     <div class="pg-form-group"><label>Phone</label><input type="tel" class="pg-form-control" id="editPhone" placeholder="+994 XX XXX XX XX"></div>
                   </div>
@@ -459,7 +453,7 @@
           document.getElementById('profileJobInfo').textContent = jobInfo.join(' at ') || 'AZERPUG Member';
 
           var expLabels = { beginner:'Beginner', intermediate:'Intermediate', advanced:'Advanced', expert:'Expert', curious:'Curious' };
-          document.getElementById('profileExpBadge').textContent = 'PG: ' + (expLabels[profile.pg_experience] || profile.pg_experience);
+          document.getElementById('profileExpBadge').textContent = 'AZERPUG Member';
           document.getElementById('profileAdminBadge').style.display = profile.is_admin ? 'inline-block' : 'none';
           document.getElementById('adminLink').style.display = profile.is_admin ? 'block' : 'none';
 
@@ -468,7 +462,7 @@
           document.getElementById('pEmail').textContent = profile.email || '—';
           document.getElementById('pCompany').textContent = profile.company || '—';
           document.getElementById('pJobTitle').textContent = profile.job_title || '—';
-          document.getElementById('pExperience').textContent = expLabels[profile.pg_experience] || profile.pg_experience || '—';
+          document.getElementById('pLinkedin').innerHTML = profile.linkedin ? '<a href="' + profile.linkedin + '" target="_blank" rel="noopener" style="color:#0077b5;font-weight:600;"><i class="fab fa-linkedin"></i> ' + profile.linkedin.replace('https://www.linkedin.com/in/','').replace('https://linkedin.com/in/','').replace(/\/$/,'') + '</a>' : '—';
           document.getElementById('pPhone').textContent = profile.phone || '—';
           document.getElementById('pNotes').textContent = profile.personal_notes || '—';
           document.getElementById('pNewsletter').textContent = profile.newsletter ? 'Yes — subscribed' : 'No — unsubscribed';
@@ -497,7 +491,7 @@
         document.getElementById('editEmail').value = profile.email || '';
         document.getElementById('editCompany').value = profile.company || '';
         document.getElementById('editJobTitle').value = profile.job_title || '';
-        document.getElementById('editExperience').value = profile.pg_experience || 'beginner';
+        document.getElementById('editLinkedin').value = profile.linkedin || '';
         document.getElementById('editPhone').value = profile.phone || '';
         document.getElementById('editNotes').value = profile.personal_notes || '';
         document.getElementById('editNewsletter').checked = profile.newsletter !== false;
@@ -516,10 +510,10 @@
             p_last_name: ln,
             p_company: document.getElementById('editCompany').value.trim() || null,
             p_job_title: document.getElementById('editJobTitle').value.trim() || null,
-            p_pg_experience: document.getElementById('editExperience').value,
             p_phone: document.getElementById('editPhone').value.trim() || null,
             p_personal_notes: document.getElementById('editNotes').value.trim() || null,
-            p_newsletter: document.getElementById('editNewsletter').checked
+            p_newsletter: document.getElementById('editNewsletter').checked,
+            p_linkedin: document.getElementById('editLinkedin').value.trim() || null
           });
 
           // Update session

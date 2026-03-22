@@ -496,8 +496,8 @@
                 <div class="pg-stat-label">Total Members</div>
               </div>
               <div class="pg-stat-item">
-                <div class="pg-stat-number" id="statExperts">&mdash;</div>
-                <div class="pg-stat-label">Advanced / Expert</div>
+                <div class="pg-stat-number" id="statLinkedin">&mdash;</div>
+                <div class="pg-stat-label">LinkedIn Profiles</div>
               </div>
               <div class="pg-stat-item">
                 <div class="pg-stat-number" id="statCompanies">&mdash;</div>
@@ -523,20 +523,12 @@
               </div>
             </div>
 
-            <!-- Search & Filter -->
+            <!-- Search -->
             <div class="pg-toolbar">
               <div class="pg-search-wrapper">
                 <i class="fas fa-search"></i>
                 <input type="text" class="pg-search-input" id="searchInput" placeholder="Search by name, company, or role...">
               </div>
-              <select class="pg-filter-select" id="filterExperience">
-                <option value="">All Levels</option>
-                <option value="beginner">Beginner</option>
-                <option value="intermediate">Intermediate</option>
-                <option value="advanced">Advanced</option>
-                <option value="expert">Expert</option>
-                <option value="curious">Curious</option>
-              </select>
             </div>
 
             <!-- Members Table -->
@@ -557,7 +549,7 @@
                     <th>Name</th>
                     <th>Company / Organization</th>
                     <th>Role</th>
-                    <th>PG Experience</th>
+                    <th>LinkedIn</th>
                     <th>Joined</th>
                   </tr>
                 </thead>
@@ -625,8 +617,8 @@
 
       function updateStats(members) {
         document.getElementById('statTotal').textContent = members.length;
-        document.getElementById('statExperts').textContent = members.filter(function(m) {
-          return m.pg_experience === 'advanced' || m.pg_experience === 'expert';
+        document.getElementById('statLinkedin').textContent = members.filter(function(m) {
+          return m.linkedin;
         }).length;
         var companies = new Set();
         members.forEach(function(m) { if (m.company) companies.add(m.company.toLowerCase().trim()); });
@@ -660,18 +652,17 @@
         var tbody = document.getElementById('membersTableBody');
         tbody.innerHTML = '';
 
-        var labels = { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced', expert: 'Expert', curious: 'Curious' };
-
         members.forEach(function(m, i) {
           var initials = ((m.first_name || '')[0] || '') + ((m.last_name || '')[0] || '');
           var joined = m.created_at ? new Date(m.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
+          var linkedinCell = m.linkedin ? '<a href="' + esc(m.linkedin) + '" target="_blank" rel="noopener" style="color:#0077b5;font-weight:600;"><i class="fab fa-linkedin"></i> Profile</a>' : '—';
           var row = document.createElement('tr');
           row.innerHTML =
             '<td data-label="#">' + (i + 1) + '</td>' +
             '<td data-label="Name"><div class="pg-member-name"><div class="pg-member-avatar">' + esc(initials).toUpperCase() + '</div><span class="pg-member-name-text">' + esc(m.first_name) + ' ' + esc(m.last_name) + '</span></div></td>' +
             '<td data-label="Company">' + esc(m.company || '—') + '</td>' +
             '<td data-label="Role">' + esc(m.job_title || '—') + '</td>' +
-            '<td data-label="Experience"><span class="pg-badge pg-badge-' + (m.pg_experience || 'curious') + '">' + (labels[m.pg_experience] || m.pg_experience) + '</span></td>' +
+            '<td data-label="LinkedIn">' + linkedinCell + '</td>' +
             '<td data-label="Joined">' + joined + '</td>';
           tbody.appendChild(row);
         });
@@ -679,17 +670,13 @@
 
       function filterMembers() {
         var q = document.getElementById('searchInput').value.toLowerCase().trim();
-        var lvl = document.getElementById('filterExperience').value;
         var filtered = allMembers.filter(function(m) {
-          var matchSearch = !q || (m.first_name + ' ' + m.last_name).toLowerCase().includes(q) || (m.company || '').toLowerCase().includes(q) || (m.job_title || '').toLowerCase().includes(q);
-          var matchLevel = !lvl || m.pg_experience === lvl;
-          return matchSearch && matchLevel;
+          return !q || (m.first_name + ' ' + m.last_name).toLowerCase().includes(q) || (m.company || '').toLowerCase().includes(q) || (m.job_title || '').toLowerCase().includes(q);
         });
         renderMembers(filtered);
       }
 
       document.getElementById('searchInput').addEventListener('input', filterMembers);
-      document.getElementById('filterExperience').addEventListener('change', filterMembers);
 
       function esc(t) { if (!t) return ''; var d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
 
