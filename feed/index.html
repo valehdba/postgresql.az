@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>AZERPUG RSS Feed</title></head>
+<body>
+<div id="output" style="font-family:monospace;white-space:pre-wrap;padding:20px;font-size:13px;color:#555;"></div>
+<script>
+// This page generates an RSS feed from published blog posts
+// Access via: postgresql.az/feed.xml (redirects here) or directly
+var SB='https://qlyqwwhimwfcvuqdrxov.supabase.co';
+var KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFseXF3d2hpbXdmY3Z1cWRyeG92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjg2ODYsImV4cCI6MjA4OTcwNDY4Nn0.6MKz72wGwthRL8hs-Iv3L9Iw_W4DdGh3UjrwcagtKfM';
+
+function esc(t){return(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function strip(h){var d=document.createElement('div');d.innerHTML=h;return d.textContent||''}
+
+async function generateRSS(){
+  try{
+    var r=await fetch(SB+'/rest/v1/public_blog_posts?select=*&order=published_at.desc&limit=20',{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}});
+    if(!r.ok)throw new Error();
+    var posts=await r.json();
+
+    var xml='<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n<channel>\n';
+    xml+='  <title>AZERPUG - Azerbaijan PostgreSQL User Group Blog</title>\n';
+    xml+='  <link>https://postgresql.az/blogs/</link>\n';
+    xml+='  <description>Articles, tutorials, and insights about PostgreSQL from the AZERPUG community in Azerbaijan.</description>\n';
+    xml+='  <language>en</language>\n';
+    xml+='  <atom:link href="https://postgresql.az/feed/" rel="self" type="application/rss+xml"/>\n';
+    xml+='  <lastBuildDate>'+new Date().toUTCString()+'</lastBuildDate>\n';
+    xml+='  <image>\n    <url>https://postgresql.az/pict/smal_AZERPUG.png</url>\n    <title>AZERPUG</title>\n    <link>https://postgresql.az/</link>\n  </image>\n';
+
+    posts.forEach(function(p){
+      var desc=p.excerpt||strip(p.content||'').substring(0,300);
+      var pubDate=p.published_at?new Date(p.published_at).toUTCString():'';
+      xml+='  <item>\n';
+      xml+='    <title>'+esc(p.title)+'</title>\n';
+      xml+='    <link>https://postgresql.az/blogs/#post/'+esc(p.slug)+'</link>\n';
+      xml+='    <guid isPermaLink="true">https://postgresql.az/blogs/#post/'+esc(p.slug)+'</guid>\n';
+      xml+='    <description>'+esc(desc)+'</description>\n';
+      xml+='    <author>'+esc(p.author_first_name+' '+p.author_last_name)+'</author>\n';
+      if(pubDate)xml+='    <pubDate>'+pubDate+'</pubDate>\n';
+      if(p.tags&&p.tags.length)p.tags.forEach(function(t){xml+='    <category>'+esc(t)+'</category>\n';});
+      xml+='  </item>\n';
+    });
+
+    xml+='</channel>\n</rss>';
+
+    // Display
+    document.getElementById('output').textContent=xml;
+    document.title='AZERPUG RSS Feed ('+posts.length+' posts)';
+
+  }catch(e){
+    document.getElementById('output').textContent='Error generating RSS feed. Visit https://postgresql.az/blogs/ to read our blog posts.';
+  }
+}
+generateRSS();
+</script>
+</body>
+</html>
