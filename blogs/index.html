@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,17 +7,185 @@
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-NDMJ7KJ');</script>
-<!-- End Google Tag Manager -->
+    <!-- End Google Tag Manager -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Blog Posts from the Azerbaijan PostgreSQL User Group community">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Quill Rich Text Editor -->
+    <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+    <!-- Highlight.js for code blocks -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
 
     <link rel="stylesheet" href="/css/pgyum.css">
 
-    <title>Welcome - Azerbaijan PostgreSQL User Group</title>
+    <title>Blog Posts - Azerbaijan PostgreSQL User Group</title>
 
+    <style>
+      :root {
+        --pg-blue-dark: #336791;
+        --pg-blue-medium: #2f6289;
+        --pg-blue-light: #e7eef4;
+        --pg-blue-hover: #264d6f;
+        --pg-text: #515151;
+        --pg-text-light: #6c757d;
+        --pg-border: #d8dde3;
+        --pg-bg-light: #f5f5f5;
+        --pg-white: #ffffff;
+        --pg-success: #28a745;
+        --pg-danger: #dc3545;
+        --pg-warning: #e8a33d;
+      }
+
+      .pg-page-wrapper { max-width: 1140px; margin: 0 auto; padding: 0 15px; }
+      .pg-content-area { display: flex; gap: 30px; margin-top: 1rem; }
+
+      /* Sidebar */
+      .pg-sidebar { flex: 0 0 220px; min-width: 220px; }
+      .pg-sidebar-logo { text-align: center; padding: 16px 10px 20px 10px; margin-bottom: 1.5rem; border-bottom: 2px solid var(--pg-border); }
+      .pg-sidebar-logo img { max-width: 160px; height: auto; margin-bottom: 10px; }
+      .pg-sidebar-logo .pg-sidebar-logo-text { font-family: 'Maven Pro', sans-serif; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--pg-blue-dark); letter-spacing: 0.8px; line-height: 1.4; }
+      .pg-sidebar-section { margin-bottom: 2rem; }
+      .pg-sidebar-section h3 { font-family: 'Maven Pro', sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--pg-blue-dark); letter-spacing: 0.5px; padding-bottom: 8px; border-bottom: 2px solid var(--pg-blue-dark); margin-bottom: 10px; }
+      .pg-sidebar-section ul { list-style: none; padding: 0; margin: 0; }
+      .pg-sidebar-section ul li a { display: block; padding: 5px 10px; font-size: 0.9rem; font-weight: 600; color: var(--pg-blue-dark); border-left: 3px solid transparent; transition: all 0.15s ease; }
+      .pg-sidebar-section ul li a:hover, .pg-sidebar-section ul li a.active { background: var(--pg-blue-light); border-left-color: var(--pg-blue-dark); text-decoration: none; }
+
+      /* Login box in sidebar */
+      .pg-login-box { background: var(--pg-bg-light); border: 1px solid var(--pg-border); border-radius: 4px; padding: 16px; }
+      .pg-login-box label { font-family: 'Maven Pro', sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--pg-text); margin-bottom: 3px; display: block; }
+      .pg-login-box input { width: 100%; padding: 6px 10px; font-size: 0.85rem; border: 1px solid var(--pg-border); border-radius: 3px; margin-bottom: 10px; }
+      .pg-login-box input:focus { border-color: var(--pg-blue-dark); outline: none; box-shadow: 0 0 0 2px rgba(51,103,145,0.15); }
+      .pg-login-error { color: var(--pg-danger); font-size: 0.8rem; margin-bottom: 8px; display: none; }
+      .pg-user-info { font-size: 0.85rem; color: var(--pg-text); }
+      .pg-user-info strong { color: var(--pg-blue-dark); }
+      .pg-user-actions { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+
+      /* Main content */
+      .pg-main-content { flex: 1; min-width: 0; }
+      .pg-page-title { font-family: 'Maven Pro', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--pg-text); text-transform: uppercase; margin-bottom: 0.25rem; padding-bottom: 10px; border-bottom: 2px solid var(--pg-border); }
+      .pg-page-subtitle { font-size: 0.95rem; color: var(--pg-text-light); margin-bottom: 1.5rem; }
+
+      /* Buttons */
+      .pg-btn-primary { display: inline-flex; align-items: center; gap: 6px; background: var(--pg-blue-dark); color: var(--pg-white); font-family: 'Maven Pro', sans-serif; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; padding: 8px 18px; border: none; border-radius: 3px; cursor: pointer; transition: background 0.15s ease; text-decoration: none; white-space: nowrap; }
+      .pg-btn-primary:hover { background: var(--pg-blue-hover); color: var(--pg-white); text-decoration: none; }
+      .pg-btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+      .pg-btn-sm { padding: 5px 12px; font-size: 0.75rem; }
+      .pg-btn-secondary { display: inline-flex; align-items: center; gap: 6px; background: transparent; color: var(--pg-blue-dark); font-family: 'Maven Pro', sans-serif; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; padding: 8px 18px; border: 1px solid var(--pg-border); border-radius: 3px; cursor: pointer; transition: all 0.15s ease; text-decoration: none; }
+      .pg-btn-secondary:hover { background: var(--pg-blue-light); border-color: var(--pg-blue-dark); text-decoration: none; color: var(--pg-blue-dark); }
+      .pg-btn-danger { background: var(--pg-danger); color: var(--pg-white); }
+      .pg-btn-danger:hover { background: #c82333; color: var(--pg-white); }
+      .pg-btn-success { background: var(--pg-success); }
+      .pg-btn-success:hover { background: #218838; }
+      .pg-btn-warning { background: var(--pg-warning); color: var(--pg-white); }
+
+      /* Blog post cards */
+      .pg-blog-card { background: var(--pg-white); border: 1px solid var(--pg-border); border-radius: 4px; padding: 24px; margin-bottom: 1.25rem; transition: box-shadow 0.15s ease; }
+      .pg-blog-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+      .pg-blog-card h2 { font-family: 'Maven Pro', sans-serif; font-size: 1.2rem; font-weight: 700; margin: 0 0 8px 0; text-transform: none; }
+      .pg-blog-card h2 a { color: var(--pg-blue-dark); text-decoration: none; }
+      .pg-blog-card h2 a:hover { color: var(--pg-blue-hover); }
+      .pg-blog-meta { font-size: 0.82rem; color: var(--pg-text-light); margin-bottom: 10px; display: flex; gap: 16px; flex-wrap: wrap; }
+      .pg-blog-meta i { margin-right: 4px; }
+      .pg-blog-excerpt { font-size: 0.92rem; color: var(--pg-text); line-height: 1.6; margin-bottom: 12px; }
+      .pg-blog-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+      .pg-tag { display: inline-block; padding: 2px 10px; background: var(--pg-blue-light); color: var(--pg-blue-dark); font-size: 0.75rem; font-weight: 600; border-radius: 12px; }
+
+      /* Single blog post view */
+      .pg-blog-full { background: var(--pg-white); border: 1px solid var(--pg-border); border-radius: 4px; padding: 32px; margin-bottom: 2rem; }
+      .pg-blog-full h1 { font-family: 'Maven Pro', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--pg-text); text-transform: none; margin-bottom: 12px; }
+      .pg-blog-full .pg-blog-content { font-size: 0.95rem; line-height: 1.75; color: var(--pg-text); }
+      .pg-blog-full .pg-blog-content h1, .pg-blog-full .pg-blog-content h2, .pg-blog-full .pg-blog-content h3 { text-transform: none; margin-top: 1.5em; }
+      .pg-blog-full .pg-blog-content pre { background: #f6f8fa; border: 1px solid var(--pg-border); border-radius: 4px; padding: 16px; overflow-x: auto; font-size: 0.88rem; }
+      .pg-blog-full .pg-blog-content code { background: #f6f8fa; padding: 2px 6px; border-radius: 3px; font-size: 0.88rem; }
+      .pg-blog-full .pg-blog-content pre code { background: none; padding: 0; }
+      .pg-blog-full .pg-blog-content blockquote { border-left: 4px solid var(--pg-blue-dark); padding: 10px 20px; margin: 1em 0; background: var(--pg-blue-light); border-radius: 0 4px 4px 0; }
+      .pg-blog-full .pg-blog-content img { max-width: 100%; height: auto; border-radius: 4px; }
+
+      /* Author box */
+      .pg-author-box { display: flex; align-items: center; gap: 12px; padding: 16px; background: var(--pg-bg-light); border-radius: 4px; margin-bottom: 20px; }
+      .pg-author-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--pg-blue-dark); color: var(--pg-white); display: flex; align-items: center; justify-content: center; font-family: 'Maven Pro', sans-serif; font-weight: 700; font-size: 1rem; flex-shrink: 0; }
+      .pg-author-name { font-weight: 700; color: var(--pg-text); font-size: 0.95rem; }
+      .pg-author-role { font-size: 0.82rem; color: var(--pg-text-light); }
+
+      /* Dashboard */
+      .pg-dashboard-card { background: var(--pg-white); border: 1px solid var(--pg-border); border-radius: 4px; overflow: hidden; margin-bottom: 1.5rem; }
+      .pg-dashboard-header { background: var(--pg-blue-dark); color: var(--pg-white); padding: 12px 20px; font-family: 'Maven Pro', sans-serif; font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; display: flex; align-items: center; justify-content: space-between; }
+      .pg-dashboard-header i { margin-right: 8px; opacity: 0.85; }
+      .pg-dashboard-body { padding: 0; }
+
+      .pg-post-row { display: flex; align-items: center; padding: 14px 20px; border-bottom: 1px solid #eef1f3; gap: 12px; }
+      .pg-post-row:last-child { border-bottom: none; }
+      .pg-post-row:hover { background: var(--pg-blue-light); }
+      .pg-post-title-col { flex: 1; min-width: 0; }
+      .pg-post-title-col h3 { font-size: 0.95rem; font-weight: 700; margin: 0; text-transform: none; color: var(--pg-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .pg-post-title-col small { color: var(--pg-text-light); font-size: 0.78rem; }
+      .pg-post-actions { display: flex; gap: 6px; flex-shrink: 0; }
+
+      /* Status badges */
+      .pg-status { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; flex-shrink: 0; }
+      .pg-status-draft { background: #e0e0e0; color: #555; }
+      .pg-status-pending { background: #fff3cd; color: #856404; }
+      .pg-status-published { background: #d4edda; color: #155724; }
+      .pg-status-rejected { background: #f8d7da; color: #721c24; }
+
+      /* Editor */
+      .pg-editor-card { background: var(--pg-white); border: 1px solid var(--pg-border); border-radius: 4px; padding: 24px; margin-bottom: 2rem; }
+      .pg-form-group { margin-bottom: 1.25rem; }
+      .pg-form-group label { display: block; font-family: 'Maven Pro', sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--pg-text); text-transform: uppercase; margin-bottom: 5px; letter-spacing: 0.3px; }
+      .pg-form-group label .required { color: var(--pg-danger); }
+      .pg-form-control { display: block; width: 100%; padding: 8px 12px; font-family: 'Open Sans', sans-serif; font-size: 0.9rem; color: var(--pg-text); border: 1px solid var(--pg-border); border-radius: 3px; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+      .pg-form-control:focus { border-color: var(--pg-blue-dark); box-shadow: 0 0 0 3px rgba(51,103,145,0.15); outline: none; }
+      select.pg-form-control { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23515151' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; -webkit-appearance: none; appearance: none; }
+
+      .pg-editor-toolbar { display: flex; gap: 8px; margin-bottom: 12px; align-items: center; flex-wrap: wrap; }
+      .pg-format-tabs { display: flex; border: 1px solid var(--pg-border); border-radius: 3px; overflow: hidden; }
+      .pg-format-tab { padding: 6px 14px; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; cursor: pointer; background: var(--pg-white); color: var(--pg-text-light); border: none; border-right: 1px solid var(--pg-border); transition: all 0.15s ease; }
+      .pg-format-tab:last-child { border-right: none; }
+      .pg-format-tab.active { background: var(--pg-blue-dark); color: var(--pg-white); }
+      .pg-format-tab:hover:not(.active) { background: var(--pg-blue-light); }
+
+      #quillEditor { min-height: 300px; }
+      .ql-toolbar.ql-snow { border-color: var(--pg-border); border-radius: 3px 3px 0 0; }
+      .ql-container.ql-snow { border-color: var(--pg-border); border-radius: 0 0 3px 3px; font-family: 'Open Sans', sans-serif; font-size: 0.95rem; }
+      #markdownEditor, #plainEditor { width: 100%; min-height: 300px; padding: 12px; font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace; font-size: 0.9rem; border: 1px solid var(--pg-border); border-radius: 3px; resize: vertical; color: var(--pg-text); }
+      #markdownEditor:focus, #plainEditor:focus { border-color: var(--pg-blue-dark); outline: none; box-shadow: 0 0 0 3px rgba(51,103,145,0.15); }
+
+      .pg-form-actions { display: flex; gap: 10px; align-items: center; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--pg-border); flex-wrap: wrap; }
+      .pg-form-hint { font-size: 0.8rem; color: var(--pg-text-light); font-style: italic; margin-top: 3px; }
+
+      /* Loading / empty / info */
+      .pg-loading { text-align: center; padding: 3rem; color: var(--pg-text-light); }
+      .pg-loading i { font-size: 2rem; color: var(--pg-blue-dark); margin-bottom: 0.75rem; display: block; }
+      .pg-empty-state { text-align: center; padding: 3rem 2rem; color: var(--pg-text-light); }
+      .pg-empty-state i { font-size: 2.5rem; color: var(--pg-border); margin-bottom: 0.75rem; display: block; }
+      .pg-info-box { background: var(--pg-blue-light); border-left: 4px solid var(--pg-blue-dark); padding: 12px 18px; margin-bottom: 1.5rem; border-radius: 0 3px 3px 0; font-size: 0.88rem; color: var(--pg-text); }
+      .pg-info-box i { color: var(--pg-blue-dark); margin-right: 6px; }
+      .pg-alert { padding: 12px 18px; border-radius: 3px; margin-bottom: 1rem; font-size: 0.88rem; }
+      .pg-alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+      .pg-alert-danger { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+
+      /* Footer */
+      #footer img.footer-logo { height: 36px; margin-bottom: 10px; opacity: 0.6; transition: opacity 0.2s ease; }
+      #footer img.footer-logo:hover { opacity: 1; }
+
+      /* Hide all views by default */
+      .pg-view { display: none; }
+      .pg-view.active { display: block; }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .pg-content-area { flex-direction: column; }
+        .pg-sidebar { flex: auto; min-width: auto; order: 2; }
+        .pg-main-content { order: 1; }
+        .pg-post-row { flex-direction: column; align-items: flex-start; }
+        .pg-form-actions { flex-direction: column; }
+      }
+    </style>
   </head>
 
 <body>
@@ -28,52 +195,662 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <div class="container-fluid">
- <!-- Nav -->
+      <!-- Nav -->
       <div class="row justify-content-md-center">
-         <div class="col">
-           <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-             <a class="navbar-brand p-0" href="/">
-               <img class="logo" src="/pict/smal_AZERPUG.png" alt="Azerbaijan PostgreSQL User Group Logo">
-             </a>
-             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
-               <span class="navbar-toggler-icon"></span>
-             </button>
-             <div class="collapse navbar-collapse" id="pgNavbar">
-               <ul class="navbar-nav mr-auto">
-                 <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
-                 <li class="nav-item p-2"><a href="/blogs/" title="Blog Posts">Blog Posts</a></li>
-                 <li class="nav-item p-2"><a href="/registration/" title="Registration">Registration</a></li>
-                 <li class="nav-item p-2"><a href="/members/" title="Members">Members</a></li>
-                 <li class="nav-item p-2"><a href="/links/" title="Useful Links">Useful Links</a></li>
-                 <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
-               </ul>
-             </div> <!-- pgNavBar -->
-	       </nav>
-         </div> <!-- col -->
-      </div> <!-- row -->
+        <div class="col">
+          <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand p-0" href="/"><img class="logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG Logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="pgNavbar">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
+                <li class="nav-item p-2"><a href="/blogs/" title="Blog Posts">Blog Posts</a></li>
+                <li class="nav-item p-2"><a href="/registration/" title="Registration">Registration</a></li>
+                <li class="nav-item p-2"><a href="/members/" title="Members">Members</a></li>
+                <li class="nav-item p-2"><a href="/links/" title="Useful Links">Useful Links</a></li>
+                <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
       <!-- End Nav -->
 
- 
-<center><h2><bold>⚡ UNDER CONSTRUCTION ⚡</bold></h2></center>
- 
+      <div class="pg-page-wrapper" style="margin-top: 1rem;">
+        <div class="pg-content-area">
+
+          <!-- Sidebar -->
+          <aside class="pg-sidebar">
+            <div class="pg-sidebar-logo">
+              <a href="/"><img src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a>
+              <div class="pg-sidebar-logo-text">Azerbaijan PostgreSQL<br>User Group</div>
+            </div>
+
+            <!-- Login / User Panel -->
+            <div class="pg-sidebar-section">
+              <h3 id="authTitle">Member Login</h3>
+
+              <!-- Login Form -->
+              <div id="loginPanel" class="pg-login-box">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" placeholder="you@example.com">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="Your password">
+                <div class="pg-login-error" id="loginError"></div>
+                <button class="pg-btn-primary pg-btn-sm" style="width:100%;" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> Log In</button>
+                <div style="margin-top:8px;font-size:0.78rem;color:var(--pg-text-light);">Not a member? <a href="/registration/">Register here</a></div>
+              </div>
+
+              <!-- User Panel (hidden by default) -->
+              <div id="userPanel" style="display:none;" class="pg-login-box">
+                <div class="pg-user-info">
+                  Logged in as<br><strong id="userName"></strong>
+                </div>
+                <div class="pg-user-actions">
+                  <a href="#dashboard" class="pg-btn-primary pg-btn-sm" style="justify-content:center;"><i class="fas fa-th-list"></i> My Posts</a>
+                  <a href="#editor" class="pg-btn-primary pg-btn-sm pg-btn-success" style="justify-content:center;"><i class="fas fa-pen"></i> Write New Post</a>
+                  <button class="pg-btn-secondary pg-btn-sm" style="justify-content:center;" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Log Out</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="pg-sidebar-section">
+              <h3>Community</h3>
+              <ul>
+                <li><a href="/registration/">Registration</a></li>
+                <li><a href="/members/">Members</a></li>
+                <li><a href="/blogs/" class="active">Blog Posts</a></li>
+                <li><a href="/news/">News</a></li>
+                <li><a href="/links/">Useful Links</a></li>
+              </ul>
+            </div>
+          </aside>
+
+          <!-- Main Content -->
+          <main class="pg-main-content">
+
+            <!-- ==================== VIEW: Blog Listing ==================== -->
+            <div id="viewListing" class="pg-view active">
+              <h1 class="pg-page-title">Blog Posts</h1>
+              <p class="pg-page-subtitle">Articles, tutorials, and insights from the AZERPUG community about PostgreSQL.</p>
+
+              <div class="pg-info-box">
+                <i class="fas fa-info-circle"></i> Want to contribute? <strong>Log in</strong> with your member credentials and start writing!
+              </div>
+
+              <div id="blogListLoading" class="pg-loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <div>Loading blog posts...</div>
+              </div>
+
+              <div id="blogListEmpty" class="pg-empty-state" style="display:none;">
+                <i class="fas fa-newspaper"></i>
+                <div>No blog posts yet. Be the first to <a href="#editor">write one</a>!</div>
+              </div>
+
+              <div id="blogListContent"></div>
+            </div>
+
+            <!-- ==================== VIEW: Single Post ==================== -->
+            <div id="viewPost" class="pg-view">
+              <div style="margin-bottom:16px;">
+                <a href="#" class="pg-btn-secondary pg-btn-sm"><i class="fas fa-arrow-left"></i> Back to Blog</a>
+              </div>
+              <div id="postContent" class="pg-blog-full"></div>
+            </div>
+
+            <!-- ==================== VIEW: Dashboard ==================== -->
+            <div id="viewDashboard" class="pg-view">
+              <h1 class="pg-page-title">My Posts</h1>
+              <p class="pg-page-subtitle">Manage your blog posts — write, edit, and track their approval status.</p>
+
+              <div style="margin-bottom:16px;">
+                <a href="#editor" class="pg-btn-primary"><i class="fas fa-plus"></i> Write New Post</a>
+                <a href="#" class="pg-btn-secondary" style="margin-left:8px;"><i class="fas fa-arrow-left"></i> Back to Blog</a>
+              </div>
+
+              <div id="dashboardAlert"></div>
+
+              <div class="pg-dashboard-card">
+                <div class="pg-dashboard-header">
+                  <span><i class="fas fa-file-alt"></i> Your Posts</span>
+                  <span id="myPostCount" style="opacity:0.7;font-size:0.8rem;"></span>
+                </div>
+                <div class="pg-dashboard-body" id="dashboardBody">
+                  <div class="pg-loading"><i class="fas fa-spinner fa-spin"></i><div>Loading your posts...</div></div>
+                </div>
+              </div>
+
+              <div class="pg-info-box">
+                <i class="fas fa-info-circle"></i> Posts submitted for review will appear as <span class="pg-status pg-status-pending">Pending</span>. An admin will review and publish approved posts.
+              </div>
+            </div>
+
+            <!-- ==================== VIEW: Editor ==================== -->
+            <div id="viewEditor" class="pg-view">
+              <h1 class="pg-page-title" id="editorTitle">Write New Post</h1>
+              <p class="pg-page-subtitle">Share your PostgreSQL knowledge with the AZERPUG community.</p>
+
+              <div style="margin-bottom:16px;">
+                <a href="#dashboard" class="pg-btn-secondary pg-btn-sm"><i class="fas fa-arrow-left"></i> Back to My Posts</a>
+              </div>
+
+              <div id="editorAlert"></div>
+
+              <div class="pg-editor-card">
+                <div class="pg-form-group">
+                  <label>Title <span class="required">*</span></label>
+                  <input type="text" class="pg-form-control" id="postTitle" placeholder="Your blog post title">
+                </div>
+
+                <div class="pg-form-group">
+                  <label>Tags</label>
+                  <input type="text" class="pg-form-control" id="postTags" placeholder="e.g. performance, replication, pg17 (comma separated)">
+                  <div class="pg-form-hint">Separate tags with commas</div>
+                </div>
+
+                <div class="pg-form-group">
+                  <label>Excerpt / Summary</label>
+                  <textarea class="pg-form-control" id="postExcerpt" rows="2" placeholder="A short summary shown in the blog listing..."></textarea>
+                </div>
+
+                <div class="pg-form-group">
+                  <label>Content <span class="required">*</span></label>
+
+                  <div class="pg-editor-toolbar">
+                    <div class="pg-format-tabs">
+                      <button class="pg-format-tab active" data-format="html" onclick="switchFormat('html')">Rich Text</button>
+                      <button class="pg-format-tab" data-format="markdown" onclick="switchFormat('markdown')">Markdown</button>
+                      <button class="pg-format-tab" data-format="plain" onclick="switchFormat('plain')">Plain Text</button>
+                    </div>
+                  </div>
+
+                  <!-- Rich Text Editor (Quill) -->
+                  <div id="editorHtml">
+                    <div id="quillEditor"></div>
+                  </div>
+
+                  <!-- Markdown Editor -->
+                  <div id="editorMarkdown" style="display:none;">
+                    <textarea id="markdownEditor" placeholder="Write your post in Markdown...&#10;&#10;# Heading&#10;## Subheading&#10;&#10;**Bold** and *italic*&#10;&#10;```sql&#10;SELECT * FROM pg_stat_activity;&#10;```"></textarea>
+                  </div>
+
+                  <!-- Plain Text Editor -->
+                  <div id="editorPlain" style="display:none;">
+                    <textarea id="plainEditor" placeholder="Write your post here..."></textarea>
+                  </div>
+                </div>
+
+                <input type="hidden" id="editPostId" value="">
+
+                <div class="pg-form-actions">
+                  <button class="pg-btn-primary" onclick="savePost('pending')"><i class="fas fa-paper-plane"></i> Submit for Review</button>
+                  <button class="pg-btn-secondary" onclick="savePost('draft')"><i class="fas fa-save"></i> Save as Draft</button>
+                </div>
+              </div>
+            </div>
+
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="container">
+        <a href="/"><img class="footer-logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG Logo"></a><br/>
+        <a href="/about/privacypolicy/">Privacy policy</a> | <a href="/about/website/">About the website</a><br/>
+        Copyright &copy; 2008-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
+      </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+
+    <script>
+      // =============================================
+      // CONFIG
+      // =============================================
+      var SUPABASE_URL = 'https://qlyqwwhimwfcvuqdrxov.supabase.co';
+      var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFseXF3d2hpbXdmY3Z1cWRyeG92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjg2ODYsImV4cCI6MjA4OTcwNDY4Nn0.6MKz72wGwthRL8hs-Iv3L9Iw_W4DdGh3UjrwcagtKfM';
+
+      var currentUser = JSON.parse(sessionStorage.getItem('azerpug_user') || 'null');
+      var currentFormat = 'html';
+      var quillEditor = null;
+
+      // =============================================
+      // SUPABASE HELPERS
+      // =============================================
+      async function rpc(fn, params) {
+        var r = await fetch(SUPABASE_URL + '/rest/v1/rpc/' + fn, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
+          body: JSON.stringify(params)
+        });
+        if (!r.ok) { var e = await r.text(); console.error('RPC error:', e); throw new Error(e); }
+        return await r.json();
+      }
+
+      async function query(view, params) {
+        var url = SUPABASE_URL + '/rest/v1/' + view + '?' + params;
+        var r = await fetch(url, {
+          headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
+        });
+        if (!r.ok) { var e = await r.text(); console.error('Query error:', e); throw new Error(e); }
+        return await r.json();
+      }
+
+      // =============================================
+      // PASSWORD HASH (same as registration)
+      // =============================================
+      async function hashPassword(pw) {
+        var data = new TextEncoder().encode(pw);
+        var buf = await crypto.subtle.digest('SHA-256', data);
+        return Array.from(new Uint8Array(buf)).map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+      }
+
+      // =============================================
+      // AUTH
+      // =============================================
+      async function doLogin() {
+        var email = document.getElementById('loginEmail').value.trim();
+        var pw = document.getElementById('loginPassword').value;
+        var errEl = document.getElementById('loginError');
+
+        if (!email || !pw) { errEl.textContent = 'Please enter email and password.'; errEl.style.display = 'block'; return; }
+
+        try {
+          errEl.style.display = 'none';
+          var hash = await hashPassword(pw);
+          var result = await rpc('member_login', { login_email: email, login_password_hash: hash });
+
+          if (!result || !result.id) {
+            errEl.textContent = 'Invalid email or password.';
+            errEl.style.display = 'block';
+            return;
+          }
+
+          currentUser = result;
+          sessionStorage.setItem('azerpug_user', JSON.stringify(currentUser));
+          updateAuthUI();
+        } catch (e) {
+          errEl.textContent = 'Login failed. Please try again.';
+          errEl.style.display = 'block';
+          console.error(e);
+        }
+      }
+
+      function doLogout() {
+        currentUser = null;
+        sessionStorage.removeItem('azerpug_user');
+        updateAuthUI();
+        window.location.hash = '';
+      }
+
+      function updateAuthUI() {
+        var loginPanel = document.getElementById('loginPanel');
+        var userPanel = document.getElementById('userPanel');
+        var authTitle = document.getElementById('authTitle');
+
+        if (currentUser) {
+          loginPanel.style.display = 'none';
+          userPanel.style.display = 'block';
+          authTitle.textContent = 'My Account';
+          document.getElementById('userName').textContent = currentUser.first_name + ' ' + currentUser.last_name;
+        } else {
+          loginPanel.style.display = 'block';
+          userPanel.style.display = 'none';
+          authTitle.textContent = 'Member Login';
+        }
+      }
+
+      // =============================================
+      // ROUTING
+      // =============================================
+      function route() {
+        var hash = window.location.hash || '#';
+        document.querySelectorAll('.pg-view').forEach(function(v) { v.classList.remove('active'); });
+
+        if (hash === '#dashboard' && currentUser) {
+          document.getElementById('viewDashboard').classList.add('active');
+          loadDashboard();
+        } else if (hash === '#editor' && currentUser) {
+          document.getElementById('viewEditor').classList.add('active');
+          resetEditor();
+        } else if (hash.startsWith('#edit/') && currentUser) {
+          document.getElementById('viewEditor').classList.add('active');
+          loadPostForEdit(hash.replace('#edit/', ''));
+        } else if (hash.startsWith('#post/')) {
+          document.getElementById('viewPost').classList.add('active');
+          loadPost(hash.replace('#post/', ''));
+        } else {
+          document.getElementById('viewListing').classList.add('active');
+          loadBlogList();
+        }
+      }
+
+      window.addEventListener('hashchange', route);
+
+      // =============================================
+      // BLOG LISTING
+      // =============================================
+      async function loadBlogList() {
+        var loading = document.getElementById('blogListLoading');
+        var empty = document.getElementById('blogListEmpty');
+        var content = document.getElementById('blogListContent');
+
+        loading.style.display = 'block';
+        empty.style.display = 'none';
+        content.innerHTML = '';
+
+        try {
+          var posts = await query('public_blog_posts', 'select=*&order=published_at.desc');
+
+          loading.style.display = 'none';
+
+          if (posts.length === 0) {
+            empty.style.display = 'block';
+            return;
+          }
+
+          posts.forEach(function(post) {
+            var date = post.published_at ? new Date(post.published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+            var tags = (post.tags || []).map(function(t) { return '<span class="pg-tag">' + esc(t) + '</span>'; }).join('');
+            var excerpt = post.excerpt || (post.content ? stripHtml(post.content).substring(0, 200) + '...' : '');
+
+            content.innerHTML += '<div class="pg-blog-card">' +
+              '<h2><a href="#post/' + esc(post.slug) + '">' + esc(post.title) + '</a></h2>' +
+              '<div class="pg-blog-meta">' +
+                '<span><i class="fas fa-user"></i> ' + esc(post.author_first_name) + ' ' + esc(post.author_last_name) + '</span>' +
+                '<span><i class="fas fa-calendar"></i> ' + date + '</span>' +
+                '<span><i class="fas fa-eye"></i> ' + (post.views_count || 0) + ' views</span>' +
+              '</div>' +
+              '<div class="pg-blog-excerpt">' + esc(excerpt) + '</div>' +
+              (tags ? '<div class="pg-blog-tags">' + tags + '</div>' : '') +
+            '</div>';
+          });
+        } catch (e) {
+          loading.style.display = 'none';
+          content.innerHTML = '<div class="pg-alert pg-alert-danger">Failed to load blog posts. ' + esc(e.message || '') + '</div>';
+        }
+      }
+
+      // =============================================
+      // SINGLE POST
+      // =============================================
+      async function loadPost(slug) {
+        var container = document.getElementById('postContent');
+        container.innerHTML = '<div class="pg-loading"><i class="fas fa-spinner fa-spin"></i><div>Loading post...</div></div>';
+
+        try {
+          var posts = await query('public_blog_posts', 'slug=eq.' + encodeURIComponent(slug) + '&limit=1');
+
+          if (posts.length === 0) {
+            container.innerHTML = '<div class="pg-empty-state"><i class="fas fa-search"></i><div>Post not found.</div></div>';
+            return;
+          }
+
+          var post = posts[0];
+          var date = post.published_at ? new Date(post.published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+          var initials = ((post.author_first_name || '')[0] || '') + ((post.author_last_name || '')[0] || '');
+          var tags = (post.tags || []).map(function(t) { return '<span class="pg-tag">' + esc(t) + '</span>'; }).join('');
+
+          var renderedContent = renderContent(post.content, post.content_format);
+
+          container.innerHTML =
+            '<h1>' + esc(post.title) + '</h1>' +
+            '<div class="pg-author-box">' +
+              '<div class="pg-author-avatar">' + esc(initials).toUpperCase() + '</div>' +
+              '<div><div class="pg-author-name">' + esc(post.author_first_name) + ' ' + esc(post.author_last_name) + '</div>' +
+              '<div class="pg-author-role">' + (post.author_job_title ? esc(post.author_job_title) : '') + (post.author_company ? ' at ' + esc(post.author_company) : '') + '</div></div>' +
+            '</div>' +
+            '<div class="pg-blog-meta" style="margin-bottom:20px;">' +
+              '<span><i class="fas fa-calendar"></i> ' + date + '</span>' +
+              '<span><i class="fas fa-eye"></i> ' + (post.views_count || 0) + ' views</span>' +
+            '</div>' +
+            (tags ? '<div class="pg-blog-tags" style="margin-bottom:24px;">' + tags + '</div>' : '') +
+            '<div class="pg-blog-content">' + renderedContent + '</div>';
+
+          // Highlight code blocks
+          container.querySelectorAll('pre code').forEach(function(block) { hljs.highlightElement(block); });
+
+        } catch (e) {
+          container.innerHTML = '<div class="pg-alert pg-alert-danger">Failed to load post. ' + esc(e.message || '') + '</div>';
+        }
+      }
+
+      // =============================================
+      // DASHBOARD
+      // =============================================
+      async function loadDashboard() {
+        if (!currentUser) return;
+        var body = document.getElementById('dashboardBody');
+        body.innerHTML = '<div class="pg-loading"><i class="fas fa-spinner fa-spin"></i><div>Loading your posts...</div></div>';
+
+        try {
+          var posts = await rpc('get_my_posts', { member_id: currentUser.id });
+
+          if (!posts || posts.length === 0) {
+            body.innerHTML = '<div class="pg-empty-state"><i class="fas fa-pen"></i><div>You haven\'t written any posts yet. <a href="#editor">Write your first post!</a></div></div>';
+            document.getElementById('myPostCount').textContent = '0 posts';
+            return;
+          }
+
+          document.getElementById('myPostCount').textContent = posts.length + ' post' + (posts.length !== 1 ? 's' : '');
+          var html = '';
+
+          posts.forEach(function(post) {
+            var date = post.updated_at ? new Date(post.updated_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+            var statusClass = 'pg-status-' + (post.status || 'draft');
+
+            html += '<div class="pg-post-row">' +
+              '<span class="pg-status ' + statusClass + '">' + esc(post.status) + '</span>' +
+              '<div class="pg-post-title-col">' +
+                '<h3>' + esc(post.title) + '</h3>' +
+                '<small>Updated: ' + date + (post.views_count ? ' · ' + post.views_count + ' views' : '') + '</small>' +
+                (post.admin_note ? '<br><small style="color:var(--pg-warning);"><i class="fas fa-comment"></i> Admin: ' + esc(post.admin_note) + '</small>' : '') +
+              '</div>' +
+              '<div class="pg-post-actions">' +
+                '<a href="#edit/' + post.id + '" class="pg-btn-secondary pg-btn-sm"><i class="fas fa-edit"></i> Edit</a>' +
+                (post.status === 'published' ? '<a href="#post/' + esc(post.slug) + '" class="pg-btn-primary pg-btn-sm"><i class="fas fa-eye"></i> View</a>' : '') +
+                (post.status !== 'published' ? '<button class="pg-btn-primary pg-btn-sm pg-btn-danger" onclick="deletePost(\'' + post.id + '\')"><i class="fas fa-trash"></i></button>' : '') +
+              '</div>' +
+            '</div>';
+          });
+
+          body.innerHTML = html;
+        } catch (e) {
+          body.innerHTML = '<div class="pg-alert pg-alert-danger">Failed to load posts. ' + esc(e.message || '') + '</div>';
+        }
+      }
+
+      // =============================================
+      // EDITOR
+      // =============================================
+      function initQuill() {
+        if (quillEditor) return;
+        quillEditor = new Quill('#quillEditor', {
+          theme: 'snow',
+          placeholder: 'Write your PostgreSQL blog post...',
+          modules: {
+            toolbar: [
+              [{ 'header': [1, 2, 3, false] }],
+              ['bold', 'italic', 'underline', 'strike'],
+              ['blockquote', 'code-block'],
+              [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+              ['link', 'image'],
+              ['clean']
+            ]
+          }
+        });
+      }
+
+      function switchFormat(format) {
+        currentFormat = format;
+        document.querySelectorAll('.pg-format-tab').forEach(function(t) { t.classList.remove('active'); });
+        document.querySelector('[data-format="' + format + '"]').classList.add('active');
+        document.getElementById('editorHtml').style.display = format === 'html' ? 'block' : 'none';
+        document.getElementById('editorMarkdown').style.display = format === 'markdown' ? 'block' : 'none';
+        document.getElementById('editorPlain').style.display = format === 'plain' ? 'block' : 'none';
+      }
+
+      function resetEditor() {
+        document.getElementById('editorTitle').textContent = 'Write New Post';
+        document.getElementById('postTitle').value = '';
+        document.getElementById('postTags').value = '';
+        document.getElementById('postExcerpt').value = '';
+        document.getElementById('editPostId').value = '';
+        document.getElementById('editorAlert').innerHTML = '';
+        if (quillEditor) quillEditor.setContents([]);
+        document.getElementById('markdownEditor').value = '';
+        document.getElementById('plainEditor').value = '';
+        switchFormat('html');
+        initQuill();
+      }
+
+      async function loadPostForEdit(postId) {
+        if (!currentUser) return;
+        initQuill();
+
+        try {
+          var post = await rpc('get_my_post', { member_id: currentUser.id, post_id: postId });
+
+          if (!post) {
+            document.getElementById('editorAlert').innerHTML = '<div class="pg-alert pg-alert-danger">Post not found.</div>';
+            return;
+          }
+
+          document.getElementById('editorTitle').textContent = 'Edit Post';
+          document.getElementById('editPostId').value = post.id;
+          document.getElementById('postTitle').value = post.title || '';
+          document.getElementById('postTags').value = (post.tags || []).join(', ');
+          document.getElementById('postExcerpt').value = post.excerpt || '';
+
+          var fmt = post.content_format || 'html';
+          switchFormat(fmt);
+
+          if (fmt === 'html') {
+            quillEditor.root.innerHTML = post.content || '';
+          } else if (fmt === 'markdown') {
+            document.getElementById('markdownEditor').value = post.content || '';
+          } else {
+            document.getElementById('plainEditor').value = post.content || '';
+          }
+        } catch (e) {
+          document.getElementById('editorAlert').innerHTML = '<div class="pg-alert pg-alert-danger">Failed to load post for editing.</div>';
+        }
+      }
+
+      function slugify(text) {
+        return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').substring(0, 80) + '-' + Date.now().toString(36);
+      }
+
+      async function savePost(status) {
+        if (!currentUser) { alert('Please log in first.'); return; }
+
+        var title = document.getElementById('postTitle').value.trim();
+        var tagsStr = document.getElementById('postTags').value.trim();
+        var excerpt = document.getElementById('postExcerpt').value.trim();
+        var editId = document.getElementById('editPostId').value;
+
+        if (!title) { alert('Please enter a title.'); return; }
+
+        var content = '';
+        if (currentFormat === 'html') {
+          content = quillEditor.root.innerHTML;
+          if (quillEditor.getText().trim().length < 10) { alert('Please write some content.'); return; }
+        } else if (currentFormat === 'markdown') {
+          content = document.getElementById('markdownEditor').value;
+          if (content.trim().length < 10) { alert('Please write some content.'); return; }
+        } else {
+          content = document.getElementById('plainEditor').value;
+          if (content.trim().length < 10) { alert('Please write some content.'); return; }
+        }
+
+        var tags = tagsStr ? tagsStr.split(',').map(function(t) { return t.trim(); }).filter(Boolean) : [];
+
+        try {
+          var result;
+          if (editId) {
+            result = await rpc('update_blog_post', {
+              p_author_id: currentUser.id,
+              p_post_id: editId,
+              p_title: title,
+              p_slug: slugify(title),
+              p_content: content,
+              p_content_format: currentFormat,
+              p_excerpt: excerpt || null,
+              p_tags: tags,
+              p_status: status
+            });
+          } else {
+            result = await rpc('create_blog_post', {
+              p_author_id: currentUser.id,
+              p_title: title,
+              p_slug: slugify(title),
+              p_content: content,
+              p_content_format: currentFormat,
+              p_excerpt: excerpt || null,
+              p_tags: tags,
+              p_status: status
+            });
+          }
+
+          window.location.hash = '#dashboard';
+          setTimeout(function() {
+            document.getElementById('dashboardAlert').innerHTML = '<div class="pg-alert pg-alert-success"><i class="fas fa-check-circle"></i> Post ' +
+              (status === 'draft' ? 'saved as draft' : 'submitted for review') + ' successfully!</div>';
+          }, 100);
+
+        } catch (e) {
+          document.getElementById('editorAlert').innerHTML = '<div class="pg-alert pg-alert-danger">Failed to save post: ' + esc(e.message || '') + '</div>';
+        }
+      }
+
+      async function deletePost(postId) {
+        if (!confirm('Are you sure you want to delete this post?')) return;
+        try {
+          await rpc('delete_blog_post', { p_author_id: currentUser.id, p_post_id: postId });
+          loadDashboard();
+        } catch (e) {
+          alert('Failed to delete post.');
+        }
+      }
+
+      // =============================================
+      // CONTENT RENDERING
+      // =============================================
+      function renderContent(content, format) {
+        if (!content) return '';
+        if (format === 'markdown') {
+          return marked.parse(content);
+        } else if (format === 'plain') {
+          return '<p>' + esc(content).replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>') + '</p>';
+        }
+        return content; // html
+      }
+
+      // =============================================
+      // UTILITY
+      // =============================================
+      function esc(t) { if (!t) return ''; var d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+
+      function stripHtml(html) {
+        var tmp = document.createElement('div');
+        tmp.innerHTML = html;
+        return tmp.textContent || tmp.innerText || '';
+      }
+
+      // =============================================
+      // INIT
+      // =============================================
+      updateAuthUI();
+      initQuill();
+      route();
+    </script>
+
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
+</html>
