@@ -497,11 +497,11 @@
               </div>
               <div class="pg-stat-item">
                 <div class="pg-stat-number" id="statLinkedin">&mdash;</div>
-                <div class="pg-stat-label">LinkedIn Profiles</div>
+                <div class="pg-stat-label">Companies / Organizations</div>
               </div>
               <div class="pg-stat-item">
                 <div class="pg-stat-number" id="statCompanies">&mdash;</div>
-                <div class="pg-stat-label">Organizations</div>
+                <div class="pg-stat-label">LinkedIn Profiles</div>
               </div>
             </div>
 
@@ -617,12 +617,10 @@
 
       function updateStats(members) {
         document.getElementById('statTotal').textContent = members.length;
-        document.getElementById('statLinkedin').textContent = members.filter(function(m) {
-          return m.linkedin;
-        }).length;
+        document.getElementById('statLinkedin').textContent = companies.size;
         var companies = new Set();
         members.forEach(function(m) { if (m.company) companies.add(m.company.toLowerCase().trim()); });
-        document.getElementById('statCompanies').textContent = companies.size;
+        document.getElementById('statCompanies').textContent = members.filter(function(m) { return m.linkedin; }).length;
       }
 
       function renderMembers(members) {
