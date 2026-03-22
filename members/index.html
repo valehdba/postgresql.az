@@ -360,6 +360,27 @@
 
       .pg-btn-primary:hover { background: var(--pg-blue-hover); color: var(--pg-white); text-decoration: none; }
 
+      .pg-btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--pg-white);
+        color: var(--pg-blue-dark);
+        font-family: 'Maven Pro', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 9px 22px;
+        border: 2px solid var(--pg-blue-dark);
+        border-radius: 3px;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: all 0.15s ease;
+      }
+
+      .pg-btn-secondary:hover { background: var(--pg-blue-dark); color: var(--pg-white); text-decoration: none; }
+
       /* Footer */
       #footer img.footer-logo { height: 36px; margin-bottom: 10px; opacity: 0.6; transition: opacity 0.2s ease; }
       #footer img.footer-logo:hover { opacity: 1; }
@@ -473,10 +494,22 @@
               </div>
             </div>
 
-            <!-- Join CTA -->
-            <div class="pg-join-cta">
+            <!-- Join CTA (hidden when logged in) -->
+            <div class="pg-join-cta" id="joinCta">
               <p><strong>Want to join the community?</strong> Registration is free and open to everyone interested in PostgreSQL.</p>
-              <a href="/registration/" class="pg-btn-primary"><i class="fas fa-user-plus"></i> Register Now</a>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <a href="/registration/" class="pg-btn-primary"><i class="fas fa-user-plus"></i> Register Now</a>
+                <a href="/profile/" class="pg-btn-secondary"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+              </div>
+            </div>
+
+            <!-- Welcome back CTA (hidden when not logged in) -->
+            <div class="pg-join-cta" id="welcomeCta" style="display:none;">
+              <p><strong>Welcome back, <span id="welcomeName"></span>!</strong> You're part of the AZERPUG community.</p>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <a href="/" class="pg-btn-primary"><i class="fas fa-home"></i> My Dashboard</a>
+                <a href="/blogs/#editor" class="pg-btn-secondary"><i class="fas fa-pen"></i> Write a Post</a>
+              </div>
             </div>
 
             <!-- Search & Filter -->
@@ -649,6 +682,15 @@
       function esc(t) { if (!t) return ''; var d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
 
       loadMembers();
+
+      // Show/hide CTAs based on login status
+      var __u = null;
+      try { __u = JSON.parse(sessionStorage.getItem('azerpug_user')); } catch(e) {}
+      if (__u && __u.id) {
+        document.getElementById('joinCta').style.display = 'none';
+        document.getElementById('welcomeCta').style.display = 'flex';
+        document.getElementById('welcomeName').textContent = __u.first_name;
+      }
     </script>
 
     <script src="/js/navbar-auth.js"></script>
