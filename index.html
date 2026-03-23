@@ -106,8 +106,8 @@
         <div class="subtitle" id="heroSubtitle" data-i18n="home.subtitle">The open-source community for PostgreSQL enthusiasts in Azerbaijan</div>
         <div class="subtitle-az" id="heroSubtitleAz" data-i18n="home.subtitle_az">Azərbaycan PostgreSQL İstifadəçiləri Qrupu</div>
         <div class="pg-hero-actions" id="heroActions">
-          <a href="/registration/" class="pg-hero-btn pg-hero-btn-primary"><i class="fas fa-user-plus"></i data-i18n="home.join"> Join the Community</a>
-          <a href="/login/" class="pg-hero-btn pg-hero-btn-outline"><i class="fas fa-sign-in-alt"></i data-i18n="home.signin"> Sign In</a>
+          <a href="/registration/" class="pg-hero-btn pg-hero-btn-primary"><i class="fas fa-user-plus"></i> <span data-i18n="home.join">Join the Community</span></a>
+          <a href="/login/" class="pg-hero-btn pg-hero-btn-outline"><i class="fas fa-sign-in-alt"></i> <span data-i18n="home.signin">Sign In</span></a>
         </div>
         <div class="pg-hero-stats">
           <div><div class="pg-hero-stat-num" id="statMembers">—</div><div class="pg-hero-stat-label" data-i18n="home.members">Members</div></div>
@@ -136,15 +136,15 @@
       </div>
 
       <!-- Our Mission -->
-      <div class="pg-section-title"><i class="fas fa-bullseye"></i data-i18n="mission.title"> Our Mission</div>
+      <div class="pg-section-title"><i class="fas fa-bullseye"></i> <span data-i18n="mission.title">Our Mission</span></div>
       <div style="background:var(--pg-white);border:1px solid var(--pg-border);border-radius:4px;padding:24px;margin-bottom:1.5rem;">
-        <p style="font-size:.92rem;line-height:1.75;color:var(--pg-text);margin:0 0 12px;">AZERPUG exists to grow and strengthen the PostgreSQL community in Azerbaijan. We believe that knowledge is most powerful when it's shared freely, and that open-source technology is the foundation of innovation.</p>
-        <p style="font-size:.92rem;line-height:1.75;color:var(--pg-text);margin:0 0 12px;">Our mission is to provide a platform where anyone — from curious beginners to seasoned database experts — can learn, share, and collaborate around PostgreSQL. We organize meetups, publish educational content, and connect professionals who work with the world's most advanced open-source relational database.</p>
-        <p style="font-size:.92rem;line-height:1.75;color:var(--pg-text);margin:0;">As an open community, AZERPUG has no hierarchy — every registered member is an equal participant. We welcome developers, DBAs, students, IT managers, and anyone interested in PostgreSQL to join us and contribute to the community.</p>
+        <p style="font-size:.92rem;line-height:1.75;color:var(--pg-text);margin:0 0 12px;" data-i18n="mission.p1">AZERPUG exists to grow and strengthen the PostgreSQL community in Azerbaijan. We believe that knowledge is most powerful when it's shared freely, and that open-source technology is the foundation of innovation.</p>
+        <p style="font-size:.92rem;line-height:1.75;color:var(--pg-text);margin:0 0 12px;" data-i18n="mission.p2">Our mission is to provide a platform where anyone — from curious beginners to seasoned database experts — can learn, share, and collaborate around PostgreSQL. We organize meetups, publish educational content, and connect professionals who work with the world's most advanced open-source relational database.</p>
+        <p style="font-size:.92rem;line-height:1.75;color:var(--pg-text);margin:0;" data-i18n="mission.p3">As an open community, AZERPUG has no hierarchy — every registered member is an equal participant. We welcome developers, DBAs, students, IT managers, and anyone interested in PostgreSQL to join us and contribute to the community.</p>
       </div>
 
       <!-- Community Values -->
-      <div class="pg-section-title"><i class="fas fa-heart"></i data-i18n="values.title"> Community Values</div>
+      <div class="pg-section-title"><i class="fas fa-heart"></i> <span data-i18n="values.title">Community Values</span></div>
       <div class="pg-features" style="margin-bottom:2rem;">
         <div class="pg-feature" style="cursor:default;"><div class="pg-feature-icon" style="background:#336791"><i class="fas fa-lock-open"></i></div><h3 data-i18n="values.opensource">Open Source</h3><p data-i18n="values.opensource_desc">We champion open-source software and the collaborative development model that makes PostgreSQL great.</p></div>
         <div class="pg-feature" style="cursor:default;"><div class="pg-feature-icon" style="background:#2e7d32"><i class="fas fa-equals"></i></div><h3 data-i18n="values.equality">Equality</h3><p data-i18n="values.equality_desc">Every member has an equal voice. There is no hierarchy — we grow together as a flat, open community.</p></div>
@@ -153,11 +153,11 @@
       </div>
 
       <!-- Latest Blog Posts -->
-      <div class="pg-section-title"><i class="fas fa-newspaper"></i data-i18n="home.latest_posts"> Latest Blog Posts</div>
+      <div class="pg-section-title"><i class="fas fa-newspaper"></i> <span data-i18n="home.latest_posts">Latest Blog Posts</span></div>
       <div id="blogPosts" class="pg-posts-grid"></div>
 
       <!-- Community Stats -->
-      <div class="pg-section-title"><i class="fas fa-chart-bar"></i data-i18n="home.community_stats"> Community</div>
+      <div class="pg-section-title"><i class="fas fa-chart-bar"></i> <span data-i18n="home.community_stats">Community</span></div>
       <div class="pg-stat-row" style="margin-bottom:2rem;">
         <div class="pg-stat-item"><div class="pg-stat-num" id="statMembersBottom">—</div><div class="pg-stat-label">Members</div></div>
         <div class="pg-stat-item"><div class="pg-stat-num" id="statPostsBottom">—</div><div class="pg-stat-label">Blog Posts</div></div>
@@ -190,8 +190,8 @@
         document.getElementById('heroSubtitle').textContent="You're part of the Azerbaijan PostgreSQL User Group community.";
         document.getElementById('heroSubtitleAz').textContent=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
         document.getElementById('heroActions').innerHTML=
-          '<a href="/profile/" class="pg-hero-btn pg-hero-btn-primary"><i class="fas fa-user"></i data-i18n="home.myprofile"> My Profile</a>'+
-          '<a href="/blogs/#editor" class="pg-hero-btn pg-hero-btn-outline"><i class="fas fa-pen"></i data-i18n="home.writepost"> Write a Post</a>'+
+          '<a href="/profile/" class="pg-hero-btn pg-hero-btn-primary"><i class="fas fa-user"></i> <span data-i18n="home.myprofile">My Profile</span></a>'+
+          '<a href="/blogs/#editor" class="pg-hero-btn pg-hero-btn-outline"><i class="fas fa-pen"></i> <span data-i18n="home.writepost">Write a Post</span></a>'+
           '<a href="/events/" class="pg-hero-btn pg-hero-btn-outline"><i class="fas fa-calendar-alt"></i> Events</a>';
         if(user.is_admin){document.getElementById('adminBar').style.display='flex';loadAdminPending();}
       }

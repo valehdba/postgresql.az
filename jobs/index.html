@@ -99,7 +99,7 @@
           <p class="pg-page-subtitle">Find PostgreSQL-related jobs in Azerbaijan and remote positions. Members can post job openings for free.</p>
 
           <div style="display:flex;gap:10px;margin-bottom:1.5rem;flex-wrap:wrap;">
-            <button class="pg-btn pg-btn-success" onclick="showView('post')"><i class="fas fa-plus"></i data-i18n="jobs.post"> Post a Job</button>
+            <button class="pg-btn pg-btn-success" onclick="showView('post')"><i class="fas fa-plus"></i> <span data-i18n="jobs.post">Post a Job</span></button>
           </div>
 
           <div id="jobsList">
@@ -112,7 +112,7 @@
           <h1 class="pg-page-title">Post a Job</h1>
           <p class="pg-page-subtitle">Share a PostgreSQL-related job opportunity with the AZERPUG community. Free for all members.</p>
 
-          <button class="pg-btn pg-btn-secondary" style="margin-bottom:16px;" onclick="showView('listing')"><i class="fas fa-arrow-left"></i data-i18n="jobs.listings"> Back to Listings</button>
+          <button class="pg-btn pg-btn-secondary" style="margin-bottom:16px;" onclick="showView('listing')"><i class="fas fa-arrow-left"></i> <span data-i18n="jobs.listings">Back to Listings</span></button>
 
           <div id="postAlert"></div>
 
@@ -145,7 +145,7 @@
               </div>
               <div class="pg-form-group"><label>Tags</label><input type="text" class="pg-form-control" id="jTags" placeholder="e.g. postgresql, dba, aws, linux (comma separated)"><div class="pg-form-hint">Separate tags with commas</div></div>
               <div class="pg-form-actions">
-                <button class="pg-btn pg-btn-primary" id="submitJobBtn" onclick="submitJob()"><i class="fas fa-paper-plane"></i data-i18n="jobs.post"> Post Job</button>
+                <button class="pg-btn pg-btn-primary" id="submitJobBtn" onclick="submitJob()"><i class="fas fa-paper-plane"></i> <span data-i18n="jobs.post">Post Job</span></button>
               </div>
             </div>
           </div>
