@@ -190,11 +190,88 @@
           <button class="admin-tab" data-status="draft" onclick="switchTab('draft')">Drafts</button>
           <button class="admin-tab" data-status="rejected" onclick="switchTab('rejected')">Rejected</button>
           <button class="admin-tab" data-status="" onclick="switchTab('')">All</button>
+          <button class="admin-tab" id="eventsTab" onclick="switchTab('events')" style="margin-left:auto;border-left:2px solid var(--pg-border);padding-left:16px;"><i class="fas fa-calendar-plus"></i> Events</button>
         </div>
 
         <!-- Posts List -->
         <div id="postsList">
           <div class="pg-loading"><i class="fas fa-spinner fa-spin"></i><div>Loading posts...</div></div>
+        </div>
+
+        <!-- Events Manager (hidden by default) -->
+        <div id="eventsManager" style="display:none;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+            <h3 style="font-family:'Maven Pro',sans-serif;font-size:1rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin:0;"><i class="fas fa-calendar-alt" style="color:var(--pg-blue-dark);margin-right:6px;"></i> Manage Events</h3>
+            <button class="btn-pg btn-approve" onclick="showEventForm()" id="newEventBtn"><i class="fas fa-plus"></i> Create Event</button>
+          </div>
+
+          <div id="eventFormContainer" style="display:none;">
+            <div style="background:var(--pg-white);border:1px solid var(--pg-border);border-radius:4px;padding:24px;margin-bottom:20px;">
+              <h4 style="font-family:'Maven Pro',sans-serif;font-size:.9rem;font-weight:700;margin:0 0 16px;text-transform:uppercase;color:var(--pg-blue-dark);"><i class="fas fa-calendar-plus"></i> New Event</h4>
+              <div id="eventAlert"></div>
+              <div style="display:flex;gap:16px;flex-wrap:wrap;">
+                <div style="flex:1;min-width:240px;">
+                  <label style="display:block;font-size:.78rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin-bottom:4px;">Title *</label>
+                  <input type="text" class="pg-form-control" id="evTitle" placeholder="PostgreSQL Meetup #1">
+                </div>
+                <div style="flex:0 0 180px;">
+                  <label style="display:block;font-size:.78rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin-bottom:4px;">Type</label>
+                  <select class="pg-form-control" id="evType">
+                    <option value="meetup">Meetup</option>
+                    <option value="workshop">Workshop</option>
+                    <option value="conference">Conference</option>
+                    <option value="webinar">Webinar</option>
+                  </select>
+                </div>
+              </div>
+              <div style="display:flex;gap:16px;margin-top:12px;flex-wrap:wrap;">
+                <div style="flex:1;min-width:180px;">
+                  <label style="display:block;font-size:.78rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin-bottom:4px;">Date *</label>
+                  <input type="date" class="pg-form-control" id="evDate">
+                </div>
+                <div style="flex:0 0 120px;">
+                  <label style="display:block;font-size:.78rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin-bottom:4px;">Start Time</label>
+                  <input type="time" class="pg-form-control" id="evTime" value="18:00">
+                </div>
+                <div style="flex:1;min-width:180px;">
+                  <label style="display:block;font-size:.78rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin-bottom:4px;">Location</label>
+                  <input type="text" class="pg-form-control" id="evLocation" placeholder="Baku, Azerbaijan">
+                </div>
+              </div>
+              <div style="margin-top:12px;">
+                <label style="display:block;font-size:.78rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin-bottom:4px;">Description</label>
+                <textarea class="pg-form-control" id="evDescription" rows="3" placeholder="What will be covered at this event..."></textarea>
+              </div>
+              <div style="display:flex;gap:16px;margin-top:12px;flex-wrap:wrap;">
+                <div style="flex:1;min-width:180px;">
+                  <label style="display:block;font-size:.78rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin-bottom:4px;">Speaker(s)</label>
+                  <input type="text" class="pg-form-control" id="evSpeaker" placeholder="Speaker name">
+                </div>
+                <div style="flex:1;min-width:180px;">
+                  <label style="display:block;font-size:.78rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin-bottom:4px;">Max Attendees</label>
+                  <input type="number" class="pg-form-control" id="evMaxAttendees" placeholder="50">
+                </div>
+              </div>
+              <div style="display:flex;gap:16px;margin-top:12px;flex-wrap:wrap;">
+                <div style="flex:1;min-width:180px;">
+                  <label style="display:block;font-size:.78rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin-bottom:4px;">Registration URL</label>
+                  <input type="url" class="pg-form-control" id="evRegUrl" placeholder="https://...">
+                </div>
+                <div style="flex:1;min-width:180px;">
+                  <label style="display:block;font-size:.78rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin-bottom:4px;">Tags</label>
+                  <input type="text" class="pg-form-control" id="evTags" placeholder="PostgreSQL, DBA, Workshop">
+                </div>
+              </div>
+              <div style="display:flex;gap:10px;margin-top:16px;">
+                <button class="btn-pg btn-approve" onclick="saveEvent()"><i class="fas fa-save"></i> Create Event</button>
+                <button class="btn-pg btn-reject" onclick="hideEventForm()"><i class="fas fa-times"></i> Cancel</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="adminEventsList">
+            <div class="pg-loading"><i class="fas fa-spinner fa-spin"></i><div>Loading events...</div></div>
+          </div>
         </div>
       </div>
 
@@ -414,6 +491,104 @@
       }
 
       document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closePreview(); });
+
+      // =============================================
+      // EVENTS MANAGEMENT
+      // =============================================
+      function showEventForm() { document.getElementById('eventFormContainer').style.display = 'block'; document.getElementById('newEventBtn').style.display = 'none'; }
+      function hideEventForm() { document.getElementById('eventFormContainer').style.display = 'none'; document.getElementById('newEventBtn').style.display = 'inline-flex'; }
+
+      async function loadAdminEvents() {
+        var el = document.getElementById('adminEventsList');
+        try {
+          var r = await fetch(SUPABASE_URL + '/rest/v1/events?select=*&order=event_date.desc', { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY } });
+          if (!r.ok) throw new Error();
+          var events = await r.json();
+          if (!events.length) { el.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--pg-text-light);"><i class="fas fa-calendar-times" style="font-size:2rem;display:block;margin-bottom:8px;color:var(--pg-border);"></i>No events yet. Create your first event above!</div>'; return; }
+
+          var html = '';
+          events.forEach(function(ev) {
+            var d = ev.event_date ? new Date(ev.event_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
+            var isPast = ev.event_date && new Date(ev.event_date) < new Date();
+            var badge = isPast ? '<span style="background:#6c757d;color:#fff;padding:2px 8px;border-radius:10px;font-size:.7rem;font-weight:700;">PAST</span>' : '<span style="background:var(--pg-success);color:#fff;padding:2px 8px;border-radius:10px;font-size:.7rem;font-weight:700;">UPCOMING</span>';
+            html += '<div style="background:var(--pg-white);border:1px solid var(--pg-border);border-radius:4px;padding:16px 20px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">' +
+              '<div><strong style="color:var(--pg-text);font-size:.9rem;">' + esc(ev.title) + '</strong> ' + badge +
+              '<div style="font-size:.78rem;color:var(--pg-text-light);margin-top:4px;"><i class="fas fa-calendar"></i> ' + d +
+              (ev.location ? ' &middot; <i class="fas fa-map-marker-alt"></i> ' + esc(ev.location) : '') +
+              (ev.event_type ? ' &middot; <i class="fas fa-tag"></i> ' + esc(ev.event_type) : '') + '</div></div>' +
+              '<button class="btn-pg btn-reject" onclick="deleteEvent(\'' + ev.id + '\')"><i class="fas fa-trash"></i> Delete</button></div>';
+          });
+          el.innerHTML = html;
+        } catch(e) { el.innerHTML = '<div style="color:var(--pg-danger);padding:1rem;">Failed to load events.</div>'; }
+      }
+
+      async function saveEvent() {
+        var title = document.getElementById('evTitle').value.trim();
+        var evDate = document.getElementById('evDate').value;
+        var alertEl = document.getElementById('eventAlert');
+
+        if (!title || !evDate) { alertEl.innerHTML = '<div class="pg-alert pg-alert-danger" style="margin-bottom:12px;">Title and date are required.</div>'; return; }
+
+        var time = document.getElementById('evTime').value || '18:00';
+        var datetime = evDate + 'T' + time + ':00';
+        var tags = document.getElementById('evTags').value.split(',').map(function(t) { return t.trim(); }).filter(Boolean);
+
+        var body = {
+          title: title,
+          event_type: document.getElementById('evType').value,
+          event_date: datetime,
+          location: document.getElementById('evLocation').value.trim() || null,
+          description: document.getElementById('evDescription').value.trim() || null,
+          speaker: document.getElementById('evSpeaker').value.trim() || null,
+          max_attendees: parseInt(document.getElementById('evMaxAttendees').value) || null,
+          registration_url: document.getElementById('evRegUrl').value.trim() || null,
+          tags: tags.length ? tags : null,
+          created_by: admin.id
+        };
+
+        try {
+          var r = await fetch(SUPABASE_URL + '/rest/v1/events', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY, 'Prefer': 'return=minimal' },
+            body: JSON.stringify(body)
+          });
+          if (!r.ok) { var e = await r.text(); throw new Error(e); }
+          alertEl.innerHTML = '<div class="pg-alert pg-alert-success" style="margin-bottom:12px;"><i class="fas fa-check"></i> Event created successfully!</div>';
+          hideEventForm();
+          loadAdminEvents();
+          // Clear form
+          ['evTitle','evDate','evLocation','evDescription','evSpeaker','evMaxAttendees','evRegUrl','evTags'].forEach(function(id) { document.getElementById(id).value = ''; });
+        } catch(e) {
+          alertEl.innerHTML = '<div class="pg-alert pg-alert-danger" style="margin-bottom:12px;">Failed to create event: ' + esc(e.message || '') + '</div>';
+        }
+      }
+
+      async function deleteEvent(eventId) {
+        if (!confirm('Are you sure you want to delete this event?')) return;
+        try {
+          await fetch(SUPABASE_URL + '/rest/v1/events?id=eq.' + eventId, {
+            method: 'DELETE',
+            headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
+          });
+          loadAdminEvents();
+        } catch(e) { alert('Failed to delete event.'); }
+      }
+
+      // Override switchTab to handle events tab
+      var origSwitchTab = switchTab;
+      switchTab = function(status) {
+        if (status === 'events') {
+          document.getElementById('postsList').style.display = 'none';
+          document.getElementById('eventsManager').style.display = 'block';
+          document.querySelectorAll('.admin-tab').forEach(function(t) { t.classList.remove('active'); });
+          document.getElementById('eventsTab').classList.add('active');
+          loadAdminEvents();
+        } else {
+          document.getElementById('postsList').style.display = 'block';
+          document.getElementById('eventsManager').style.display = 'none';
+          origSwitchTab(status);
+        }
+      };
 
       // =============================================
       // UTIL
