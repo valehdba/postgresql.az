@@ -217,8 +217,13 @@
             var tags=(j.tags||[]).map(function(t){return'<span class="pg-tag">'+esc(t)+'</span>'}).join('');
             var badge=typeBadge[j.job_type]||'pg-badge-ft';
             var applyBtn='';
-            if(j.apply_url)applyBtn='<a href="'+esc(j.apply_url)+'" target="_blank" rel="noopener" class="pg-btn pg-btn-primary"><i class="fas fa-external-link-alt"></i> Apply</a>';
-            else if(j.apply_email)applyBtn='<a href="mailto:'+esc(j.apply_email)+'" class="pg-btn pg-btn-primary"><i class="fas fa-envelope"></i> Apply via Email</a>';
+            if(j.apply_email){
+              applyBtn='<a href="mailto:'+esc(j.apply_email)+'?subject=Application%20for%20'+encodeURIComponent(j.title)+'&body=Dear%20Hiring%20Manager%2C%0A%0AI%20would%20like%20to%20apply%20for%20the%20position%20of%20'+encodeURIComponent(j.title)+'.%20Please%20find%20my%20CV%20attached.%0A%0ABest%20regards" class="pg-btn pg-btn-primary"><i class="fas fa-envelope"></i> Apply via Email</a>';
+            }
+            if(j.apply_url){
+              var url=j.apply_url;if(url&&!/^https?:\/\//i.test(url))url='https://'+url;
+              applyBtn+='<a href="'+esc(url)+'" target="_blank" rel="noopener" class="pg-btn pg-btn-secondary" style="margin-left:6px;"><i class="fas fa-external-link-alt"></i> Company Website</a>';
+            }
 
             var shortDesc=esc(j.description).substring(0,300)+(j.description&&j.description.length>300?'...':'');
             var fullDesc=esc(j.description||'').replace(/\n/g,'<br>');
