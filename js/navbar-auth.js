@@ -68,6 +68,12 @@
     '[data-theme="dark"] .pg-hero-btn-outline{border-color:rgba(255,255,255,.4)!important;color:#fff!important}[data-theme="dark"] .pg-hero-btn-outline:hover{background:rgba(255,255,255,.1)!important}' +
     '[data-theme="dark"] .pg-tag{background:#1a2a3a!important;color:#5b9bd5!important}' +
     '[data-theme="dark"] .pg-badge{color:#fff!important}' +
+    '[data-theme="dark"] .pg-badge-ft{background:#1565c0!important;color:#fff!important}' +
+    '[data-theme="dark"] .pg-badge-pt{background:#7b1fa2!important;color:#fff!important}' +
+    '[data-theme="dark"] .pg-badge-contract{background:#e65100!important;color:#fff!important}' +
+    '[data-theme="dark"] .pg-badge-freelance{background:#2e7d32!important;color:#fff!important}' +
+    '[data-theme="dark"] .pg-badge-internship{background:#c62828!important;color:#fff!important}' +
+    '[data-theme="dark"] .pg-badge-remote{background:#00838f!important;color:#fff!important}' +
     '[data-theme="dark"] .pg-event-type{opacity:.9}' +
     '[data-theme="dark"] .pg-event-day{background:#2a2a2a!important;color:#d4d4d4!important;border-color:#444!important}' +
     '[data-theme="dark"] .pg-event-footer{background:#1e1e1e!important;border-color:#333!important}' +
