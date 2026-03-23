@@ -1152,6 +1152,16 @@
             }
           } catch(loginErr) { console.warn('Auto-login failed:', loginErr); }
 
+          // Send email notification for new registration
+          try {
+            await emailjs.send('service_gtolwpf', 'template_lt1rmcl', {
+              name: firstName.value.trim() + ' ' + lastName.value.trim(),
+              email: email.value.trim(),
+              company: document.getElementById('company').value.trim() || 'Not specified',
+              job_title: document.getElementById('jobTitle').value.trim() || 'Not specified'
+            });
+          } catch(emailErr) { console.warn('Registration email failed:', emailErr); }
+
           // Show success message briefly, then redirect
           document.getElementById('registrationForm').style.display = 'none';
           document.getElementById('successMessage').style.display = 'block';
@@ -1180,5 +1190,8 @@
     </script>
 
     <script src="/js/navbar-auth.js"></script>
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>emailjs.init('1xXaZzZ874ZIGQM8Q');</script>
 </body>
 </html>
