@@ -57,9 +57,13 @@
     '[data-theme="dark"] #darkModeBtn{border-color:#444!important;color:#a0a0a0!important}[data-theme="dark"] #darkModeBtn:hover{border-color:#5b9bd5!important;color:#5b9bd5!important}' +
     '[data-theme="dark"] .pg-cta-box{background:#1a2a3a!important;border-color:#3a3a3a!important}' +
     '[data-theme="dark"] .pg-btn-primary{background:#2a5a8a!important;color:#fff!important}[data-theme="dark"] .pg-btn-primary:hover{background:#3a6a9a!important}' +
+    '[data-theme="dark"] .pg-btn-primary a,[data-theme="dark"] a.pg-btn-primary,[data-theme="dark"] a.pg-btn-primary i{color:#fff!important}' +
     '[data-theme="dark"] .pg-btn-secondary{background:#2a2a2a!important;color:#d4d4d4!important;border-color:#555!important}[data-theme="dark"] .pg-btn-secondary:hover{background:#333!important;border-color:#5b9bd5!important;color:#5b9bd5!important}' +
-    '[data-theme="dark"] .pg-btn-success{background:#2e7d32!important;color:#fff!important}[data-theme="dark"] .pg-btn-success:hover{background:#388e3c!important}' +
-    '[data-theme="dark"] .pg-btn-outline{background:transparent!important;color:#5b9bd5!important;border-color:#555!important}[data-theme="dark"] .pg-btn-outline:hover{background:#1a2a3a!important;border-color:#5b9bd5!important}' +
+    '[data-theme="dark"] a.pg-btn-secondary,[data-theme="dark"] a.pg-btn-secondary i{color:#d4d4d4!important}[data-theme="dark"] a.pg-btn-secondary:hover,[data-theme="dark"] a.pg-btn-secondary:hover i{color:#5b9bd5!important}' +
+    '[data-theme="dark"] .pg-btn-success,[data-theme="dark"] a.pg-btn-success{background:#2e7d32!important;color:#fff!important}[data-theme="dark"] .pg-btn-success:hover{background:#388e3c!important}' +
+    '[data-theme="dark"] .pg-btn-outline,[data-theme="dark"] a.pg-btn-outline{background:transparent!important;color:#5b9bd5!important;border-color:#555!important}[data-theme="dark"] .pg-btn-outline:hover{background:#1a2a3a!important;border-color:#5b9bd5!important}' +
+    '[data-theme="dark"] .pg-job-apply a,[data-theme="dark"] .pg-job-apply button{color:#fff!important}' +
+    '[data-theme="dark"] .pg-job-apply .pg-btn-secondary{color:#d4d4d4!important}' +
     '[data-theme="dark"] .pg-hero-btn-primary{background:#2a5a8a!important;color:#fff!important}[data-theme="dark"] .pg-hero-btn-primary:hover{background:#3a6a9a!important}' +
     '[data-theme="dark"] .pg-hero-btn-outline{border-color:rgba(255,255,255,.4)!important;color:#fff!important}[data-theme="dark"] .pg-hero-btn-outline:hover{background:rgba(255,255,255,.1)!important}' +
     '[data-theme="dark"] .pg-tag{background:#1a2a3a!important;color:#5b9bd5!important}' +
