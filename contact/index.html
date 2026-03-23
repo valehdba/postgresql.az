@@ -83,7 +83,7 @@
       </aside>
 
       <main class="pg-main-content">
-        <h1 class="pg-page-title">Contact Us</h1>
+        <h1 class="pg-page-title" data-i18n="contact.title">Contact Us</h1>
         <p class="pg-page-subtitle">Have a question, suggestion, or feedback? We'd love to hear from you. Reach out through any of the channels below or use the contact form.</p>
 
         <!-- Contact Cards -->
@@ -101,11 +101,11 @@
             <div id="formAlert"></div>
             <form id="contactForm">
               <div class="pg-form-row">
-                <div class="pg-form-group"><label>Your Name <span class="req">*</span></label><input type="text" class="pg-form-control" id="cName" placeholder="Your full name"></div>
-                <div class="pg-form-group"><label>Your Email <span class="req">*</span></label><input type="email" class="pg-form-control" id="cEmail" placeholder="you@example.com"></div>
+                <div class="pg-form-group"><label data-i18n="contact.name">Your Name <span class="req">*</span></label><input type="text" class="pg-form-control" id="cName" placeholder="Your full name"></div>
+                <div class="pg-form-group"><label data-i18n="contact.email">Your Email <span class="req">*</span></label><input type="email" class="pg-form-control" id="cEmail" placeholder="you@example.com"></div>
               </div>
               <div class="pg-form-group">
-                <label>Subject <span class="req">*</span></label>
+                <label data-i18n="contact.subject">Subject <span class="req">*</span></label>
                 <select class="pg-form-control" id="cSubject">
                   <option value="">— Select a topic —</option>
                   <option value="general">General Question</option>
@@ -118,17 +118,17 @@
                 </select>
               </div>
               <div class="pg-form-group">
-                <label>Message <span class="req">*</span></label>
+                <label data-i18n="contact.message">Message <span class="req">*</span></label>
                 <textarea class="pg-form-control" id="cMessage" placeholder="Tell us what's on your mind..."></textarea>
               </div>
               <div class="pg-form-actions">
-                <button type="submit" class="pg-btn pg-btn-primary" id="submitBtn"><i class="fas fa-paper-plane"></i> Send Message</button>
+                <button type="submit" class="pg-btn pg-btn-primary" id="submitBtn"><i class="fas fa-paper-plane"></i data-i18n="contact.send_btn"> Send Message</button>
               </div>
             </form>
 
             <div id="successMsg" style="display:none;text-align:center;padding:2rem;">
               <i class="fas fa-check-circle" style="font-size:2.5rem;color:var(--pg-success);margin-bottom:.75rem;display:block;"></i>
-              <h3 style="font-family:'Maven Pro',sans-serif;font-size:1.2rem;color:var(--pg-text);text-transform:none;">Message Sent!</h3>
+              <h3 style="font-family:'Maven Pro',sans-serif;font-size:1.2rem;color:var(--pg-text);text-transform:none;" data-i18n="contact.sent">Message Sent!</h3>
               <p style="color:var(--pg-text-light);font-size:.9rem;">Thank you for reaching out. Your message has been sent to our team and we'll get back to you as soon as possible.</p>
             </div>
           </div>

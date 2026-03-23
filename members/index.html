@@ -486,22 +486,22 @@
 
           <!-- Main Content -->
           <main class="pg-main-content">
-            <h1 class="pg-page-title">Community Members</h1>
+            <h1 class="pg-page-title" data-i18n="members.title">Community Members</h1>
             <p class="pg-page-subtitle">Meet the PostgreSQL enthusiasts, developers, and database administrators who make up the AZERPUG community.</p>
 
             <!-- Stats -->
             <div class="pg-stats-bar">
               <div class="pg-stat-item">
                 <div class="pg-stat-number" id="statTotal">&mdash;</div>
-                <div class="pg-stat-label">Total Members</div>
+                <div class="pg-stat-label" data-i18n="members.total">Total Members</div>
               </div>
               <div class="pg-stat-item">
                 <div class="pg-stat-number" id="statLinkedin">&mdash;</div>
-                <div class="pg-stat-label">Companies / Organizations</div>
+                <div class="pg-stat-label" data-i18n="members.companies">Companies / Organizations</div>
               </div>
               <div class="pg-stat-item">
                 <div class="pg-stat-number" id="statCompanies">&mdash;</div>
-                <div class="pg-stat-label">LinkedIn Profiles</div>
+                <div class="pg-stat-label" data-i18n="members.linkedin_profiles">LinkedIn Profiles</div>
               </div>
             </div>
 
@@ -509,8 +509,8 @@
             <div class="pg-join-cta" id="joinCta">
               <p><strong>Want to join the community?</strong> Registration is free and open to everyone interested in PostgreSQL.</p>
               <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <a href="/registration/" class="pg-btn-primary"><i class="fas fa-user-plus"></i> Register Now</a>
-                <a href="/login/" class="pg-btn-secondary"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                <a href="/registration/" class="pg-btn-primary"><i class="fas fa-user-plus"></i data-i18n="members.register"> Register Now</a>
+                <a href="/login/" class="pg-btn-secondary"><i class="fas fa-sign-in-alt"></i data-i18n="home.signin"> Sign In</a>
               </div>
             </div>
 
@@ -519,7 +519,7 @@
               <p><strong>Welcome back, <span id="welcomeName"></span>!</strong> You're part of the AZERPUG community.</p>
               <div style="display:flex;gap:10px;flex-wrap:wrap;">
                 <a href="/" class="pg-btn-primary"><i class="fas fa-home"></i> My Dashboard</a>
-                <a href="/blogs/#editor" class="pg-btn-secondary"><i class="fas fa-pen"></i> Write a Post</a>
+                <a href="/blogs/#editor" class="pg-btn-secondary"><i class="fas fa-pen"></i data-i18n="home.writepost"> Write a Post</a>
               </div>
             </div>
 
@@ -527,7 +527,7 @@
             <div class="pg-toolbar">
               <div class="pg-search-wrapper">
                 <i class="fas fa-search"></i>
-                <input type="text" class="pg-search-input" id="searchInput" placeholder="Search by name, company, or role...">
+                <input type="text" class="pg-search-input" id="searchInput" data-i18n="members.search" placeholder="Search by name, company, or role...">
               </div>
             </div>
 
@@ -546,11 +546,11 @@
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Name</th>
+                    <th data-i18n="members.name">Name</th>
                     <th>Company / Organization</th>
-                    <th>Role</th>
-                    <th>LinkedIn</th>
-                    <th>Joined</th>
+                    <th data-i18n="members.role">Role</th>
+                    <th data-i18n="members.linkedin">LinkedIn</th>
+                    <th data-i18n="members.joined">Joined</th>
                   </tr>
                 </thead>
                 <tbody id="membersTableBody"></tbody>

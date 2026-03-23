@@ -211,7 +211,7 @@
 
             <!-- ==================== PROFILE VIEW ==================== -->
             <div id="viewProfile" class="pg-view">
-              <h1 class="pg-page-title">My Profile</h1>
+              <h1 class="pg-page-title" data-i18n="profile.title">My Profile</h1>
 
               <div id="profileAlert"></div>
 
@@ -266,8 +266,8 @@
               </div>
 
               <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <a href="#edit" class="pg-btn pg-btn-primary"><i class="fas fa-edit"></i> Edit Profile</a>
-                <a href="#password" class="pg-btn pg-btn-secondary"><i class="fas fa-key"></i> Change Password</a>
+                <a href="#edit" class="pg-btn pg-btn-primary"><i class="fas fa-edit"></i data-i18n="profile.edit"> Edit Profile</a>
+                <a href="#password" class="pg-btn pg-btn-secondary"><i class="fas fa-key"></i data-i18n="profile.change_pw"> Change Password</a>
                 <a href="/blogs/#dashboard" class="pg-btn pg-btn-secondary"><i class="fas fa-newspaper"></i> My Blog Posts</a>
                 <button class="pg-btn pg-btn-secondary" onclick="doLogout()" style="margin-left:auto;"><i class="fas fa-sign-out-alt"></i> Log Out</button>
               </div>
@@ -307,8 +307,8 @@
                     <label for="editNewsletter" style="margin:0;text-transform:none;font-weight:400;font-size:0.88rem;">Receive community news and event invitations via email</label>
                   </div>
                   <div class="pg-form-actions">
-                    <button class="pg-btn pg-btn-primary" onclick="saveProfile()"><i class="fas fa-save"></i> Save Changes</button>
-                    <a href="#profile" class="pg-btn pg-btn-secondary"><i class="fas fa-times"></i> Cancel</a>
+                    <button class="pg-btn pg-btn-primary" onclick="saveProfile()"><i class="fas fa-save"></i data-i18n="profile.save"> Save Changes</button>
+                    <a href="#profile" class="pg-btn pg-btn-secondary"><i class="fas fa-times"></i data-i18n="profile.cancel"> Cancel</a>
                   </div>
                 </div>
               </div>
@@ -331,7 +331,7 @@
                   <div class="pg-form-group"><label>Confirm New Password <span class="req">*</span></label><input type="password" class="pg-form-control" id="pwConfirm" placeholder="Re-enter new password"></div>
                   <div class="pg-form-actions">
                     <button class="pg-btn pg-btn-primary" onclick="changePassword()"><i class="fas fa-key"></i> Update Password</button>
-                    <a href="#profile" class="pg-btn pg-btn-secondary"><i class="fas fa-times"></i> Cancel</a>
+                    <a href="#profile" class="pg-btn pg-btn-secondary"><i class="fas fa-times"></i data-i18n="profile.cancel"> Cancel</a>
                   </div>
                 </div>
               </div>

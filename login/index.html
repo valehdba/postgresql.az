@@ -54,8 +54,8 @@
     <div class="pg-login-wrapper">
       <div class="pg-login-logo">
         <a href="/"><img src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a>
-        <h1>Welcome Back</h1>
-        <p>Sign in to your AZERPUG account</p>
+        <h1 data-i18n="login.welcome">Welcome Back</h1>
+        <p data-i18n="login.subtitle">Sign in to your AZERPUG account</p>
       </div>
 
       <div class="pg-card">
@@ -63,14 +63,14 @@
         <div class="pg-card-body">
           <div id="loginError" class="pg-alert pg-alert-danger" style="display:none;"></div>
           <div class="pg-form-group">
-            <label for="loginEmail">Email Address</label>
+            <label for="loginEmail" data-i18n="login.email">Email Address</label>
             <input type="email" class="pg-form-control" id="loginEmail" placeholder="you@example.com" autofocus>
           </div>
           <div class="pg-form-group">
-            <label for="loginPassword">Password</label>
+            <label for="loginPassword" data-i18n="login.password">Password</label>
             <input type="password" class="pg-form-control" id="loginPassword" placeholder="Your password">
           </div>
-          <button class="pg-btn-primary" id="loginBtn" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+          <button class="pg-btn-primary" id="loginBtn" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i data-i18n="login.btn"> Sign In</button>
           <div class="pg-divider">or</div>
           <div id="googleBtnContainer" style="display:flex;justify-content:center;margin-bottom:12px;">
             <div id="g_id_onload"

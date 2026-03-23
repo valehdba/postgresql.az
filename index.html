@@ -106,8 +106,8 @@
         <div class="subtitle" id="heroSubtitle" data-i18n="home.subtitle">The open-source community for PostgreSQL enthusiasts in Azerbaijan</div>
         <div class="subtitle-az" id="heroSubtitleAz" data-i18n="home.subtitle_az">Azərbaycan PostgreSQL İstifadəçiləri Qrupu</div>
         <div class="pg-hero-actions" id="heroActions">
-          <a href="/registration/" class="pg-hero-btn pg-hero-btn-primary"><i class="fas fa-user-plus"></i> Join the Community</a>
-          <a href="/login/" class="pg-hero-btn pg-hero-btn-outline"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+          <a href="/registration/" class="pg-hero-btn pg-hero-btn-primary"><i class="fas fa-user-plus"></i data-i18n="home.join"> Join the Community</a>
+          <a href="/login/" class="pg-hero-btn pg-hero-btn-outline"><i class="fas fa-sign-in-alt"></i data-i18n="home.signin"> Sign In</a>
         </div>
         <div class="pg-hero-stats">
           <div><div class="pg-hero-stat-num" id="statMembers">—</div><div class="pg-hero-stat-label" data-i18n="home.members">Members</div></div>
@@ -190,8 +190,8 @@
         document.getElementById('heroSubtitle').textContent="You're part of the Azerbaijan PostgreSQL User Group community.";
         document.getElementById('heroSubtitleAz').textContent=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
         document.getElementById('heroActions').innerHTML=
-          '<a href="/profile/" class="pg-hero-btn pg-hero-btn-primary"><i class="fas fa-user"></i> My Profile</a>'+
-          '<a href="/blogs/#editor" class="pg-hero-btn pg-hero-btn-outline"><i class="fas fa-pen"></i> Write a Post</a>'+
+          '<a href="/profile/" class="pg-hero-btn pg-hero-btn-primary"><i class="fas fa-user"></i data-i18n="home.myprofile"> My Profile</a>'+
+          '<a href="/blogs/#editor" class="pg-hero-btn pg-hero-btn-outline"><i class="fas fa-pen"></i data-i18n="home.writepost"> Write a Post</a>'+
           '<a href="/events/" class="pg-hero-btn pg-hero-btn-outline"><i class="fas fa-calendar-alt"></i> Events</a>';
         if(user.is_admin){document.getElementById('adminBar').style.display='flex';loadAdminPending();}
       }

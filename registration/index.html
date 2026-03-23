@@ -674,7 +674,7 @@
 
                 <!-- Google Sign-Up -->
                 <div style="text-align:center;margin-bottom:20px;">
-                  <p style="font-size:.9rem;color:var(--pg-text-light);margin-bottom:14px;">Quick registration with your Google account:</p>
+                  <p style="font-size:.9rem;color:var(--pg-text-light);margin-bottom:14px;" data-i18n="reg.google_quick">Quick registration with your Google account:</p>
                   <div id="googleBtnContainer" style="display:flex;justify-content:center;margin-bottom:8px;">
                     <div id="g_id_onload"
                       data-client_id="328722583843-n04cr2tp7uhg4876m74ap124t366khq7.apps.googleusercontent.com"
@@ -697,7 +697,7 @@
 
                 <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;color:var(--pg-text-light);font-size:.78rem;text-transform:uppercase;font-weight:700;">
                   <div style="flex:1;height:1px;background:var(--pg-border);"></div>
-                  <span>or register with email</span>
+                  <span data-i18n="reg.or_email">or register with email</span>
                   <div style="flex:1;height:1px;background:var(--pg-border);"></div>
                 </div>
 
@@ -710,12 +710,12 @@
 
                   <div class="pg-form-row">
                     <div class="pg-form-group">
-                      <label for="firstName">First Name <span class="required">*</span></label>
+                      <label for="firstName" data-i18n="reg.first_name">First Name <span class="required">*</span></label>
                       <input type="text" class="pg-form-control" id="firstName" name="firstName" placeholder="e.g. Elvin" required>
                       <div class="pg-invalid-feedback" id="firstNameError"></div>
                     </div>
                     <div class="pg-form-group">
-                      <label for="lastName">Last Name <span class="required">*</span></label>
+                      <label for="lastName" data-i18n="reg.last_name">Last Name <span class="required">*</span></label>
                       <input type="text" class="pg-form-control" id="lastName" name="lastName" placeholder="e.g. Məmmədov" required>
                       <div class="pg-invalid-feedback" id="lastNameError"></div>
                     </div>
@@ -763,23 +763,23 @@
 
                   <div class="pg-form-row">
                     <div class="pg-form-group">
-                      <label for="company">Company / Organization</label>
+                      <label for="company" data-i18n="reg.company">Company / Organization</label>
                       <input type="text" class="pg-form-control" id="company" name="company" placeholder="Your company or organization">
                     </div>
                     <div class="pg-form-group">
-                      <label for="jobTitle">Job Title / Role</label>
+                      <label for="jobTitle" data-i18n="reg.job_title">Job Title / Role</label>
                       <input type="text" class="pg-form-control" id="jobTitle" name="jobTitle" placeholder="e.g. Database Administrator">
                     </div>
                   </div>
 
                   <div class="pg-form-row">
                     <div class="pg-form-group">
-                      <label for="linkedin">LinkedIn Profile</label>
+                      <label for="linkedin" data-i18n="reg.linkedin">LinkedIn Profile</label>
                       <input type="url" class="pg-form-control" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourname">
                       <div class="form-hint">Optional — your public LinkedIn profile URL</div>
                     </div>
                     <div class="pg-form-group">
-                      <label for="phone">Phone Number</label>
+                      <label for="phone" data-i18n="reg.phone">Phone Number</label>
                       <input type="tel" class="pg-form-control" id="phone" name="phone" placeholder="+994 XX XXX XX XX">
                       <div class="form-hint">Optional — for event notifications via SMS</div>
                     </div>
@@ -791,7 +791,7 @@
                   </div>
 
                   <div class="pg-form-group">
-                    <label for="personalNotes">Personal Notes</label>
+                    <label for="personalNotes" data-i18n="reg.notes">Personal Notes</label>
                     <textarea class="pg-form-control" id="personalNotes" name="personalNotes" rows="3" placeholder="Tell us about yourself — your interests in PostgreSQL, what you hope to gain from the community, or anything else you'd like to share..."></textarea>
                     <div class="form-hint">Optional — help us get to know you better</div>
                   </div>
