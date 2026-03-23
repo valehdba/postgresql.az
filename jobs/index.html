@@ -145,7 +145,7 @@
               </div>
               <div class="pg-form-group"><label>Tags</label><input type="text" class="pg-form-control" id="jTags" placeholder="e.g. postgresql, dba, aws, linux (comma separated)"><div class="pg-form-hint">Separate tags with commas</div></div>
               <div class="pg-form-actions">
-                <button class="pg-btn pg-btn-primary" onclick="submitJob()"><i class="fas fa-paper-plane"></i> Post Job</button>
+                <button class="pg-btn pg-btn-primary" id="submitJobBtn" onclick="submitJob()"><i class="fas fa-paper-plane"></i> Post Job</button>
               </div>
             </div>
           </div>
@@ -225,12 +225,21 @@
               applyBtn+='<a href="'+esc(url)+'" target="_blank" rel="noopener" class="pg-btn pg-btn-secondary" style="margin-left:6px;"><i class="fas fa-external-link-alt"></i> Company Website</a>';
             }
 
+            // Owner actions (edit/delete)
+            var ownerBtns='';
+            if(user&&j.posted_by===user.id){
+              ownerBtns='<div style="display:flex;gap:6px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--pg-border);">'+
+                '<button class="pg-btn pg-btn-secondary" onclick="editJob(\''+j.id+'\','+idx+')"><i class="fas fa-edit"></i> Edit</button>'+
+                '<button class="pg-btn pg-btn-secondary" style="color:var(--pg-danger);border-color:var(--pg-danger);" onclick="deleteJob(\''+j.id+'\')"><i class="fas fa-trash"></i> Delete</button>'+
+              '</div>';
+            }
+
             var shortDesc=esc(j.description).substring(0,300)+(j.description&&j.description.length>300?'...':'');
             var fullDesc=esc(j.description||'').replace(/\n/g,'<br>');
             var fullReq=j.requirements?esc(j.requirements).replace(/\n/g,'<br>'):'';
             var hasMore=j.description&&j.description.length>300||j.requirements;
 
-            html+='<div class="pg-job-card" id="job-'+idx+'"><div class="pg-job-header"><h3>'+esc(j.title)+'</h3><div class="pg-job-badges"><span class="pg-badge '+badge+'">'+(typeLabels[j.job_type]||j.job_type)+'</span>'+(j.is_remote?'<span class="pg-badge pg-badge-remote"><i class="fas fa-globe"></i> Remote</span>':'')+'</div></div>'+
+            html+='<div class="pg-job-card" id="job-'+idx+'" data-job=\''+JSON.stringify(j).replace(/'/g,"&#39;")+'\'><div class="pg-job-header"><h3>'+esc(j.title)+'</h3><div class="pg-job-badges"><span class="pg-badge '+badge+'">'+(typeLabels[j.job_type]||j.job_type)+'</span>'+(j.is_remote?'<span class="pg-badge pg-badge-remote"><i class="fas fa-globe"></i> Remote</span>':'')+'</div></div>'+
               '<div class="pg-job-meta"><span><i class="fas fa-building"></i> '+esc(j.company)+'</span>'+(j.location?'<span><i class="fas fa-map-marker-alt"></i> '+esc(j.location)+'</span>':'')+(j.salary_range?'<span><i class="fas fa-money-bill-wave"></i> '+esc(j.salary_range)+'</span>':'')+'<span><i class="fas fa-calendar"></i> '+date+'</span></div>'+
               '<div class="pg-job-desc" id="job-short-'+idx+'">'+shortDesc+'</div>'+
               '<div class="pg-job-details" id="job-full-'+idx+'" style="display:none;">'+
@@ -241,7 +250,7 @@
               '<div class="pg-job-apply">'+
                 (hasMore?'<button class="pg-btn pg-btn-secondary" id="job-toggle-'+idx+'" onclick="toggleJobDetails('+idx+')"><i class="fas fa-info-circle"></i> View Details</button>':'')+
                 applyBtn+
-              '</div></div>';
+              '</div>'+ownerBtns+'</div>';
           });
           el.innerHTML=html;
         }catch(e){
@@ -278,6 +287,101 @@
           btn.innerHTML='<i class="fas fa-info-circle"></i> View Details';
         }
       }
+
+      var editingJobId=null;
+
+      function editJob(jobId,idx){
+        var card=document.getElementById('job-'+idx);
+        var j=JSON.parse(card.getAttribute('data-job'));
+        editingJobId=jobId;
+
+        // Switch to post view and fill form with existing data
+        showView('post');
+        document.getElementById('jTitle').value=j.title||'';
+        document.getElementById('jCompany').value=j.company||'';
+        document.getElementById('jLocation').value=j.location||'';
+        document.getElementById('jRemote').checked=j.is_remote||false;
+        document.getElementById('jType').value=j.job_type||'full-time';
+        document.getElementById('jDesc').value=j.description||'';
+        document.getElementById('jReqs').value=j.requirements||'';
+        document.getElementById('jSalary').value=j.salary_range||'';
+        document.getElementById('jUrl').value=j.apply_url||'';
+        document.getElementById('jEmail').value=j.apply_email||'';
+        document.getElementById('jTags').value=(j.tags||[]).join(', ');
+
+        // Update form title and button
+        document.querySelector('#viewPost .pg-page-title').textContent='Edit Job Post';
+        var submitBtn=document.getElementById('submitJobBtn');
+        submitBtn.innerHTML='<i class="fas fa-save"></i> Update Job';
+        submitBtn.onclick=function(){updateJob()};
+        window.scrollTo({top:0,behavior:'smooth'});
+      }
+
+      async function updateJob(){
+        var t=document.getElementById('jTitle').value.trim();
+        var c=document.getElementById('jCompany').value.trim();
+        var d=document.getElementById('jDesc').value.trim();
+        if(!t||!c||!d){document.getElementById('postAlert').innerHTML='<div class="pg-alert pg-alert-danger">Title, company, and description are required.</div>';return;}
+
+        var tags=document.getElementById('jTags').value.split(',').map(function(x){return x.trim()}).filter(Boolean);
+        var body={
+          title:t,company:c,
+          location:document.getElementById('jLocation').value.trim()||null,
+          is_remote:document.getElementById('jRemote').checked,
+          job_type:document.getElementById('jType').value,
+          description:d,
+          requirements:document.getElementById('jReqs').value.trim()||null,
+          salary_range:document.getElementById('jSalary').value.trim()||null,
+          apply_url:document.getElementById('jUrl').value.trim()||null,
+          apply_email:document.getElementById('jEmail').value.trim()||null,
+          tags:tags.length?tags:null
+        };
+
+        try{
+          var r=await fetch(SB+'/rest/v1/jobs?id=eq.'+editingJobId,{
+            method:'PATCH',
+            headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY,'Prefer':'return=minimal'},
+            body:JSON.stringify(body)
+          });
+          if(r.ok){
+            document.getElementById('postAlert').innerHTML='<div class="pg-alert pg-alert-success"><i class="fas fa-check"></i> Job updated successfully!</div>';
+            editingJobId=null;
+            setTimeout(function(){showView('listing');loadJobs();document.getElementById('postAlert').innerHTML='';},1500);
+          }else{
+            var e=await r.text();
+            document.getElementById('postAlert').innerHTML='<div class="pg-alert pg-alert-danger">Failed to update: '+esc(e)+'</div>';
+          }
+        }catch(e){
+          document.getElementById('postAlert').innerHTML='<div class="pg-alert pg-alert-danger">Failed to update job.</div>';
+        }
+      }
+
+      async function deleteJob(jobId){
+        if(!confirm('Are you sure you want to delete this job post? This cannot be undone.'))return;
+        try{
+          var r=await fetch(SB+'/rest/v1/jobs?id=eq.'+jobId,{
+            method:'DELETE',
+            headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}
+          });
+          if(r.ok){loadJobs();}
+          else{alert('Failed to delete job.');}
+        }catch(e){alert('Failed to delete job.');}
+      }
+
+      // Reset form when switching to post view for new job
+      var origShowView=showView;
+      showView=function(v){
+        if(v==='post'&&!editingJobId){
+          // Reset form for new post
+          setTimeout(function(){
+            var title=document.querySelector('#viewPost .pg-page-title');
+            if(title)title.textContent='Post a Job';
+            var btn=document.getElementById('submitJobBtn');
+            if(btn){btn.innerHTML='<i class="fas fa-paper-plane"></i> Submit Job';btn.onclick=function(){submitJob()};}
+          },50);
+        }
+        origShowView(v);
+      };
 
       loadJobs();
       // FINDING-011: Remove post form from DOM for anonymous users
