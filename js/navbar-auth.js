@@ -1,65 +1,104 @@
 /* =============================================
-   AZERPUG Navbar Auth Button
-   Include this script on all pages to show
-   a login/profile button in the navbar
+   AZERPUG Navbar Auth + Dark Mode + Logout
+   Include this script on all pages
    ============================================= */
 (function() {
   var user = null;
   try { user = JSON.parse(sessionStorage.getItem('azerpug_user')); } catch(e) {}
 
-  // Wait for DOM
+  // ============ DARK MODE ============
+  function getDarkMode() {
+    var stored = localStorage.getItem('azerpug_dark');
+    if (stored !== null) return stored === '1';
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+
+  function applyDarkMode(dark) {
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    localStorage.setItem('azerpug_dark', dark ? '1' : '0');
+    var icon = document.getElementById('darkModeIcon');
+    if (icon) icon.className = dark ? 'fas fa-sun' : 'fas fa-moon';
+  }
+
+  applyDarkMode(getDarkMode());
+
+  // ============ DARK MODE CSS ============
+  var s = document.createElement('style');
+  s.textContent =
+    '[data-theme="dark"]{--pg-blue-dark:#5b9bd5;--pg-blue-light:#1a2a3a;--pg-blue-hover:#7cb3e0;--pg-text:#d4d4d4;--pg-text-light:#a0a0a0;--pg-border:#3a3a3a;--pg-bg-light:#1e1e1e;--pg-white:#252525;--pg-success:#4caf50;--pg-danger:#ef5350}' +
+    '[data-theme="dark"] body{background:#181818!important;color:#d4d4d4}' +
+    '[data-theme="dark"] .navbar.bg-light{background:#1e1e1e!important;border-bottom:1px solid #333}' +
+    '[data-theme="dark"] .navbar a{color:#b0b0b0!important}[data-theme="dark"] .navbar a:hover{color:#5b9bd5!important}' +
+    '[data-theme="dark"] .pg-hero{background:linear-gradient(135deg,#1a3352,#0d1b2a)}' +
+    '[data-theme="dark"] .pg-feature{background:#252525;border-color:#3a3a3a}[data-theme="dark"] .pg-feature:hover{border-color:#5b9bd5;box-shadow:0 4px 12px rgba(0,0,0,.3)}' +
+    '[data-theme="dark"] .pg-feature h3,[data-theme="dark"] .pg-page-title,[data-theme="dark"] .pg-section-title{color:#d4d4d4!important}[data-theme="dark"] .pg-page-title,[data-theme="dark"] .pg-section-title{border-color:#3a3a3a!important}' +
+    '[data-theme="dark"] h1,[data-theme="dark"] h2,[data-theme="dark"] h3,[data-theme="dark"] h4,[data-theme="dark"] h5,[data-theme="dark"] h6{color:#d4d4d4}' +
+    '[data-theme="dark"] a{color:#5b9bd5}' +
+    '[data-theme="dark"] .pg-form-control,[data-theme="dark"] .pg-toolbar input,[data-theme="dark"] .pg-toolbar select{background:#2a2a2a!important;border-color:#444!important;color:#d4d4d4!important}' +
+    '[data-theme="dark"] .pg-form-control:focus{border-color:#5b9bd5!important;box-shadow:0 0 0 3px rgba(91,155,213,.2)!important}' +
+    '[data-theme="dark"] .pg-card,[data-theme="dark"] .pg-post-card,[data-theme="dark"] .pg-blog-card,[data-theme="dark"] .pg-event-card,[data-theme="dark"] .pg-stat-item,[data-theme="dark"] .pg-job-card,[data-theme="dark"] .pg-role-card,[data-theme="dark"] .pg-album-card,[data-theme="dark"] .pg-benefit-card,[data-theme="dark"] .pg-tier-card,[data-theme="dark"] .pg-login-box,[data-theme="dark"] .pg-checkbox-item,[data-theme="dark"] .pg-sponsor-empty{background:#252525!important;border-color:#3a3a3a!important}' +
+    '[data-theme="dark"] .pg-card-header{background:#2a4a6b!important}' +
+    '[data-theme="dark"] .pg-info-box{background:#1a2a3a!important;border-color:#5b9bd5!important}' +
+    '[data-theme="dark"] .pg-sidebar-section h3{color:#5b9bd5!important;border-color:#5b9bd5!important}' +
+    '[data-theme="dark"] .pg-sidebar-section a{color:#b0b0b0!important}[data-theme="dark"] .pg-sidebar-section a:hover,[data-theme="dark"] .pg-sidebar-section a.active{background:#1a2a3a!important;border-left-color:#5b9bd5!important}' +
+    '[data-theme="dark"] .pg-sidebar-logo{border-color:#3a3a3a!important}' +
+    '[data-theme="dark"] #footer{color:#888}[data-theme="dark"] #footer a{color:#5b9bd5}' +
+    '[data-theme="dark"] table th{background:#2a2a2a!important;color:#d4d4d4!important;border-color:#3a3a3a!important}[data-theme="dark"] table td{border-color:#333!important;color:#d4d4d4}' +
+    '[data-theme="dark"] .pg-alert-danger{background:#3d1c1c!important;color:#ef9a9a!important;border-color:#5a2a2a!important}' +
+    '[data-theme="dark"] .pg-alert-success{background:#1c3d1c!important;color:#a5d6a7!important;border-color:#2a5a2a!important}' +
+    '[data-theme="dark"] .pg-admin-bar{background:#1a2a3a!important}' +
+    '[data-theme="dark"] .pg-member-avatar{background:#2a4a6b!important}' +
+    '[data-theme="dark"] .pg-lightbox{background:rgba(0,0,0,.95)}' +
+    '[data-theme="dark"] .pg-empty,[data-theme="dark"] .pg-empty-posts,[data-theme="dark"] .pg-loading{color:#888!important}' +
+    '[data-theme="dark"] img.footer-logo{filter:brightness(0.7)}' +
+    '[data-theme="dark"] .pg-checkbox-item:hover,[data-theme="dark"] .pg-checkbox-item.checked{background:#1a2a3a!important;border-color:#5b9bd5!important}' +
+    '[data-theme="dark"] select.pg-form-control{background-image:url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'12\' height=\'12\' viewBox=\'0 0 12 12\'%3E%3Cpath fill=\'%23a0a0a0\' d=\'M6 8L1 3h10z\'/%3E%3C/svg%3E")!important}' +
+    '[data-theme="dark"] .pg-search-wrapper{background:#2a2a2a;border-color:#444}[data-theme="dark"] .pg-search-input{background:#2a2a2a!important;color:#d4d4d4!important}' +
+    '[data-theme="dark"] #darkModeBtn{border-color:#444!important;color:#a0a0a0!important}[data-theme="dark"] #darkModeBtn:hover{border-color:#5b9bd5!important;color:#5b9bd5!important}' +
+    '[data-theme="dark"] .pg-cta-box{background:#1a2a3a!important;border-color:#3a3a3a!important}' +
+    '[data-theme="dark"] p,[data-theme="dark"] li,[data-theme="dark"] span,[data-theme="dark"] div{color:inherit}';
+  document.head.appendChild(s);
+
+  // ============ INIT NAVBAR ============
   function init() {
     var navbar = document.getElementById('pgNavbar');
     if (!navbar) return;
 
-    // Create the auth container
     var authDiv = document.createElement('div');
     authDiv.className = 'navbar-nav ml-auto';
     authDiv.id = 'navbarAuth';
     authDiv.style.cssText = 'display:flex;align-items:center;gap:8px;';
 
+    var darkBtn = '<button id="darkModeBtn" onclick="window.__toggleDark()" title="Toggle dark mode" style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:transparent;border:1px solid #ccc;border-radius:50%;font-size:0.8rem;color:#515151;cursor:pointer;transition:all 0.15s;"><i id="darkModeIcon" class="' + (getDarkMode() ? 'fas fa-sun' : 'fas fa-moon') + '"></i></button>';
+
     if (user && user.id) {
       var initials = ((user.first_name || '')[0] || '') + ((user.last_name || '')[0] || '');
-
-      authDiv.innerHTML =
-        '<a href="/profile/" style="display:inline-flex;align-items:center;gap:8px;padding:5px 14px;background:#336791;color:#fff;border-radius:20px;font-size:0.82rem;font-weight:600;text-decoration:none;transition:background 0.15s ease;font-family:\'Maven Pro\',sans-serif;" ' +
-        'onmouseover="this.style.background=\'#264d6f\'" onmouseout="this.style.background=\'#336791\'">' +
+      authDiv.innerHTML = darkBtn +
+        '<a href="/profile/" style="display:inline-flex;align-items:center;gap:8px;padding:5px 14px;background:#336791;color:#fff!important;border-radius:20px;font-size:0.82rem;font-weight:600;text-decoration:none;transition:background 0.15s ease;font-family:\'Maven Pro\',sans-serif;" onmouseover="this.style.background=\'#264d6f\'" onmouseout="this.style.background=\'#336791\'">' +
           '<span style="width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;">' + initials.toUpperCase() + '</span>' +
-          '<span>' + user.first_name + '</span>' +
-        '</a>';
-
-      // Add admin icon if admin
+          '<span>' + user.first_name + '</span></a>';
       if (user.is_admin) {
-        authDiv.innerHTML +=
-          '<a href="/admin/" title="Admin Panel" style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:#c62828;color:#fff;border-radius:50%;font-size:0.75rem;text-decoration:none;transition:background 0.15s ease;" ' +
-          'onmouseover="this.style.background=\'#a31c1c\'" onmouseout="this.style.background=\'#c62828\'">' +
-            '<i class="fas fa-shield-alt"></i>' +
-          '</a>';
+        authDiv.innerHTML += '<a href="/admin/" title="Admin Panel" style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:#c62828;color:#fff!important;border-radius:50%;font-size:0.75rem;text-decoration:none;transition:background 0.15s ease;" onmouseover="this.style.background=\'#a31c1c\'" onmouseout="this.style.background=\'#c62828\'"><i class="fas fa-shield-alt"></i></a>';
       }
+      authDiv.innerHTML += '<button onclick="window.__logout()" title="Log Out" style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:transparent;border:1px solid #ccc;border-radius:50%;font-size:0.75rem;color:#999;cursor:pointer;transition:all 0.15s;" onmouseover="this.style.borderColor=\'#c62828\';this.style.color=\'#c62828\'" onmouseout="this.style.borderColor=\'#ccc\';this.style.color=\'#999\'"><i class="fas fa-sign-out-alt"></i></button>';
     } else {
-      authDiv.innerHTML =
-        '<a href="/login/" style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:#336791;color:#fff;border-radius:20px;font-size:0.82rem;font-weight:600;text-decoration:none;transition:background 0.15s ease;font-family:\'Maven Pro\',sans-serif;" ' +
-        'onmouseover="this.style.background=\'#264d6f\'" onmouseout="this.style.background=\'#336791\'">' +
-          '<i class="fas fa-sign-in-alt"></i> Log In' +
-        '</a>';
+      authDiv.innerHTML = darkBtn +
+        '<a href="/login/" style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:#336791;color:#fff!important;border-radius:20px;font-size:0.82rem;font-weight:600;text-decoration:none;transition:background 0.15s ease;font-family:\'Maven Pro\',sans-serif;" onmouseover="this.style.background=\'#264d6f\'" onmouseout="this.style.background=\'#336791\'"><i class="fas fa-sign-in-alt"></i> Log In</a>';
     }
 
     navbar.appendChild(authDiv);
 
-    // FINDING-018: Hide Registration link when logged in
     if (user && user.id) {
-      var navLinks = navbar.querySelectorAll('a');
-      navLinks.forEach(function(link) {
-        if (link.getAttribute('href') === '/registration/' || link.textContent.trim() === 'Registration') {
+      navbar.querySelectorAll('a').forEach(function(link) {
+        if (link.getAttribute('href') === '/registration/' || link.textContent.trim() === 'Registration')
           link.parentElement.style.display = 'none';
-        }
       });
     }
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  window.__toggleDark = function() { applyDarkMode(!getDarkMode()); };
+  window.__logout = function() { sessionStorage.removeItem('azerpug_user'); window.location.href = '/'; };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
