@@ -671,6 +671,36 @@
                 <i class="fas fa-user-plus"></i> Create Your Account
               </div>
               <div class="pg-form-card-body">
+
+                <!-- Google Sign-Up -->
+                <div style="text-align:center;margin-bottom:20px;">
+                  <p style="font-size:.9rem;color:var(--pg-text-light);margin-bottom:14px;">Quick registration with your Google account:</p>
+                  <div id="googleBtnContainer" style="display:flex;justify-content:center;margin-bottom:8px;">
+                    <div id="g_id_onload"
+                      data-client_id="328722583843-n04cr2tp7uhg4876m74ap124t366khq7.apps.googleusercontent.com"
+                      data-context="signup"
+                      data-callback="handleGoogleCredential"
+                      data-auto_prompt="false">
+                    </div>
+                    <div class="g_id_signin"
+                      data-type="standard"
+                      data-shape="rectangular"
+                      data-theme="outline"
+                      data-text="signup_with"
+                      data-size="large"
+                      data-logo_alignment="left"
+                      data-width="300">
+                    </div>
+                  </div>
+                  <div id="googleStatusMsg" style="display:none;text-align:center;font-size:.85rem;margin-bottom:8px;"></div>
+                </div>
+
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;color:var(--pg-text-light);font-size:.78rem;text-transform:uppercase;font-weight:700;">
+                  <div style="flex:1;height:1px;background:var(--pg-border);"></div>
+                  <span>or register with email</span>
+                  <div style="flex:1;height:1px;background:var(--pg-border);"></div>
+                </div>
+
                 <form id="registrationForm" novalidate>
 
                   <!-- Account Information -->
@@ -1193,5 +1223,8 @@
     <!-- EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>emailjs.init('1xXaZzZ874ZIGQM8Q');</script>
+    <!-- Google Sign-In -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="/js/google-auth.js"></script>
 </body>
 </html>

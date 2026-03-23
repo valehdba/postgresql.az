@@ -72,6 +72,24 @@
           </div>
           <button class="pg-btn-primary" id="loginBtn" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> Sign In</button>
           <div class="pg-divider">or</div>
+          <div id="googleBtnContainer" style="display:flex;justify-content:center;margin-bottom:12px;">
+            <div id="g_id_onload"
+              data-client_id="328722583843-n04cr2tp7uhg4876m74ap124t366khq7.apps.googleusercontent.com"
+              data-context="signin"
+              data-callback="handleGoogleCredential"
+              data-auto_prompt="false">
+            </div>
+            <div class="g_id_signin"
+              data-type="standard"
+              data-shape="rectangular"
+              data-theme="outline"
+              data-text="signin_with"
+              data-size="large"
+              data-logo_alignment="left"
+              data-width="300">
+            </div>
+          </div>
+          <div id="googleStatusMsg" style="display:none;text-align:center;font-size:.85rem;margin-bottom:12px;"></div>
           <div style="text-align:center;">
             <a href="/registration/" style="font-size:.88rem;color:var(--pg-blue-dark);font-weight:600;">Don't have an account? <strong>Register for free</strong></a>
           </div>
@@ -92,6 +110,8 @@
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="/js/google-auth.js"></script>
     <script src="/js/navbar-auth.js"></script>
 
     <script>
