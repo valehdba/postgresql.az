@@ -202,7 +202,10 @@
       async function loadJobs(){
         var el=document.getElementById('jobsList');
         try{
-          var r=await fetch(SB+'/rest/v1/public_jobs?select=*&order=created_at.desc',{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}});
+          var controller=new AbortController();
+          var timeout=setTimeout(function(){controller.abort();},8000);
+          var r=await fetch(SB+'/rest/v1/public_jobs?select=*&order=created_at.desc',{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY},signal:controller.signal});
+          clearTimeout(timeout);
           if(!r.ok)throw new Error(await r.text());
           var jobs=await r.json();
           if(jobs.length===0){el.innerHTML='<div class="pg-empty"><i class="fas fa-briefcase"></i>No jobs posted yet. Be the first to <a href="#" onclick="showView(\'post\')">post a job</a>!</div>';return;}
