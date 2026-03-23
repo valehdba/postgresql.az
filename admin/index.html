@@ -501,15 +501,15 @@
       async function loadAdminEvents() {
         var el = document.getElementById('adminEventsList');
         try {
-          var r = await fetch(SUPABASE_URL + '/rest/v1/events?select=*&order=event_date.desc', { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY } });
+          var r = await fetch(SUPABASE_URL + '/rest/v1/events?select=*&order=start_date.desc', { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY } });
           if (!r.ok) throw new Error();
           var events = await r.json();
           if (!events.length) { el.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--pg-text-light);"><i class="fas fa-calendar-times" style="font-size:2rem;display:block;margin-bottom:8px;color:var(--pg-border);"></i>No events yet. Create your first event above!</div>'; return; }
 
           var html = '';
           events.forEach(function(ev) {
-            var d = ev.event_date ? new Date(ev.event_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
-            var isPast = ev.event_date && new Date(ev.event_date) < new Date();
+            var d = ev.start_date ? new Date(ev.start_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
+            var isPast = ev.start_date && new Date(ev.start_date) < new Date();
             var badge = isPast ? '<span style="background:#6c757d;color:#fff;padding:2px 8px;border-radius:10px;font-size:.7rem;font-weight:700;">PAST</span>' : '<span style="background:var(--pg-success);color:#fff;padding:2px 8px;border-radius:10px;font-size:.7rem;font-weight:700;">UPCOMING</span>';
             html += '<div style="background:var(--pg-white);border:1px solid var(--pg-border);border-radius:4px;padding:16px 20px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">' +
               '<div><strong style="color:var(--pg-text);font-size:.9rem;">' + esc(ev.title) + '</strong> ' + badge +
@@ -535,8 +535,9 @@
 
         var body = {
           title: title,
+          slug: title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') + '-' + Date.now().toString(36),
           event_type: document.getElementById('evType').value,
-          event_date: datetime,
+          start_date: datetime,
           location: document.getElementById('evLocation').value.trim() || null,
           description: document.getElementById('evDescription').value.trim() || null,
           speaker: document.getElementById('evSpeaker').value.trim() || null,
