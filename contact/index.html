@@ -146,10 +146,15 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="/js/navbar-auth.js"></script>
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <script>
       var SB = 'https://qlyqwwhimwfcvuqdrxov.supabase.co';
       var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFseXF3d2hpbXdmY3Z1cWRyeG92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjg2ODYsImV4cCI6MjA4OTcwNDY4Nn0.6MKz72wGwthRL8hs-Iv3L9Iw_W4DdGh3UjrwcagtKfM';
+
+      // Initialize EmailJS
+      emailjs.init('1xXaZzZ874ZIGQM8Q');
 
       // Auto-fill if logged in
       var user = null;
@@ -176,24 +181,36 @@
         btn.disabled = true;
         btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
+        var dbOk = false;
+        var emailOk = false;
+
+        // 1. Save to Supabase DB
         try {
           var r = await fetch(SB + '/rest/v1/contact_messages', {
             method: 'POST',
             headers: { 'Content-Type':'application/json', 'apikey':KEY, 'Authorization':'Bearer '+KEY, 'Prefer':'return=minimal' },
             body: JSON.stringify({ name:name, email:email, subject:subject, message:message, member_id: user ? user.id : null })
           });
+          if (r.ok) dbOk = true;
+        } catch(err) { console.warn('DB save failed:', err); }
 
-          if (r.ok) {
-            document.getElementById('contactForm').style.display = 'none';
-            document.getElementById('successMsg').style.display = 'block';
-          } else {
-            // If table doesn't exist yet, show email fallback
-            alert.innerHTML = '<div class="pg-alert pg-alert-success"><i class="fas fa-info-circle"></i> Contact form database is being set up. In the meantime, please email us directly at <a href="mailto:info@postgresql.az">info@postgresql.az</a></div>';
-            btn.disabled = false;
-            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-          }
-        } catch(err) {
-          alert.innerHTML = '<div class="pg-alert pg-alert-danger">Failed to send. Please email us at <a href="mailto:info@postgresql.az">info@postgresql.az</a></div>';
+        // 2. Send email via EmailJS
+        try {
+          await emailjs.send('service_gtolwpf', 'template_7zg35wq', {
+            from_name: name,
+            from_email: email,
+            subject: subject,
+            message: message
+          });
+          emailOk = true;
+        } catch(err) { console.warn('Email send failed:', err); }
+
+        // Show result
+        if (dbOk || emailOk) {
+          document.getElementById('contactForm').style.display = 'none';
+          document.getElementById('successMsg').style.display = 'block';
+        } else {
+          alert.innerHTML = '<div class="pg-alert pg-alert-danger">Failed to send message. Please email us directly at <a href="mailto:info@postgresql.az">info@postgresql.az</a></div>';
           btn.disabled = false;
           btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
         }
