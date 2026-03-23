@@ -55,6 +55,7 @@
     '[data-theme="dark"] select.pg-form-control{background-image:url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'12\' height=\'12\' viewBox=\'0 0 12 12\'%3E%3Cpath fill=\'%23a0a0a0\' d=\'M6 8L1 3h10z\'/%3E%3C/svg%3E")!important}' +
     '[data-theme="dark"] .pg-search-wrapper{background:#2a2a2a;border-color:#444}[data-theme="dark"] .pg-search-input{background:#2a2a2a!important;color:#d4d4d4!important}' +
     '[data-theme="dark"] #darkModeBtn{border-color:#444!important;color:#a0a0a0!important}[data-theme="dark"] #darkModeBtn:hover{border-color:#5b9bd5!important;color:#5b9bd5!important}' +
+    '[data-theme="dark"] #langToggleBtn{border-color:#444!important;color:#a0a0a0!important}[data-theme="dark"] #langToggleBtn:hover{border-color:#5b9bd5!important;color:#5b9bd5!important}' +
     '[data-theme="dark"] .pg-cta-box{background:#1a2a3a!important;border-color:#3a3a3a!important}' +
     '[data-theme="dark"] .pg-btn-primary{background:#2a5a8a!important;color:#fff!important}[data-theme="dark"] .pg-btn-primary:hover{background:#3a6a9a!important}' +
     '[data-theme="dark"] .pg-btn-primary a,[data-theme="dark"] a.pg-btn-primary,[data-theme="dark"] a.pg-btn-primary i{color:#fff!important}' +

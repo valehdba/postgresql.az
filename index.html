@@ -93,7 +93,7 @@
         <a class="navbar-brand p-0" aria-label="AZERPUG Home" href="/"><img class="logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="pgNavbar"><ul class="navbar-nav mr-auto">
-          <li class="nav-item p-2"><a href="/">Home</a></li><li class="nav-item p-2"><a href="/blogs/">Blog Posts</a></li><li class="nav-item p-2"><a href="/events/">Events</a></li><li class="nav-item p-2"><a href="/registration/">Registration</a></li><li class="nav-item p-2"><a href="/members/">Members</a></li><li class="nav-item p-2"><a href="/community/">Global Community</a></li><li class="nav-item p-2"><a href="/profile/">My Profile</a></li><li class="nav-item p-2"><a href="/about/">About</a></li>
+          <li class="nav-item p-2"><a href="/" data-i18n="nav.home">Home</a></li><li class="nav-item p-2"><a href="/blogs/" data-i18n="nav.blog">Blog Posts</a></li><li class="nav-item p-2"><a href="/events/" data-i18n="nav.events">Events</a></li><li class="nav-item p-2"><a href="/registration/" data-i18n="nav.registration">Registration</a></li><li class="nav-item p-2"><a href="/members/" data-i18n="nav.members">Members</a></li><li class="nav-item p-2"><a href="/community/" data-i18n="nav.community">Global Community</a></li><li class="nav-item p-2"><a href="/profile/" data-i18n="nav.profile">My Profile</a></li><li class="nav-item p-2"><a href="/about/" data-i18n="nav.about">About</a></li>
         </ul></div>
       </nav>
     </div></div>
@@ -102,18 +102,18 @@
 
       <!-- Hero Banner — adapts to login state -->
       <div class="pg-hero" id="heroBanner">
-        <h1 id="heroTitle">Azerbaijan PostgreSQL User Group</h1>
-        <div class="subtitle" id="heroSubtitle">The open-source community for PostgreSQL enthusiasts in Azerbaijan</div>
-        <div class="subtitle-az" id="heroSubtitleAz">Azərbaycan PostgreSQL İstifadəçiləri Qrupu</div>
+        <h1 id="heroTitle" data-i18n="home.title">Azerbaijan PostgreSQL User Group</h1>
+        <div class="subtitle" id="heroSubtitle" data-i18n="home.subtitle">The open-source community for PostgreSQL enthusiasts in Azerbaijan</div>
+        <div class="subtitle-az" id="heroSubtitleAz" data-i18n="home.subtitle_az">Azərbaycan PostgreSQL İstifadəçiləri Qrupu</div>
         <div class="pg-hero-actions" id="heroActions">
           <a href="/registration/" class="pg-hero-btn pg-hero-btn-primary"><i class="fas fa-user-plus"></i> Join the Community</a>
           <a href="/login/" class="pg-hero-btn pg-hero-btn-outline"><i class="fas fa-sign-in-alt"></i> Sign In</a>
         </div>
         <div class="pg-hero-stats">
-          <div><div class="pg-hero-stat-num" id="statMembers">—</div><div class="pg-hero-stat-label">Members</div></div>
-          <div><div class="pg-hero-stat-num" id="statPosts">—</div><div class="pg-hero-stat-label">Blog Posts</div></div>
-          <div><div class="pg-hero-stat-num">2018</div><div class="pg-hero-stat-label">Founded</div></div>
-          <div><div class="pg-hero-stat-num"><i class="fas fa-globe" style="font-size:1.4rem"></i></div><div class="pg-hero-stat-label">Open Source</div></div>
+          <div><div class="pg-hero-stat-num" id="statMembers">—</div><div class="pg-hero-stat-label" data-i18n="home.members">Members</div></div>
+          <div><div class="pg-hero-stat-num" id="statPosts">—</div><div class="pg-hero-stat-label" data-i18n="home.blogposts">Blog Posts</div></div>
+          <div><div class="pg-hero-stat-num">2018</div><div class="pg-hero-stat-label" data-i18n="home.founded">Founded</div></div>
+          <div><div class="pg-hero-stat-num"><i class="fas fa-globe" style="font-size:1.4rem"></i></div><div class="pg-hero-stat-label" data-i18n="home.opensource">Open Source</div></div>
         </div>
       </div>
 
@@ -125,18 +125,18 @@
 
       <!-- Features Grid -->
       <div class="pg-features">
-        <a href="/blogs/" class="pg-feature"><div class="pg-feature-icon" style="background:#336791"><i class="fas fa-pen"></i></div><h3>Blog Posts</h3><p>Read and write articles about PostgreSQL — tutorials, tips, and real-world experiences</p></a>
-        <a href="/events/" class="pg-feature"><div class="pg-feature-icon" style="background:#e65100"><i class="fas fa-calendar-alt"></i></div><h3>Events & Meetups</h3><p>Join workshops, meetups, webinars, and conferences with the community</p></a>
-        <a href="/members/" class="pg-feature"><div class="pg-feature-icon" style="background:#2e7d32"><i class="fas fa-users"></i></div><h3>Community Members</h3><p>Connect with PostgreSQL professionals, developers, and DBAs in Azerbaijan</p></a>
-        <a href="/resources/" class="pg-feature"><div class="pg-feature-icon" style="background:#7b1fa2"><i class="fas fa-book-open"></i></div><h3>Resources</h3><p>Curated tutorials, books, tools, and courses for learning PostgreSQL</p></a>
-        <a href="/jobs/" class="pg-feature"><div class="pg-feature-icon" style="background:#c62828"><i class="fas fa-briefcase"></i></div><h3>Job Board</h3><p>Find PostgreSQL-related jobs in Azerbaijan and remote positions</p></a>
-        <a href="/community/" class="pg-feature"><div class="pg-feature-icon" style="background:#1565c0"><i class="fas fa-globe"></i></div><h3>Global Community</h3><p>Connect with the worldwide PostgreSQL ecosystem and organizations</p></a>
-        <a href="/contact/" class="pg-feature"><div class="pg-feature-icon" style="background:#00838f"><i class="fas fa-comment-dots"></i></div><h3>Feedback</h3><p>Share your thoughts, suggestions, and ideas to help us improve the community</p></a>
-        <a href="/contribute/" class="pg-feature"><div class="pg-feature-icon" style="background:#2e7d32"><i class="fas fa-hands-helping"></i></div><h3>Contribute to Local Community</h3><p>Volunteer, organize events, write content, and help grow PostgreSQL in Azerbaijan</p></a>
+        <a href="/blogs/" class="pg-feature"><div class="pg-feature-icon" style="background:#336791"><i class="fas fa-pen"></i></div><h3 data-i18n="feat.blog">Blog Posts</h3><p data-i18n="feat.blog_desc">Read and write articles about PostgreSQL — tutorials, tips, and real-world experiences</p></a>
+        <a href="/events/" class="pg-feature"><div class="pg-feature-icon" style="background:#e65100"><i class="fas fa-calendar-alt"></i></div><h3 data-i18n="feat.events">Events & Meetups</h3><p data-i18n="feat.events_desc">Join workshops, meetups, webinars, and conferences with the community</p></a>
+        <a href="/members/" class="pg-feature"><div class="pg-feature-icon" style="background:#2e7d32"><i class="fas fa-users"></i></div><h3 data-i18n="feat.members">Community Members</h3><p data-i18n="feat.members_desc">Connect with PostgreSQL professionals, developers, and DBAs in Azerbaijan</p></a>
+        <a href="/resources/" class="pg-feature"><div class="pg-feature-icon" style="background:#7b1fa2"><i class="fas fa-book-open"></i></div><h3 data-i18n="feat.resources">Resources</h3><p data-i18n="feat.resources_desc">Curated tutorials, books, tools, and courses for learning PostgreSQL</p></a>
+        <a href="/jobs/" class="pg-feature"><div class="pg-feature-icon" style="background:#c62828"><i class="fas fa-briefcase"></i></div><h3 data-i18n="feat.jobs">Job Board</h3><p data-i18n="feat.jobs_desc">Find PostgreSQL-related jobs in Azerbaijan and remote positions</p></a>
+        <a href="/community/" class="pg-feature"><div class="pg-feature-icon" style="background:#1565c0"><i class="fas fa-globe"></i></div><h3 data-i18n="feat.community">Global Community</h3><p data-i18n="feat.community_desc">Connect with the worldwide PostgreSQL ecosystem and organizations</p></a>
+        <a href="/contact/" class="pg-feature"><div class="pg-feature-icon" style="background:#00838f"><i class="fas fa-comment-dots"></i></div><h3 data-i18n="feat.feedback">Feedback</h3><p data-i18n="feat.feedback_desc">Share your thoughts, suggestions, and ideas to help us improve the community</p></a>
+        <a href="/contribute/" class="pg-feature"><div class="pg-feature-icon" style="background:#2e7d32"><i class="fas fa-hands-helping"></i></div><h3 data-i18n="feat.contribute">Contribute to Local Community</h3><p data-i18n="feat.contribute_desc">Volunteer, organize events, write content, and help grow PostgreSQL in Azerbaijan</p></a>
       </div>
 
       <!-- Our Mission -->
-      <div class="pg-section-title"><i class="fas fa-bullseye"></i> Our Mission</div>
+      <div class="pg-section-title"><i class="fas fa-bullseye"></i data-i18n="mission.title"> Our Mission</div>
       <div style="background:var(--pg-white);border:1px solid var(--pg-border);border-radius:4px;padding:24px;margin-bottom:1.5rem;">
         <p style="font-size:.92rem;line-height:1.75;color:var(--pg-text);margin:0 0 12px;">AZERPUG exists to grow and strengthen the PostgreSQL community in Azerbaijan. We believe that knowledge is most powerful when it's shared freely, and that open-source technology is the foundation of innovation.</p>
         <p style="font-size:.92rem;line-height:1.75;color:var(--pg-text);margin:0 0 12px;">Our mission is to provide a platform where anyone — from curious beginners to seasoned database experts — can learn, share, and collaborate around PostgreSQL. We organize meetups, publish educational content, and connect professionals who work with the world's most advanced open-source relational database.</p>
@@ -144,20 +144,20 @@
       </div>
 
       <!-- Community Values -->
-      <div class="pg-section-title"><i class="fas fa-heart"></i> Community Values</div>
+      <div class="pg-section-title"><i class="fas fa-heart"></i data-i18n="values.title"> Community Values</div>
       <div class="pg-features" style="margin-bottom:2rem;">
-        <div class="pg-feature" style="cursor:default;"><div class="pg-feature-icon" style="background:#336791"><i class="fas fa-lock-open"></i></div><h3>Open Source</h3><p>We champion open-source software and the collaborative development model that makes PostgreSQL great.</p></div>
-        <div class="pg-feature" style="cursor:default;"><div class="pg-feature-icon" style="background:#2e7d32"><i class="fas fa-equals"></i></div><h3>Equality</h3><p>Every member has an equal voice. There is no hierarchy — we grow together as a flat, open community.</p></div>
-        <div class="pg-feature" style="cursor:default;"><div class="pg-feature-icon" style="background:#e65100"><i class="fas fa-graduation-cap"></i></div><h3>Knowledge Sharing</h3><p>We learn from each other through blog posts, meetups, workshops, and mentorship.</p></div>
-        <div class="pg-feature" style="cursor:default;"><div class="pg-feature-icon" style="background:#7b1fa2"><i class="fas fa-hands-helping"></i></div><h3>Inclusivity</h3><p>Everyone is welcome regardless of experience level, background, or profession.</p></div>
+        <div class="pg-feature" style="cursor:default;"><div class="pg-feature-icon" style="background:#336791"><i class="fas fa-lock-open"></i></div><h3 data-i18n="values.opensource">Open Source</h3><p data-i18n="values.opensource_desc">We champion open-source software and the collaborative development model that makes PostgreSQL great.</p></div>
+        <div class="pg-feature" style="cursor:default;"><div class="pg-feature-icon" style="background:#2e7d32"><i class="fas fa-equals"></i></div><h3 data-i18n="values.equality">Equality</h3><p data-i18n="values.equality_desc">Every member has an equal voice. There is no hierarchy — we grow together as a flat, open community.</p></div>
+        <div class="pg-feature" style="cursor:default;"><div class="pg-feature-icon" style="background:#e65100"><i class="fas fa-graduation-cap"></i></div><h3 data-i18n="values.knowledge">Knowledge Sharing</h3><p data-i18n="values.knowledge_desc">We learn from each other through blog posts, meetups, workshops, and mentorship.</p></div>
+        <div class="pg-feature" style="cursor:default;"><div class="pg-feature-icon" style="background:#7b1fa2"><i class="fas fa-hands-helping"></i></div><h3 data-i18n="values.inclusivity">Inclusivity</h3><p data-i18n="values.inclusivity_desc">Everyone is welcome regardless of experience level, background, or profession.</p></div>
       </div>
 
       <!-- Latest Blog Posts -->
-      <div class="pg-section-title"><i class="fas fa-newspaper"></i> Latest Blog Posts</div>
+      <div class="pg-section-title"><i class="fas fa-newspaper"></i data-i18n="home.latest_posts"> Latest Blog Posts</div>
       <div id="blogPosts" class="pg-posts-grid"></div>
 
       <!-- Community Stats -->
-      <div class="pg-section-title"><i class="fas fa-chart-bar"></i> Community</div>
+      <div class="pg-section-title"><i class="fas fa-chart-bar"></i data-i18n="home.community_stats"> Community</div>
       <div class="pg-stat-row" style="margin-bottom:2rem;">
         <div class="pg-stat-item"><div class="pg-stat-num" id="statMembersBottom">—</div><div class="pg-stat-label">Members</div></div>
         <div class="pg-stat-item"><div class="pg-stat-num" id="statPostsBottom">—</div><div class="pg-stat-label">Blog Posts</div></div>
@@ -169,13 +169,14 @@
     <footer id="footer"><div class="container">
       <a href="/"><img class="footer-logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a><br/>
       <div style="margin-bottom:12px;"><a href="https://www.facebook.com/groups/www.postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="Facebook" aria-label="AZERPUG Facebook Group"><i class="fab fa-facebook"></i></a> <a href="https://github.com/valehdba/postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="GitHub" aria-label="AZERPUG GitHub Repository"><i class="fab fa-github"></i></a> <a href="https://www.linkedin.com/groups/17977044/" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="LinkedIn" aria-label="AZERPUG LinkedIn Group"><i class="fab fa-linkedin"></i></a> <a href="https://t.me/postgresqlaz" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="Telegram" aria-label="AZERPUG Telegram Group"><i class="fab fa-telegram-plane"></i></a> <a href="https://www.youtube.com/@postgresqlaz" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="YouTube" aria-label="AZERPUG YouTube Channel"><i class="fab fa-youtube"></i></a></div>
-      <a href="/about/privacypolicy/">Privacy policy</a> | <a href="/about/website/">About the website</a><br/>
+      <a href="/about/privacypolicy/" data-i18n="footer.privacy">Privacy policy</a> | <a href="/about/website/" data-i18n="footer.website">About the website</a><br/>
       Copyright &copy; 2018-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
     </div></footer>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="/js/navbar-auth.js"></script>
+    <script src="/js/lang.js"></script>
 
     <script>
       var SB='https://qlyqwwhimwfcvuqdrxov.supabase.co';
