@@ -237,6 +237,88 @@
     // News page
     'news.title': { en: 'PostgreSQL News', az: 'PostgreSQL Xəbərləri' },
 
+
+    // About page sections
+    'about.mission_title': { en: 'Our Mission', az: 'Missiyamız' },
+    'about.mission_text': { en: 'AZERPUG exists to grow and strengthen the PostgreSQL community in Azerbaijan. We believe that knowledge is most powerful when it\'s shared freely, and that open-source technology is the foundation of innovation.', az: 'AZERPUG Azərbaycanda PostgreSQL icmasını inkişaf etdirmək və güclənirmək üçün mövcuddur. Biz inanırıq ki, bilik sərbəst paylaşıldıqda ən güclüdür və açıq-mənbə texnologiyası innovasiyanın əsasıdır.' },
+    'about.values_title': { en: 'Community Values', az: 'İcma Dəyərləri' },
+    'about.timeline_title': { en: 'Our Journey', az: 'Bizim Yolumuz' },
+    'about.connect_title': { en: 'Connect With Us', az: 'Bizimlə Əlaqə' },
+    'about.join_title': { en: 'Join AZERPUG Today', az: 'Bu gün AZERPUG-a qoşulun' },
+    'about.join_desc': { en: 'Become part of the PostgreSQL community in Azerbaijan. Registration is free and open to everyone.', az: 'Azərbaycandakı PostgreSQL icmasının bir hissəsi olun. Qeydiyyat pulsuz və hər kəs üçün açıqdır.' },
+    'about.founded_label': { en: 'Founded', az: 'Təsis edilib' },
+    'about.members_label': { en: 'Members', az: 'Üzvlər' },
+    'about.events_label': { en: 'Events Held', az: 'Keçirilmiş Tədbirlər' },
+    'about.posts_label': { en: 'Blog Posts', az: 'Bloq Yazıları' },
+
+    // Sponsors page sections
+    'sponsors.become': { en: 'Become Our First Sponsor', az: 'İlk Sponsorumuz Olun' },
+    'sponsors.become_desc': { en: 'We\'re looking for organizations that believe in open-source technology and want to support the growing PostgreSQL community in Azerbaijan.', az: 'Açıq-mənbə texnologiyasına inanan və Azərbaycanda böyüyən PostgreSQL icmasını dəstəkləmək istəyən təşkilatlar axtarırıq.' },
+    'sponsors.why': { en: 'Why Sponsor AZERPUG?', az: 'Niyə AZERPUG-u Sponsorluq Etməli?' },
+    'sponsors.tiers': { en: 'Sponsorship Tiers', az: 'Sponsorluq Səviyyələri' },
+    'sponsors.contact': { en: 'Interested in Sponsoring AZERPUG?', az: 'AZERPUG-u Sponsorluq Etməkdə Maraqlısınız?' },
+    'sponsors.brand': { en: 'Brand Visibility', az: 'Brend Görünürlüyü' },
+    'sponsors.talent': { en: 'Talent Access', az: 'İstedada Giriş' },
+    'sponsors.speaking': { en: 'Speaking Opportunities', az: 'Çıxış İmkanları' },
+    'sponsors.impact': { en: 'Community Impact', az: 'İcma Təsiri' },
+    'sponsors.gold': { en: 'Gold', az: 'Qızıl' },
+    'sponsors.silver': { en: 'Silver', az: 'Gümüş' },
+    'sponsors.bronze': { en: 'Bronze', az: 'Bürünc' },
+
+    // News page
+    'news.subtitle': { en: 'Latest PostgreSQL releases, security updates, and community announcements.', az: 'Ən son PostgreSQL versiyaları, təhlükəsizlik yeniləmələri və icma elanları.' },
+    'news.pg_releases': { en: 'PostgreSQL Releases', az: 'PostgreSQL Versiyaları' },
+    'news.community_news': { en: 'Community News', az: 'İcma Xəbərləri' },
+
+    // Resources sections
+    'resources.docs': { en: 'Official Documentation', az: 'Rəsmi Sənədlər' },
+    'resources.tutorials': { en: 'Tutorials & Guides', az: 'Dərsliklər və Bələdçilər' },
+    'resources.books': { en: 'Books', az: 'Kitablar' },
+    'resources.tools': { en: 'Tools & Extensions', az: 'Alətlər və Əlavələr' },
+    'resources.courses': { en: 'Video Courses', az: 'Video Kurslar' },
+
+    // FAQ sections
+    'faq.about_azerpug': { en: 'About AZERPUG', az: 'AZERPUG Haqqında' },
+    'faq.membership': { en: 'Membership', az: 'Üzvlük' },
+    'faq.about_pg': { en: 'About PostgreSQL', az: 'PostgreSQL Haqqında' },
+
+    // Gallery
+    'gallery.all_albums': { en: 'All Albums', az: 'Bütün Albomlar' },
+    'gallery.loading': { en: 'Loading gallery...', az: 'Qalereya yüklənir...' },
+    'gallery.no_albums': { en: 'No photo albums yet. Photos from upcoming events will appear here!', az: 'Hələ foto albom yoxdur. Gələcək tədbirlərdən fotolar burada görünəcək!' },
+    'gallery.back': { en: 'Back to Albums', az: 'Albomlara Qayıt' },
+
+    // Contribute roles
+    'contribute.event_organizer': { en: 'Event Organizer', az: 'Tədbir Təşkilatçısı' },
+    'contribute.speaker': { en: 'Speaker / Presenter', az: 'Məruzəçi / Təqdimatçı' },
+    'contribute.writer': { en: 'Content Writer', az: 'Məzmun Yazarı' },
+    'contribute.social': { en: 'Social Media & Outreach', az: 'Sosial Media və Əlaqə' },
+    'contribute.mentor': { en: 'Mentor / Tutor', az: 'Mentor / Təlimatçı' },
+    'contribute.developer': { en: 'Website Developer', az: 'Veb Proqramçı' },
+    'contribute.sponsor_coord': { en: 'Sponsorship Coordinator', az: 'Sponsorluq Koordinatoru' },
+    'contribute.photographer': { en: 'Photographer / Videographer', az: 'Fotoqraf / Videoqraf' },
+    'contribute.name': { en: 'Full Name', az: 'Tam Ad' },
+    'contribute.email': { en: 'Email', az: 'E-poçt' },
+    'contribute.phone': { en: 'Phone (optional)', az: 'Telefon (istəyə bağlı)' },
+    'contribute.roles_label': { en: 'How would you like to contribute?', az: 'Necə töhfə vermək istərdiniz?' },
+    'contribute.select_roles': { en: 'Select all roles that interest you', az: 'Sizi maraqlandıran bütün rolları seçin' },
+    'contribute.experience': { en: 'Relevant Experience', az: 'Müvafiq Təcrübə' },
+    'contribute.availability': { en: 'Availability', az: 'Müsaitlik' },
+    'contribute.anything_else': { en: 'Anything Else?', az: 'Başqa Bir Şey?' },
+
+    // Profile page
+    'profile.first_name': { en: 'First Name', az: 'Ad' },
+    'profile.last_name': { en: 'Last Name', az: 'Soyad' },
+    'profile.company': { en: 'Company', az: 'Şirkət' },
+    'profile.job_title': { en: 'Job Title', az: 'Vəzifə' },
+    'profile.linkedin': { en: 'LinkedIn', az: 'LinkedIn' },
+    'profile.phone': { en: 'Phone', az: 'Telefon' },
+    'profile.notes': { en: 'Personal Notes', az: 'Şəxsi Qeydlər' },
+    'profile.newsletter': { en: 'Newsletter', az: 'Xəbər Bülleteni' },
+    'profile.member_since': { en: 'Member Since', az: 'Üzv olub' },
+    'profile.view_profile': { en: 'View Profile', az: 'Profili Gör' },
+    'profile.edit_profile': { en: 'Edit Profile', az: 'Profili Redaktə Et' },
+
     // Common
     'common.loading': { en: 'Loading...', az: 'Yüklənir...' },
     'common.back_home': { en: 'Back to Home', az: 'Ana Səhifəyə' },
