@@ -56,6 +56,33 @@
     '[data-theme="dark"] .pg-search-wrapper{background:#2a2a2a;border-color:#444}[data-theme="dark"] .pg-search-input{background:#2a2a2a!important;color:#d4d4d4!important}' +
     '[data-theme="dark"] #darkModeBtn{border-color:#444!important;color:#a0a0a0!important}[data-theme="dark"] #darkModeBtn:hover{border-color:#5b9bd5!important;color:#5b9bd5!important}' +
     '[data-theme="dark"] .pg-cta-box{background:#1a2a3a!important;border-color:#3a3a3a!important}' +
+    '[data-theme="dark"] .pg-btn-primary{background:#2a5a8a!important;color:#fff!important}[data-theme="dark"] .pg-btn-primary:hover{background:#3a6a9a!important}' +
+    '[data-theme="dark"] .pg-btn-secondary{background:#2a2a2a!important;color:#d4d4d4!important;border-color:#555!important}[data-theme="dark"] .pg-btn-secondary:hover{background:#333!important;border-color:#5b9bd5!important;color:#5b9bd5!important}' +
+    '[data-theme="dark"] .pg-btn-success{background:#2e7d32!important;color:#fff!important}[data-theme="dark"] .pg-btn-success:hover{background:#388e3c!important}' +
+    '[data-theme="dark"] .pg-btn-outline{background:transparent!important;color:#5b9bd5!important;border-color:#555!important}[data-theme="dark"] .pg-btn-outline:hover{background:#1a2a3a!important;border-color:#5b9bd5!important}' +
+    '[data-theme="dark"] .pg-hero-btn-primary{background:#2a5a8a!important;color:#fff!important}[data-theme="dark"] .pg-hero-btn-primary:hover{background:#3a6a9a!important}' +
+    '[data-theme="dark"] .pg-hero-btn-outline{border-color:rgba(255,255,255,.4)!important;color:#fff!important}[data-theme="dark"] .pg-hero-btn-outline:hover{background:rgba(255,255,255,.1)!important}' +
+    '[data-theme="dark"] .pg-tag{background:#1a2a3a!important;color:#5b9bd5!important}' +
+    '[data-theme="dark"] .pg-badge{color:#fff!important}' +
+    '[data-theme="dark"] .pg-event-type{opacity:.9}' +
+    '[data-theme="dark"] .pg-event-day{background:#2a2a2a!important;color:#d4d4d4!important;border-color:#444!important}' +
+    '[data-theme="dark"] .pg-event-footer{background:#1e1e1e!important;border-color:#333!important}' +
+    '[data-theme="dark"] .pg-job-card{background:#252525!important;border-color:#3a3a3a!important}' +
+    '[data-theme="dark"] .pg-job-header h3{color:#d4d4d4!important}' +
+    '[data-theme="dark"] .pg-job-meta{color:#a0a0a0!important}' +
+    '[data-theme="dark"] .pg-job-desc{color:#c0c0c0!important}' +
+    '[data-theme="dark"] .pg-form-group label{color:#d4d4d4!important}' +
+    '[data-theme="dark"] .pg-form-hint{color:#888!important}' +
+    '[data-theme="dark"] .pg-page-subtitle{color:#a0a0a0!important}' +
+    '[data-theme="dark"] .pg-sidebar-logo-text{color:#5b9bd5!important}' +
+    '[data-theme="dark"] .btn-pg{color:#d4d4d4!important;border-color:#555!important}[data-theme="dark"] .btn-pg:hover{border-color:#5b9bd5!important}' +
+    '[data-theme="dark"] .btn-approve{background:#2e7d32!important;color:#fff!important;border-color:#2e7d32!important}' +
+    '[data-theme="dark"] .btn-reject{background:#c62828!important;color:#fff!important;border-color:#c62828!important}' +
+    '[data-theme="dark"] .admin-tabs{border-color:#3a3a3a!important}[data-theme="dark"] .admin-tab{color:#a0a0a0!important;border-color:transparent!important}[data-theme="dark"] .admin-tab.active{color:#5b9bd5!important;border-color:#5b9bd5!important}' +
+    '[data-theme="dark"] .admin-stats{background:#1e1e1e!important}[data-theme="dark"] .admin-stat{border-color:#3a3a3a!important}' +
+    '[data-theme="dark"] .pg-filter-select{background:#2a2a2a!important;border-color:#444!important;color:#d4d4d4!important}' +
+    '[data-theme="dark"] .pg-role-card{background:#252525!important;border-color:#3a3a3a!important}[data-theme="dark"] .pg-role-card:hover{border-color:#5b9bd5!important}' +
+    '[data-theme="dark"] .pg-role-card h3{color:#d4d4d4!important}[data-theme="dark"] .pg-role-card p{color:#a0a0a0!important}' +
     '[data-theme="dark"] p,[data-theme="dark"] li,[data-theme="dark"] span,[data-theme="dark"] div{color:inherit}';
   document.head.appendChild(s);
 
