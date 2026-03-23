@@ -208,7 +208,7 @@
           if(jobs.length===0){el.innerHTML='<div class="pg-empty"><i class="fas fa-briefcase"></i>No jobs posted yet. Be the first to <a href="#" onclick="showView(\'post\')">post a job</a>!</div>';return;}
 
           var html='';
-          jobs.forEach(function(j){
+          jobs.forEach(function(j,idx){
             var date=j.created_at?new Date(j.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'';
             var tags=(j.tags||[]).map(function(t){return'<span class="pg-tag">'+esc(t)+'</span>'}).join('');
             var badge=typeBadge[j.job_type]||'pg-badge-ft';
@@ -216,12 +216,24 @@
             if(j.apply_url)applyBtn='<a href="'+esc(j.apply_url)+'" target="_blank" rel="noopener" class="pg-btn pg-btn-primary"><i class="fas fa-external-link-alt"></i> Apply</a>';
             else if(j.apply_email)applyBtn='<a href="mailto:'+esc(j.apply_email)+'" class="pg-btn pg-btn-primary"><i class="fas fa-envelope"></i> Apply via Email</a>';
 
-            html+='<div class="pg-job-card"><div class="pg-job-header"><h3>'+esc(j.title)+'</h3><div class="pg-job-badges"><span class="pg-badge '+badge+'">'+(typeLabels[j.job_type]||j.job_type)+'</span>'+(j.is_remote?'<span class="pg-badge pg-badge-remote"><i class="fas fa-globe"></i> Remote</span>':'')+'</div></div>'+
+            var shortDesc=esc(j.description).substring(0,300)+(j.description&&j.description.length>300?'...':'');
+            var fullDesc=esc(j.description||'').replace(/\n/g,'<br>');
+            var fullReq=j.requirements?esc(j.requirements).replace(/\n/g,'<br>'):'';
+            var hasMore=j.description&&j.description.length>300||j.requirements;
+
+            html+='<div class="pg-job-card" id="job-'+idx+'"><div class="pg-job-header"><h3>'+esc(j.title)+'</h3><div class="pg-job-badges"><span class="pg-badge '+badge+'">'+(typeLabels[j.job_type]||j.job_type)+'</span>'+(j.is_remote?'<span class="pg-badge pg-badge-remote"><i class="fas fa-globe"></i> Remote</span>':'')+'</div></div>'+
               '<div class="pg-job-meta"><span><i class="fas fa-building"></i> '+esc(j.company)+'</span>'+(j.location?'<span><i class="fas fa-map-marker-alt"></i> '+esc(j.location)+'</span>':'')+(j.salary_range?'<span><i class="fas fa-money-bill-wave"></i> '+esc(j.salary_range)+'</span>':'')+'<span><i class="fas fa-calendar"></i> '+date+'</span></div>'+
-              '<div class="pg-job-desc">'+esc(j.description).substring(0,300)+(j.description.length>300?'...':'')+'</div>'+
-              (j.requirements?'<div class="pg-job-desc" style="font-size:.82rem;color:var(--pg-text-light);"><strong>Requirements:</strong> '+esc(j.requirements).substring(0,200)+'</div>':'')+
+              '<div class="pg-job-desc" id="job-short-'+idx+'">'+shortDesc+'</div>'+
+              '<div class="pg-job-details" id="job-full-'+idx+'" style="display:none;">'+
+                '<div class="pg-job-desc" style="white-space:pre-line;">'+fullDesc+'</div>'+
+                (fullReq?'<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--pg-border);"><strong style="font-size:.85rem;color:var(--pg-text);">Requirements</strong><div class="pg-job-desc" style="margin-top:6px;white-space:pre-line;">'+fullReq+'</div></div>':'')+
+              '</div>'+
               (tags?'<div class="pg-job-tags">'+tags+'</div>':'')+
-              '<div class="pg-job-apply">'+applyBtn+'</div></div>';
+              '<div class="pg-job-apply">'+
+                (hasMore?'<button class="pg-btn pg-btn-secondary" id="job-toggle-'+idx+'" onclick="toggleJobDetails('+idx+')"><i class="fas fa-info-circle"></i> View Details</button>':'')+
+                applyBtn+
+              '</div></div>';
+          });
           });
           el.innerHTML=html;
         }catch(e){
@@ -244,6 +256,19 @@
           if(r.ok){showView('listing');loadJobs();document.getElementById('postAlert').innerHTML='';}
           else{var e=await r.text();document.getElementById('postAlert').innerHTML='<div class="pg-alert pg-alert-danger">Failed: '+esc(e)+'</div>';}
         }catch(e){document.getElementById('postAlert').innerHTML='<div class="pg-alert pg-alert-danger">Failed to post job.</div>';}
+      }
+
+      function toggleJobDetails(idx){
+        var short=document.getElementById('job-short-'+idx);
+        var full=document.getElementById('job-full-'+idx);
+        var btn=document.getElementById('job-toggle-'+idx);
+        if(full.style.display==='none'){
+          full.style.display='block';short.style.display='none';
+          btn.innerHTML='<i class="fas fa-chevron-up"></i> Hide Details';
+        }else{
+          full.style.display='none';short.style.display='block';
+          btn.innerHTML='<i class="fas fa-info-circle"></i> View Details';
+        }
       }
 
       loadJobs();
