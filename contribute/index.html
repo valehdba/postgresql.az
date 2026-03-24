@@ -73,8 +73,8 @@
       <aside class="pg-sidebar">
         <div class="pg-sidebar-logo"><a href="/"><img src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a><div class="pg-sidebar-logo-text">Azerbaijan PostgreSQL<br>User Group</div></div>
         <div class="pg-sidebar-section"><h3>Contribute</h3><ul>
-          <li><a href="#roles" class="active">Volunteer Roles</a></li>
-          <li><a href="#form">Sign Up Form</a></li>
+          <li><a href="#roles" class="active" data-i18n="contribute.how">Volunteer Roles</a></li>
+          <li><a href="#form" data-i18n="contribute.signup">Sign Up Form</a></li>
         </ul></div>
         <div class="pg-sidebar-section"><h3>Community</h3><ul>
           <li><a href="/events/">Events</a></li><li><a href="/blogs/">Blog Posts</a></li><li><a href="/members/">Members</a></li><li><a href="/about/">About</a></li>
@@ -86,7 +86,7 @@
         <p class="pg-page-subtitle" data-i18n="contribute.subtitle">AZERPUG is built by its members. Whether you have 30 minutes or 30 hours a month, there's a way for you to help grow the PostgreSQL community in Azerbaijan. Tell us how you'd like to contribute!</p>
 
         <div class="pg-info-box">
-          <i class="fas fa-heart"></i> AZERPUG is a volunteer-driven community. Every contribution — big or small — makes a real difference. No prior organizing experience needed!
+          <i class="fas fa-heart"></i> <span data-i18n="contribute.info">AZERPUG is a volunteer-driven community. Every contribution — big or small — makes a real difference. No prior organizing experience needed!</span>
         </div>
 
         <!-- Volunteer Roles -->
@@ -95,42 +95,42 @@
           <div class="pg-role-card">
             <div class="pg-role-icon" style="background:#336791"><i class="fas fa-calendar-alt"></i></div>
             <h3 data-i18n="contribute.event_organizer">Event Organizer</h3>
-            <p>Help plan and run meetups, workshops, and conferences. Find venues, coordinate speakers, and manage logistics in Baku.</p>
+            <p data-i18n="contribute.event_organizer_desc">Help plan and run meetups, workshops, and conferences. Find venues, coordinate speakers, and manage logistics in Baku.</p>
           </div>
           <div class="pg-role-card">
             <div class="pg-role-icon" style="background:#e65100"><i class="fas fa-microphone-alt"></i></div>
             <h3 data-i18n="contribute.speaker">Speaker / Presenter</h3>
-            <p>Share your PostgreSQL knowledge at meetups and workshops. Topics can range from beginner introductions to advanced deep-dives.</p>
+            <p data-i18n="contribute.speaker_desc">Share your PostgreSQL knowledge at meetups and workshops. Topics can range from beginner introductions to advanced deep-dives.</p>
           </div>
           <div class="pg-role-card">
             <div class="pg-role-icon" style="background:#2e7d32"><i class="fas fa-pen-fancy"></i></div>
             <h3 data-i18n="contribute.writer">Content Writer</h3>
-            <p>Write blog posts, tutorials, and guides in English or Azerbaijani. Help translate PostgreSQL documentation for local users.</p>
+            <p data-i18n="contribute.writer_desc">Write blog posts, tutorials, and guides in English or Azerbaijani. Help translate PostgreSQL documentation for local users.</p>
           </div>
           <div class="pg-role-card">
             <div class="pg-role-icon" style="background:#7b1fa2"><i class="fas fa-bullhorn"></i></div>
             <h3 data-i18n="contribute.social">Social Media & Outreach</h3>
-            <p>Manage our Facebook, LinkedIn, Telegram, and YouTube channels. Promote events and share PostgreSQL news with the community.</p>
+            <p data-i18n="contribute.social_desc">Manage our Facebook, LinkedIn, Telegram, and YouTube channels. Promote events and share PostgreSQL news with the community.</p>
           </div>
           <div class="pg-role-card">
             <div class="pg-role-icon" style="background:#c62828"><i class="fas fa-chalkboard-teacher"></i></div>
             <h3 data-i18n="contribute.mentor">Mentor / Tutor</h3>
-            <p>Guide beginners through their PostgreSQL journey. Answer questions, review code, and provide one-on-one support to new members.</p>
+            <p data-i18n="contribute.mentor_desc">Guide beginners through their PostgreSQL journey. Answer questions, review code, and provide one-on-one support to new members.</p>
           </div>
           <div class="pg-role-card">
             <div class="pg-role-icon" style="background:#00838f"><i class="fas fa-code"></i></div>
             <h3 data-i18n="contribute.developer">Website Developer</h3>
-            <p>Help improve the postgresql.az website. Fix bugs, add features, improve design — the code is open source on GitHub.</p>
+            <p data-i18n="contribute.developer_desc">Help improve the postgresql.az website. Fix bugs, add features, improve design — the code is open source on GitHub.</p>
           </div>
           <div class="pg-role-card">
             <div class="pg-role-icon" style="background:#4e342e"><i class="fas fa-handshake"></i></div>
             <h3 data-i18n="contribute.sponsor_coord">Sponsorship Coordinator</h3>
-            <p>Help find sponsors and partners for events. Build relationships with companies that use PostgreSQL in Azerbaijan.</p>
+            <p data-i18n="contribute.sponsor_coord_desc">Help find sponsors and partners for events. Build relationships with companies that use PostgreSQL in Azerbaijan.</p>
           </div>
           <div class="pg-role-card">
             <div class="pg-role-icon" style="background:#1565c0"><i class="fas fa-camera"></i></div>
             <h3 data-i18n="contribute.photographer">Photographer / Videographer</h3>
-            <p>Capture photos and videos at events for our gallery and YouTube channel. Help with livestreaming meetups and talks.</p>
+            <p data-i18n="contribute.photographer_desc">Capture photos and videos at events for our gallery and YouTube channel. Help with livestreaming meetups and talks.</p>
           </div>
         </div>
 
@@ -138,53 +138,53 @@
         <h2 class="pg-section-title" id="form"><i class="fas fa-hand-paper"></i><span data-i18n="contribute.signup"> Volunteer Sign-Up</span></h2>
 
         <div class="pg-card">
-          <div class="pg-card-header"><i class="fas fa-hands-helping"></i> I Want to Contribute</div>
+          <div class="pg-card-header"><i class="fas fa-hands-helping"></i data-i18n="contribute.form_header"> I Want to Contribute</div>
           <div class="pg-card-body">
             <div id="formAlert"></div>
 
             <form id="volunteerForm">
               <div class="pg-form-row">
                 <div class="pg-form-group"><label data-i18n="contribute.name">Full Name <span class="req">*</span></label><input type="text" class="pg-form-control" id="vName" placeholder="Your full name"></div>
-                <div class="pg-form-group"><label>Email <span class="req">*</span></label><input type="email" class="pg-form-control" id="vEmail" placeholder="you@example.com"></div>
+                <div class="pg-form-group"><label data-i18n="contribute.email">Email <span class="req">*</span></label><input type="email" class="pg-form-control" id="vEmail" placeholder="you@example.com"></div>
               </div>
 
-              <div class="pg-form-group"><label>Phone (optional)</label><input type="tel" class="pg-form-control" id="vPhone" placeholder="+994 XX XXX XX XX"></div>
+              <div class="pg-form-group"><label data-i18n="contribute.phone">Phone (optional)</label><input type="tel" class="pg-form-control" id="vPhone" placeholder="+994 XX XXX XX XX"></div>
 
               <div class="pg-form-group">
-                <label>How would you like to contribute? <span class="req">*</span></label>
-                <div class="pg-form-hint" style="margin-bottom:10px;">Select all roles that interest you</div>
+                <label data-i18n="contribute.roles_label">How would you like to contribute? <span class="req">*</span></label>
+                <div class="pg-form-hint" style="margin-bottom:10px;" data-i18n="contribute.select_roles">Select all roles that interest you</div>
                 <div class="pg-checkbox-grid">
                   <label class="pg-checkbox-item" onclick="this.classList.toggle('checked')">
                     <input type="checkbox" name="roles" value="event_organizer">
-                    <div><div class="pg-cb-label"><i class="fas fa-calendar-alt" style="color:#336791;margin-right:4px;"></i> Event Organizer</div><div class="pg-cb-desc">Plan and run meetups, find venues</div></div>
+                    <div><div class="pg-cb-label"><i class="fas fa-calendar-alt" style="color:#336791;margin-right:4px;"></i data-i18n="contribute.event_organizer"> Event Organizer</div><div class="pg-cb-desc" data-i18n="contribute.cb_organizer_desc">Plan and run meetups, find venues</div></div>
                   </label>
                   <label class="pg-checkbox-item" onclick="this.classList.toggle('checked')">
                     <input type="checkbox" name="roles" value="speaker">
-                    <div><div class="pg-cb-label"><i class="fas fa-microphone-alt" style="color:#e65100;margin-right:4px;"></i> Speaker / Presenter</div><div class="pg-cb-desc">Give talks at events</div></div>
+                    <div><div class="pg-cb-label"><i class="fas fa-microphone-alt" style="color:#e65100;margin-right:4px;"></i data-i18n="contribute.speaker"> Speaker / Presenter</div><div class="pg-cb-desc" data-i18n="contribute.cb_speaker_desc">Give talks at events</div></div>
                   </label>
                   <label class="pg-checkbox-item" onclick="this.classList.toggle('checked')">
                     <input type="checkbox" name="roles" value="content_writer">
-                    <div><div class="pg-cb-label"><i class="fas fa-pen-fancy" style="color:#2e7d32;margin-right:4px;"></i> Content Writer</div><div class="pg-cb-desc">Write blogs, tutorials, guides</div></div>
+                    <div><div class="pg-cb-label"><i class="fas fa-pen-fancy" style="color:#2e7d32;margin-right:4px;"></i data-i18n="contribute.writer"> Content Writer</div><div class="pg-cb-desc" data-i18n="contribute.cb_writer_desc">Write blogs, tutorials, guides</div></div>
                   </label>
                   <label class="pg-checkbox-item" onclick="this.classList.toggle('checked')">
                     <input type="checkbox" name="roles" value="social_media">
-                    <div><div class="pg-cb-label"><i class="fas fa-bullhorn" style="color:#7b1fa2;margin-right:4px;"></i> Social Media & Outreach</div><div class="pg-cb-desc">Manage channels, promote events</div></div>
+                    <div><div class="pg-cb-label"><i class="fas fa-bullhorn" style="color:#7b1fa2;margin-right:4px;"></i data-i18n="contribute.social"> Social Media & Outreach</div><div class="pg-cb-desc" data-i18n="contribute.cb_social_desc">Manage channels, promote events</div></div>
                   </label>
                   <label class="pg-checkbox-item" onclick="this.classList.toggle('checked')">
                     <input type="checkbox" name="roles" value="mentor">
-                    <div><div class="pg-cb-label"><i class="fas fa-chalkboard-teacher" style="color:#c62828;margin-right:4px;"></i> Mentor / Tutor</div><div class="pg-cb-desc">Guide and support beginners</div></div>
+                    <div><div class="pg-cb-label"><i class="fas fa-chalkboard-teacher" style="color:#c62828;margin-right:4px;"></i data-i18n="contribute.mentor"> Mentor / Tutor</div><div class="pg-cb-desc" data-i18n="contribute.cb_mentor_desc">Guide and support beginners</div></div>
                   </label>
                   <label class="pg-checkbox-item" onclick="this.classList.toggle('checked')">
                     <input type="checkbox" name="roles" value="developer">
-                    <div><div class="pg-cb-label"><i class="fas fa-code" style="color:#00838f;margin-right:4px;"></i> Website Developer</div><div class="pg-cb-desc">Improve postgresql.az</div></div>
+                    <div><div class="pg-cb-label"><i class="fas fa-code" style="color:#00838f;margin-right:4px;"></i data-i18n="contribute.developer"> Website Developer</div><div class="pg-cb-desc" data-i18n="contribute.cb_developer_desc">Improve postgresql.az</div></div>
                   </label>
                   <label class="pg-checkbox-item" onclick="this.classList.toggle('checked')">
                     <input type="checkbox" name="roles" value="sponsor_coordinator">
-                    <div><div class="pg-cb-label"><i class="fas fa-handshake" style="color:#4e342e;margin-right:4px;"></i> Sponsorship Coordinator</div><div class="pg-cb-desc">Find sponsors and partners</div></div>
+                    <div><div class="pg-cb-label"><i class="fas fa-handshake" style="color:#4e342e;margin-right:4px;"></i data-i18n="contribute.sponsor_coord"> Sponsorship Coordinator</div><div class="pg-cb-desc" data-i18n="contribute.cb_sponsor_desc">Find sponsors and partners</div></div>
                   </label>
                   <label class="pg-checkbox-item" onclick="this.classList.toggle('checked')">
                     <input type="checkbox" name="roles" value="photographer">
-                    <div><div class="pg-cb-label"><i class="fas fa-camera" style="color:#1565c0;margin-right:4px;"></i> Photographer / Videographer</div><div class="pg-cb-desc">Capture events, livestream</div></div>
+                    <div><div class="pg-cb-label"><i class="fas fa-camera" style="color:#1565c0;margin-right:4px;"></i data-i18n="contribute.photographer"> Photographer / Videographer</div><div class="pg-cb-desc" data-i18n="contribute.cb_photo_desc">Capture events, livestream</div></div>
                   </label>
                 </div>
               </div>
@@ -197,11 +197,11 @@
               <div class="pg-form-group">
                 <label data-i18n="contribute.availability">Availability</label>
                 <select class="pg-form-control" id="vAvailability">
-                  <option value="">— How much time can you commit? —</option>
-                  <option value="few_hours_month">A few hours per month</option>
-                  <option value="weekly">A few hours per week</option>
-                  <option value="event_based">Only during events</option>
-                  <option value="flexible">Flexible — depends on the task</option>
+                  <option value="" data-i18n="contribute.avail_prompt">— How much time can you commit? —</option>
+                  <option value="few_hours_month" data-i18n="contribute.avail_monthly">A few hours per month</option>
+                  <option value="weekly" data-i18n="contribute.avail_weekly">A few hours per week</option>
+                  <option value="event_based" data-i18n="contribute.avail_events">Only during events</option>
+                  <option value="flexible" data-i18n="contribute.avail_flexible">Flexible — depends on the task</option>
                 </select>
               </div>
 
@@ -218,7 +218,7 @@
             <div id="successMsg" style="display:none;text-align:center;padding:2.5rem;">
               <i class="fas fa-check-circle" style="font-size:2.5rem;color:var(--pg-success);margin-bottom:.75rem;display:block;"></i>
               <h3 style="font-family:'Maven Pro',sans-serif;font-size:1.2rem;color:var(--pg-text);text-transform:none;" data-i18n="contribute.thanks">Thank You for Volunteering!</h3>
-              <p style="color:var(--pg-text-light);font-size:.9rem;">Your application has been submitted. We'll be in touch to discuss how you can best contribute to the AZERPUG community.</p>
+              <p style="color:var(--pg-text-light);font-size:.9rem;" data-i18n="contribute.thanks_desc">Your application has been submitted. We'll be in touch to discuss how you can best contribute to the AZERPUG community.</p>
               <a href="/" class="pg-btn pg-btn-primary" style="margin-top:12px;"><i class="fas fa-home"></i> <span data-i18n="common.back_home">Back to Home</span></a>
             </div>
           </div>
