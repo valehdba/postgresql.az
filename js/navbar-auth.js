@@ -94,6 +94,7 @@
     '[data-theme="dark"] .pg-filter-select{background:#2a2a2a!important;border-color:#444!important;color:#d4d4d4!important}' +
     '[data-theme="dark"] .pg-role-card{background:#252525!important;border-color:#3a3a3a!important}[data-theme="dark"] .pg-role-card:hover{border-color:#5b9bd5!important}' +
     '[data-theme="dark"] .pg-role-card h3{color:#d4d4d4!important}[data-theme="dark"] .pg-role-card p{color:#a0a0a0!important}' +
+    '[data-theme="dark"] .dropdown-menu{background:#252525!important;border-color:#3a3a3a!important}[data-theme="dark"] .dropdown-item{color:#d4d4d4!important}[data-theme="dark"] .dropdown-item:hover{background:#1a2a3a!important;color:#5b9bd5!important}' +
     '[data-theme="dark"] p,[data-theme="dark"] li,[data-theme="dark"] span,[data-theme="dark"] div{color:inherit}';
   document.head.appendChild(s);
 

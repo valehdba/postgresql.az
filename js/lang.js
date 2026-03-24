@@ -14,6 +14,11 @@
     'nav.community': { en: 'Global Community', az: 'Qlobal İcma' },
     'nav.profile': { en: 'My Profile', az: 'Profilim' },
     'nav.about': { en: 'About', az: 'Haqqımızda' },
+    'nav.sponsors': { en: 'Sponsors', az: 'Sponsorlar' },
+    'nav.faq': { en: 'FAQ', az: 'TVS' },
+    'nav.gallery': { en: 'Gallery', az: 'Qalereya' },
+    'nav.contact': { en: 'Contact', az: 'Əlaqə' },
+    'nav.contribute': { en: 'Contribute', az: 'Töhfə Ver' },
 
     // Footer
     'footer.privacy': { en: 'Privacy policy', az: 'Məxfilik siyasəti' },

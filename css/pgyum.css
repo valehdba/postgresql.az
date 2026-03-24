@@ -191,3 +191,30 @@ dl.eventlist dd {
 .pgyum-available {
     color: green;
 }
+/* Navbar Dropdown */
+.navbar .dropdown-toggle::after {
+    margin-left: 4px;
+    vertical-align: middle;
+}
+.navbar .dropdown-menu {
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border: 1px solid #d8dde3;
+    padding: 6px 0;
+    min-width: 180px;
+}
+.navbar .dropdown-item {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #336791;
+    padding: 8px 20px;
+    transition: all 0.15s ease;
+}
+.navbar .dropdown-item:hover {
+    background: #e7eef4;
+    color: #264d6f;
+}
+.navbar .dropdown-item:active {
+    background: #336791;
+    color: #fff;
+}
