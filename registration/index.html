@@ -657,18 +657,18 @@
 
           <!-- Main Content -->
           <main class="pg-main-content">
-            <h1 class="pg-page-title">Member Registration</h1>
+            <h1 class="pg-page-title" data-i18n="reg.title">Member Registration</h1>
             <p class="pg-page-subtitle">Join the Azerbaijan PostgreSQL User Group (AZERPUG) — the official PostgreSQL community in Azerbaijan.</p>
 
             <div class="pg-info-box">
               <p><i class="fas fa-info-circle"></i> Registration is free and open to everyone interested in PostgreSQL — developers, DBAs, students, and enthusiasts. Fill out the form below to become a member of AZERPUG.</p>
-              <p style="margin-top:8px;"><i class="fas fa-sign-in-alt"></i> Already a member? <a href="/profile/" style="font-weight:700;">Sign in here</a></p>
+              <p style="margin-top:8px;"><i class="fas fa-sign-in-alt"></i> Already a member? <a href="/profile/" style="font-weight:700;" data-i18n="reg.sign_in">Sign in here</a></p>
             </div>
 
             <!-- Registration Form -->
             <div class="pg-form-card">
               <div class="pg-form-card-header">
-                <i class="fas fa-user-plus"></i> Create Your Account
+                <i class="fas fa-user-plus"></i> <span data-i18n="reg.create">Create Your Account</span>
               </div>
               <div class="pg-form-card-body">
 
@@ -705,7 +705,7 @@
 
                   <!-- Account Information -->
                   <div class="pg-form-section">
-                    <i class="fas fa-key"></i> Account Information
+                    <i class="fas fa-key"></i data-i18n="reg.account_info"> Account Information
                   </div>
 
                   <div class="pg-form-row">
@@ -722,14 +722,14 @@
                   </div>
 
                   <div class="pg-form-group">
-                    <label for="email">Email Address <span class="required">*</span></label>
+                    <label for="email" data-i18n="reg.email">Email Address <span class="required">*</span></label>
                     <input type="email" class="pg-form-control" id="email" name="email" placeholder="you@example.com" required>
                     <div class="pg-invalid-feedback" id="emailError"></div>
                   </div>
 
                   <div class="pg-form-row">
                     <div class="pg-form-group">
-                      <label for="password">Password <span class="required">*</span></label>
+                      <label for="password" data-i18n="reg.password">Password <span class="required">*</span></label>
                       <div class="pg-password-wrapper">
                         <input type="password" class="pg-form-control" id="password" name="password" placeholder="Minimum 8 characters" required minlength="8">
                         <button type="button" class="pg-password-toggle" onclick="togglePassword('password', this)" aria-label="Toggle password visibility">
@@ -745,7 +745,7 @@
                       <div class="pg-invalid-feedback" id="passwordError"></div>
                     </div>
                     <div class="pg-form-group">
-                      <label for="confirmPassword">Confirm Password <span class="required">*</span></label>
+                      <label for="confirmPassword" data-i18n="reg.confirm_password">Confirm Password <span class="required">*</span></label>
                       <div class="pg-password-wrapper">
                         <input type="password" class="pg-form-control" id="confirmPassword" name="confirmPassword" placeholder="Re-enter your password" required>
                         <button type="button" class="pg-password-toggle" onclick="togglePassword('confirmPassword', this)" aria-label="Toggle password visibility">
@@ -758,7 +758,7 @@
 
                   <!-- Professional Information -->
                   <div class="pg-form-section">
-                    <i class="fas fa-briefcase"></i> Professional Information
+                    <i class="fas fa-briefcase"></i data-i18n="reg.professional"> Professional Information
                   </div>
 
                   <div class="pg-form-row">
@@ -776,39 +776,39 @@
                     <div class="pg-form-group">
                       <label for="linkedin" data-i18n="reg.linkedin">LinkedIn Profile</label>
                       <input type="url" class="pg-form-control" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourname">
-                      <div class="form-hint">Optional — your public LinkedIn profile URL</div>
+                      <div class="form-hint" data-i18n="reg.linkedin_hint">Optional — your public LinkedIn profile URL</div>
                     </div>
                     <div class="pg-form-group">
                       <label for="phone" data-i18n="reg.phone">Phone Number</label>
                       <input type="tel" class="pg-form-control" id="phone" name="phone" placeholder="+994 XX XXX XX XX">
-                      <div class="form-hint">Optional — for event notifications via SMS</div>
+                      <div class="form-hint" data-i18n="reg.phone_hint">Optional — for event notifications via SMS</div>
                     </div>
                   </div>
 
                   <!-- Additional Info -->
                   <div class="pg-form-section">
-                    <i class="fas fa-comment-alt"></i> Additional Information
+                    <i class="fas fa-comment-alt"></i data-i18n="reg.additional"> Additional Information
                   </div>
 
                   <div class="pg-form-group">
                     <label for="personalNotes" data-i18n="reg.notes">Personal Notes</label>
                     <textarea class="pg-form-control" id="personalNotes" name="personalNotes" rows="3" placeholder="Tell us about yourself — your interests in PostgreSQL, what you hope to gain from the community, or anything else you'd like to share..."></textarea>
-                    <div class="form-hint">Optional — help us get to know you better</div>
+                    <div class="form-hint" data-i18n="reg.notes_hint">Optional — help us get to know you better</div>
                   </div>
 
                   <!-- Agreements -->
                   <div class="pg-form-section">
-                    <i class="fas fa-shield-alt"></i> Terms &amp; Privacy
+                    <i class="fas fa-shield-alt"></i data-i18n="reg.terms"> Terms &amp; Privacy
                   </div>
 
                   <div class="pg-checkbox-group">
                     <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
-                    <label for="agreeTerms">I agree to the <a href="/about/privacypolicy/" target="_blank">Privacy Policy</a> and consent to AZERPUG storing my registration data. <span class="required">*</span></label>
+                    <label for="agreeTerms" data-i18n-html="reg.agree_html">I agree to the <a href="/about/privacypolicy/" target="_blank">Privacy Policy</a> and consent to AZERPUG storing my registration data. <span class="required">*</span></label>
                   </div>
 
                   <div class="pg-checkbox-group">
                     <input type="checkbox" id="agreeNewsletter" name="agreeNewsletter" checked>
-                    <label for="agreeNewsletter">I would like to receive community news, event invitations, and PostgreSQL updates via email.</label>
+                    <label for="agreeNewsletter" data-i18n="reg.newsletter">I would like to receive community news, event invitations, and PostgreSQL updates via email.</label>
                   </div>
 
                   <!-- Form Error Banner -->
@@ -818,10 +818,10 @@
                   <!-- Form Actions -->
                   <div class="pg-form-actions">
                     <button type="submit" class="pg-btn-primary" id="submitBtn">
-                      <i class="fas fa-user-plus"></i> Register
+                      <i class="fas fa-user-plus"></i data-i18n="reg.register_btn"> Register
                     </button>
                     <button type="reset" class="pg-btn-secondary" onclick="resetForm()">
-                      <i class="fas fa-undo"></i> Reset
+                      <i class="fas fa-undo"></i data-i18n="reg.reset_btn"> Reset
                     </button>
                   </div>
 
@@ -830,11 +830,10 @@
                 <!-- Success Message (hidden by default) -->
                 <div class="pg-success-message" id="successMessage">
                   <i class="fas fa-check-circle"></i>
-                  <h3>Qeydiyyat Uğurla Tamamlandı!</h3>
-                  <h3>Registration Successful!</h3>
-                  <p>Welcome to the Azerbaijan PostgreSQL User Group. You are now logged in and will be redirected to the home page.</p>
+                  <h3 data-i18n="reg.success_title">Registration Successful!</h3>
+                  <p data-i18n="reg.success_desc">Welcome to the Azerbaijan PostgreSQL User Group. You are now logged in and will be redirected to the home page.</p>
                   <br>
-                  <a href="/" class="pg-btn-primary"><i class="fas fa-home"></i> Go to Home</a>
+                  <a href="/" class="pg-btn-primary"><i class="fas fa-home"></i data-i18n="common.back_home"> Go to Home</a>
                 </div>
               </div>
             </div>
