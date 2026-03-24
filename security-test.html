@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html><head><title>AZERPUG Security Test</title></head>
+<body>
+<h2>AZERPUG Security Audit</h2>
+<pre id="results">Running tests...</pre>
+<script>
+const SB = 'https://qlyqwwhimwfcvuqdrxov.supabase.co';
+const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFseXF3d2hpbXdmY3Z1cWRyeG92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjg2ODYsImV4cCI6MjA4OTcwNDY4Nn0.6MKz72wGwthRL8hs-Iv3L9Iw_W4DdGh3UjrwcagtKfM';
+const H = {'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'};
+
+async function test(label, url, method, body) {
+  try {
+    const opts = {method:method||'GET',headers:H};
+    if(body) opts.body = JSON.stringify(body);
+    const r = await fetch(url, opts);
+    const t = await r.text();
+    const d = t.length > 200 ? t.substring(0,200)+'...' : t;
+    return label + ': [' + r.status + '] ' + d;
+  } catch(e) { return label + ': ERROR ' + e.message; }
+}
+
+(async function(){
+  const out = [];
+  out.push('=== DIRECT TABLE ACCESS ===');
+  out.push(await test('members (MUST BE [] empty)', SB+'/rest/v1/members?select=id,email,password_hash&limit=3'));
+  out.push(await test('blog_posts (only published)', SB+'/rest/v1/blog_posts?select=id,title,status&limit=5'));
+  out.push(await test('events', SB+'/rest/v1/events?select=id,title&limit=3'));
+  out.push(await test('jobs', SB+'/rest/v1/jobs?select=id,title,posted_by&limit=3'));
+  out.push(await test('contact_messages (MUST BE [] empty)', SB+'/rest/v1/contact_messages?select=*&limit=3'));
+  out.push(await test('volunteer_submissions (MUST BE [] empty)', SB+'/rest/v1/volunteer_submissions?select=*&limit=3'));
+  
+  out.push('\n=== PUBLIC VIEWS (should work) ===');
+  out.push(await test('public_blog_posts', SB+'/rest/v1/public_blog_posts?select=id,title&limit=2'));
+  out.push(await test('public_members', SB+'/rest/v1/public_members?select=first_name,company&limit=2'));
+  out.push(await test('public_events', SB+'/rest/v1/public_events?select=id,title&limit=2'));
+  out.push(await test('public_jobs', SB+'/rest/v1/public_jobs?select=id,title&limit=2'));
+  
+  out.push('\n=== WRITE ATTEMPTS (should fail) ===');
+  out.push(await test('INSERT blog_posts', SB+'/rest/v1/blog_posts','POST',{title:'HACK',slug:'hack',content:'x',author_id:'00000000-0000-0000-0000-000000000000',content_format:'plain'}));
+  out.push(await test('INSERT events', SB+'/rest/v1/events','POST',{title:'HACK',slug:'hack-ev',event_type:'meetup'}));
+  out.push(await test('INSERT jobs', SB+'/rest/v1/jobs','POST',{title:'HACK',company:'X',description:'x'}));
+  out.push(await test('DELETE events', SB+'/rest/v1/events?id=eq.00000000-0000-0000-0000-000000000000','DELETE'));
+  
+  out.push('\n=== RPC LEAK TEST ===');
+  out.push(await test('nonexistent RPC', SB+'/rest/v1/rpc/this_does_not_exist','POST',{}));
+  
+  out.push('\n=== SCHEMA EXPOSURE ===');
+  out.push(await test('OpenAPI root', SB+'/rest/v1/'));
+  
+  document.getElementById('results').textContent = out.join('\n');
+})();
+</script>
+</body></html>
