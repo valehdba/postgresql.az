@@ -324,20 +324,20 @@
           var pastEl = document.getElementById('pastEvents');
 
           if (upcoming.length === 0) {
-            upEl.innerHTML = '<div class="pg-empty"><i class="fas fa-calendar-plus"></i>No upcoming events at the moment. Check back soon or <a href="mailto:info@postgresql.az">suggest an event</a>!</div>';
+            upEl.innerHTML = '<div class="pg-empty"><i class="fas fa-calendar-plus"></i>'+(typeof azT==='function'?azT('events.no_upcoming'):'No upcoming events at the moment. Check back soon or')+' <a href="mailto:info@postgresql.az">'+(typeof azT==='function'?azT('events.suggest'):'suggest an event')+'</a>!</div>';
           } else {
             upEl.innerHTML = upcoming.map(function(e) { return renderEvent(e, false); }).join('');
           }
 
           if (past.length === 0) {
-            pastEl.innerHTML = '<div class="pg-empty"><i class="fas fa-history"></i>No past events recorded yet.</div>';
+            pastEl.innerHTML = '<div class="pg-empty"><i class="fas fa-history"></i>'+(typeof azT==='function'?azT('events.no_past'):'No past events recorded yet.')+'</div>';
           } else {
             pastEl.innerHTML = past.map(function(e) { return renderEvent(e, true); }).join('');
           }
         } catch(e) {
           console.error('Events error:', e);
-          document.getElementById('upcomingEvents').innerHTML = '<div class="pg-empty"><i class="fas fa-calendar-plus"></i>No upcoming events at the moment. Check back soon!</div>';
-          document.getElementById('pastEvents').innerHTML = '<div class="pg-empty"><i class="fas fa-history"></i>No past events recorded yet.</div>';
+          document.getElementById('upcomingEvents').innerHTML = '<div class="pg-empty"><i class="fas fa-calendar-plus"></i>'+(typeof azT==='function'?azT('events.no_upcoming'):'No upcoming events at the moment.')+'</div>';
+          document.getElementById('pastEvents').innerHTML = '<div class="pg-empty"><i class="fas fa-history"></i>'+(typeof azT==='function'?azT('events.no_past'):'No past events recorded yet.')+'</div>';
         }
       }
 
