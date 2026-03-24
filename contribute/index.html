@@ -283,11 +283,12 @@
 
         // Save to Supabase
         try{
-          await fetch(SB+'/rest/v1/volunteer_submissions',{
+          var r=await fetch(SB+'/rest/v1/rpc/submit_volunteer',{
             method:'POST',
-            headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY,'Prefer':'return=minimal'},
-            body:JSON.stringify({name:name,email:email,phone:phone||null,roles:roles,experience:experience||null,availability:availability||null,message:message||null,member_id:user?user.id:null})
+            headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY},
+            body:JSON.stringify({p_name:name,p_email:email,p_phone:phone||null,p_roles:roles,p_experience:experience||null,p_availability:availability||null,p_message:message||null,p_member_id:user?user.id:null})
           });
+          if(!r.ok){var errB=await r.text();if(errB.includes('Too many')){alert.innerHTML='<div class="pg-alert pg-alert-danger">Too many submissions. Please try again later.</div>';btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i> <span data-i18n="contribute.submit">Submit Volunteer Application</span>';return;}}
         }catch(err){console.warn('DB save failed:',err);}
 
         // Send email notification

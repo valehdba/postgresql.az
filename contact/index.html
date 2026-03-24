@@ -197,12 +197,16 @@
 
         // 1. Save to Supabase DB
         try {
-          var r = await fetch(SB + '/rest/v1/contact_messages', {
+          var r = await fetch(SB + '/rest/v1/rpc/submit_contact', {
             method: 'POST',
-            headers: { 'Content-Type':'application/json', 'apikey':KEY, 'Authorization':'Bearer '+KEY, 'Prefer':'return=minimal' },
-            body: JSON.stringify({ name:name, email:email, subject:subject, message:message, member_id: user ? user.id : null })
+            headers: { 'Content-Type':'application/json', 'apikey':KEY, 'Authorization':'Bearer '+KEY },
+            body: JSON.stringify({ p_name:name, p_email:email, p_subject:subject, p_message:message, p_member_id: user ? user.id : null })
           });
           if (r.ok) dbOk = true;
+          else {
+            var errBody = await r.text();
+            if (errBody.includes('Too many')) { alert.innerHTML = '<div class="pg-alert pg-alert-danger">Too many messages. Please try again later.</div>'; btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i> <span data-i18n="contact.send_btn">Send Message</span>'; return; }
+          }
         } catch(err) { console.warn('DB save failed:', err); }
 
         // 2. Send email via EmailJS

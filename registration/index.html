@@ -1134,19 +1134,28 @@
             newsletter: document.getElementById('agreeNewsletter').checked
           };
 
-          console.log('Submitting to Supabase:', SUPABASE_URL + '/rest/v1/members');
-          console.log('Data:', JSON.stringify(memberData, null, 2));
+          console.log('Submitting via secure RPC...');
 
-          // Insert into Supabase
-          var response = await fetch(SUPABASE_URL + '/rest/v1/members', {
+          // Insert via rate-limited RPC
+          var response = await fetch(SUPABASE_URL + '/rest/v1/rpc/register_member', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
               'apikey': SUPABASE_ANON_KEY,
-              'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-              'Prefer': 'return=minimal'
+              'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
             },
-            body: JSON.stringify(memberData)
+            body: JSON.stringify({
+              p_first_name: firstName.value.trim(),
+              p_last_name: lastName.value.trim(),
+              p_email: email.value.trim().toLowerCase(),
+              p_password_hash: passwordHash,
+              p_company: document.getElementById('company').value.trim() || null,
+              p_job_title: document.getElementById('jobTitle').value.trim() || null,
+              p_linkedin: document.getElementById('linkedin').value.trim() || null,
+              p_phone: document.getElementById('phone').value.trim() || null,
+              p_personal_notes: document.getElementById('personalNotes').value.trim() || null,
+              p_newsletter: document.getElementById('agreeNewsletter').checked
+            })
           });
 
           console.log('Response status:', response.status);
@@ -1158,10 +1167,15 @@
             // Try to parse as JSON for specific error handling
             try {
               var errorJson = JSON.parse(errorBody);
-              if (errorJson.code === '23505') {
+              if (errorJson.code === '23505' || (errorJson.message && errorJson.message.includes('already registered'))) {
                 email.classList.remove('is-valid');
                 email.classList.add('is-invalid');
                 showError('emailError', 'This email is already registered.');
+                setSubmitLoading(false);
+                return;
+              }
+              if (errorJson.message && errorJson.message.includes('Too many')) {
+                showFormError('Too many registration attempts. Please try again in 1 hour.');
                 setSubmitLoading(false);
                 return;
               }
