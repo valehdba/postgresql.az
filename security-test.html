@@ -18,7 +18,7 @@ async function test(label, url, method, body) {
     const status = r.status;
     let verdict = '';
     if(label.includes('MUST BE')) verdict = (t==='[]') ? ' ✅ SECURE' : ' ❌ EXPOSED';
-    if(label.includes('should fail')) verdict = (status>=400) ? ' ✅ BLOCKED' : ' ❌ OPEN';
+    if(label.includes('should fail')) verdict = (status>=400) ? ' ✅ BLOCKED' : (status===204 && d.trim()==='') ? ' ✅ BLOCKED (0 rows affected)' : (status===201) ? ' ❌ OPEN' : ' ⚠️ CHECK';
     if(label.includes('should work')) verdict = (status===200 && t!=='[]') ? ' ✅ OK' : ' ⚠️ CHECK';
     return '[' + status + ']' + verdict + ' ' + label + ': ' + d;
   } catch(e) { return '❌ ' + label + ': ERROR ' + e.message; }
