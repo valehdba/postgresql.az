@@ -175,55 +175,6 @@
             <div id="pastEvents">
               <div class="pg-loading"><i class="fas fa-spinner fa-spin"></i><div data-i18n="events.loading">Loading events...</div></div>
             </div>
-
-            <!-- Historic Events (static) -->
-            <div class="pg-event-card completed" style="border-left:4px solid var(--pg-blue-dark);">
-              <div class="pg-event-body">
-                <div class="pg-event-date-box">
-                  <div class="pg-event-month">Nov</div>
-                  <div class="pg-event-day">19</div>
-                </div>
-                <div class="pg-event-info">
-                  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px;">
-                    <span class="pg-event-type pg-type-conference" data-i18n="events.conference">Conference</span>
-                    <span class="pg-event-status pg-status-completed" data-i18n="events.completed">Completed</span>
-                  </div>
-                  <h3 data-i18n="events.adnsu_title">PostgreSQL Talk by Devrim Gündüz at ADNSU</h3>
-                  <div class="pg-event-meta">
-                    <span><i class="fas fa-calendar"></i> Monday, 19 November 2018</span>
-                    <span><i class="fas fa-map-marker-alt"></i> ADNSU Conference Hall, Baku</span>
-                    <span><i class="fas fa-microphone-alt"></i> <a href="https://www.linkedin.com/in/devrimgunduz/" target="_blank" rel="noopener" style="color:var(--pg-blue-dark);font-weight:600;">Devrim Gündüz</a></span>
-                  </div>
-                  <div class="pg-event-desc" style="margin-top:10px;" data-i18n-html="events.adnsu_desc">
-                    A landmark event for the AZERPUG community — PostgreSQL major contributor <a href="https://www.linkedin.com/in/devrimgunduz/" target="_blank" rel="noopener" style="font-weight:700;">Devrim Gündüz</a> visited Baku and delivered a talk at the Azerbaijan State Oil and Industry University (ADNSU) conference hall. Devrim coordinates RPM maintenance at <a href="https://yum.postgresql.org" target="_blank" rel="noopener">yum.postgresql.org</a> for Red Hat, Rocky, Alma Linux, and Fedora, manages packages at <a href="https://zypp.postgresql.org" target="_blank" rel="noopener">zypp.postgresql.org</a> for SLES, contributes to PostgreSQL website maintenance, builds PostgreSQL-related packages for Fedora and EPEL, and helps organise PGDay.UK and other conferences.
-                  </div>
-                  <div class="pg-event-desc" style="margin-top:8px;" data-i18n-html="events.adnsu_thanks">
-                    <strong>Special thanks to <a href="https://www.linkedin.com/in/kamranagayev/" target="_blank" rel="noopener" style="color:var(--pg-blue-dark);">Kamran Agayev</a></strong> for organizational support in making this event possible.
-                  </div>
-                  <div class="pg-event-tags" style="margin-top:10px;">
-                    <span class="pg-tag">PostgreSQL</span>
-                    <span class="pg-tag">RPM</span>
-                    <span class="pg-tag">ADNSU</span>
-                    <span class="pg-tag">Community</span>
-                  </div>
-                </div>
-              </div>
-              <!-- Event Photos -->
-              <div style="padding:0 24px 20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                <div style="border-radius:6px;overflow:hidden;border:1px solid var(--pg-border);">
-                  <img src="/pict/events/2018-adnsu-talk.jpg" alt="Devrim Gündüz presenting at ADNSU Conference Hall, November 2018" style="width:100%;height:220px;object-fit:cover;display:block;">
-                  <div style="padding:8px 12px;font-size:.78rem;color:var(--pg-text-light);background:var(--pg-bg-light);" data-i18n="events.photo1_caption">Devrim Gündüz presenting at ADNSU</div>
-                </div>
-                <div style="border-radius:6px;overflow:hidden;border:1px solid var(--pg-border);">
-                  <img src="/pict/events/2018-adnsu-audience.jpg" alt="Audience at AZERPUG event at ADNSU, November 2018" style="width:100%;height:220px;object-fit:cover;display:block;">
-                  <div style="padding:8px 12px;font-size:.78rem;color:var(--pg-text-light);background:var(--pg-bg-light);" data-i18n="events.photo2_caption">Enthusiastic audience at the ADNSU event</div>
-                </div>
-              </div>
-              <div class="pg-event-footer">
-                <div class="pg-event-attendees"><i class="fas fa-users"></i data-i18n="events.attendees"> 100+ iştirakçı</div>
-                <span style="font-size:.78rem;color:var(--pg-text-light);"><i class="fas fa-map-marker-alt"></i> ADNSU, Baku, Azerbaijan</span>
-              </div>
-            </div>
           </main>
         </div>
       </div>
@@ -274,7 +225,48 @@
           rsvpBtn = '<a href="/login/" class="pg-btn pg-btn-outline"><i class="fas fa-sign-in-alt"></i> Log in to RSVP</a>';
         }
 
-        return '<div class="pg-event-card ' + cardClass + '">' +
+        // Speaker with LinkedIn link for known speakers
+        var speakerHtml = '';
+        if (ev.speaker) {
+          var speakerLinks = {
+            'Devrim Gündüz': 'https://www.linkedin.com/in/devrimgunduz/'
+          };
+          if (speakerLinks[ev.speaker]) {
+            speakerHtml = '<span><i class="fas fa-microphone-alt"></i> <a href="' + speakerLinks[ev.speaker] + '" target="_blank" rel="noopener" style="font-weight:600;">' + esc(ev.speaker) + '</a></span>';
+          } else {
+            speakerHtml = '<span><i class="fas fa-microphone-alt"></i> ' + esc(ev.speaker) + '</span>';
+          }
+        }
+
+        // Description with line breaks
+        var descHtml = '';
+        if (ev.description) {
+          var descText = esc(ev.description).replace(/\n/g, '<br>');
+          // Add LinkedIn links for known names in description
+          descText = descText.replace('Kamran Agayev', '<a href="https://www.linkedin.com/in/kamranagayev/" target="_blank" rel="noopener" style="font-weight:700;">Kamran Agayev</a>');
+          descText = descText.replace('Devrim Gündüz', '<a href="https://www.linkedin.com/in/devrimgunduz/" target="_blank" rel="noopener" style="font-weight:700;">Devrim Gündüz</a>');
+          descText = descText.replace('yum.postgresql.org', '<a href="https://yum.postgresql.org" target="_blank" rel="noopener">yum.postgresql.org</a>');
+          descText = descText.replace('zypp.postgresql.org', '<a href="https://zypp.postgresql.org" target="_blank" rel="noopener">zypp.postgresql.org</a>');
+          descHtml = '<div class="pg-event-desc">' + descText + '</div>';
+        }
+
+        // Photos for specific events (by slug)
+        var photosHtml = '';
+        if (ev.slug === 'postgresql-talk-devrim-gunduz-adnsu-2018') {
+          photosHtml = '<div style="padding:0 24px 20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">' +
+            '<div style="border-radius:6px;overflow:hidden;border:1px solid var(--pg-border);">' +
+              '<img src="/pict/events/2018-adnsu-talk.jpg" alt="Devrim Gündüz presenting at ADNSU" style="width:100%;height:220px;object-fit:cover;display:block;">' +
+              '<div style="padding:8px 12px;font-size:.78rem;color:var(--pg-text-light);background:var(--pg-bg-light);" data-i18n="events.photo1_caption">Devrim Gündüz presenting at ADNSU</div>' +
+            '</div>' +
+            '<div style="border-radius:6px;overflow:hidden;border:1px solid var(--pg-border);">' +
+              '<img src="/pict/events/2018-adnsu-audience.jpg" alt="Audience at ADNSU event" style="width:100%;height:220px;object-fit:cover;display:block;">' +
+              '<div style="padding:8px 12px;font-size:.78rem;color:var(--pg-text-light);background:var(--pg-bg-light);" data-i18n="events.photo2_caption">Enthusiastic audience at the ADNSU event</div>' +
+            '</div></div>';
+        }
+
+        var attendeeText = ev.max_attendees ? (ev.max_attendees + '+ ' + (typeof azT==='function'?azT('events.attendees_label'):'attendees')) : ((ev.going_count || 0) + ' ' + (typeof azT==='function'?azT('events.going'):'going'));
+
+        return '<div class="pg-event-card ' + cardClass + '" style="border-left:4px solid var(--pg-blue-dark);">' +
           '<div class="pg-event-body">' +
             '<div class="pg-event-date-box">' +
               '<div class="pg-event-month">' + month + '</div>' +
@@ -290,15 +282,15 @@
                 '<span><i class="fas fa-calendar"></i> ' + dateStr + '</span>' +
                 '<span><i class="fas fa-clock"></i> ' + time + endStr + '</span>' +
                 (location ? '<span>' + location + '</span>' : '') +
-                (ev.speaker ? '<span><i class="fas fa-microphone-alt"></i> ' + esc(ev.speaker) + '</span>' : '') +
+                speakerHtml +
               '</div>' +
-              (ev.description ? '<div class="pg-event-desc">' + esc(ev.description) + '</div>' : '') +
+              descHtml +
               (tags ? '<div class="pg-event-tags">' + tags + '</div>' : '') +
             '</div>' +
           '</div>' +
+          photosHtml +
           '<div class="pg-event-footer">' +
-            '<div class="pg-event-attendees"><i class="fas fa-users"></i> ' + (ev.going_count || 0) + ' going' + (ev.maybe_count > 0 ? ' · ' + ev.maybe_count + ' maybe' : '') +
-              (ev.max_attendees ? ' / ' + ev.max_attendees + ' max' : '') +
+            '<div class="pg-event-attendees"><i class="fas fa-users"></i> ' + attendeeText +
             '</div>' +
             rsvpBtn +
           '</div>' +
