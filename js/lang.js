@@ -92,6 +92,8 @@
     'login.invalid': { en: 'Invalid email or password. Please try again.', az: 'Yanlış e-poçt və ya şifrə. Yenidən cəhd edin.' },
     'login.failed': { en: 'Login failed. Please check your connection and try again.', az: 'Daxil olmaq mümkün olmadı. Bağlantınızı yoxlayın və yenidən cəhd edin.' },
     'login.signing_in': { en: 'Signing in...', az: 'Daxil olunur...' },
+    'login.ph_email': { en: 'you@example.com', az: 'siz@misal.com' },
+    'login.ph_password': { en: 'Your password', az: 'Şifrəniz' },
 
     // Registration page
     'reg.title': { en: 'Member Registration', az: 'Üzv Qeydiyyatı' },
@@ -124,6 +126,18 @@
     'reg.sign_in': { en: 'Sign in here', az: 'Buradan daxil olun' },
     'reg.success_title': { en: 'Registration Successful!', az: 'Qeydiyyat Uğurla Tamamlandı!' },
     'reg.success_desc': { en: 'Welcome to the Azerbaijan PostgreSQL User Group. You are now logged in and will be redirected to the home page.', az: 'Azərbaycan PostgreSQL İstifadəçiləri Qrupuna xoş gəldiniz. Siz artıq daxil olmusunuz və ana səhifəyə yönləndiriləcəksiniz.' },
+
+    // Registration placeholders
+    'reg.ph_firstname': { en: 'e.g. Elvin', az: 'məs. Elvin' },
+    'reg.ph_lastname': { en: 'e.g. Məmmədov', az: 'məs. Məmmədov' },
+    'reg.ph_email': { en: 'you@example.com', az: 'siz@misal.com' },
+    'reg.ph_password': { en: 'Minimum 8 characters', az: 'Minimum 8 simvol' },
+    'reg.ph_confirm': { en: 'Re-enter your password', az: 'Şifrənizi yenidən daxil edin' },
+    'reg.ph_company': { en: 'Your company or organization', az: 'Şirkətiniz və ya təşkilatınız' },
+    'reg.ph_jobtitle': { en: 'e.g. Database Administrator', az: 'məs. Verilənlər Bazası Administratoru' },
+    'reg.ph_linkedin': { en: 'https://linkedin.com/in/yourname', az: 'https://linkedin.com/in/adiniz' },
+    'reg.ph_phone': { en: '+994 XX XXX XX XX', az: '+994 XX XXX XX XX' },
+    'reg.ph_notes': { en: "Tell us about yourself — your interests in PostgreSQL, what you hope to gain from the community, or anything else you'd like to share...", az: 'Özünüz haqqında danışın — PostgreSQL-ə marağınız, icmadan nə gözlədiyiniz və ya paylaşmaq istədiyiniz başqa hər hansı bir şey...' },
 
     // Members page
     'members.title': { en: 'Community Members', az: 'İcma Üzvləri' },
@@ -204,6 +218,8 @@
     'contact.sent': { en: 'Message Sent!', az: 'Mesaj Göndərildi!' },
     'contact.sent_desc': { en: 'Thank you for reaching out. Your message has been sent to our team and we\'ll get back to you as soon as possible.', az: 'Müraciətiniz üçün təşəkkür edirik. Mesajınız komandamıza göndərildi və ən qısa zamanda sizə cavab verəcəyik.' },
     'contact.location': { en: 'Location', az: 'Məkan' },
+    'contact.ph_email': { en: 'you@example.com', az: 'siz@misal.com' },
+    'contact.ph_message': { en: "Tell us what's on your mind...", az: 'Fikirlərinizi bizimlə bölüşün...' },
 
     // Resources page
     'resources.title': { en: 'PostgreSQL Resources', az: 'PostgreSQL Resursları' },
@@ -369,6 +385,11 @@
     'contribute.avail_events': { en: 'Only during events', az: 'Yalnız tədbirlər zamanı' },
     'contribute.avail_flexible': { en: 'Flexible — depends on the task', az: 'Çevik — tapşırıqdan asılıdır' },
     'contribute.anything_else': { en: 'Anything Else?', az: 'Başqa Bir Şey?' },
+    'contribute.ph_name': { en: 'Your full name', az: 'Tam adınız' },
+    'contribute.ph_email': { en: 'you@example.com', az: 'siz@misal.com' },
+    'contribute.ph_phone': { en: '+994 XX XXX XX XX', az: '+994 XX XXX XX XX' },
+    'contribute.ph_experience': { en: 'Tell us about any relevant experience — organizing events, public speaking, writing, social media management, photography, development, etc. No experience required!', az: 'Müvafiq təcrübəniz haqqında danışın — tədbirlərin təşkili, ictimai çıxışlar, yazıçılıq, sosial media idarəetməsi, fotoqrafiya, proqramlaşdırma və s. Təcrübə tələb olunmur!' },
+    'contribute.ph_message': { en: 'Any ideas, suggestions, or questions about contributing...', az: 'Töhfə vermə haqqında hər hansı fikir, təklif və ya sual...' },
 
     // Profile page
     'profile.first_name': { en: 'First Name', az: 'Ad' },
@@ -429,6 +450,11 @@
     document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
       var key = el.getAttribute('data-i18n-html');
       if (T[key]) el.innerHTML = T[key][lang] || T[key]['en'];
+    });
+    // Update placeholders
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n-placeholder');
+      if (T[key]) el.placeholder = T[key][lang] || T[key]['en'];
     });
   }
 

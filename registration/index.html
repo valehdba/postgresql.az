@@ -711,19 +711,19 @@
                   <div class="pg-form-row">
                     <div class="pg-form-group">
                       <label for="firstName" data-i18n="reg.first_name">First Name <span class="required">*</span></label>
-                      <input type="text" class="pg-form-control" id="firstName" name="firstName" placeholder="e.g. Elvin" required>
+                      <input type="text" class="pg-form-control" id="firstName" name="firstName" placeholder="e.g. Elvin" data-i18n-placeholder="reg.ph_firstname" required>
                       <div class="pg-invalid-feedback" id="firstNameError"></div>
                     </div>
                     <div class="pg-form-group">
                       <label for="lastName" data-i18n="reg.last_name">Last Name <span class="required">*</span></label>
-                      <input type="text" class="pg-form-control" id="lastName" name="lastName" placeholder="e.g. Məmmədov" required>
+                      <input type="text" class="pg-form-control" id="lastName" name="lastName" placeholder="e.g. Məmmədov" data-i18n-placeholder="reg.ph_lastname" required>
                       <div class="pg-invalid-feedback" id="lastNameError"></div>
                     </div>
                   </div>
 
                   <div class="pg-form-group">
                     <label for="email" data-i18n="reg.email">Email Address <span class="required">*</span></label>
-                    <input type="email" class="pg-form-control" id="email" name="email" placeholder="you@example.com" required>
+                    <input type="email" class="pg-form-control" id="email" name="email" placeholder="you@example.com" data-i18n-placeholder="reg.ph_email" required>
                     <div class="pg-invalid-feedback" id="emailError"></div>
                   </div>
 
@@ -731,7 +731,7 @@
                     <div class="pg-form-group">
                       <label for="password" data-i18n="reg.password">Password <span class="required">*</span></label>
                       <div class="pg-password-wrapper">
-                        <input type="password" class="pg-form-control" id="password" name="password" placeholder="Minimum 8 characters" required minlength="8">
+                        <input type="password" class="pg-form-control" id="password" name="password" placeholder="Minimum 8 characters" data-i18n-placeholder="reg.ph_password" required minlength="8">
                         <button type="button" class="pg-password-toggle" onclick="togglePassword('password', this)" aria-label="Toggle password visibility">
                           <i class="fas fa-eye"></i>
                         </button>
@@ -747,7 +747,7 @@
                     <div class="pg-form-group">
                       <label for="confirmPassword" data-i18n="reg.confirm_password">Confirm Password <span class="required">*</span></label>
                       <div class="pg-password-wrapper">
-                        <input type="password" class="pg-form-control" id="confirmPassword" name="confirmPassword" placeholder="Re-enter your password" required>
+                        <input type="password" class="pg-form-control" id="confirmPassword" name="confirmPassword" placeholder="Re-enter your password" data-i18n-placeholder="reg.ph_confirm" required>
                         <button type="button" class="pg-password-toggle" onclick="togglePassword('confirmPassword', this)" aria-label="Toggle password visibility">
                           <i class="fas fa-eye"></i>
                         </button>
@@ -764,23 +764,23 @@
                   <div class="pg-form-row">
                     <div class="pg-form-group">
                       <label for="company" data-i18n="reg.company">Company / Organization</label>
-                      <input type="text" class="pg-form-control" id="company" name="company" placeholder="Your company or organization">
+                      <input type="text" class="pg-form-control" id="company" name="company" placeholder="Your company or organization" data-i18n-placeholder="reg.ph_company">
                     </div>
                     <div class="pg-form-group">
                       <label for="jobTitle" data-i18n="reg.job_title">Job Title / Role</label>
-                      <input type="text" class="pg-form-control" id="jobTitle" name="jobTitle" placeholder="e.g. Database Administrator">
+                      <input type="text" class="pg-form-control" id="jobTitle" name="jobTitle" placeholder="e.g. Database Administrator" data-i18n-placeholder="reg.ph_jobtitle">
                     </div>
                   </div>
 
                   <div class="pg-form-row">
                     <div class="pg-form-group">
                       <label for="linkedin" data-i18n="reg.linkedin">LinkedIn Profile</label>
-                      <input type="url" class="pg-form-control" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourname">
+                      <input type="url" class="pg-form-control" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourname" data-i18n-placeholder="reg.ph_linkedin">
                       <div class="form-hint" data-i18n="reg.linkedin_hint">Optional — your public LinkedIn profile URL</div>
                     </div>
                     <div class="pg-form-group">
                       <label for="phone" data-i18n="reg.phone">Phone Number</label>
-                      <input type="tel" class="pg-form-control" id="phone" name="phone" placeholder="+994 XX XXX XX XX">
+                      <input type="tel" class="pg-form-control" id="phone" name="phone" placeholder="+994 XX XXX XX XX" data-i18n-placeholder="reg.ph_phone">
                       <div class="form-hint" data-i18n="reg.phone_hint">Optional — for event notifications via SMS</div>
                     </div>
                   </div>
@@ -792,7 +792,7 @@
 
                   <div class="pg-form-group">
                     <label for="personalNotes" data-i18n="reg.notes">Personal Notes</label>
-                    <textarea class="pg-form-control" id="personalNotes" name="personalNotes" rows="3" placeholder="Tell us about yourself — your interests in PostgreSQL, what you hope to gain from the community, or anything else you'd like to share..."></textarea>
+                    <textarea class="pg-form-control" id="personalNotes" name="personalNotes" rows="3" data-i18n-placeholder="reg.ph_notes" placeholder="Tell us about yourself — your interests in PostgreSQL, what you hope to gain from the community, or anything else you'd like to share..."></textarea>
                     <div class="form-hint" data-i18n="reg.notes_hint">Optional — help us get to know you better</div>
                   </div>
 
