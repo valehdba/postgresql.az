@@ -15,7 +15,7 @@
     'nav.profile': { en: 'My Profile', az: 'Profilim' },
     'nav.about': { en: 'About', az: 'Haqqımızda' },
     'nav.sponsors': { en: 'Sponsors', az: 'Sponsorlar' },
-    'nav.faq': { en: 'FAQ', az: 'TVS' },
+    'nav.faq': { en: 'FAQ', az: 'FAQ' },
     'nav.gallery': { en: 'Gallery', az: 'Qalereya' },
     'nav.contact': { en: 'Contact', az: 'Əlaqə' },
     'nav.contribute': { en: 'Contribute', az: 'Töhfə Ver' },
