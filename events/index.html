@@ -139,19 +139,19 @@
               <div class="pg-sidebar-logo-text">Azerbaijan PostgreSQL<br>User Group</div>
             </div>
             <div class="pg-sidebar-section">
-              <h3>Events</h3>
+              <h3 data-i18n="nav.events">Events</h3>
               <ul>
-                <li><a href="#upcoming" class="active">Upcoming Events</a></li>
-                <li><a href="#past">Past Events</a></li>
+                <li><a href="#upcoming" class="active" data-i18n="events.upcoming">Upcoming Events</a></li>
+                <li><a href="#past" data-i18n="events.past">Past Events</a></li>
               </ul>
             </div>
             <div class="pg-sidebar-section">
-              <h3>Community</h3>
+              <h3 data-i18n="nav.community">Community</h3>
               <ul>
-                <li><a href="/registration/">Registration</a></li>
-                <li><a href="/members/">Members</a></li>
-                <li><a href="/blogs/">Blog Posts</a></li>
-                <li><a href="/community/">Global Community</a></li>
+                <li><a href="/registration/" data-i18n="nav.registration">Registration</a></li>
+                <li><a href="/members/" data-i18n="nav.members">Members</a></li>
+                <li><a href="/blogs/" data-i18n="nav.blog">Blog Posts</a></li>
+                <li><a href="/community/" data-i18n="nav.community">Global Community</a></li>
               </ul>
             </div>
           </aside>
@@ -161,19 +161,19 @@
             <p class="pg-page-subtitle" data-i18n="events.subtitle">Join us at PostgreSQL meetups, workshops, webinars, and conferences in Azerbaijan. All events are open to AZERPUG members.</p>
 
             <div class="pg-info-box">
-              <i class="fas fa-calendar-check"></i> Want to attend an event? Log in and click <strong>RSVP</strong> to let us know you're coming. Want to suggest or organize an event? <a href="mailto:info@postgresql.az">Contact us</a>.
+              <i class="fas fa-calendar-check"></i> <span data-i18n="events.info_text">Want to attend an event? Log in and click <strong>RSVP</strong> to let us know you're coming. Want to suggest or organize an event?</span> <a href="mailto:info@postgresql.az" data-i18n="events.contact">Contact us</a>.
             </div>
 
             <!-- Upcoming Events -->
             <h2 class="pg-section-title" id="upcoming"><i class="fas fa-calendar-alt"></i> <span data-i18n="events.upcoming">Upcoming Events</span></h2>
             <div id="upcomingEvents">
-              <div class="pg-loading"><i class="fas fa-spinner fa-spin"></i><div>Loading events...</div></div>
+              <div class="pg-loading"><i class="fas fa-spinner fa-spin"></i><div data-i18n="events.loading">Loading events...</div></div>
             </div>
 
             <!-- Past Events -->
             <h2 class="pg-section-title" id="past"><i class="fas fa-history"></i> <span data-i18n="events.past">Past Events</span></h2>
             <div id="pastEvents">
-              <div class="pg-loading"><i class="fas fa-spinner fa-spin"></i><div>Loading events...</div></div>
+              <div class="pg-loading"><i class="fas fa-spinner fa-spin"></i><div data-i18n="events.loading">Loading events...</div></div>
             </div>
 
             <!-- Historic Events (static) -->
@@ -185,19 +185,19 @@
                 </div>
                 <div class="pg-event-info">
                   <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px;">
-                    <span class="pg-event-type pg-type-conference">Conference</span>
-                    <span class="pg-event-status pg-status-completed">Completed</span>
+                    <span class="pg-event-type pg-type-conference" data-i18n="events.conference">Conference</span>
+                    <span class="pg-event-status pg-status-completed" data-i18n="events.completed">Completed</span>
                   </div>
-                  <h3>PostgreSQL Talk by Devrim Gündüz at ADNSU</h3>
+                  <h3 data-i18n="events.adnsu_title">PostgreSQL Talk by Devrim Gündüz at ADNSU</h3>
                   <div class="pg-event-meta">
                     <span><i class="fas fa-calendar"></i> Monday, 19 November 2018</span>
                     <span><i class="fas fa-map-marker-alt"></i> ADNSU Conference Hall, Baku</span>
                     <span><i class="fas fa-microphone-alt"></i> <a href="https://www.linkedin.com/in/devrimgunduz/" target="_blank" rel="noopener" style="color:var(--pg-blue-dark);font-weight:600;">Devrim Gündüz</a></span>
                   </div>
-                  <div class="pg-event-desc" style="margin-top:10px;">
+                  <div class="pg-event-desc" style="margin-top:10px;" data-i18n-html="events.adnsu_desc">
                     A landmark event for the AZERPUG community — PostgreSQL major contributor <a href="https://www.linkedin.com/in/devrimgunduz/" target="_blank" rel="noopener" style="font-weight:700;">Devrim Gündüz</a> visited Baku and delivered a talk at the Azerbaijan State Oil and Industry University (ADNSU) conference hall. Devrim coordinates RPM maintenance at <a href="https://yum.postgresql.org" target="_blank" rel="noopener">yum.postgresql.org</a> for Red Hat, Rocky, Alma Linux, and Fedora, manages packages at <a href="https://zypp.postgresql.org" target="_blank" rel="noopener">zypp.postgresql.org</a> for SLES, contributes to PostgreSQL website maintenance, builds PostgreSQL-related packages for Fedora and EPEL, and helps organise PGDay.UK and other conferences.
                   </div>
-                  <div class="pg-event-desc" style="margin-top:8px;">
+                  <div class="pg-event-desc" style="margin-top:8px;" data-i18n-html="events.adnsu_thanks">
                     <strong>Special thanks to <a href="https://www.linkedin.com/in/kamranagayev/" target="_blank" rel="noopener" style="color:var(--pg-blue-dark);">Kamran Agayev</a></strong> for organizational support in making this event possible.
                   </div>
                   <div class="pg-event-tags" style="margin-top:10px;">
@@ -212,15 +212,15 @@
               <div style="padding:0 24px 20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
                 <div style="border-radius:6px;overflow:hidden;border:1px solid var(--pg-border);">
                   <img src="/pict/events/2018-adnsu-talk.jpg" alt="Devrim Gündüz presenting at ADNSU Conference Hall, November 2018" style="width:100%;height:220px;object-fit:cover;display:block;">
-                  <div style="padding:8px 12px;font-size:.78rem;color:var(--pg-text-light);background:var(--pg-bg-light);">Devrim Gündüz presenting at ADNSU</div>
+                  <div style="padding:8px 12px;font-size:.78rem;color:var(--pg-text-light);background:var(--pg-bg-light);" data-i18n="events.photo1_caption">Devrim Gündüz presenting at ADNSU</div>
                 </div>
                 <div style="border-radius:6px;overflow:hidden;border:1px solid var(--pg-border);">
                   <img src="/pict/events/2018-adnsu-audience.jpg" alt="Audience at AZERPUG event at ADNSU, November 2018" style="width:100%;height:220px;object-fit:cover;display:block;">
-                  <div style="padding:8px 12px;font-size:.78rem;color:var(--pg-text-light);background:var(--pg-bg-light);">Enthusiastic audience at the ADNSU event</div>
+                  <div style="padding:8px 12px;font-size:.78rem;color:var(--pg-text-light);background:var(--pg-bg-light);" data-i18n="events.photo2_caption">Enthusiastic audience at the ADNSU event</div>
                 </div>
               </div>
               <div class="pg-event-footer">
-                <div class="pg-event-attendees"><i class="fas fa-users"></i> 100+ attendees</div>
+                <div class="pg-event-attendees"><i class="fas fa-users"></i data-i18n="events.attendees"> 100+ iştirakçı</div>
                 <span style="font-size:.78rem;color:var(--pg-text-light);"><i class="fas fa-map-marker-alt"></i> ADNSU, Baku, Azerbaijan</span>
               </div>
             </div>
