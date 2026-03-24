@@ -547,10 +547,21 @@
         };
 
         try {
-          var r = await fetch(SUPABASE_URL + '/rest/v1/events', {
+          var r = await fetch(SUPABASE_URL + '/rest/v1/rpc/admin_insert_event', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY, 'Prefer': 'return=minimal' },
-            body: JSON.stringify(body)
+            headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
+            body: JSON.stringify({
+              p_admin_id: admin.id,
+              p_title: title,
+              p_slug: title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') + '-' + Date.now().toString(36),
+              p_event_type: document.getElementById('evType').value,
+              p_start_date: datetime,
+              p_location: document.getElementById('evLocation').value.trim() || null,
+              p_description: document.getElementById('evDescription').value.trim() || null,
+              p_speaker: document.getElementById('evSpeaker').value.trim() || null,
+              p_max_attendees: parseInt(document.getElementById('evMaxAttendees').value) || null,
+              p_tags: tags.length ? tags : null
+            })
           });
           if (!r.ok) { var e = await r.text(); throw new Error(e); }
           alertEl.innerHTML = '<div class="pg-alert pg-alert-success" style="margin-bottom:12px;"><i class="fas fa-check"></i> Event created successfully!</div>';
@@ -566,9 +577,10 @@
       async function deleteEvent(eventId) {
         if (!confirm('Are you sure you want to delete this event?')) return;
         try {
-          await fetch(SUPABASE_URL + '/rest/v1/events?id=eq.' + eventId, {
-            method: 'DELETE',
-            headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
+          await fetch(SUPABASE_URL + '/rest/v1/rpc/admin_delete_event', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
+            body: JSON.stringify({ p_admin_id: admin.id, p_event_id: eventId })
           });
           loadAdminEvents();
         } catch(e) { alert('Failed to delete event.'); }
