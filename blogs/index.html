@@ -244,14 +244,14 @@
 
             <!-- Login / User Panel -->
             <div class="pg-sidebar-section">
-              <h3 id="authTitle">Member Login</h3>
+              <h3 id="authTitle" data-i18n="profile.login_title">Member Login</h3>
 
               <!-- Login Form -->
               <div id="loginPanel" class="pg-login-box">
-                <label for="loginEmail">Email</label>
+                <label for="loginEmail" data-i18n="profile.email">Email</label>
                 <input type="email" id="loginEmail" placeholder="you@example.com">
-                <label for="loginPassword">Password</label>
-                <input type="password" id="loginPassword" placeholder="Your password">
+                <label for="loginPassword" data-i18n="profile.password">Password</label>
+                <input type="password" id="loginPassword" placeholder="Your password" data-i18n-placeholder="login.ph_password">
                 <div class="pg-login-error" id="loginError"></div>
                 <button class="pg-btn-primary pg-btn-sm" style="width:100%;" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> Log In</button>
                 <div style="margin-top:8px;font-size:0.78rem;color:var(--pg-text-light);">Not a member? <a href="/registration/">Register here</a></div>

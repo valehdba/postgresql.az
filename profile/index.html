@@ -164,7 +164,7 @@
               <div class="pg-sidebar-logo-text">Azerbaijan PostgreSQL<br>User Group</div>
             </div>
             <div class="pg-sidebar-section" id="sidebarNav" style="display:none;">
-              <h3>My Account</h3>
+              <h3 data-i18n="profile.sidebar_account">My Account</h3>
               <ul>
                 <li><a href="#profile" class="active" id="navProfile" data-i18n="nav.profile">My Profile</a></li>
                 <li><a href="#edit" id="navEdit">Edit Profile</a></li>
@@ -194,12 +194,12 @@
                   <div class="pg-card-body">
                     <p style="font-size:0.9rem;color:var(--pg-text-light);margin-bottom:1.25rem;">Log in to access your profile, manage your details, and write blog posts.</p>
                     <div class="pg-form-group">
-                      <label>Email</label>
+                      <label data-i18n="profile.email">Email</label>
                       <input type="email" class="pg-form-control" id="loginEmail" placeholder="you@example.com">
                     </div>
                     <div class="pg-form-group">
-                      <label>Password</label>
-                      <input type="password" class="pg-form-control" id="loginPassword" placeholder="Your password">
+                      <label data-i18n="profile.password">Password</label>
+                      <input type="password" class="pg-form-control" id="loginPassword" placeholder="Your password" data-i18n-placeholder="login.ph_password">
                     </div>
                     <div id="loginError" class="pg-alert pg-alert-danger" style="display:none;"></div>
                     <button class="pg-btn pg-btn-primary" style="width:100%;justify-content:center;" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> Log In</button>
@@ -291,8 +291,8 @@
                   </div>
                   <div class="pg-form-group"><label>Email</label><input type="email" class="pg-form-control" id="editEmail" readonly><div class="pg-form-hint">Email cannot be changed. Contact admin if needed.</div></div>
                   <div class="pg-form-row">
-                    <div class="pg-form-group"><label>Company / Organization</label><input type="text" class="pg-form-control" id="editCompany" placeholder="Your company"></div>
-                    <div class="pg-form-group"><label>Job Title / Role</label><input type="text" class="pg-form-control" id="editJobTitle" placeholder="e.g. Database Administrator"></div>
+                    <div class="pg-form-group"><label data-i18n="reg.company">Company / Organization</label><input type="text" class="pg-form-control" id="editCompany" placeholder="Your company" data-i18n-placeholder="reg.ph_company"></div>
+                    <div class="pg-form-group"><label data-i18n="reg.job_title">Job Title / Role</label><input type="text" class="pg-form-control" id="editJobTitle" placeholder="e.g. Database Administrator" data-i18n-placeholder="reg.ph_jobtitle"></div>
                   </div>
                   <div class="pg-form-row">
                     <div class="pg-form-group">

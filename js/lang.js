@@ -417,6 +417,35 @@
     'common.part_time': { en: 'Part-time', az: 'Yarım iş günü' },
     'common.contract': { en: 'Contract', az: 'Müqavilə' },
     'common.remote': { en: 'Remote', az: 'Uzaqdan' },
+    'common.community': { en: 'Community', az: 'İcma' },
+
+    // Sidebar titles (shared across pages)
+    'about.sidebar_onpage': { en: 'On This Page', az: 'Bu Səhifədə' },
+    'sponsors.sidebar_title': { en: 'Sponsorship', az: 'Sponsorluq' },
+    'sponsors.contact_link': { en: 'Get in Touch', az: 'Əlaqə Saxlayın' },
+    'faq.sidebar_topics': { en: 'FAQ Topics', az: 'TVS Mövzuları' },
+    'faq.sidebar_help': { en: 'Need Help?', az: 'Kömək Lazımdır?' },
+    'faq.still_questions': { en: 'Still have questions?', az: 'Hələ sualınız var?' },
+    'faq.cant_find': { en: "Can't find what you're looking for? Reach out to us directly.", az: 'Axtardığınızı tapa bilmirsiniz? Birbaşa bizimlə əlaqə saxlayın.' },
+    'gallery.sidebar_title': { en: 'Gallery', az: 'Qalereya' },
+    'news.sidebar_sources': { en: 'News Sources', az: 'Xəbər Mənbələri' },
+    'jobs.sidebar_title': { en: 'Job Board', az: 'İş Elanları' },
+    'profile.sidebar_account': { en: 'My Account', az: 'Hesabım' },
+
+    // Jobs form labels
+    'jobs.form_title': { en: 'Job Title', az: 'İş Başlığı' },
+    'jobs.form_company': { en: 'Company', az: 'Şirkət' },
+    'jobs.form_location': { en: 'Location', az: 'Məkan' },
+    'jobs.form_type': { en: 'Job Type', az: 'İş Növü' },
+    'jobs.form_desc': { en: 'Description', az: 'Təsvir' },
+    'jobs.form_reqs': { en: 'Requirements', az: 'Tələblər' },
+    'jobs.form_salary': { en: 'Salary Range', az: 'Maaş Aralığı' },
+    'jobs.form_url': { en: 'Apply URL', az: 'Müraciət Linki' },
+    'jobs.form_email': { en: 'Apply Email', az: 'Müraciət E-poçtu' },
+    'jobs.form_tags': { en: 'Tags', az: 'Etiketlər' },
+    'jobs.ph_title': { en: 'e.g. Senior PostgreSQL DBA', az: 'məs. Baş PostgreSQL DBA' },
+    'jobs.ph_company': { en: 'Company name', az: 'Şirkət adı' },
+    'jobs.ph_location': { en: 'e.g. Baku, Azerbaijan', az: 'məs. Bakı, Azərbaycan' },
   };
 
   // Get/set language

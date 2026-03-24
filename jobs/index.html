@@ -82,7 +82,7 @@
     <div class="pg-page-wrapper" style="margin-top:1rem;"><div class="pg-content-area">
       <aside class="pg-sidebar">
         <div class="pg-sidebar-logo"><a href="/"><img src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a><div class="pg-sidebar-logo-text">Azerbaijan PostgreSQL<br>User Group</div></div>
-        <div class="pg-sidebar-section"><h3>Job Board</h3><ul>
+        <div class="pg-sidebar-section"><h3 data-i18n="jobs.sidebar_title">Job Board</h3><ul>
           <li><a href="#listings" class="active" onclick="showView('listing')" data-i18n="jobs.listings">Job Listings</a></li>
           <li><a href="#post" onclick="showView('post')">Post a Job</a></li>
         </ul></div>
@@ -124,26 +124,26 @@
             <div class="pg-card-header"><i class="fas fa-briefcase"></i> Job Details</div>
             <div class="pg-card-body">
               <div class="pg-form-row">
-                <div class="pg-form-group"><label>Job Title <span class="req">*</span></label><input type="text" class="pg-form-control" id="jTitle" placeholder="e.g. Senior PostgreSQL DBA"></div>
-                <div class="pg-form-group"><label>Company <span class="req">*</span></label><input type="text" class="pg-form-control" id="jCompany" placeholder="Company name"></div>
+                <div class="pg-form-group"><label data-i18n="jobs.form_title">Job Title <span class="req">*</span></label><input type="text" class="pg-form-control" id="jTitle" placeholder="e.g. Senior PostgreSQL DBA" data-i18n-placeholder="jobs.ph_title"></div>
+                <div class="pg-form-group"><label data-i18n="jobs.form_company">Company <span class="req">*</span></label><input type="text" class="pg-form-control" id="jCompany" placeholder="Company name" data-i18n-placeholder="jobs.ph_company"></div>
               </div>
               <div class="pg-form-row">
-                <div class="pg-form-group"><label>Location</label><input type="text" class="pg-form-control" id="jLocation" placeholder="e.g. Baku, Azerbaijan"></div>
-                <div class="pg-form-group"><label>Job Type</label>
+                <div class="pg-form-group"><label data-i18n="jobs.form_location">Location</label><input type="text" class="pg-form-control" id="jLocation" placeholder="e.g. Baku, Azerbaijan" data-i18n-placeholder="jobs.ph_location"></div>
+                <div class="pg-form-group"><label data-i18n="jobs.form_type">Job Type</label>
                   <select class="pg-form-control" id="jType"><option value="full-time">Full-time</option><option value="part-time">Part-time</option><option value="contract">Contract</option><option value="freelance">Freelance</option><option value="internship">Internship</option></select>
                 </div>
               </div>
               <div class="pg-form-row">
-                <div class="pg-form-group"><label>Salary Range</label><input type="text" class="pg-form-control" id="jSalary" placeholder="e.g. $3000-5000/month or Negotiable"></div>
+                <div class="pg-form-group"><label data-i18n="jobs.form_salary">Salary Range</label><input type="text" class="pg-form-control" id="jSalary" placeholder="e.g. $3000-5000/month or Negotiable"></div>
                 <div class="pg-form-group" style="padding-top:28px;"><div class="pg-checkbox"><input type="checkbox" id="jRemote"><label for="jRemote">Remote position available</label></div></div>
               </div>
-              <div class="pg-form-group"><label>Description <span class="req">*</span></label><textarea class="pg-form-control" id="jDesc" placeholder="Describe the role, responsibilities, and what you're looking for..."></textarea></div>
-              <div class="pg-form-group"><label>Requirements</label><textarea class="pg-form-control" id="jReqs" rows="3" placeholder="Required skills, experience, qualifications..."></textarea></div>
+              <div class="pg-form-group"><label data-i18n="jobs.form_desc">Description <span class="req">*</span></label><textarea class="pg-form-control" id="jDesc" placeholder="Describe the role, responsibilities, and what you're looking for..."></textarea></div>
+              <div class="pg-form-group"><label data-i18n="jobs.form_reqs">Requirements</label><textarea class="pg-form-control" id="jReqs" rows="3" placeholder="Required skills, experience, qualifications..."></textarea></div>
               <div class="pg-form-row">
-                <div class="pg-form-group"><label>Apply URL</label><input type="url" class="pg-form-control" id="jUrl" placeholder="https://careers.example.com/apply"></div>
-                <div class="pg-form-group"><label>Apply Email</label><input type="email" class="pg-form-control" id="jEmail" placeholder="hr@example.com"></div>
+                <div class="pg-form-group"><label data-i18n="jobs.form_url">Apply URL</label><input type="url" class="pg-form-control" id="jUrl" placeholder="https://careers.example.com/apply"></div>
+                <div class="pg-form-group"><label data-i18n="jobs.form_email">Apply Email</label><input type="email" class="pg-form-control" id="jEmail" placeholder="hr@example.com"></div>
               </div>
-              <div class="pg-form-group"><label>Tags</label><input type="text" class="pg-form-control" id="jTags" placeholder="e.g. postgresql, dba, aws, linux (comma separated)"><div class="pg-form-hint">Separate tags with commas</div></div>
+              <div class="pg-form-group"><label data-i18n="jobs.form_tags">Tags</label><input type="text" class="pg-form-control" id="jTags" placeholder="e.g. postgresql, dba, aws, linux (comma separated)"><div class="pg-form-hint">Separate tags with commas</div></div>
               <div class="pg-form-actions">
                 <button class="pg-btn pg-btn-primary" id="submitJobBtn" onclick="submitJob()"><i class="fas fa-paper-plane"></i> <span data-i18n="jobs.post">Post Job</span></button>
               </div>
