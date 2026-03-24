@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html><head><title>AZERPUG Security Test</title></head>
+<html><head><title>AZERPUG Security Test v2</title></head>
 <body>
-<h2>AZERPUG Security Audit</h2>
+<h2>AZERPUG Security Audit v2</h2>
 <pre id="results">Running tests...</pre>
 <script>
 const SB = 'https://qlyqwwhimwfcvuqdrxov.supabase.co';
@@ -14,40 +14,71 @@ async function test(label, url, method, body) {
     if(body) opts.body = JSON.stringify(body);
     const r = await fetch(url, opts);
     const t = await r.text();
-    const d = t.length > 200 ? t.substring(0,200)+'...' : t;
-    return label + ': [' + r.status + '] ' + d;
-  } catch(e) { return label + ': ERROR ' + e.message; }
+    const d = t.length > 300 ? t.substring(0,300)+'...' : t;
+    const status = r.status;
+    let verdict = '';
+    if(label.includes('MUST BE')) verdict = (t==='[]') ? ' ✅ SECURE' : ' ❌ EXPOSED';
+    if(label.includes('should fail')) verdict = (status>=400) ? ' ✅ BLOCKED' : ' ❌ OPEN';
+    if(label.includes('should work')) verdict = (status===200 && t!=='[]') ? ' ✅ OK' : ' ⚠️ CHECK';
+    return '[' + status + ']' + verdict + ' ' + label + ': ' + d;
+  } catch(e) { return '❌ ' + label + ': ERROR ' + e.message; }
 }
 
 (async function(){
-  const out = [];
-  out.push('=== DIRECT TABLE ACCESS ===');
-  out.push(await test('members (MUST BE [] empty)', SB+'/rest/v1/members?select=id,email,password_hash&limit=3'));
-  out.push(await test('blog_posts (only published)', SB+'/rest/v1/blog_posts?select=id,title,status&limit=5'));
-  out.push(await test('events', SB+'/rest/v1/events?select=id,title&limit=3'));
-  out.push(await test('jobs', SB+'/rest/v1/jobs?select=id,title,posted_by&limit=3'));
-  out.push(await test('contact_messages (MUST BE [] empty)', SB+'/rest/v1/contact_messages?select=*&limit=3'));
-  out.push(await test('volunteer_submissions (MUST BE [] empty)', SB+'/rest/v1/volunteer_submissions?select=*&limit=3'));
+  const o = [];
+  o.push('========= DIRECT TABLE ACCESS =========');
+  o.push(await test('members SELECT (MUST BE empty)', SB+'/rest/v1/members?select=id,email,password_hash&limit=3'));
+  o.push(await test('contact_messages (MUST BE empty)', SB+'/rest/v1/contact_messages?select=*&limit=3'));
+  o.push(await test('volunteer_submissions (MUST BE empty)', SB+'/rest/v1/volunteer_submissions?select=*&limit=3'));
+  o.push(await test('blog_posts direct (only published should show)', SB+'/rest/v1/blog_posts?select=id,title,status&limit=5'));
+  o.push(await test('events direct', SB+'/rest/v1/events?select=id,title&limit=3'));
+  o.push(await test('jobs direct', SB+'/rest/v1/jobs?select=id,title,posted_by&limit=3'));
+
+  o.push('\n========= PUBLIC VIEWS (should work) =========');
+  o.push(await test('public_blog_posts (should work)', SB+'/rest/v1/public_blog_posts?select=id,title&limit=2'));
+  o.push(await test('public_members (should work)', SB+'/rest/v1/public_members?select=first_name,company&limit=2'));
+  o.push(await test('public_events (should work)', SB+'/rest/v1/public_events?select=id,title&limit=2'));
+  o.push(await test('public_jobs (should work)', SB+'/rest/v1/public_jobs?select=id,title&limit=2'));
+
+  o.push('\n========= INSERT ATTEMPTS (should fail) =========');
+  o.push(await test('INSERT blog_posts (should fail)', SB+'/rest/v1/blog_posts','POST',{title:'HACK',slug:'hack-'+Date.now(),content:'x',author_id:'00000000-0000-0000-0000-000000000000',content_format:'plain'}));
+  o.push(await test('INSERT events (should fail)', SB+'/rest/v1/events','POST',{title:'HACK',slug:'hack-ev-'+Date.now(),event_type:'meetup',start_date:'2025-01-01'}));
+  o.push(await test('INSERT jobs (should fail)', SB+'/rest/v1/jobs','POST',{title:'HACK',company:'X',description:'x'}));
+  o.push(await test('INSERT members spam (should fail)', SB+'/rest/v1/members','POST',{first_name:'HACK',last_name:'TEST',email:'hack'+Date.now()+'@test.com',password_hash:'abc',pg_experience:'beginner'}));
+
+  o.push('\n========= DELETE ATTEMPTS (should fail) =========');
+  // Get real event ID first
+  var evResp = await fetch(SB+'/rest/v1/events?select=id&limit=1',{headers:H});
+  var evData = await evResp.json();
+  var realEventId = evData.length ? evData[0].id : '00000000-0000-0000-0000-000000000000';
+  o.push(await test('DELETE event with REAL ID (should fail)', SB+'/rest/v1/events?id=eq.'+realEventId,'DELETE'));
   
-  out.push('\n=== PUBLIC VIEWS (should work) ===');
-  out.push(await test('public_blog_posts', SB+'/rest/v1/public_blog_posts?select=id,title&limit=2'));
-  out.push(await test('public_members', SB+'/rest/v1/public_members?select=first_name,company&limit=2'));
-  out.push(await test('public_events', SB+'/rest/v1/public_events?select=id,title&limit=2'));
-  out.push(await test('public_jobs', SB+'/rest/v1/public_jobs?select=id,title&limit=2'));
+  var jobResp = await fetch(SB+'/rest/v1/jobs?select=id&limit=1',{headers:H});
+  var jobData = await jobResp.json();
+  var realJobId = jobData.length ? jobData[0].id : '00000000-0000-0000-0000-000000000000';
+  o.push(await test('DELETE job with REAL ID (should fail)', SB+'/rest/v1/jobs?id=eq.'+realJobId,'DELETE'));
   
-  out.push('\n=== WRITE ATTEMPTS (should fail) ===');
-  out.push(await test('INSERT blog_posts', SB+'/rest/v1/blog_posts','POST',{title:'HACK',slug:'hack',content:'x',author_id:'00000000-0000-0000-0000-000000000000',content_format:'plain'}));
-  out.push(await test('INSERT events', SB+'/rest/v1/events','POST',{title:'HACK',slug:'hack-ev',event_type:'meetup'}));
-  out.push(await test('INSERT jobs', SB+'/rest/v1/jobs','POST',{title:'HACK',company:'X',description:'x'}));
-  out.push(await test('DELETE events', SB+'/rest/v1/events?id=eq.00000000-0000-0000-0000-000000000000','DELETE'));
+  o.push(await test('DELETE blog_post (should fail)', SB+'/rest/v1/blog_posts?id=eq.edabfbe1-a947-4d71-9711-cd653c1ce851','DELETE'));
+  o.push(await test('DELETE member (should fail)', SB+'/rest/v1/members?id=eq.00000000-0000-0000-0000-000000000000','DELETE'));
+
+  o.push('\n========= UPDATE ATTEMPTS (should fail) =========');
+  o.push(await test('UPDATE event title (should fail)', SB+'/rest/v1/events?id=eq.'+realEventId,'PATCH',{title:'HACKED'}));
+  o.push(await test('UPDATE job title (should fail)', SB+'/rest/v1/jobs?id=eq.'+realJobId,'PATCH',{title:'HACKED'}));
+  o.push(await test('UPDATE blog_post (should fail)', SB+'/rest/v1/blog_posts?id=eq.edabfbe1-a947-4d71-9711-cd653c1ce851','PATCH',{title:'HACKED'}));
+
+  o.push('\n========= RPC LEAK TEST =========');
+  o.push(await test('nonexistent RPC', SB+'/rest/v1/rpc/this_does_not_exist','POST',{}));
   
-  out.push('\n=== RPC LEAK TEST ===');
-  out.push(await test('nonexistent RPC', SB+'/rest/v1/rpc/this_does_not_exist','POST',{}));
+  o.push('\n========= SCHEMA EXPOSURE =========');
+  o.push(await test('OpenAPI root', SB+'/rest/v1/'));
+
+  // Verify event still exists (wasn't deleted)
+  o.push('\n========= POST-TEST VERIFICATION =========');
+  var verify = await fetch(SB+'/rest/v1/events?select=id,title',{headers:H});
+  var vdata = await verify.json();
+  o.push('Events still intact: ' + vdata.length + ' events found' + (vdata.length >= 2 ? ' ✅' : ' ❌ SOMETHING WAS DELETED'));
   
-  out.push('\n=== SCHEMA EXPOSURE ===');
-  out.push(await test('OpenAPI root', SB+'/rest/v1/'));
-  
-  document.getElementById('results').textContent = out.join('\n');
+  document.getElementById('results').textContent = o.join('\n');
 })();
 </script>
 </body></html>
