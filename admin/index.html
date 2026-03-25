@@ -682,10 +682,8 @@
           document.getElementById('eventsTab').classList.add('active');
           loadAdminEvents();
         } else if (status === 'messages') {
-          document.getElementById('messagesManager').style.display = 'block';
-          document.querySelectorAll('.admin-tab').forEach(function(t) { t.classList.remove('active'); });
-          document.getElementById('messagesTab').classList.add('active');
-          loadMessages();
+          window.location.href = '/profile/#mailbox';
+          return;
         } else {
           document.getElementById('postsList').style.display = 'block';
           origSwitchTab(status);
