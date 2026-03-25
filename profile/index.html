@@ -611,11 +611,16 @@
         el.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--pg-text-light);"><i class="fas fa-spinner fa-spin" style="font-size:1.5rem;"></i><div>Loading messages...</div></div>';
 
         try {
-          myMessages = await rpc('get_my_messages', { p_member_id: user.id });
-          if (typeof myMessages === 'string') myMessages = JSON.parse(myMessages);
+          var raw = await rpc('get_my_messages', { p_member_id: user.id });
+          // Handle nested JSON — Supabase may return JSON string inside JSON
+          if (typeof raw === 'string') { try { raw = JSON.parse(raw); } catch(e2) {} }
+          if (raw && typeof raw === 'object' && !Array.isArray(raw) && raw.get_my_messages) { raw = raw.get_my_messages; }
+          if (typeof raw === 'string') { try { raw = JSON.parse(raw); } catch(e3) {} }
+          myMessages = Array.isArray(raw) ? raw : [];
           renderMailbox();
         } catch(e) {
-          el.innerHTML = '<div class="pg-alert pg-alert-danger">Failed to load messages.</div>';
+          console.error('Mailbox error:', e);
+          el.innerHTML = '<div class="pg-alert pg-alert-danger">Failed to load messages: ' + esc(e.message || 'Unknown error') + '</div>';
         }
       }
 

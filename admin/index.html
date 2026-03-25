@@ -290,12 +290,52 @@
         <div id="messagesManager" style="display:none;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
             <h3 style="font-family:'Maven Pro',sans-serif;font-size:1rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin:0;"><i class="fas fa-envelope" style="color:var(--pg-blue-dark);margin-right:6px;"></i> Contact Messages</h3>
-            <div style="display:flex;gap:8px;">
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button class="btn-pg btn-approve" onclick="showComposeForm()" id="composeBtn"><i class="fas fa-pen"></i> Compose</button>
               <button class="btn-pg" style="background:var(--pg-blue-light);color:var(--pg-blue-dark);" onclick="filterMessages('all')" id="msgFilterAll"><i class="fas fa-inbox"></i> All</button>
               <button class="btn-pg" style="background:transparent;color:var(--pg-text-light);border:1px solid var(--pg-border);" onclick="filterMessages('unread')" id="msgFilterUnread"><i class="fas fa-envelope"></i> Unread</button>
               <button class="btn-pg" style="background:transparent;color:var(--pg-text-light);border:1px solid var(--pg-border);" onclick="filterMessages('replied')" id="msgFilterReplied"><i class="fas fa-reply"></i> Replied</button>
             </div>
           </div>
+
+          <!-- Compose Message Form (hidden) -->
+          <div id="composeFormContainer" style="display:none;">
+            <div style="background:var(--pg-white);border:1px solid var(--pg-border);border-radius:4px;padding:24px;margin-bottom:20px;">
+              <h4 style="font-family:'Maven Pro',sans-serif;font-size:.9rem;font-weight:700;margin:0 0 16px;text-transform:uppercase;color:var(--pg-blue-dark);"><i class="fas fa-pen-fancy"></i> Send Message</h4>
+              <div id="composeAlert"></div>
+              <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px;">
+                <div style="flex:1;min-width:240px;">
+                  <label style="display:block;font-size:.78rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin-bottom:4px;">Recipient *</label>
+                  <select class="pg-form-control" id="composeRecipient" onchange="onRecipientChange()">
+                    <option value="">— Select a member —</option>
+                    <option value="__broadcast__" style="color:var(--pg-danger);font-weight:700;">📢 ALL MEMBERS (Broadcast)</option>
+                  </select>
+                </div>
+                <div style="flex:1;min-width:200px;">
+                  <label style="display:block;font-size:.78rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin-bottom:4px;">Subject *</label>
+                  <select class="pg-form-control" id="composeSubject">
+                    <option value="general">General</option>
+                    <option value="event">Event</option>
+                    <option value="blog">Blog</option>
+                    <option value="partnership">Partnership</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div id="broadcastWarning" style="display:none;background:#fff3cd;border:1px solid #ffc107;border-radius:4px;padding:10px 14px;margin-bottom:12px;font-size:.82rem;color:#856404;">
+                <i class="fas fa-exclamation-triangle"></i> <strong>Broadcast mode:</strong> This message will be sent to ALL active members.
+              </div>
+              <div style="margin-bottom:12px;">
+                <label style="display:block;font-size:.78rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin-bottom:4px;">Message *</label>
+                <textarea class="pg-form-control" id="composeBody" rows="4" placeholder="Type your message..."></textarea>
+              </div>
+              <div style="display:flex;gap:10px;">
+                <button class="btn-pg btn-approve" onclick="sendComposedMessage()" id="composeSendBtn"><i class="fas fa-paper-plane"></i> Send</button>
+                <button class="btn-pg btn-reject" onclick="hideComposeForm()"><i class="fas fa-times"></i> Cancel</button>
+              </div>
+            </div>
+          </div>
+
           <div id="messagesList">
             <div class="pg-loading"><i class="fas fa-spinner fa-spin"></i><div>Loading messages...</div></div>
           </div>
@@ -662,8 +702,11 @@
         var el = document.getElementById('messagesList');
         el.innerHTML = '<div class="pg-loading"><i class="fas fa-spinner fa-spin"></i><div>Loading messages...</div></div>';
         try {
-          allMessages = await rpc('admin_get_contact_messages', { p_admin_id: admin.id });
-          if (typeof allMessages === 'string') allMessages = JSON.parse(allMessages);
+          var raw = await rpc('admin_get_contact_messages', { p_admin_id: admin.id });
+          if (typeof raw === 'string') { try { raw = JSON.parse(raw); } catch(e2) {} }
+          if (raw && typeof raw === 'object' && !Array.isArray(raw) && raw.admin_get_contact_messages) { raw = raw.admin_get_contact_messages; }
+          if (typeof raw === 'string') { try { raw = JSON.parse(raw); } catch(e3) {} }
+          allMessages = Array.isArray(raw) ? raw : [];
           renderMessages();
         } catch(e) {
           el.innerHTML = '<div class="pg-alert pg-alert-danger">Failed to load messages: ' + esc(e.message) + '</div>';
@@ -814,6 +857,118 @@
           await loadMessages();
           loadStats();
         } catch(e) { alert('Failed to delete message.'); }
+      }
+
+      // =============================================
+      // COMPOSE MESSAGE
+      // =============================================
+      var allMembersLoaded = false;
+
+      async function showComposeForm() {
+        document.getElementById('composeFormContainer').style.display = 'block';
+        document.getElementById('composeBtn').style.display = 'none';
+        document.getElementById('composeAlert').innerHTML = '';
+        if (!allMembersLoaded) await loadMembersForCompose();
+      }
+
+      function hideComposeForm() {
+        document.getElementById('composeFormContainer').style.display = 'none';
+        document.getElementById('composeBtn').style.display = 'inline-flex';
+        document.getElementById('composeBody').value = '';
+        document.getElementById('broadcastWarning').style.display = 'none';
+      }
+
+      function onRecipientChange() {
+        var val = document.getElementById('composeRecipient').value;
+        document.getElementById('broadcastWarning').style.display = val === '__broadcast__' ? 'block' : 'none';
+      }
+
+      async function loadMembersForCompose() {
+        try {
+          var r = await fetch(SUPABASE_URL + '/rest/v1/rpc/admin_get_all_members', {
+            method: 'POST',
+            headers: { 'Content-Type':'application/json', 'apikey':SUPABASE_ANON_KEY, 'Authorization':'Bearer '+SUPABASE_ANON_KEY },
+            body: JSON.stringify({ p_admin_id: admin.id })
+          });
+          if (!r.ok) throw new Error();
+          var members = await r.json();
+          if (typeof members === 'string') members = JSON.parse(members);
+
+          var sel = document.getElementById('composeRecipient');
+          // Keep first two options (placeholder + broadcast)
+          while (sel.options.length > 2) sel.remove(2);
+
+          if (Array.isArray(members)) {
+            members.forEach(function(m) {
+              var opt = document.createElement('option');
+              opt.value = m.id;
+              opt.textContent = (m.first_name || '') + ' ' + (m.last_name || '') + ' (' + (m.email || '') + ')';
+              sel.appendChild(opt);
+            });
+          }
+          allMembersLoaded = true;
+        } catch(e) {
+          // Fallback: try to load from public_members view
+          try {
+            var r2 = await fetch(SUPABASE_URL + '/rest/v1/public_members?select=id,first_name,last_name,email&order=first_name.asc', {
+              headers: { 'apikey':SUPABASE_ANON_KEY, 'Authorization':'Bearer '+SUPABASE_ANON_KEY }
+            });
+            if (r2.ok) {
+              var members2 = await r2.json();
+              var sel = document.getElementById('composeRecipient');
+              while (sel.options.length > 2) sel.remove(2);
+              members2.forEach(function(m) {
+                var opt = document.createElement('option');
+                opt.value = m.id;
+                opt.textContent = (m.first_name || '') + ' ' + (m.last_name || '') + ' (' + (m.email || '') + ')';
+                sel.appendChild(opt);
+              });
+              allMembersLoaded = true;
+            }
+          } catch(e2) {
+            console.error('Failed to load members for compose:', e2);
+          }
+        }
+      }
+
+      async function sendComposedMessage() {
+        var recipient = document.getElementById('composeRecipient').value;
+        var subject = document.getElementById('composeSubject').value;
+        var body = document.getElementById('composeBody').value.trim();
+        var alertEl = document.getElementById('composeAlert');
+        var btn = document.getElementById('composeSendBtn');
+
+        if (!recipient) { alertEl.innerHTML = '<div class="pg-alert pg-alert-danger">Please select a recipient.</div>'; return; }
+        if (!body) { alertEl.innerHTML = '<div class="pg-alert pg-alert-danger">Please enter a message.</div>'; return; }
+
+        if (recipient === '__broadcast__') {
+          if (!confirm('Are you sure you want to send this message to ALL active members?')) return;
+        }
+
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+        try {
+          if (recipient === '__broadcast__') {
+            var result = await rpc('admin_send_broadcast', { p_admin_id: admin.id, p_subject: subject, p_body: body });
+            var count = result && result.sent_count ? result.sent_count : 0;
+            alertEl.innerHTML = '<div class="pg-alert pg-alert-success"><i class="fas fa-check-circle"></i> Broadcast sent to ' + count + ' members!</div>';
+          } else {
+            await rpc('admin_send_message', { p_admin_id: admin.id, p_member_id: recipient, p_subject: subject, p_body: body });
+            alertEl.innerHTML = '<div class="pg-alert pg-alert-success"><i class="fas fa-check-circle"></i> Message sent successfully!</div>';
+          }
+          document.getElementById('composeBody').value = '';
+          document.getElementById('composeRecipient').value = '';
+          document.getElementById('broadcastWarning').style.display = 'none';
+          await loadMessages();
+          loadStats();
+          setTimeout(function() { hideComposeForm(); }, 2000);
+        } catch(e) {
+          alertEl.innerHTML = '<div class="pg-alert pg-alert-danger">Failed to send: ' + esc(e.message) + '</div>';
+        }
+
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send';
       }
 
       // =============================================
