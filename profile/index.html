@@ -647,7 +647,9 @@
       var myMessages = [];
       var mbFilter = 'all';
       var mbMembersLoaded = false;
-      var isAdmin = user && user.is_admin;
+      var adminSession = null; try { adminSession = JSON.parse(sessionStorage.getItem('azerpug_admin')); } catch(e) {}
+      var isAdmin = (user && user.is_admin) || (adminSession && adminSession.is_admin);
+      var adminId = isAdmin ? ((user && user.is_admin) ? user.id : adminSession.id) : null;
 
       async function loadMailbox() {
         if (!user) return;
@@ -666,7 +668,7 @@
         try {
           var raw;
           if (isAdmin) {
-            raw = await rpc('admin_get_contact_messages', { p_admin_id: user.id });
+            raw = await rpc('admin_get_contact_messages', { p_admin_id: adminId });
           } else {
             raw = await rpc('get_my_messages', { p_member_id: user.id });
           }
@@ -859,7 +861,7 @@
         if (!body) { alertEl.innerHTML = '<div class="pg-alert pg-alert-danger" style="font-size:.82rem;padding:8px 12px;">Enter a reply.</div>'; return; }
         try {
           if (isAdmin) {
-            await rpc('admin_reply_contact', { p_admin_id: user.id, p_message_id: msgId, p_body: body });
+            await rpc('admin_reply_contact', { p_admin_id: adminId, p_message_id: msgId, p_body: body });
           } else {
             await rpc('user_reply_message', { p_member_id: user.id, p_message_id: msgId, p_body: body });
           }
@@ -873,7 +875,7 @@
 
       async function mbToggleRead(msgId, isRead) {
         try {
-          await rpc('admin_toggle_message_read', { p_admin_id: user.id, p_message_id: msgId, p_is_read: isRead });
+          await rpc('admin_toggle_message_read', { p_admin_id: adminId, p_message_id: msgId, p_is_read: isRead });
           loadMailbox();
         } catch(e) {}
       }
@@ -881,7 +883,7 @@
       async function mbDeleteMsg(msgId) {
         if (!confirm('Delete this message and all replies?')) return;
         try {
-          await rpc('admin_delete_contact_message', { p_admin_id: user.id, p_message_id: msgId });
+          await rpc('admin_delete_contact_message', { p_admin_id: adminId, p_message_id: msgId });
           loadMailbox();
         } catch(e) { alert('Failed to delete.'); }
       }
@@ -907,7 +909,7 @@
       async function mbLoadMembers() {
         if (mbMembersLoaded) return;
         try {
-          var raw = await rpc('admin_get_all_members', { p_admin_id: user.id });
+          var raw = await rpc('admin_get_all_members', { p_admin_id: adminId });
           if (typeof raw === 'string') { try { raw = JSON.parse(raw); } catch(e2) {} }
           if (typeof raw === 'string') { try { raw = JSON.parse(raw); } catch(e3) {} }
           var members = Array.isArray(raw) ? raw : [];
@@ -938,10 +940,10 @@
         btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
         try {
           if (recipient === '__broadcast__') {
-            var res = await rpc('admin_send_broadcast', { p_admin_id: user.id, p_subject: subject, p_body: body });
+            var res = await rpc('admin_send_broadcast', { p_admin_id: adminId, p_subject: subject, p_body: body });
             alertEl.innerHTML = '<div class="pg-alert pg-alert-success"><i class="fas fa-check"></i> Sent to ' + (res.sent_count || 0) + ' members!</div>';
           } else {
-            await rpc('admin_send_message', { p_admin_id: user.id, p_member_id: recipient, p_subject: subject, p_body: body });
+            await rpc('admin_send_message', { p_admin_id: adminId, p_member_id: recipient, p_subject: subject, p_body: body });
             alertEl.innerHTML = '<div class="pg-alert pg-alert-success"><i class="fas fa-check"></i> Message sent!</div>';
           }
           document.getElementById('mbComposeBody').value = '';
