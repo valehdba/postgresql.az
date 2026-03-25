@@ -397,6 +397,7 @@
                 <button class="pg-btn pg-btn-primary" style="display:none;" id="mbComposeBtn" onclick="document.getElementById('mbComposeContainer').style.display='block';this.style.display='none';mbLoadMembers();"><i class="fas fa-pen"></i> Compose</button>
                 <button class="pg-btn pg-btn-primary" id="mbTabAll" onclick="filterMailbox('all')"><i class="fas fa-inbox"></i> All</button>
                 <button class="pg-btn pg-btn-secondary" id="mbTabUnread" onclick="filterMailbox('unread')"><i class="fas fa-envelope"></i> Unread</button>
+                <button class="pg-btn pg-btn-secondary" id="mbTabDeleted" onclick="filterMailbox('deleted')"><i class="fas fa-trash"></i> Deleted</button>
                 <!-- Admin-only filter -->
                 <span id="mbAdminFilters" style="display:none;margin-left:auto;">
                   <button class="pg-btn pg-btn-secondary" id="mbTabMine" onclick="filterMailbox('mine')"><i class="fas fa-user"></i> My Messages</button>
@@ -681,7 +682,7 @@
 
       function filterMailbox(f) {
         mbFilter = f;
-        var tabs = ['All','Unread','Mine','Incoming'];
+        var tabs = ['All','Unread','Deleted','Mine','Incoming'];
         tabs.forEach(function(t) {
           var btn = document.getElementById('mbTab' + t);
           if (btn) btn.className = (t.toLowerCase() === f) ? 'pg-btn pg-btn-primary' : 'pg-btn pg-btn-secondary';
@@ -693,19 +694,32 @@
         var el = document.getElementById('mailboxList');
         var msgs = myMessages;
 
-        if (mbFilter === 'unread') {
-          msgs = msgs.filter(function(m) {
-            return isAdmin ? !m.is_read : m.unread_replies > 0;
-          });
-        } else if (mbFilter === 'mine' && isAdmin) {
-          msgs = msgs.filter(function(m) { return m.sender_name === 'AZERPUG Admin' || (m.reply_count > 0); });
-        } else if (mbFilter === 'incoming' && isAdmin) {
-          msgs = msgs.filter(function(m) { return m.sender_name !== 'AZERPUG Admin'; });
+        // For non-admin users: filter out hidden messages by default, show only hidden in 'deleted' tab
+        if (!isAdmin) {
+          if (mbFilter === 'deleted') {
+            msgs = msgs.filter(function(m) { return m.hidden_by_member; });
+          } else if (mbFilter === 'unread') {
+            msgs = msgs.filter(function(m) { return !m.hidden_by_member && m.unread_replies > 0; });
+          } else {
+            // 'all' — exclude hidden
+            msgs = msgs.filter(function(m) { return !m.hidden_by_member; });
+          }
+        } else {
+          // Admin filters
+          if (mbFilter === 'unread') {
+            msgs = msgs.filter(function(m) { return !m.is_read; });
+          } else if (mbFilter === 'mine') {
+            msgs = msgs.filter(function(m) { return m.sender_name === 'AZERPUG Admin' || (m.reply_count > 0); });
+          } else if (mbFilter === 'incoming') {
+            msgs = msgs.filter(function(m) { return m.sender_name !== 'AZERPUG Admin'; });
+          } else if (mbFilter === 'deleted') {
+            msgs = msgs.filter(function(m) { return m.hidden_by_member; });
+          }
         }
 
         if (!msgs || !msgs.length) {
-          var emptyText = mbFilter === 'unread' ? 'No unread messages.' : 'No messages found.';
-          el.innerHTML = '<div style="text-align:center;padding:2.5rem;color:var(--pg-text-light);"><i class="fas fa-inbox" style="font-size:2rem;display:block;margin-bottom:8px;color:var(--pg-border);"></i>' + emptyText + '</div>';
+          var emptyTexts = { unread:'No unread messages.', deleted:'No deleted messages.', all:'No messages found.', mine:'No messages found.', incoming:'No incoming messages.' };
+          el.innerHTML = '<div style="text-align:center;padding:2.5rem;color:var(--pg-text-light);"><i class="fas fa-' + (mbFilter === 'deleted' ? 'trash' : 'inbox') + '" style="font-size:2rem;display:block;margin-bottom:8px;color:var(--pg-border);"></i>' + (emptyTexts[mbFilter] || 'No messages found.') + '</div>';
           return;
         }
 
@@ -809,6 +823,15 @@
               '<button class="pg-btn pg-btn-sm" style="background:var(--pg-danger);color:#fff;" onclick="mbDeleteMsg(\'' + m.id + '\')"><i class="fas fa-trash"></i> Delete</button>';
           }
 
+          // User soft delete / restore
+          if (!isAdmin) {
+            if (m.hidden_by_member) {
+              html += '<button class="pg-btn pg-btn-secondary pg-btn-sm" onclick="event.stopPropagation();mbRestoreMsg(\'' + m.id + '\')"><i class="fas fa-undo"></i> Restore</button>';
+            } else {
+              html += '<button class="pg-btn pg-btn-sm" style="background:var(--pg-danger);color:#fff;" onclick="event.stopPropagation();mbHideMsg(\'' + m.id + '\')"><i class="fas fa-trash"></i> Delete</button>';
+            }
+          }
+
           html += '</div>' +
             '<div id="mbReplyAlert-' + m.id + '" style="margin-top:6px;"></div>' +
           '</div>';
@@ -861,6 +884,23 @@
           await rpc('admin_delete_contact_message', { p_admin_id: user.id, p_message_id: msgId });
           loadMailbox();
         } catch(e) { alert('Failed to delete.'); }
+      }
+
+      // User: Soft delete (hide) message
+      async function mbHideMsg(msgId) {
+        if (!confirm('Move this message to Deleted? You can restore it later.')) return;
+        try {
+          await rpc('user_hide_message', { p_member_id: user.id, p_message_id: msgId });
+          loadMailbox();
+        } catch(e) { alert('Failed to delete message.'); }
+      }
+
+      // User: Restore hidden message
+      async function mbRestoreMsg(msgId) {
+        try {
+          await rpc('user_restore_message', { p_member_id: user.id, p_message_id: msgId });
+          loadMailbox();
+        } catch(e) { alert('Failed to restore message.'); }
       }
 
       // Admin: Load members for compose
