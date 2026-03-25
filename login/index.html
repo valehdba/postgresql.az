@@ -160,6 +160,7 @@
           }
 
           sessionStorage.setItem('azerpug_user',JSON.stringify(result));
+          if(result.is_admin){sessionStorage.setItem('azerpug_admin',JSON.stringify(result));}
           window.location.href='/';
         }catch(e){
           err.textContent='Login failed. Please check your connection and try again.';

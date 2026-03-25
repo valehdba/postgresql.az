@@ -470,13 +470,16 @@
           if (!result || !result.id) { err.textContent = 'Invalid email or password.'; err.style.display = 'block'; return; }
           user = result;
           sessionStorage.setItem('azerpug_user', JSON.stringify(user));
-          window.location.href = '/';  // Go to welcome page
+          // Sync admin session if admin
+          if (user.is_admin) { sessionStorage.setItem('azerpug_admin', JSON.stringify(user)); }
+          window.location.href = '/';
         } catch (e) { err.textContent = 'Login failed.'; err.style.display = 'block'; }
       }
 
       function doLogout() {
         user = null; profile = null;
         sessionStorage.removeItem('azerpug_user');
+        sessionStorage.removeItem('azerpug_admin');
         window.location.hash = '';
         route();
       }

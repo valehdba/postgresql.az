@@ -136,7 +136,7 @@
   }
 
   window.__toggleDark = function() { applyDarkMode(!getDarkMode()); };
-  window.__logout = function() { sessionStorage.removeItem('azerpug_user'); window.location.href = '/'; };
+  window.__logout = function() { sessionStorage.removeItem('azerpug_user'); sessionStorage.removeItem('azerpug_admin'); window.location.href = '/'; };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

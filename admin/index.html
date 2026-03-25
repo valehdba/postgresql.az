@@ -160,15 +160,23 @@
 
       <!-- Login Screen -->
       <div id="loginScreen" class="admin-login">
-        <div class="admin-login-header"><i class="fas fa-lock"></i>&nbsp; Admin Login</div>
+        <div class="admin-login-header"><i class="fas fa-shield-alt"></i>&nbsp; Admin Panel</div>
         <div class="admin-login-body">
-          <label>Email</label>
-          <input type="email" id="loginEmail" placeholder="Email address">
-          <label>Password</label>
-          <input type="password" id="loginPassword" placeholder="Your password">
-          <div id="loginError" style="color:var(--pg-danger);font-size:0.82rem;margin-bottom:10px;display:none;"></div>
-          <button class="btn-pg btn-preview" style="width:100%;justify-content:center;padding:10px;" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> Log In</button>
-          <div style="margin-top:12px;font-size:0.78rem;color:var(--pg-text-light);text-align:center;">Admin access only. <a href="/blogs/">Back to Blog</a></div>
+          <div style="text-align:center;padding:10px 0 20px;">
+            <i class="fas fa-lock" style="font-size:2rem;color:var(--pg-blue-dark);margin-bottom:10px;display:block;"></i>
+            <p style="font-size:0.9rem;color:var(--pg-text);margin:0 0 6px;">You need to be logged in as an admin to access this panel.</p>
+            <p style="font-size:0.82rem;color:var(--pg-text-light);margin:0 0 16px;">If you're already logged in, your account may not have admin privileges.</p>
+            <a href="/login/" style="display:inline-flex;align-items:center;gap:6px;padding:10px 24px;background:var(--pg-blue-dark);color:#fff;border-radius:4px;font-family:'Maven Pro',sans-serif;font-size:.85rem;font-weight:700;text-transform:uppercase;text-decoration:none;"><i class="fas fa-sign-in-alt"></i> Go to Login</a>
+          </div>
+          <div style="border-top:1px solid var(--pg-border);padding-top:14px;margin-top:10px;">
+            <p style="font-size:0.78rem;color:var(--pg-text-light);text-align:center;margin:0 0 10px;">Or log in directly:</p>
+            <label>Email</label>
+            <input type="email" id="loginEmail" placeholder="Email address">
+            <label>Password</label>
+            <input type="password" id="loginPassword" placeholder="Your password">
+            <div id="loginError" style="color:var(--pg-danger);font-size:0.82rem;margin-bottom:10px;display:none;"></div>
+            <button class="btn-pg btn-preview" style="width:100%;justify-content:center;padding:10px;" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> Log In</button>
+          </div>
         </div>
       </div>
 
@@ -372,7 +380,15 @@
       var SUPABASE_URL = 'https://qlyqwwhimwfcvuqdrxov.supabase.co';
       var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFseXF3d2hpbXdmY3Z1cWRyeG92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjg2ODYsImV4cCI6MjA4OTcwNDY4Nn0.6MKz72wGwthRL8hs-Iv3L9Iw_W4DdGh3UjrwcagtKfM';
 
-      var admin = JSON.parse(sessionStorage.getItem('azerpug_admin') || 'null');
+      // Unified auth: read from azerpug_user (main login), fallback to azerpug_admin (legacy)
+      var admin = JSON.parse(sessionStorage.getItem('azerpug_user') || 'null');
+      if (!admin || !admin.is_admin) {
+        admin = JSON.parse(sessionStorage.getItem('azerpug_admin') || 'null');
+      }
+      // Sync: if logged in as admin via azerpug_user, also set azerpug_admin for backward compat
+      if (admin && admin.is_admin) {
+        sessionStorage.setItem('azerpug_admin', JSON.stringify(admin));
+      }
       var allPosts = [];
       var currentTab = 'pending';
 
@@ -393,7 +409,7 @@
       }
 
       // =============================================
-      // AUTH
+      // AUTH — Unified login (no separate admin login)
       // =============================================
       async function doLogin() {
         var email = document.getElementById('loginEmail').value.trim();
@@ -410,6 +426,7 @@
           if (!result.is_admin) { err.textContent = 'Access denied. Admin privileges required.'; err.style.display = 'block'; return; }
 
           admin = result;
+          sessionStorage.setItem('azerpug_user', JSON.stringify(admin));
           sessionStorage.setItem('azerpug_admin', JSON.stringify(admin));
           showPanel();
         } catch (e) {
