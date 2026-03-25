@@ -202,8 +202,17 @@
         document.getElementById('heroActions').innerHTML=
           '<a href="/profile/" class="pg-hero-btn pg-hero-btn-primary"><i class="fas fa-user"></i> <span data-i18n="home.myprofile">My Profile</span></a>'+
           '<a href="/blogs/#editor" class="pg-hero-btn pg-hero-btn-outline"><i class="fas fa-pen"></i> <span data-i18n="home.writepost">Write a Post</span></a>'+
-          '<a href="/events/" class="pg-hero-btn pg-hero-btn-outline"><i class="fas fa-calendar-alt"></i> Events</a>';
+          '<a href="/events/" class="pg-hero-btn pg-hero-btn-outline"><i class="fas fa-calendar-alt"></i> Events</a>'+
+          '<a href="/profile/#mailbox" class="pg-hero-btn pg-hero-btn-outline" style="position:relative;"><i class="fas fa-envelope"></i> Mailbox<span id="heroMailboxBadge" style="display:none;position:absolute;top:-8px;right:-8px;background:#dc3545;color:#fff;font-size:.65rem;font-weight:700;min-width:20px;height:20px;border-radius:10px;display:none;align-items:center;justify-content:center;padding:0 5px;"></span></a>';
         if(user.is_admin){document.getElementById('adminBar').style.display='flex';loadAdminPending();}
+        loadUnreadCount();
+      }
+
+      async function loadUnreadCount(){
+        try{
+          var r=await fetch(SB+'/rest/v1/rpc/get_my_unread_count',{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY},body:JSON.stringify({p_member_id:user.id})});
+          if(r.ok){var count=await r.json();var badge=document.getElementById('heroMailboxBadge');if(badge&&count>0){badge.textContent=count;badge.style.display='flex';}}
+        }catch(e){}
       }
 
       async function loadAdminPending(){
