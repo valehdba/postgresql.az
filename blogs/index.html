@@ -91,6 +91,7 @@
       .pg-blog-card h2 a:hover { color: var(--pg-blue-hover); }
       .pg-blog-meta { font-size: 0.82rem; color: var(--pg-text-light); margin-bottom: 10px; display: flex; gap: 16px; flex-wrap: wrap; }
       .pg-blog-meta i { margin-right: 4px; }
+      #postLikeArea { transition: color .15s; } #postLikeArea:hover { color: #dc3545; }
       .pg-blog-excerpt { font-size: 0.92rem; color: var(--pg-text); line-height: 1.6; margin-bottom: 12px; }
       .pg-blog-tags { display: flex; gap: 6px; flex-wrap: wrap; }
       .pg-tag { display: inline-block; padding: 2px 10px; background: var(--pg-blue-light); color: var(--pg-blue-dark); font-size: 0.75rem; font-weight: 600; border-radius: 12px; }
@@ -593,10 +594,19 @@
                 '<span><i class="fas fa-user"></i> ' + esc(post.author_first_name) + ' ' + esc(post.author_last_name) + '</span>' +
                 '<span><i class="fas fa-calendar"></i> ' + date + '</span>' +
                 '<span><i class="fas fa-eye"></i> ' + (post.views_count || 0) + ' views</span>' +
+                '<span><i class="far fa-heart"></i> <span id="listLike-' + esc(post.slug) + '">—</span></span>' +
               '</div>' +
               '<div class="pg-blog-excerpt">' + esc(excerpt) + '</div>' +
               (tags ? '<div class="pg-blog-tags">' + tags + '</div>' : '') +
             '</div>';
+          });
+          // Load like counts for listed posts
+          posts.forEach(function(post) {
+            rpc('get_post_likes', { p_post_slug: post.slug, p_member_id: currentUser ? currentUser.id : null }).then(function(r) {
+              if (typeof r === 'string') try { r = JSON.parse(r); } catch(e) {}
+              var el = document.getElementById('listLike-' + post.slug);
+              if (el) el.textContent = (r.like_count || 0);
+            }).catch(function(){});
           });
         } catch (e) {
           loading.style.display = 'none';
@@ -626,6 +636,9 @@
 
           var renderedContent = renderContent(post.content, post.content_format);
 
+          // Track view
+          rpc('track_post_view', { p_post_slug: slug, p_viewer_id: currentUser ? currentUser.id : null }).catch(function(){});
+
           container.innerHTML =
             '<h1>' + esc(post.title) + '</h1>' +
             '<div class="pg-author-box">' +
@@ -635,17 +648,86 @@
             '</div>' +
             '<div class="pg-blog-meta" style="margin-bottom:20px;">' +
               '<span><i class="fas fa-calendar"></i> ' + date + '</span>' +
-              '<span><i class="fas fa-eye"></i> ' + (post.views_count || 0) + ' views</span>' +
+              '<span><i class="fas fa-eye"></i> <span id="postViewCount">' + ((post.views_count || 0) + 1) + '</span> views</span>' +
+              '<span id="postLikeArea" style="cursor:pointer;" onclick="toggleLike(\'' + esc(slug) + '\')"><i class="far fa-heart" id="postLikeIcon"></i> <span id="postLikeCount">0</span> likes</span>' +
             '</div>' +
             (tags ? '<div class="pg-blog-tags" style="margin-bottom:24px;">' + tags + '</div>' : '') +
-            '<div class="pg-blog-content">' + renderedContent + '</div>';
+            '<div class="pg-blog-content">' + renderedContent + '</div>' +
+            '<div id="postLikers" style="margin-top:24px;"></div>';
 
           // Highlight code blocks
           container.querySelectorAll('pre code').forEach(function(block) { hljs.highlightElement(block); });
 
+          // Load likes
+          loadPostLikes(slug);
+
         } catch (e) {
           container.innerHTML = '<div class="pg-alert pg-alert-danger">Failed to load post. ' + esc(e.message || '') + '</div>';
         }
+      }
+
+      // =============================================
+      // LIKES
+      // =============================================
+      async function loadPostLikes(slug) {
+        try {
+          var result = await rpc('get_post_likes', { p_post_slug: slug, p_member_id: currentUser ? currentUser.id : null });
+          if (typeof result === 'string') result = JSON.parse(result);
+
+          document.getElementById('postLikeCount').textContent = result.like_count || 0;
+
+          var icon = document.getElementById('postLikeIcon');
+          if (result.liked) {
+            icon.className = 'fas fa-heart';
+            icon.style.color = '#dc3545';
+          } else {
+            icon.className = 'far fa-heart';
+            icon.style.color = '';
+          }
+
+          // Show likers
+          var likers = result.likers || [];
+          var likersEl = document.getElementById('postLikers');
+          if (likers.length > 0) {
+            var html = '<div style="border-top:1px solid var(--pg-border);padding-top:16px;">' +
+              '<div style="font-family:\'Maven Pro\',sans-serif;font-size:.82rem;font-weight:700;text-transform:uppercase;color:var(--pg-text-light);margin-bottom:10px;"><i class="fas fa-heart" style="color:#dc3545;"></i> Liked by</div>' +
+              '<div style="display:flex;flex-wrap:wrap;gap:8px;">';
+            likers.forEach(function(l) {
+              var li = ((l.first_name||'')[0]||'') + ((l.last_name||'')[0]||'');
+              html += '<div style="display:flex;align-items:center;gap:6px;background:var(--pg-blue-light);padding:4px 12px 4px 4px;border-radius:20px;">' +
+                '<div style="width:24px;height:24px;border-radius:50%;background:var(--pg-blue-dark);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;">' + esc(li).toUpperCase() + '</div>' +
+                '<span style="font-size:.8rem;font-weight:600;color:var(--pg-blue-dark);">' + esc(l.first_name) + ' ' + esc(l.last_name) + '</span>' +
+              '</div>';
+            });
+            html += '</div></div>';
+            likersEl.innerHTML = html;
+          } else {
+            likersEl.innerHTML = '';
+          }
+        } catch(e) { console.error('Load likes error:', e); }
+      }
+
+      async function toggleLike(slug) {
+        if (!currentUser) {
+          alert('Please log in to like posts.');
+          return;
+        }
+        try {
+          var result = await rpc('toggle_post_like', { p_member_id: currentUser.id, p_post_slug: slug });
+          if (typeof result === 'string') result = JSON.parse(result);
+
+          document.getElementById('postLikeCount').textContent = result.like_count || 0;
+          var icon = document.getElementById('postLikeIcon');
+          if (result.liked) {
+            icon.className = 'fas fa-heart';
+            icon.style.color = '#dc3545';
+          } else {
+            icon.className = 'far fa-heart';
+            icon.style.color = '';
+          }
+          // Reload likers
+          loadPostLikes(slug);
+        } catch(e) { console.error('Toggle like error:', e); }
       }
 
       // =============================================
