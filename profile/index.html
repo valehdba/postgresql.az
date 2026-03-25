@@ -179,6 +179,7 @@
                 <li><a href="#profile" class="active" id="navProfile" data-i18n="nav.profile">My Profile</a></li>
                 <li><a href="#edit" id="navEdit">Edit Profile</a></li>
                 <li><a href="#password" id="navPassword">Change Password</a></li>
+                <li><a href="#mailbox" id="navMailbox"><i class="fas fa-envelope"></i> Mailbox <span id="mailboxBadge" style="background:var(--pg-danger);color:#fff;padding:1px 7px;border-radius:10px;font-size:.65rem;font-weight:700;display:none;margin-left:4px;"></span></a></li>
                 <li><a href="/blogs/#dashboard">My Blog Posts</a></li>
                 <li><a href="/blogs/#editor">Write a Post</a></li>
                 <li id="adminLink" style="display:none;"><a href="/admin/" style="color:#c62828;"><i class="fas fa-shield-alt"></i> Admin Panel</a></li>
@@ -347,6 +348,32 @@
               </div>
             </div>
 
+            <!-- ==================== MAILBOX VIEW ==================== -->
+            <div id="viewMailbox" class="pg-view">
+              <h1 class="pg-page-title"><i class="fas fa-envelope"></i> My Mailbox</h1>
+              <p class="pg-page-subtitle">View your sent messages and replies from the AZERPUG team.</p>
+
+              <a href="#profile" class="pg-btn pg-btn-secondary pg-btn-sm" style="margin-bottom:16px;"><i class="fas fa-arrow-left"></i> Back to Profile</a>
+
+              <div id="mailboxAlert"></div>
+
+              <!-- Mailbox tabs -->
+              <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+                <button class="pg-btn pg-btn-primary" id="mbTabAll" onclick="filterMailbox('all')"><i class="fas fa-inbox"></i> All Messages</button>
+                <button class="pg-btn pg-btn-secondary" id="mbTabUnread" onclick="filterMailbox('unread')"><i class="fas fa-envelope"></i> With New Replies</button>
+              </div>
+
+              <div id="mailboxList">
+                <div style="text-align:center;padding:2rem;color:var(--pg-text-light);"><i class="fas fa-spinner fa-spin" style="font-size:1.5rem;"></i><div>Loading messages...</div></div>
+              </div>
+
+              <!-- Send new message shortcut -->
+              <div style="margin-top:2rem;padding:20px;background:var(--pg-blue-light);border-radius:4px;text-align:center;">
+                <div style="font-family:'Maven Pro',sans-serif;font-size:.88rem;font-weight:700;color:var(--pg-blue-dark);margin-bottom:8px;">Need to contact us?</div>
+                <a href="/contact/" class="pg-btn pg-btn-primary"><i class="fas fa-paper-plane"></i> Send New Message</a>
+              </div>
+            </div>
+
           </main>
         </div>
       </div>
@@ -435,6 +462,10 @@
         } else if (hash === '#password') {
           document.getElementById('viewPassword').classList.add('active');
           document.getElementById('navPassword').classList.add('active');
+        } else if (hash === '#mailbox') {
+          document.getElementById('viewMailbox').classList.add('active');
+          document.getElementById('navMailbox').classList.add('active');
+          loadMailbox();
         } else {
           document.getElementById('viewProfile').classList.add('active');
           document.getElementById('navProfile').classList.add('active');
@@ -569,14 +600,135 @@
       }
 
       // =============================================
+      // MAILBOX
+      // =============================================
+      var myMessages = [];
+      var mbFilter = 'all';
+
+      async function loadMailbox() {
+        if (!user) return;
+        var el = document.getElementById('mailboxList');
+        el.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--pg-text-light);"><i class="fas fa-spinner fa-spin" style="font-size:1.5rem;"></i><div>Loading messages...</div></div>';
+
+        try {
+          myMessages = await rpc('get_my_messages', { p_member_id: user.id });
+          if (typeof myMessages === 'string') myMessages = JSON.parse(myMessages);
+          renderMailbox();
+        } catch(e) {
+          el.innerHTML = '<div class="pg-alert pg-alert-danger">Failed to load messages.</div>';
+        }
+      }
+
+      function filterMailbox(f) {
+        mbFilter = f;
+        document.getElementById('mbTabAll').className = f === 'all' ? 'pg-btn pg-btn-primary' : 'pg-btn pg-btn-secondary';
+        document.getElementById('mbTabUnread').className = f === 'unread' ? 'pg-btn pg-btn-primary' : 'pg-btn pg-btn-secondary';
+        renderMailbox();
+      }
+
+      function renderMailbox() {
+        var el = document.getElementById('mailboxList');
+        var msgs = myMessages;
+        if (mbFilter === 'unread') msgs = msgs.filter(function(m) { return m.unread_replies > 0; });
+
+        if (!msgs || !msgs.length) {
+          el.innerHTML = '<div style="text-align:center;padding:2.5rem;color:var(--pg-text-light);"><i class="fas fa-inbox" style="font-size:2rem;display:block;margin-bottom:8px;color:var(--pg-border);"></i>' +
+            (mbFilter === 'unread' ? 'No new replies.' : 'You haven\'t sent any messages yet.') +
+            '<br><a href="/contact/" style="font-size:.88rem;">Send your first message</a></div>';
+          return;
+        }
+
+        var html = '';
+        msgs.forEach(function(m) {
+          var d = m.created_at ? new Date(m.created_at).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '';
+          var subjectLabels = { general:'General Question', feedback:'Website Feedback', event:'Event Suggestion', blog:'Blog Post Question', partnership:'Partnership / Sponsorship', bug:'Report a Bug', other:'Other' };
+          var hasUnread = m.unread_replies > 0;
+          var preview = (m.message || '').substring(0, 100) + ((m.message || '').length > 100 ? '...' : '');
+
+          html += '<div class="pg-card" style="margin-bottom:12px;overflow:hidden;' + (hasUnread ? 'border-left:4px solid var(--pg-success);' : '') + '">' +
+            '<div style="padding:16px 20px;cursor:pointer;" onclick="toggleMailboxMsg(this)">' +
+              '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;">' +
+                '<div style="flex:1;min-width:0;">' +
+                  '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">' +
+                    (hasUnread ? '<span style="background:var(--pg-success);color:#fff;padding:1px 8px;border-radius:10px;font-size:.68rem;font-weight:700;">' + m.unread_replies + ' new repl' + (m.unread_replies > 1 ? 'ies' : 'y') + '</span>' : '') +
+                    '<span style="font-size:.82rem;font-weight:700;color:var(--pg-blue-dark);">' + esc(subjectLabels[m.subject] || m.subject) + '</span>' +
+                  '</div>' +
+                  '<div style="font-size:.85rem;color:var(--pg-text);line-height:1.4;">' + esc(preview) + '</div>' +
+                '</div>' +
+                '<div style="flex-shrink:0;text-align:right;">' +
+                  '<div style="font-size:.75rem;color:var(--pg-text-light);">' + d + '</div>' +
+                  (m.reply_count > 0 ? '<div style="font-size:.75rem;color:var(--pg-success);margin-top:2px;"><i class="fas fa-reply"></i> ' + m.reply_count + ' repl' + (m.reply_count > 1 ? 'ies' : 'y') + '</div>' : '<div style="font-size:.75rem;color:var(--pg-text-light);margin-top:2px;"><i class="fas fa-clock"></i> Awaiting reply</div>') +
+                  '<div style="margin-top:4px;"><i class="fas fa-chevron-down" style="font-size:.7rem;color:var(--pg-text-light);"></i></div>' +
+                '</div>' +
+              '</div>' +
+            '</div>';
+
+          // Expandable detail
+          html += '<div class="mailbox-detail" style="display:none;border-top:1px solid var(--pg-border);padding:16px 20px;background:var(--pg-bg-light);">' +
+            '<div style="font-family:\'Maven Pro\',sans-serif;font-size:.78rem;font-weight:700;text-transform:uppercase;color:var(--pg-text-light);margin-bottom:8px;"><i class="fas fa-paper-plane"></i> Your Message</div>' +
+            '<div style="background:var(--pg-white);border:1px solid var(--pg-border);border-radius:4px;padding:12px 16px;font-size:.88rem;line-height:1.6;color:var(--pg-text);white-space:pre-wrap;margin-bottom:16px;">' + esc(m.message) + '</div>';
+
+          if (m.replies && m.replies.length) {
+            html += '<div style="font-family:\'Maven Pro\',sans-serif;font-size:.78rem;font-weight:700;text-transform:uppercase;color:var(--pg-text-light);margin-bottom:8px;"><i class="fas fa-reply"></i> Replies from AZERPUG Team</div>';
+            m.replies.forEach(function(r) {
+              var rd = r.created_at ? new Date(r.created_at).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '';
+              var isNew = !r.is_read;
+              html += '<div style="background:' + (isNew ? '#e8f5e9' : 'var(--pg-blue-light)') + ';border-left:3px solid ' + (isNew ? 'var(--pg-success)' : 'var(--pg-blue-dark)') + ';border-radius:0 4px 4px 0;padding:12px 16px;margin-bottom:8px;">' +
+                '<div style="display:flex;justify-content:space-between;margin-bottom:6px;flex-wrap:wrap;">' +
+                  '<strong style="font-size:.82rem;color:var(--pg-blue-dark);"><i class="fas fa-shield-alt"></i> ' + esc(r.admin_name) + '</strong>' +
+                  '<span style="font-size:.75rem;color:var(--pg-text-light);">' + rd + (isNew ? ' <span style="background:var(--pg-success);color:#fff;padding:1px 6px;border-radius:8px;font-size:.6rem;font-weight:700;">NEW</span>' : '') + '</span>' +
+                '</div>' +
+                '<div style="font-size:.88rem;line-height:1.5;color:var(--pg-text);white-space:pre-wrap;">' + esc(r.body) + '</div>' +
+              '</div>';
+
+              // Mark as read if unread
+              if (isNew) {
+                rpc('mark_reply_read', { p_member_id: user.id, p_reply_id: r.id }).catch(function(){});
+              }
+            });
+          } else {
+            html += '<div style="text-align:center;padding:1rem;color:var(--pg-text-light);font-size:.85rem;"><i class="fas fa-hourglass-half"></i> No replies yet. Our team will respond soon.</div>';
+          }
+
+          html += '</div></div>';
+        });
+
+        el.innerHTML = html;
+      }
+
+      function toggleMailboxMsg(el) {
+        var detail = el.parentElement.querySelector('.mailbox-detail');
+        if (detail) {
+          var isOpen = detail.style.display !== 'none';
+          detail.style.display = isOpen ? 'none' : 'block';
+          var icon = el.querySelector('.fa-chevron-down, .fa-chevron-up');
+          if (icon) icon.className = icon.className.replace(isOpen ? 'fa-chevron-up' : 'fa-chevron-down', isOpen ? 'fa-chevron-down' : 'fa-chevron-up');
+        }
+      }
+
+      async function loadUnreadBadge() {
+        if (!user) return;
+        try {
+          var count = await rpc('get_my_unread_count', { p_member_id: user.id });
+          var badge = document.getElementById('mailboxBadge');
+          if (badge) {
+            if (count > 0) { badge.textContent = count; badge.style.display = 'inline'; }
+            else { badge.style.display = 'none'; }
+          }
+        } catch(e) {}
+      }
+
+      // =============================================
       // INIT
       // =============================================
       // FINDING-015: Remove auth-gated forms from DOM for anonymous users
       if (!user) {
-        ['viewProfile', 'viewEdit', 'viewPassword'].forEach(function(id) {
+        ['viewProfile', 'viewEdit', 'viewPassword', 'viewMailbox'].forEach(function(id) {
           var el = document.getElementById(id);
           if (el) el.parentNode.removeChild(el);
         });
+      } else {
+        loadUnreadBadge();
       }
       route();
     </script>
