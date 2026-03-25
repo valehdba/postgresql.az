@@ -210,8 +210,17 @@
 
       async function loadUnreadCount(){
         try{
-          var r=await fetch(SB+'/rest/v1/rpc/get_my_unread_count',{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY},body:JSON.stringify({p_member_id:user.id})});
-          if(r.ok){var count=await r.json();var badge=document.getElementById('heroMailboxBadge');if(badge&&count>0){badge.textContent=count;badge.style.display='flex';}}
+          var badge=document.getElementById('heroMailboxBadge');
+          if(!badge)return;
+          if(user.is_admin){
+            // Admin: show total unread contact messages
+            var r=await fetch(SB+'/rest/v1/rpc/admin_get_stats',{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY},body:JSON.stringify({p_admin_id:user.id})});
+            if(r.ok){var s=await r.json();var count=s.unread_messages||0;if(count>0){badge.textContent=count;badge.style.display='flex';}else{badge.style.display='none';}}
+          }else{
+            // User: show unread replies
+            var r=await fetch(SB+'/rest/v1/rpc/get_my_unread_count',{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY},body:JSON.stringify({p_member_id:user.id})});
+            if(r.ok){var count=await r.json();if(count>0){badge.textContent=count;badge.style.display='flex';}else{badge.style.display='none';}}
+          }
         }catch(e){}
       }
 
