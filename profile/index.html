@@ -698,7 +698,6 @@
             return isAdmin ? !m.is_read : m.unread_replies > 0;
           });
         } else if (mbFilter === 'mine' && isAdmin) {
-          // Messages sent by admin (where sender_name is 'AZERPUG Admin')
           msgs = msgs.filter(function(m) { return m.sender_name === 'AZERPUG Admin' || (m.reply_count > 0); });
         } else if (mbFilter === 'incoming' && isAdmin) {
           msgs = msgs.filter(function(m) { return m.sender_name !== 'AZERPUG Admin'; });
@@ -710,30 +709,30 @@
           return;
         }
 
+        var subjectLabels = { general:'General', feedback:'Feedback', event:'Event', blog:'Blog', partnership:'Partnership', bug:'Bug', other:'Other' };
         var html = '';
         msgs.forEach(function(m) {
           var d = m.created_at ? new Date(m.created_at).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '';
-          var subjectLabels = { general:'General', feedback:'Feedback', event:'Event', blog:'Blog', partnership:'Partnership', bug:'Bug', other:'Other' };
           var subjectLabel = subjectLabels[m.subject] || m.subject || '—';
-
-          // Admin view: show sender info. User view: show subject
-          var senderName = isAdmin ? (m.sender_name || '—') : '';
+          var senderName = m.sender_name || '—';
           var senderEmail = isAdmin ? (m.sender_email || '') : '';
           var hasUnread = isAdmin ? !m.is_read : (m.unread_replies > 0);
-          var unreadCount = isAdmin ? '' : (m.unread_replies > 0 ? m.unread_replies : 0);
+          var unreadCount = !isAdmin && m.unread_replies > 0 ? m.unread_replies : 0;
           var msgPreview = (m.message || '').substring(0, 120) + ((m.message || '').length > 120 ? '...' : '');
           var isMember = isAdmin && m.member_id;
 
+          // Header line: always show sender name
           html += '<div class="pg-card" style="margin-bottom:10px;overflow:hidden;' + (hasUnread ? 'border-left:4px solid var(--pg-warning);' : '') + 'cursor:pointer;" onclick="toggleMailboxMsg(this)">' +
             '<div style="padding:14px 18px;">' +
               '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;">' +
                 '<div style="flex:1;min-width:0;">' +
                   '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap;">' +
                     (hasUnread ? '<span style="width:8px;height:8px;border-radius:50%;background:var(--pg-warning);flex-shrink:0;"></span>' : '') +
-                    (isAdmin ? '<strong style="font-size:.88rem;color:var(--pg-text);">' + esc(senderName) + '</strong><span style="font-size:.75rem;color:var(--pg-text-light);">' + esc(senderEmail) + '</span>' : '') +
+                    '<strong style="font-size:.88rem;color:var(--pg-text);">' + esc(senderName) + '</strong>' +
+                    (senderEmail ? '<span style="font-size:.72rem;color:var(--pg-text-light);">' + esc(senderEmail) + '</span>' : '') +
                     '<span style="background:var(--pg-blue-light);color:var(--pg-blue-dark);padding:1px 8px;border-radius:10px;font-size:.68rem;font-weight:700;">' + esc(subjectLabel) + '</span>' +
                     (isMember ? '<span style="background:#e8f5e9;color:#2e7d32;padding:1px 8px;border-radius:10px;font-size:.68rem;font-weight:700;">Member</span>' : '') +
-                    (!isAdmin && unreadCount > 0 ? '<span style="background:var(--pg-success);color:#fff;padding:1px 8px;border-radius:10px;font-size:.68rem;font-weight:700;">' + unreadCount + ' new</span>' : '') +
+                    (unreadCount > 0 ? '<span style="background:var(--pg-success);color:#fff;padding:1px 8px;border-radius:10px;font-size:.68rem;font-weight:700;">' + unreadCount + ' new</span>' : '') +
                   '</div>' +
                   '<div style="font-size:.82rem;color:var(--pg-text-light);line-height:1.4;">' + esc(msgPreview) + '</div>' +
                 '</div>' +
@@ -748,7 +747,7 @@
           // Expandable detail
           html += '<div class="mailbox-detail" style="display:none;border-top:1px solid var(--pg-border);padding:16px 18px;background:var(--pg-bg-light);">';
 
-          // Original message
+          // Original message with sender name
           html += '<div style="font-family:\'Maven Pro\',sans-serif;font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--pg-text-light);margin-bottom:6px;"><i class="fas fa-paper-plane"></i> ' + (isAdmin ? 'From: ' + esc(senderName) : 'Your Message') + '</div>' +
             '<div style="background:var(--pg-white);border:1px solid var(--pg-border);border-radius:4px;padding:12px 14px;font-size:.85rem;line-height:1.5;color:var(--pg-text);white-space:pre-wrap;margin-bottom:14px;">' + esc(m.message) + '</div>';
 
@@ -758,31 +757,61 @@
             m.replies.forEach(function(r) {
               var rd = r.created_at ? new Date(r.created_at).toLocaleDateString('en-GB', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' }) : '';
               var isNew = !r.is_read;
-              html += '<div style="background:' + (isNew ? '#e8f5e9' : 'var(--pg-blue-light)') + ';border-left:3px solid ' + (isNew ? 'var(--pg-success)' : 'var(--pg-blue-dark)') + ';border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:6px;">' +
-                '<div style="display:flex;justify-content:space-between;margin-bottom:4px;flex-wrap:wrap;">' +
-                  '<strong style="font-size:.78rem;color:var(--pg-blue-dark);"><i class="fas fa-shield-alt"></i> ' + esc(r.admin_name || 'Admin') + '</strong>' +
-                  '<span style="font-size:.72rem;color:var(--pg-text-light);">' + rd + (isNew ? ' <span style="background:var(--pg-success);color:#fff;padding:1px 6px;border-radius:8px;font-size:.58rem;font-weight:700;">NEW</span>' : '') + '</span>' +
-                '</div>' +
-                '<div style="font-size:.85rem;line-height:1.5;color:var(--pg-text);white-space:pre-wrap;">' + esc(r.body) + '</div>' +
-              '</div>';
-              if (isNew && !isAdmin) { rpc('mark_reply_read', { p_member_id: user.id, p_reply_id: r.id }).catch(function(){}); }
+              var isOwn = r.is_own || false;
+              var replyName = r.admin_name || 'Admin';
+              var isAdminReply = !isOwn;
+
+              // Different styling: admin replies = blue, user replies = green border on right
+              if (isOwn && !isAdmin) {
+                // User's own reply — align right
+                html += '<div style="background:var(--pg-bg-light);border-right:3px solid var(--pg-blue-dark);border-radius:4px 0 0 4px;padding:10px 14px;margin-bottom:6px;margin-left:40px;text-align:right;">' +
+                  '<div style="display:flex;justify-content:space-between;margin-bottom:4px;flex-wrap:wrap;">' +
+                    '<span style="font-size:.72rem;color:var(--pg-text-light);">' + rd + '</span>' +
+                    '<strong style="font-size:.78rem;color:var(--pg-blue-dark);"><i class="fas fa-user"></i> ' + esc(replyName) + ' (You)</strong>' +
+                  '</div>' +
+                  '<div style="font-size:.85rem;line-height:1.5;color:var(--pg-text);white-space:pre-wrap;">' + esc(r.body) + '</div>' +
+                '</div>';
+              } else if (isOwn && isAdmin) {
+                // Admin's own reply
+                html += '<div style="background:var(--pg-bg-light);border-right:3px solid var(--pg-blue-dark);border-radius:4px 0 0 4px;padding:10px 14px;margin-bottom:6px;margin-left:40px;">' +
+                  '<div style="display:flex;justify-content:space-between;margin-bottom:4px;flex-wrap:wrap;">' +
+                    '<strong style="font-size:.78rem;color:var(--pg-blue-dark);"><i class="fas fa-shield-alt"></i> ' + esc(replyName) + ' (You)</strong>' +
+                    '<span style="font-size:.72rem;color:var(--pg-text-light);">' + rd + '</span>' +
+                  '</div>' +
+                  '<div style="font-size:.85rem;line-height:1.5;color:var(--pg-text);white-space:pre-wrap;">' + esc(r.body) + '</div>' +
+                '</div>';
+              } else {
+                // Other person's reply
+                var icon = isAdminReply ? 'fa-shield-alt' : 'fa-user';
+                html += '<div style="background:' + (isNew ? '#e8f5e9' : 'var(--pg-blue-light)') + ';border-left:3px solid ' + (isNew ? 'var(--pg-success)' : 'var(--pg-blue-dark)') + ';border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:6px;margin-right:40px;">' +
+                  '<div style="display:flex;justify-content:space-between;margin-bottom:4px;flex-wrap:wrap;">' +
+                    '<strong style="font-size:.78rem;color:var(--pg-blue-dark);"><i class="fas ' + icon + '"></i> ' + esc(replyName) + '</strong>' +
+                    '<span style="font-size:.72rem;color:var(--pg-text-light);">' + rd + (isNew ? ' <span style="background:var(--pg-success);color:#fff;padding:1px 6px;border-radius:8px;font-size:.58rem;font-weight:700;">NEW</span>' : '') + '</span>' +
+                  '</div>' +
+                  '<div style="font-size:.85rem;line-height:1.5;color:var(--pg-text);white-space:pre-wrap;">' + esc(r.body) + '</div>' +
+                '</div>';
+              }
+              if (isNew && !isOwn) { rpc('mark_reply_read', { p_member_id: user.id, p_reply_id: r.id }).catch(function(){}); }
             });
           } else if (!isAdmin) {
             html += '<div style="text-align:center;padding:.75rem;color:var(--pg-text-light);font-size:.82rem;"><i class="fas fa-hourglass-half"></i> Awaiting reply</div>';
           }
 
-          // Admin: reply form inline
+          // Reply form — for BOTH admin and user
+          html += '<div style="margin-top:12px;border-top:1px solid var(--pg-border);padding-top:12px;">' +
+            '<textarea class="pg-form-control" id="mbReply-' + m.id + '" rows="2" placeholder="Type reply..." style="margin-bottom:8px;font-size:.85rem;"></textarea>' +
+            '<div style="display:flex;gap:8px;flex-wrap:wrap;">' +
+              '<button class="pg-btn pg-btn-primary pg-btn-sm" onclick="mbSendReply(\'' + m.id + '\')"><i class="fas fa-reply"></i> Reply</button>';
+
+          // Admin-only actions
           if (isAdmin) {
-            html += '<div style="margin-top:12px;border-top:1px solid var(--pg-border);padding-top:12px;">' +
-              '<textarea class="pg-form-control" id="mbReply-' + m.id + '" rows="2" placeholder="Type reply..." style="margin-bottom:8px;font-size:.85rem;"></textarea>' +
-              '<div style="display:flex;gap:8px;flex-wrap:wrap;">' +
-                '<button class="pg-btn pg-btn-primary pg-btn-sm" onclick="mbSendReply(\'' + m.id + '\')"><i class="fas fa-reply"></i> Reply</button>' +
-                (!m.is_read ? '<button class="pg-btn pg-btn-secondary pg-btn-sm" onclick="mbToggleRead(\'' + m.id + '\',true)"><i class="fas fa-check"></i> Mark Read</button>' : '<button class="pg-btn pg-btn-secondary pg-btn-sm" onclick="mbToggleRead(\'' + m.id + '\',false)"><i class="fas fa-envelope"></i> Mark Unread</button>') +
-                '<button class="pg-btn pg-btn-sm" style="background:var(--pg-danger);color:#fff;" onclick="mbDeleteMsg(\'' + m.id + '\')"><i class="fas fa-trash"></i> Delete</button>' +
-              '</div>' +
-              '<div id="mbReplyAlert-' + m.id + '" style="margin-top:6px;"></div>' +
-            '</div>';
+            html += (!m.is_read ? '<button class="pg-btn pg-btn-secondary pg-btn-sm" onclick="mbToggleRead(\'' + m.id + '\',true)"><i class="fas fa-check"></i> Mark Read</button>' : '<button class="pg-btn pg-btn-secondary pg-btn-sm" onclick="mbToggleRead(\'' + m.id + '\',false)"><i class="fas fa-envelope"></i> Mark Unread</button>') +
+              '<button class="pg-btn pg-btn-sm" style="background:var(--pg-danger);color:#fff;" onclick="mbDeleteMsg(\'' + m.id + '\')"><i class="fas fa-trash"></i> Delete</button>';
           }
+
+          html += '</div>' +
+            '<div id="mbReplyAlert-' + m.id + '" style="margin-top:6px;"></div>' +
+          '</div>';
 
           html += '</div></div>';
         });
@@ -800,13 +829,17 @@
         }
       }
 
-      // Admin: Reply from mailbox
+      // Reply from mailbox — works for both admin and user
       async function mbSendReply(msgId) {
         var body = document.getElementById('mbReply-' + msgId).value.trim();
         var alertEl = document.getElementById('mbReplyAlert-' + msgId);
         if (!body) { alertEl.innerHTML = '<div class="pg-alert pg-alert-danger" style="font-size:.82rem;padding:8px 12px;">Enter a reply.</div>'; return; }
         try {
-          await rpc('admin_reply_contact', { p_admin_id: user.id, p_message_id: msgId, p_body: body });
+          if (isAdmin) {
+            await rpc('admin_reply_contact', { p_admin_id: user.id, p_message_id: msgId, p_body: body });
+          } else {
+            await rpc('user_reply_message', { p_member_id: user.id, p_message_id: msgId, p_body: body });
+          }
           alertEl.innerHTML = '<div class="pg-alert pg-alert-success" style="font-size:.82rem;padding:8px 12px;"><i class="fas fa-check"></i> Sent!</div>';
           document.getElementById('mbReply-' + msgId).value = '';
           setTimeout(function() { loadMailbox(); }, 1000);
