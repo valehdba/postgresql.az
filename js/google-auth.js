@@ -1,5 +1,5 @@
 /* =============================================
-   AZERPUG Google Sign-In
+   Google Sign-In
    Shared across login and registration pages
    ============================================= */
 var GOOGLE_CLIENT_ID = '328722583843-n04cr2tp7uhg4876m74ap124t366khq7.apps.googleusercontent.com';
