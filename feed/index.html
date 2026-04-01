@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-<head><meta charset="utf-8"><title>AZERPUG RSS Feed</title></head>
+<head><meta charset="utf-8"><title>Azerbaijan PostgreSQL User Group RSS Feed</title></head>
 <body>
 <div id="output" style="font-family:monospace;white-space:pre-wrap;padding:20px;font-size:13px;color:#555;"></div>
 <script>
@@ -19,9 +19,9 @@ async function generateRSS(){
     var posts=await r.json();
 
     var xml='<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n<channel>\n';
-    xml+='  <title>AZERPUG - Azerbaijan PostgreSQL User Group Blog</title>\n';
+    xml+='  <title>Azerbaijan PostgreSQL User Group (AZERPUG) Blog</title>\n';
     xml+='  <link>https://postgresql.az/blogs/</link>\n';
-    xml+='  <description>Articles, tutorials, and insights about PostgreSQL from the AZERPUG community in Azerbaijan.</description>\n';
+    xml+='  <description>Articles, tutorials, and insights about PostgreSQL from the community in Azerbaijan.</description>\n';
     xml+='  <language>en</language>\n';
     xml+='  <atom:link href="https://postgresql.az/feed/" rel="self" type="application/rss+xml"/>\n';
     xml+='  <lastBuildDate>'+new Date().toUTCString()+'</lastBuildDate>\n';
@@ -45,7 +45,7 @@ async function generateRSS(){
 
     // Display
     document.getElementById('output').textContent=xml;
-    document.title='AZERPUG RSS Feed ('+posts.length+' posts)';
+    document.title='Azerbaijan PostgreSQL User Group RSS Feed ('+posts.length+' posts)';
 
   }catch(e){
     document.getElementById('output').textContent='Error generating RSS feed. Visit https://postgresql.az/blogs/ to read our blog posts.';

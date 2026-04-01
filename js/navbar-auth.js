@@ -1,5 +1,5 @@
 /* =============================================
-   AZERPUG Navbar Auth + Dark Mode + Logout
+   Navbar Auth + Dark Mode + Logout
    Include this script on all pages
    ============================================= */
 (function() {

@@ -1,5 +1,5 @@
 /* =============================================
-   AZERPUG Language System (AZ/EN)
+   Language System (AZ/EN)
    Include on all pages after navbar-auth.js
    ============================================= */
 (function() {
@@ -60,9 +60,9 @@
 
     // Homepage - Mission
     'mission.title': { en: 'Our Mission', az: 'Missiyamız' },
-    'mission.p1': { en: 'AZERPUG exists to grow and strengthen the PostgreSQL community in Azerbaijan. We believe that knowledge is most powerful when it\'s shared freely, and that open-source technology is the foundation of innovation.', az: 'AZERPUG Azərbaycanda PostgreSQL icmasını inkişaf etdirmək və güclənirmək üçün mövcuddur. Biz inanırıq ki, bilik sərbəst paylaşıldıqda ən güclüdür və açıq-mənbə texnologiyası innovasiyanın əsasıdır.' },
+    'mission.p1': { en: 'Azerbaijan PostgreSQL User Group exists to grow and strengthen the PostgreSQL community in Azerbaijan. We believe that knowledge is most powerful when it\'s shared freely, and that open-source technology is the foundation of innovation.', az: 'Azerbaijan PostgreSQL User Group Azərbaycanda PostgreSQL icmasını inkişaf etdirmək və güclənirmək üçün mövcuddur. Biz inanırıq ki, bilik sərbəst paylaşıldıqda ən güclüdür və açıq-mənbə texnologiyası innovasiyanın əsasıdır.' },
     'mission.p2': { en: 'Our mission is to provide a platform where anyone — from curious beginners to seasoned database experts — can learn, share, and collaborate around PostgreSQL. We organize meetups, publish educational content, and connect professionals who work with the world\'s most advanced open-source relational database.', az: 'Missiyamız hər kəsin — maraqlı yeni başlayandan təcrübəli verilənlər bazası mütəxəssisinə qədər — PostgreSQL ətrafında öyrənə, paylaşa və əməkdaşlıq edə biləcəyi bir platforma təmin etməkdir. Biz görüşlər təşkil edirik, təhsil məzmunu dərc edirik və dünyanın ən təkmil açıq-mənbə relational verilənlər bazası ilə işləyən mütəxəssisləri birləşdiririk.' },
-    'mission.p3': { en: 'As an open community, AZERPUG has no hierarchy — every registered member is an equal participant. We welcome developers, DBAs, students, IT managers, and anyone interested in PostgreSQL to join us and contribute to the community.', az: 'Açıq icma olaraq, AZERPUG-da ierarxiya yoxdur — hər qeydiyyatdan keçmiş üzv bərabər iştirakçıdır. Biz proqramçıları, DBA-ları, tələbələri, İT menecerlərini və PostgreSQL ilə maraqlanan hər kəsi icmamıza qoşulmağa və töhfə verməyə dəvət edirik.' },
+    'mission.p3': { en: 'As an open community, our community has no hierarchy — every registered member is an equal participant. We welcome developers, DBAs, students, IT managers, and anyone interested in PostgreSQL to join us and contribute to the community.', az: 'Açıq icma olaraq, icmamızda ierarxiya yoxdur — hər qeydiyyatdan keçmiş üzv bərabər iştirakçıdır. Biz proqramçıları, DBA-ları, tələbələri, İT menecerlərini və PostgreSQL ilə maraqlanan hər kəsi icmamıza qoşulmağa və töhfə verməyə dəvət edirik.' },
 
     // Homepage - Values
     'values.title': { en: 'Community Values', az: 'İcma Dəyərləri' },
@@ -84,7 +84,7 @@
 
     // Login page
     'login.welcome': { en: 'Welcome Back', az: 'Xoş Gəldiniz' },
-    'login.subtitle': { en: 'Sign in to your AZERPUG account', az: 'AZERPUG hesabınıza daxil olun' },
+    'login.subtitle': { en: 'Sign in to your account', az: 'Hesabınıza daxil olun' },
     'login.header': { en: 'Sign In', az: 'Daxil ol' },
     'login.email': { en: 'Email Address', az: 'E-poçt ünvanı' },
     'login.password': { en: 'Password', az: 'Şifrə' },
@@ -123,7 +123,7 @@
     'reg.notes': { en: 'Personal Notes', az: 'Şəxsi Qeydlər' },
     'reg.notes_hint': { en: 'Optional — help us get to know you better', az: 'İstəyə bağlı — sizi daha yaxşı tanımağımıza kömək edin' },
     'reg.terms': { en: 'Terms & Privacy', az: 'Şərtlər və Məxfilik' },
-    'reg.agree_html': { en: 'I agree to the <a href="/about/privacypolicy/" target="_blank">Privacy Policy</a> and consent to AZERPUG storing my registration data. <span class="required">*</span>', az: '<a href="/about/privacypolicy/" target="_blank">Məxfilik Siyasəti</a> ilə razıyam və AZERPUG-un qeydiyyat məlumatlarımı saxlamasına icazə verirəm. <span class="required">*</span>' },
+    'reg.agree_html': { en: 'I agree to the <a href="/about/privacypolicy/" target="_blank">Privacy Policy</a> and consent to storing my registration data. <span class="required">*</span>', az: '<a href="/about/privacypolicy/" target="_blank">Məxfilik Siyasəti</a> ilə razıyam və qeydiyyat məlumatlarımı saxlamasına icazə verirəm. <span class="required">*</span>' },
     'reg.newsletter': { en: 'I would like to receive community news, event invitations, and PostgreSQL updates via email.', az: 'İcma xəbərləri, tədbir dəvətnamələri və PostgreSQL yenilikləri e-poçtla almaq istəyirəm.' },
     'reg.register_btn': { en: 'Register', az: 'Qeydiyyat' },
     'reg.reset_btn': { en: 'Reset', az: 'Sıfırla' },
@@ -156,12 +156,12 @@
     'members.role': { en: 'Role', az: 'Vəzifə' },
     'members.linkedin': { en: 'LinkedIn', az: 'LinkedIn' },
     'members.joined': { en: 'Joined', az: 'Qoşulub' },
-    'members.join_cta': { en: 'Join the AZERPUG community to connect with PostgreSQL professionals in Azerbaijan.', az: 'Azərbaycandakı PostgreSQL mütəxəssisləri ilə əlaqə qurmaq üçün AZERPUG icmasına qoşulun.' },
+    'members.join_cta': { en: 'Join the community to connect with PostgreSQL professionals in Azerbaijan.', az: 'Azərbaycandakı PostgreSQL mütəxəssisləri ilə əlaqə qurmaq üçün icmamıza qoşulun.' },
     'members.register': { en: 'Register Now', az: 'İndi Qeydiyyatdan Keç' },
 
     // Events page
     'events.title': { en: 'Events & Meetups', az: 'Tədbirlər və Görüşlər' },
-    'events.subtitle': { en: 'Join us at PostgreSQL meetups, workshops, webinars, and conferences in Azerbaijan. All events are open to AZERPUG members.', az: 'Azərbaycanda PostgreSQL görüşləri, seminarlar, vebinarlar və konfranslara qoşulun. Bütün tədbirlər AZERPUG üzvləri üçün açıqdır.' },
+    'events.subtitle': { en: 'Join us at PostgreSQL meetups, workshops, webinars, and conferences in Azerbaijan. All events are open to all members.', az: 'Azərbaycanda PostgreSQL görüşləri, seminarlar, vebinarlar və konfranslara qoşulun. Bütün tədbirlər bütün üzvlər üçün açıqdır.' },
     'events.info': { en: 'Want to attend an event? Log in and click RSVP to let us know you\'re coming. Want to suggest or organize an event?', az: 'Tədbirə qatılmaq istəyirsiniz? Daxil olun və gəldiyinizi bildirmək üçün RSVP klikləyin. Tədbir təklif etmək və ya təşkil etmək istəyirsiniz?' },
     'events.info_text': { en: 'Want to attend an event? Log in and click <strong>RSVP</strong> to let us know you\'re coming. Want to suggest or organize an event?', az: 'Tədbirə qatılmaq istəyirsiniz? Daxil olun və gəldiyinizi bildirmək üçün <strong>RSVP</strong> klikləyin. Tədbir təklif etmək və ya təşkil etmək istəyirsiniz?' },
     'events.contact': { en: 'Contact us', az: 'Bizimlə əlaqə saxlayın' },
@@ -180,14 +180,14 @@
     'events.attendees': { en: '100+ attendees', az: '100+ iştirakçı' },
     'events.attendees_label': { en: 'attendees', az: 'iştirakçı' },
     'events.adnsu_title': { en: 'PostgreSQL Talk by Devrim Gündüz at ADNSU', az: 'ADNSU-da Devrim Gündüz tərəfindən PostgreSQL Çıxışı' },
-    'events.adnsu_desc': { en: 'A landmark event for the AZERPUG community — PostgreSQL major contributor <a href="https://www.linkedin.com/in/devrimgunduz/" target="_blank" rel="noopener" style="font-weight:700;">Devrim Gündüz</a> visited Baku and delivered a talk at the Azerbaijan State Oil and Industry University (ADNSU) conference hall. Devrim coordinates RPM maintenance at <a href="https://yum.postgresql.org" target="_blank" rel="noopener">yum.postgresql.org</a> for Red Hat, Rocky, Alma Linux, and Fedora, manages packages at <a href="https://zypp.postgresql.org" target="_blank" rel="noopener">zypp.postgresql.org</a> for SLES, contributes to PostgreSQL website maintenance, builds PostgreSQL-related packages for Fedora and EPEL, and helps organise PGDay.UK and other conferences.', az: 'AZERPUG icması üçün əlamətdar tədbir — PostgreSQL-in əsas töhfəçisi <a href="https://www.linkedin.com/in/devrimgunduz/" target="_blank" rel="noopener" style="font-weight:700;">Devrim Gündüz</a> Bakıya gələrək Azərbaycan Dövlət Neft və Sənaye Universitetinin (ADNSU) konfrans zalında çıxış etdi. Devrim Red Hat, Rocky, Alma Linux və Fedora üçün <a href="https://yum.postgresql.org" target="_blank" rel="noopener">yum.postgresql.org</a>-da RPM təminatını koordinasiya edir, SLES üçün <a href="https://zypp.postgresql.org" target="_blank" rel="noopener">zypp.postgresql.org</a>-da paketləri idarə edir, PostgreSQL veb saytının təminatına kömək edir, Fedora və EPEL üçün PostgreSQL ilə əlaqəli paketlər qurur və PGDay.UK və digər konfransları təşkil etməyə kömək edir.' },
+    'events.adnsu_desc': { en: 'A landmark event for the community — PostgreSQL major contributor <a href="https://www.linkedin.com/in/devrimgunduz/" target="_blank" rel="noopener" style="font-weight:700;">Devrim Gündüz</a> visited Baku and delivered a talk at the Azerbaijan State Oil and Industry University (ADNSU) conference hall. Devrim coordinates RPM maintenance at <a href="https://yum.postgresql.org" target="_blank" rel="noopener">yum.postgresql.org</a> for Red Hat, Rocky, Alma Linux, and Fedora, manages packages at <a href="https://zypp.postgresql.org" target="_blank" rel="noopener">zypp.postgresql.org</a> for SLES, contributes to PostgreSQL website maintenance, builds PostgreSQL-related packages for Fedora and EPEL, and helps organise PGDay.UK and other conferences.', az: 'İcmamız üçün əlamətdar tədbir — PostgreSQL-in əsas töhfəçisi <a href="https://www.linkedin.com/in/devrimgunduz/" target="_blank" rel="noopener" style="font-weight:700;">Devrim Gündüz</a> Bakıya gələrək Azərbaycan Dövlət Neft və Sənaye Universitetinin (ADNSU) konfrans zalında çıxış etdi. Devrim Red Hat, Rocky, Alma Linux və Fedora üçün <a href="https://yum.postgresql.org" target="_blank" rel="noopener">yum.postgresql.org</a>-da RPM təminatını koordinasiya edir, SLES üçün <a href="https://zypp.postgresql.org" target="_blank" rel="noopener">zypp.postgresql.org</a>-da paketləri idarə edir, PostgreSQL veb saytının təminatına kömək edir, Fedora və EPEL üçün PostgreSQL ilə əlaqəli paketlər qurur və PGDay.UK və digər konfransları təşkil etməyə kömək edir.' },
     'events.adnsu_thanks': { en: '<strong>Special thanks to <a href="https://www.linkedin.com/in/kamranagayev/" target="_blank" rel="noopener" style="color:var(--pg-blue-dark);">Kamran Agayev</a></strong> for organizational support in making this event possible.', az: 'Bu tədbirin reallaşmasında təşkilati dəstəyə görə <a href="https://www.linkedin.com/in/kamranagayev/" target="_blank" rel="noopener" style="color:var(--pg-blue-dark);"><strong>Kamran Agayev</strong></a>-ə xüsusi təşəkkür.' },
     'events.photo1_caption': { en: 'Devrim Gündüz presenting at ADNSU', az: 'Devrim Gündüz ADNSU-da çıxış edir' },
     'events.photo2_caption': { en: 'Enthusiastic audience at the ADNSU event', az: 'ADNSU tədbirində coşğulu auditoriya' },
 
     // Blog page
     'blog.title': { en: 'Blog Posts', az: 'Bloq Yazıları' },
-    'blog.subtitle': { en: 'Articles, tutorials, and insights from the AZERPUG community about PostgreSQL.', az: 'AZERPUG icmasından PostgreSQL haqqında məqalələr, dərsliklər və fikirlər.' },
+    'blog.subtitle': { en: 'Articles, tutorials, and insights from the community about PostgreSQL.', az: 'İcmamızdan PostgreSQL haqqında məqalələr, dərsliklər və fikirlər.' },
     'blog.contribute': { en: 'Want to contribute? Log in with your member credentials and start writing!', az: 'Töhfə vermək istəyirsiniz? Üzv məlumatlarınızla daxil olun və yazmağa başlayın!' },
     'blog.loading': { en: 'Loading blog posts...', az: 'Bloq yazıları yüklənir...' },
     'blog.no_posts': { en: 'No blog posts yet. Be the first to', az: 'Hələ bloq yazısı yoxdur. İlk siz' },
@@ -228,22 +228,22 @@
 
     // Resources page
     'resources.title': { en: 'PostgreSQL Resources', az: 'PostgreSQL Resursları' },
-    'resources.subtitle': { en: 'Curated collection of the best PostgreSQL learning materials, tools, and references recommended by the AZERPUG community.', az: 'AZERPUG icması tərəfindən tövsiyə olunan ən yaxşı PostgreSQL öyrənmə materialları, alətləri və istinadların seçilmiş kolleksiyası.' },
+    'resources.subtitle': { en: 'Curated collection of the best PostgreSQL learning materials, tools, and references recommended by the community.', az: 'İcmamız tərəfindən tövsiyə olunan ən yaxşı PostgreSQL öyrənmə materialları, alətləri və istinadların seçilmiş kolleksiyası.' },
 
     // FAQ page
     'faq.title': { en: 'Frequently Asked Questions', az: 'Tez-tez Verilən Suallar' },
-    'faq.subtitle': { en: 'Find answers to common questions about AZERPUG membership, events, and PostgreSQL.', az: 'AZERPUG üzvlüyü, tədbirlər və PostgreSQL haqqında ümumi suallara cavablar tapın.' },
-    'faq.q1': { en: 'What is AZERPUG?', az: 'AZERPUG nədir?' },
-    'faq.a1': { en: '<p>AZERPUG (Azerbaijan PostgreSQL User Group) is an open-source community founded in 2018 in Baku, Azerbaijan. We bring together PostgreSQL enthusiasts — developers, database administrators, students, and IT professionals — to learn, share knowledge, and grow together. We are the first and only dedicated PostgreSQL user group in Azerbaijan.</p>', az: '<p>AZERPUG (Azərbaycan PostgreSQL İstifadəçiləri Qrupu) 2018-ci ildə Bakıda təsis edilmiş açıq-mənbə icmasıdır. Biz PostgreSQL həvəskarlarını — proqramçıları, verilənlər bazası administratorlarını, tələbələri və İT mütəxəssislərini — öyrənmək, bilik paylaşmaq və birlikdə inkişaf etmək üçün bir araya gətiririk. Azərbaycanda ilk və yeganə PostgreSQL istifadəçi qrupuyuq.</p>' },
-    'faq.q2': { en: 'Is AZERPUG an official PostgreSQL organization?', az: 'AZERPUG rəsmi PostgreSQL təşkilatıdır?' },
-    'faq.a2': { en: '<p>AZERPUG is a community-driven local user group, part of the broader global PostgreSQL community. We are recognized as a PostgreSQL user group and listed among community organizations worldwide. We are not a commercial entity — we are a volunteer-run open-source community.</p>', az: '<p>AZERPUG icma tərəfindən idarə olunan yerli istifadəçi qrupudur və daha geniş qlobal PostgreSQL icmasının bir hissəsidir. Biz PostgreSQL istifadəçi qrupu kimi tanınırıq və dünya üzrə icma təşkilatları arasında siyahıya alınmışıq. Biz kommersiya qurumu deyilik — könüllü idarə olunan açıq-mənbə icmasıyıq.</p>' },
-    'faq.q3': { en: 'Does AZERPUG have a hierarchy or leadership structure?', az: 'AZERPUG-da ierarxiya və ya rəhbərlik strukturu varmı?' },
-    'faq.a3': { en: '<p>No. AZERPUG is a flat, open community. Every registered member is an equal participant — there are no titles, ranks, or hierarchy. All members can write blog posts, attend events, and contribute to the community. Community decisions are made collaboratively.</p>', az: '<p>Xeyr. AZERPUG düz, açıq bir icmadır. Hər qeydiyyatdan keçmiş üzv bərabər iştirakçıdır — heç bir titul, dərəcə və ya ierarxiya yoxdur. Bütün üzvlər bloq yazıları yaza, tədbirlərdə iştirak edə və icmaya töhfə verə bilər. İcma qərarları birgə qəbul edilir.</p>' },
-    'faq.q4': { en: 'How can I contribute to AZERPUG?', az: 'AZERPUG-a necə töhfə verə bilərəm?' },
-    'faq.a4': { en: '<p>There are many ways to contribute:</p><ul><li>Write blog posts sharing your PostgreSQL knowledge</li><li>Attend and participate in meetups and events</li><li>Suggest topics for workshops or talks</li><li>Help other members in discussions</li><li>Spread the word about AZERPUG</li><li>Contribute to our open-source website on <a href="https://github.com/valehdba/postgresql.az" target="_blank">GitHub</a></li></ul>', az: '<p>Töhfə vermənin bir çox yolu var:</p><ul><li>PostgreSQL biliyinizi paylaşan bloq yazıları yazın</li><li>Görüşlərdə və tədbirlərdə iştirak edin</li><li>Seminarlar və ya çıxışlar üçün mövzular təklif edin</li><li>Müzakirələrdə digər üzvlərə kömək edin</li><li>AZERPUG haqqında məlumat yayın</li><li><a href="https://github.com/valehdba/postgresql.az" target="_blank">GitHub</a>-da açıq-mənbə saytımıza töhfə verin</li></ul>' },
+    'faq.subtitle': { en: 'Find answers to common questions about membership, events, and PostgreSQL.', az: 'Üzvlük, tədbirlər və PostgreSQL haqqında ümumi suallara cavablar tapın.' },
+    'faq.q1': { en: 'What is Azerbaijan PostgreSQL User Group?', az: 'Azerbaijan PostgreSQL User Group nədir?' },
+    'faq.a1': { en: '<p>Azerbaijan PostgreSQL User Group (AZERPUG) is an open-source community founded in 2018 in Baku, Azerbaijan. We bring together PostgreSQL enthusiasts — developers, database administrators, students, and IT professionals — to learn, share knowledge, and grow together. We are the first and only dedicated PostgreSQL user group in Azerbaijan.</p>', az: '<p>AZERPUG (Azərbaycan PostgreSQL İstifadəçiləri Qrupu) 2018-ci ildə Bakıda təsis edilmiş açıq-mənbə icmasıdır. Biz PostgreSQL həvəskarlarını — proqramçıları, verilənlər bazası administratorlarını, tələbələri və İT mütəxəssislərini — öyrənmək, bilik paylaşmaq və birlikdə inkişaf etmək üçün bir araya gətiririk. Azərbaycanda ilk və yeganə PostgreSQL istifadəçi qrupuyuq.</p>' },
+    'faq.q2': { en: 'Is this an official PostgreSQL organization?', az: 'Bu rəsmi PostgreSQL təşkilatıdır?' },
+    'faq.a2': { en: '<p>Azerbaijan PostgreSQL User Group is a community-driven local user group, part of the broader global PostgreSQL community. We are recognized as a PostgreSQL user group and listed among community organizations worldwide. We are not a commercial entity — we are a volunteer-run open-source community.</p>', az: '<p>Azerbaijan PostgreSQL User Group icma tərəfindən idarə olunan yerli istifadəçi qrupudur və daha geniş qlobal PostgreSQL icmasının bir hissəsidir. Biz PostgreSQL istifadəçi qrupu kimi tanınırıq və dünya üzrə icma təşkilatları arasında siyahıya alınmışıq. Biz kommersiya qurumu deyilik — könüllü idarə olunan açıq-mənbə icmasıyıq.</p>' },
+    'faq.q3': { en: 'Does the community have a hierarchy or leadership structure?', az: 'icmamızda ierarxiya və ya rəhbərlik strukturu varmı?' },
+    'faq.a3': { en: '<p>No. We are a flat, open community. Every registered member is an equal participant — there are no titles, ranks, or hierarchy. All members can write blog posts, attend events, and contribute to the community. Community decisions are made collaboratively.</p>', az: '<p>Xeyr. Biz düz, açıq bir icmayıq. Hər qeydiyyatdan keçmiş üzv bərabər iştirakçıdır — heç bir titul, dərəcə və ya ierarxiya yoxdur. Bütün üzvlər bloq yazıları yaza, tədbirlərdə iştirak edə və icmaya töhfə verə bilər. İcma qərarları birgə qəbul edilir.</p>' },
+    'faq.q4': { en: 'How can I contribute?', az: 'İcmaya necə töhfə verə bilərəm?' },
+    'faq.a4': { en: '<p>There are many ways to contribute:</p><ul><li>Write blog posts sharing your PostgreSQL knowledge</li><li>Attend and participate in meetups and events</li><li>Suggest topics for workshops or talks</li><li>Help other members in discussions</li><li>Spread the word about the community</li><li>Contribute to our open-source website on <a href="https://github.com/valehdba/postgresql.az" target="_blank">GitHub</a></li></ul>', az: '<p>Töhfə vermənin bir çox yolu var:</p><ul><li>PostgreSQL biliyinizi paylaşan bloq yazıları yazın</li><li>Görüşlərdə və tədbirlərdə iştirak edin</li><li>Seminarlar və ya çıxışlar üçün mövzular təklif edin</li><li>Müzakirələrdə digər üzvlərə kömək edin</li><li>İcma haqqında məlumat yayın</li><li><a href="https://github.com/valehdba/postgresql.az" target="_blank">GitHub</a>-da açıq-mənbə saytımıza töhfə verin</li></ul>' },
     'faq.q5': { en: 'Is membership free?', az: 'Üzvlük pulsuzdur?' },
-    'faq.a5': { en: '<p>Yes, AZERPUG membership is completely free and always will be. We are an open-source community — no fees, no subscriptions, no hidden costs.</p>', az: '<p>Bəli, AZERPUG üzvlüyü tamamilə pulsuzdur və həmişə belə olacaq. Biz açıq-mənbə icmasıyıq — heç bir ödəniş, abunə və ya gizli xərc yoxdur.</p>' },
-    'faq.q6': { en: 'Who can join AZERPUG?', az: 'AZERPUG-a kim qoşula bilər?' },
+    'faq.a5': { en: '<p>Yes, membership is completely free and always will be. We are an open-source community — no fees, no subscriptions, no hidden costs.</p>', az: '<p>Bəli, üzvlük tamamilə pulsuzdur və həmişə belə olacaq. Biz açıq-mənbə icmasıyıq — heç bir ödəniş, abunə və ya gizli xərc yoxdur.</p>' },
+    'faq.q6': { en: 'Who can join?', az: 'Kim qoşula bilər?' },
     'faq.a6': { en: "<p>Anyone interested in PostgreSQL! You don't need to be a database expert — beginners, students, developers, DBAs, managers, and curious learners are all welcome. You don't even need to be from Azerbaijan, though our focus is on the local community.</p>", az: '<p>PostgreSQL ilə maraqlanan hər kəs! Verilənlər bazası mütəxəssisi olmaq lazım deyil — yeni başlayanlar, tələbələr, proqramçılar, DBA-lar, menecerlər və maraqlı öyrənənlər hamısı xoş gəlir. Azərbaycandan olmaq belə lazım deyil, baxmayaraq ki, diqqətimiz yerli icmaya yönəlib.</p>' },
     'faq.q7': { en: 'How do I register?', az: 'Necə qeydiyyatdan keçim?' },
     'faq.a7': { en: '<p>Visit our <a href="/registration/">Registration page</a> and fill out the form. You\'ll need to provide your name, email, password, and PostgreSQL experience level. After registration you can immediately log in, write blog posts, and RSVP for events.</p>', az: '<p><a href="/registration/">Qeydiyyat səhifəmizi</a> ziyarət edin və formu doldurun. Adınızı, e-poçtunuzu və şifrənizi təqdim etməlisiniz. Qeydiyyatdan sonra dərhal daxil ola, bloq yazıları yaza və tədbirlərə RSVP edə bilərsiniz.</p>' },
@@ -266,7 +266,7 @@
     'community.title': { en: 'PostgreSQL Global Community', az: 'PostgreSQL Qlobal İcması' },
     'community.subtitle': { en: 'The key organizations, communities, and projects that power the worldwide PostgreSQL ecosystem.', az: 'Dünya miqyasında PostgreSQL ekosistemini gücləndirən əsas təşkilatlar, icmalar və layihələr.' },
     'community.subtitle_full': { en: "PostgreSQL is more than a database — it's a worldwide open-source community of developers, contributors, and organizations dedicated to building the world's most advanced relational database. Here are the key organizations and resources that power the PostgreSQL ecosystem.", az: "PostgreSQL sadəcə verilənlər bazası deyil — dünyanın ən təkmil relational verilənlər bazasını qurmağa həsr olunmuş proqramçılar, töhfə verənlər və təşkilatlardan ibarət dünya miqyasında açıq-mənbə icmasıdır. PostgreSQL ekosistemini gücləndirən əsas təşkilatlar və resurslar bunlardır." },
-    'community.info': { en: 'AZERPUG is proud to be part of the global PostgreSQL community. We encourage all our members to engage with these organizations and support the open-source mission.', az: 'AZERPUG qlobal PostgreSQL icmasının bir hissəsi olmaqdan qürur duyur. Bütün üzvlərimizi bu təşkilatlarla əlaqə qurmağa və açıq-mənbə missiyasını dəstəkləməyə təşviq edirik.' },
+    'community.info': { en: 'We are proud to be part of the global PostgreSQL community. We encourage all our members to engage with these organizations and support the open-source mission.', az: 'Biz qlobal PostgreSQL icmasının bir hissəsi olmaqdan qürur duyur. Bütün üzvlərimizi bu təşkilatlarla əlaqə qurmağa və açıq-mənbə missiyasını dəstəkləməyə təşviq edirik.' },
     'community.sidebar_onpage': { en: 'On This Page', az: 'Bu Səhifədə' },
     'community.pg_title': { en: 'PostgreSQL — The Official Website', az: 'PostgreSQL — Rəsmi Sayt' },
     'community.pg_desc': { en: "The official home of the PostgreSQL project. PostgreSQL is a powerful, open-source object-relational database system with over 35 years of active development. The website serves as the central hub for documentation, downloads, community news, release announcements, and developer resources. Whether you're just getting started or you're a seasoned database administrator, postgresql.org is the definitive resource for everything PostgreSQL.", az: 'PostgreSQL layihəsinin rəsmi evi. PostgreSQL 35 ildən artıq aktiv inkişafa malik güclü, açıq-mənbə obyekt-relational verilənlər bazası sistemidir. Sayt sənədlər, yükləmələr, icma xəbərləri, buraxılış elanları və proqramçı resursları üçün mərkəzi mərkəzdir. Yeni başlayan və ya təcrübəli verilənlər bazası administratoru olsanız da, postgresql.org PostgreSQL ilə bağlı hər şey üçün əsas resursdur.' },
@@ -293,7 +293,7 @@
     'community.donate_visit': { en: 'Donate Now', az: 'İndi İanə Edin' },
 
     // About page
-    'about.title': { en: 'About AZERPUG', az: 'AZERPUG Haqqında' },
+    'about.title': { en: 'About Us', az: 'Haqqımızda' },
     'about.subtitle': { en: 'The Azerbaijan PostgreSQL User Group — an open-source community for PostgreSQL enthusiasts, founded in 2018.', az: 'Azərbaycan PostgreSQL İstifadəçiləri Qrupu — 2018-ci ildə təsis edilmiş PostgreSQL həvəskarları üçün açıq-mənbə icması.' },
 
     // Profile page
@@ -309,21 +309,21 @@
 
     // Sponsors page
     'sponsors.title': { en: 'Sponsors & Partners', az: 'Sponsorlar və Tərəfdaşlar' },
-    'sponsors.subtitle': { en: 'AZERPUG is a volunteer-run, open-source community. Sponsorships help us organize meetups, workshops, and grow the PostgreSQL ecosystem in Azerbaijan.', az: 'AZERPUG könüllü idarə olunan, açıq-mənbə icmasıdır. Sponsorluqlar bizə görüşlər, seminarlar təşkil etməyə və Azərbaycanda PostgreSQL ekosistemini inkişaf etdirməyə kömək edir.' },
+    'sponsors.subtitle': { en: 'We are a volunteer-run, open-source community. Sponsorships help us organize meetups, workshops, and grow the PostgreSQL ecosystem in Azerbaijan.', az: 'Biz könüllü idarə olunan, açıq-mənbə icmasıyıq. Sponsorluqlar bizə görüşlər, seminarlar təşkil etməyə və Azərbaycanda PostgreSQL ekosistemini inkişaf etdirməyə kömək edir.' },
 
     // Gallery page
     'gallery.title': { en: 'Photo Gallery', az: 'Foto Qalereya' },
-    'gallery.subtitle': { en: 'Photos from AZERPUG meetups, workshops, and PostgreSQL community events in Azerbaijan.', az: 'Azərbaycanda AZERPUG görüşləri, seminarları və PostgreSQL icma tədbirlərindən fotolar.' },
+    'gallery.subtitle': { en: 'Photos from our meetups, workshops, and PostgreSQL community events in Azerbaijan.', az: 'Azərbaycanda görüşlərimiz, seminarları və PostgreSQL icma tədbirlərindən fotolar.' },
 
     // Contribute page
     'contribute.title': { en: 'Contribute to Local Community', az: 'Yerli İcmaya Töhfə Ver' },
-    'contribute.subtitle': { en: 'AZERPUG is built by its members. Whether you have 30 minutes or 30 hours a month, there\'s a way for you to help grow the PostgreSQL community in Azerbaijan. Tell us how you\'d like to contribute!', az: 'AZERPUG öz üzvləri tərəfindən qurulub. Ayda 30 dəqiqəniz və ya 30 saatınız olsa da, Azərbaycanda PostgreSQL icmasını inkişaf etdirməyə kömək etmək üçün bir yol var. Necə töhfə vermək istədiyinizi bizə bildirin!' },
-    'contribute.info': { en: 'AZERPUG is a volunteer-driven community. Every contribution — big or small — makes a real difference. No prior organizing experience needed!', az: 'AZERPUG könüllü idarə olunan icmadır. Hər töhfə — böyük və ya kiçik — həqiqi fərq yaradır. Əvvəlcədən təşkilatçılıq təcrübəsi tələb olunmur!' },
+    'contribute.subtitle': { en: 'Our community is built by its members. Whether you have 30 minutes or 30 hours a month, there\'s a way for you to help grow the PostgreSQL community in Azerbaijan. Tell us how you\'d like to contribute!', az: 'İcmamız öz üzvləri tərəfindən qurulub. Ayda 30 dəqiqəniz və ya 30 saatınız olsa da, Azərbaycanda PostgreSQL icmasını inkişaf etdirməyə kömək etmək üçün bir yol var. Necə töhfə vermək istədiyinizi bizə bildirin!' },
+    'contribute.info': { en: 'We are a volunteer-driven community. Every contribution — big or small — makes a real difference. No prior organizing experience needed!', az: 'Biz könüllü idarə olunan icmayıq. Hər töhfə — böyük və ya kiçik — həqiqi fərq yaradır. Əvvəlcədən təşkilatçılıq təcrübəsi tələb olunmur!' },
     'contribute.how': { en: 'How You Can Help', az: 'Necə Kömək Edə Bilərsiniz' },
     'contribute.signup': { en: 'Volunteer Sign-Up', az: 'Könüllü Qeydiyyatı' },
     'contribute.submit': { en: 'Submit Volunteer Application', az: 'Könüllü Müraciətini Göndər' },
     'contribute.thanks': { en: 'Thank You for Volunteering!', az: 'Könüllü Olduğunuz Üçün Təşəkkür Edirik!' },
-    'contribute.thanks_desc': { en: 'Your application has been submitted. We\'ll be in touch to discuss how you can best contribute to the AZERPUG community.', az: 'Müraciətiniz göndərildi. AZERPUG icmasına ən yaxşı şəkildə necə töhfə verə biləcəyinizi müzakirə etmək üçün sizinlə əlaqə saxlayacağıq.' },
+    'contribute.thanks_desc': { en: 'Your application has been submitted. We\'ll be in touch to discuss how you can best contribute to the community.', az: 'Müraciətiniz göndərildi. icmamıza ən yaxşı şəkildə necə töhfə verə biləcəyinizi müzakirə etmək üçün sizinlə əlaqə saxlayacağıq.' },
 
     // News page
     'news.title': { en: 'PostgreSQL News', az: 'PostgreSQL Xəbərləri' },
@@ -331,11 +331,11 @@
 
     // About page sections
     'about.mission_title': { en: 'Our Mission', az: 'Missiyamız' },
-    'about.mission_text': { en: 'AZERPUG exists to grow and strengthen the PostgreSQL community in Azerbaijan. We believe that knowledge is most powerful when it\'s shared freely, and that open-source technology is the foundation of innovation.', az: 'AZERPUG Azərbaycanda PostgreSQL icmasını inkişaf etdirmək və güclənirmək üçün mövcuddur. Biz inanırıq ki, bilik sərbəst paylaşıldıqda ən güclüdür və açıq-mənbə texnologiyası innovasiyanın əsasıdır.' },
+    'about.mission_text': { en: 'Azerbaijan PostgreSQL User Group exists to grow and strengthen the PostgreSQL community in Azerbaijan. We believe that knowledge is most powerful when it\'s shared freely, and that open-source technology is the foundation of innovation.', az: 'Azerbaijan PostgreSQL User Group Azərbaycanda PostgreSQL icmasını inkişaf etdirmək və güclənirmək üçün mövcuddur. Biz inanırıq ki, bilik sərbəst paylaşıldıqda ən güclüdür və açıq-mənbə texnologiyası innovasiyanın əsasıdır.' },
     'about.values_title': { en: 'Community Values', az: 'İcma Dəyərləri' },
     'about.timeline_title': { en: 'Our Journey', az: 'Bizim Yolumuz' },
     'about.connect_title': { en: 'Connect With Us', az: 'Bizimlə Əlaqə' },
-    'about.join_title': { en: 'Join AZERPUG Today', az: 'Bu gün AZERPUG-a qoşulun' },
+    'about.join_title': { en: 'Join the community Today', az: 'Bu gün icmamıza qoşulun' },
     'about.join_desc': { en: 'Become part of the PostgreSQL community in Azerbaijan. Registration is free and open to everyone.', az: 'Azərbaycandakı PostgreSQL icmasının bir hissəsi olun. Qeydiyyat pulsuz və hər kəs üçün açıqdır.' },
     'about.founded_label': { en: 'Founded', az: 'Təsis edilib' },
     'about.members_label': { en: 'Members', az: 'Üzvlər' },
@@ -345,9 +345,9 @@
     // Sponsors page sections
     'sponsors.become': { en: 'Become Our First Sponsor', az: 'İlk Sponsorumuz Olun' },
     'sponsors.become_desc': { en: 'We\'re looking for organizations that believe in open-source technology and want to support the growing PostgreSQL community in Azerbaijan.', az: 'Açıq-mənbə texnologiyasına inanan və Azərbaycanda böyüyən PostgreSQL icmasını dəstəkləmək istəyən təşkilatlar axtarırıq.' },
-    'sponsors.why': { en: 'Why Sponsor AZERPUG?', az: 'Niyə AZERPUG-u Sponsorluq Etməli?' },
+    'sponsors.why': { en: 'Why Sponsor Us?', az: 'Niyə Bizi Sponsorluq Etməli?' },
     'sponsors.tiers': { en: 'Sponsorship Tiers', az: 'Sponsorluq Səviyyələri' },
-    'sponsors.contact': { en: 'Interested in Sponsoring AZERPUG?', az: 'AZERPUG-u Sponsorluq Etməkdə Maraqlısınız?' },
+    'sponsors.contact': { en: 'Interested in Sponsoring Us?', az: 'Bizi Sponsorluq Etməkdə Maraqlısınız?' },
     'sponsors.brand': { en: 'Brand Visibility', az: 'Brend Görünürlüyü' },
     'sponsors.talent': { en: 'Talent Access', az: 'İstedada Giriş' },
     'sponsors.speaking': { en: 'Speaking Opportunities', az: 'Çıxış İmkanları' },
@@ -369,7 +369,7 @@
     'resources.courses': { en: 'Video Courses', az: 'Video Kurslar' },
 
     // FAQ sections
-    'faq.about_azerpug': { en: 'About AZERPUG', az: 'AZERPUG Haqqında' },
+    'faq.about_azerpug': { en: 'About Us', az: 'Haqqımızda' },
     'faq.membership': { en: 'Membership', az: 'Üzvlük' },
     'faq.about_pg': { en: 'About PostgreSQL', az: 'PostgreSQL Haqqında' },
 
@@ -479,6 +479,46 @@
     'jobs.ph_title': { en: 'e.g. Senior PostgreSQL DBA', az: 'məs. Baş PostgreSQL DBA' },
     'jobs.ph_company': { en: 'Company name', az: 'Şirkət adı' },
     'jobs.ph_location': { en: 'e.g. Baku, Azerbaijan', az: 'məs. Bakı, Azərbaycan' },
+
+    // Code of Conduct
+    'coc.title': { en: 'Code of Conduct', az: 'Davranış Qaydaları' },
+    'coc.subtitle': { en: 'Azerbaijan PostgreSQL User Group is committed to providing a welcoming, inclusive, and harassment-free experience for everyone. We explicitly adopt the <strong>PostgreSQL Community Code of Conduct</strong> as our own.', az: 'Azerbaijan PostgreSQL User Group hər kəs üçün qonaqpərvər, inklüziv və təcavüzdən azad mühit təmin etməyə sadiqdir. Biz rəsmi <strong>PostgreSQL İcma Davranış Qaydalarını</strong> qəbul edirik.' },
+    'coc.commitment_title': { en: 'Our Commitment', az: 'Öhdəliyimiz' },
+    'coc.commitment_text': { en: 'As a recognized PostgreSQL User Group, Azerbaijan PostgreSQL User Group fully adopts the official PostgreSQL Community Code of Conduct. This policy applies to all community spaces — including meetups, events, online discussions, social media groups, and this website.', az: 'Tanınmış PostgreSQL İstifadəçi Qrupu olaraq, Azerbaijan PostgreSQL User Group rəsmi PostgreSQL İcma Davranış Qaydalarını tam qəbul edir. Bu siyasət bütün icma məkanlarına — o cümlədən görüşlər, tədbirlər, onlayn müzakirələr, sosial media qrupları və bu veb sayta şamil edilir.' },
+    'coc.read_official': { en: 'Read the Official PostgreSQL Code of Conduct', az: 'Rəsmi PostgreSQL Davranış Qaydalarını Oxuyun' },
+    'coc.summary_title': { en: 'Summary of Key Principles', az: 'Əsas Prinsiplərin Xülasəsi' },
+    'coc.summary_intro': { en: 'The PostgreSQL Community Code of Conduct is built on a simple idea: treat everyone with respect, professionalism, and consideration. It applies to all community interactions, whether in person or online.', az: 'PostgreSQL İcma Davranış Qaydaları sadə bir fikir üzərində qurulub: hər kəsə hörmət, peşəkarlıq və diqqətlə yanaşın. Bu, istər şəxsən, istərsə də onlayn bütün icma qarşılıqlı əlaqələrinə şamil edilir.' },
+    'coc.expected_title': { en: 'Expected Behavior', az: 'Gözlənilən Davranış' },
+    'coc.expected_1': { en: 'Be considerate, respectful, and collaborative', az: 'Diqqətli, hörmətli və əməkdaşlığa açıq olun' },
+    'coc.expected_2': { en: 'Refrain from demeaning, discriminatory, or harassing behavior and speech', az: 'Alçaldıcı, ayrı-seçkilik edən və ya təcavüzkar davranış və nitqdən çəkinin' },
+    'coc.expected_3': { en: 'Be mindful of your surroundings and fellow community members', az: 'Ətrafınıza və icma üzvlərinizə diqqətli olun' },
+    'coc.expected_4': { en: 'Attempt collaboration before conflict', az: 'Münaqişədən əvvəl əməkdaşlığa cəhd edin' },
+    'coc.expected_5': { en: 'Alert community organizers if you notice violations or someone in distress', az: 'Pozuntular və ya çətinlikdə olan birini görsəniz icma təşkilatçılarını xəbərdar edin' },
+    'coc.unacceptable_title': { en: 'Unacceptable Behavior', az: 'Qəbuledilməz Davranış' },
+    'coc.unacceptable_1': { en: 'Intimidating, harassing, abusive, discriminatory, or derogatory conduct', az: 'Hədələyici, təcavüzkar, zorakı, ayrı-seçkilik edən və ya alçaldıcı davranış' },
+    'coc.unacceptable_2': { en: 'Offensive verbal comments related to gender, sexual orientation, race, religion, or disability', az: 'Cinsiyyət, cinsi oriyentasiya, irq, din və ya əlillik ilə bağlı təhqiredici şifahi şərhlər' },
+    'coc.unacceptable_3': { en: 'Inappropriate use of nudity, sexual images, or violent content in community spaces', az: 'İcma məkanlarında çılpaqlıq, cinsi təsvirlər və ya zorakılıq məzmununun uyğunsuz istifadəsi' },
+    'coc.unacceptable_4': { en: 'Deliberate intimidation, stalking, or unwelcome photography/recording', az: 'Qəsdən hədələmə, izləmə və ya xoşagəlməz fotoçəkmə/videoyazma' },
+    'coc.unacceptable_5': { en: 'Sustained disruption of talks, events, or online discussions', az: 'Çıxışların, tədbirlərin və ya onlayn müzakirələrin davamlı pozulması' },
+    'coc.unacceptable_6': { en: 'Any form of unwelcome physical contact or sexual attention', az: 'Xoşagəlməz fiziki təmas və ya cinsi diqqətin hər hansı forması' },
+    'coc.scope_title': { en: 'Scope', az: 'Əhatə Dairəsi' },
+    'coc.scope_intro': { en: 'This Code of Conduct applies to all community spaces, including but not limited to:', az: 'Bu Davranış Qaydaları bütün icma məkanlarına şamil edilir, o cümlədən:' },
+    'coc.scope_1': { en: 'In-person meetups, workshops, and conferences organized by Azerbaijan PostgreSQL User Group', az: 'Azerbaijan PostgreSQL User Group tərəfindən təşkil edilən canlı görüşlər, seminarlar və konfranslar' },
+    'coc.scope_2': { en: 'Our website (postgresql.az) — blog posts, comments, and contact messages', az: 'Veb saytımız (postgresql.az) — bloq yazıları, şərhlər və əlaqə mesajları' },
+    'coc.scope_3': { en: 'our social media groups (Facebook, LinkedIn, Telegram)', az: 'Sosial media qruplarımız (Facebook, LinkedIn, Telegram)' },
+    'coc.scope_4': { en: 'our GitHub repositories and discussions', az: 'our GitHub repoları və müzakirələri' },
+    'coc.scope_5': { en: 'Any communication conducted in the context of community activities', az: 'İcma fəaliyyəti kontekstində aparılan istənilən ünsiyyət' },
+    'coc.reporting_title': { en: 'Reporting Violations', az: 'Pozuntuların Bildirilməsi' },
+    'coc.reporting_text': { en: 'If you experience or witness behavior that violates this Code of Conduct, please report it immediately. All reports will be handled with discretion and confidentiality.', az: 'Bu Davranış Qaydalarını pozan davranışla qarşılaşsanız və ya şahid olsanız, zəhmət olmasa dərhal bildirin. Bütün bildirişlər ehtiyatla və məxfi şəkildə araşdırılacaq.' },
+    'coc.reporting_pg': { en: 'You may also refer to the <a href="https://www.postgresql.org/about/policies/coc_committee/" target="_blank" rel="noopener" style="font-weight:700;">PostgreSQL Code of Conduct Committee</a> for guidance on the broader community process.', az: 'Daha geniş icma prosesi üzrə rəhbərlik üçün <a href="https://www.postgresql.org/about/policies/coc_committee/" target="_blank" rel="noopener" style="font-weight:700;">PostgreSQL Davranış Qaydaları Komitəsinə</a> də müraciət edə bilərsiniz.' },
+    'coc.contact_email': { en: 'Email', az: 'E-poçt' },
+    'coc.contact_form': { en: 'Contact Form', az: 'Əlaqə Formu' },
+    'coc.contact_form_link': { en: 'Send a Message', az: 'Mesaj Göndərin' },
+    'coc.official_title': { en: 'Official Reference', az: 'Rəsmi İstinad' },
+    'coc.official_text': { en: 'This page is a summary. The full, authoritative version is maintained by the PostgreSQL Global Development Group.', az: 'Bu səhifə xülasədir. Tam və rəsmi versiya PostgreSQL Qlobal İnkişaf Qrupu tərəfindən dəstəklənir.' },
+    'coc.official_btn': { en: 'PostgreSQL Code of Conduct (Full Text)', az: 'PostgreSQL Davranış Qaydaları (Tam Mətn)' },
+    'nav.coc': { en: 'Code of Conduct', az: 'Davranış Qaydaları' },
+    'footer.coc': { en: 'Code of Conduct', az: 'Davranış Qaydaları' },
   };
 
   // Get/set language

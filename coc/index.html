@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NDMJ7KJ');</script>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Azerbaijan PostgreSQL User Group Code of Conduct — We adopt the official PostgreSQL Community Code of Conduct to ensure a welcoming and inclusive environment.">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/pgyum.css">
+    <title>Code of Conduct - Azerbaijan PostgreSQL User Group</title>
+    <style>
+      :root{--pg-blue-dark:#336791;--pg-blue-light:#e7eef4;--pg-blue-hover:#264d6f;--pg-text:#515151;--pg-text-light:#6c757d;--pg-border:#d8dde3;--pg-bg-light:#f5f5f5;--pg-white:#fff;--pg-success:#28a745;--pg-danger:#dc3545}
+      .pg-page-wrapper{max-width:1140px;margin:0 auto;padding:0 15px}
+      .pg-content-area{display:flex;gap:30px;margin-top:1rem}
+      .pg-sidebar{flex:0 0 220px;min-width:220px}
+      .pg-sidebar-logo{text-align:center;padding:16px 10px 20px;margin-bottom:1.5rem;border-bottom:2px solid var(--pg-border)}
+      .pg-sidebar-logo img{max-width:160px;height:auto;margin-bottom:10px}
+      .pg-sidebar-logo .pg-sidebar-logo-text{font-family:'Maven Pro',sans-serif;font-size:.72rem;font-weight:700;text-transform:uppercase;color:var(--pg-blue-dark);letter-spacing:.8px;line-height:1.4}
+      .pg-sidebar-section{margin-bottom:2rem}
+      .pg-sidebar-section h3{font-family:'Maven Pro',sans-serif;font-size:.85rem;font-weight:700;text-transform:uppercase;color:var(--pg-blue-dark);letter-spacing:.5px;padding-bottom:8px;border-bottom:2px solid var(--pg-blue-dark);margin-bottom:10px}
+      .pg-sidebar-section ul{list-style:none;padding:0;margin:0}
+      .pg-sidebar-section ul li a{display:block;padding:5px 10px;font-size:.9rem;font-weight:600;color:var(--pg-blue-dark);border-left:3px solid transparent;transition:all .15s}
+      .pg-sidebar-section ul li a:hover,.pg-sidebar-section ul li a.active{background:var(--pg-blue-light);border-left-color:var(--pg-blue-dark);text-decoration:none}
+      .pg-main-content{flex:1;min-width:0}
+      .pg-page-title{font-family:'Maven Pro',sans-serif;font-size:1.6rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin-bottom:.25rem;padding-bottom:10px;border-bottom:2px solid var(--pg-border)}
+      .pg-page-subtitle{font-size:.95rem;color:var(--pg-text-light);margin-bottom:1.5rem;line-height:1.6}
+      .pg-card{background:var(--pg-white);border:1px solid var(--pg-border);border-radius:4px;overflow:hidden;margin-bottom:1.5rem}
+      .pg-card-header{background:var(--pg-blue-dark);color:var(--pg-white);padding:12px 20px;font-family:'Maven Pro',sans-serif;font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+      .pg-card-header i{margin-right:8px;opacity:.85}
+      .pg-card-body{padding:24px}
+      .pg-card-body p{font-size:.92rem;line-height:1.7;color:var(--pg-text);margin-bottom:.75rem}
+      .pg-card-body p:last-child{margin-bottom:0}
+      .pg-section-title{font-family:'Maven Pro',sans-serif;font-size:1.1rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;padding-bottom:8px;border-bottom:2px solid var(--pg-border);margin:2rem 0 1.25rem;display:flex;align-items:center;gap:8px}
+      .pg-section-title i{color:var(--pg-blue-dark);font-size:.9rem}
+      .pg-coc-highlight{background:var(--pg-blue-light);border-left:4px solid var(--pg-blue-dark);border-radius:0 4px 4px 0;padding:16px 20px;margin-bottom:1.5rem;font-size:.92rem;line-height:1.7;color:var(--pg-text)}
+      .pg-coc-highlight strong{color:var(--pg-blue-dark)}
+      .pg-coc-list{padding-left:0;list-style:none;margin-bottom:1.5rem}
+      .pg-coc-list li{padding:8px 0 8px 28px;font-size:.92rem;line-height:1.6;color:var(--pg-text);position:relative}
+      .pg-coc-list li::before{content:'\f058';font-family:'Font Awesome 5 Free';font-weight:900;position:absolute;left:0;top:9px;color:var(--pg-success);font-size:.85rem}
+      .pg-coc-list-warn li::before{content:'\f057';color:var(--pg-danger)}
+      .pg-btn{display:inline-flex;align-items:center;gap:6px;font-family:'Maven Pro',sans-serif;font-size:.82rem;font-weight:700;text-transform:uppercase;padding:10px 22px;border:none;border-radius:3px;cursor:pointer;transition:all .15s;text-decoration:none}
+      .pg-btn-primary{background:var(--pg-blue-dark);color:var(--pg-white)}.pg-btn-primary:hover{background:var(--pg-blue-hover);color:var(--pg-white);text-decoration:none}
+      .pg-btn-secondary{background:transparent;color:var(--pg-blue-dark);border:1px solid var(--pg-border)}.pg-btn-secondary:hover{background:var(--pg-blue-light);text-decoration:none}
+      .pg-coc-banner{background:linear-gradient(135deg,var(--pg-blue-dark) 0%,#1a3d5c 100%);color:var(--pg-white);border-radius:8px;padding:32px;margin-bottom:2rem;position:relative;overflow:hidden}
+      .pg-coc-banner::after{content:'';position:absolute;bottom:-40px;right:-40px;width:200px;height:200px;background:url('/pict/smal_AZERPUG.png') no-repeat center;background-size:contain;opacity:.07;pointer-events:none}
+      .pg-coc-banner h2{font-family:'Maven Pro',sans-serif;font-size:1.3rem;font-weight:700;margin:0 0 8px;text-transform:none;color:var(--pg-white)}
+      .pg-coc-banner p{font-size:.95rem;opacity:.9;margin:0 0 16px;line-height:1.6}
+      .pg-coc-contact{display:flex;gap:12px;flex-wrap:wrap;margin-top:1.5rem}
+      .pg-coc-contact-card{background:var(--pg-white);border:1px solid var(--pg-border);border-radius:4px;padding:16px 20px;display:flex;align-items:center;gap:12px;flex:1;min-width:200px}
+      .pg-coc-contact-card i{font-size:1.2rem;color:var(--pg-blue-dark)}
+      .pg-coc-contact-card strong{font-size:.82rem;color:var(--pg-text);display:block}
+      .pg-coc-contact-card span{font-size:.82rem;color:var(--pg-text-light)}
+      .pg-coc-contact-card a{color:var(--pg-blue-dark);font-weight:600;font-size:.85rem}
+      #footer img.footer-logo{height:36px;margin-bottom:10px;opacity:.6;transition:opacity .2s}#footer img.footer-logo:hover{opacity:1}
+      @media(max-width:768px){.pg-content-area{flex-direction:column}.pg-sidebar{flex:auto;order:2}.pg-main-content{order:1}.pg-coc-contact{flex-direction:column}}
+    </style>
+    <meta property="og:title" content="Code of Conduct - Azerbaijan PostgreSQL User Group">
+    <meta property="og:description" content="Azerbaijan PostgreSQL User Group adopts the official PostgreSQL Community Code of Conduct to ensure a welcoming, inclusive, and harassment-free environment.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://postgresql.az/coc/">
+    <meta property="og:site_name" content="Azerbaijan PostgreSQL User Group (AZERPUG)">
+    <meta property="og:image" content="https://postgresql.az/pict/smal_AZERPUG.png">
+    <link rel="canonical" href="https://postgresql.az/coc/">
+  </head>
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDMJ7KJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="container-fluid"><div class="row justify-content-md-center"><div class="col">
+      <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand p-0" aria-label="AZERPUG Home" href="/"><img class="logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="pgNavbar"><ul class="navbar-nav mr-auto">
+          <li class="nav-item p-2"><a href="/" data-i18n="nav.home">Home</a></li>
+          <li class="nav-item p-2"><a href="/blogs/" data-i18n="nav.blog">Blog Posts</a></li>
+          <li class="nav-item p-2"><a href="/events/" data-i18n="nav.events">Events</a></li>
+          <li class="nav-item p-2"><a href="/registration/" data-i18n="nav.registration">Registration</a></li>
+          <li class="nav-item p-2"><a href="/members/" data-i18n="nav.members">Members</a></li>
+          <li class="nav-item p-2"><a href="/community/" data-i18n="nav.community">Global Community</a></li>
+          <li class="nav-item p-2"><a href="/profile/" data-i18n="nav.profile">My Profile</a></li>
+          <li class="nav-item p-2 dropdown">
+            <a href="/about/" class="dropdown-toggle" data-toggle="dropdown" data-i18n="nav.about">About</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/about/" data-i18n="nav.about">About</a>
+              <a class="dropdown-item" href="/sponsors/" data-i18n="nav.sponsors">Sponsors</a>
+              <a class="dropdown-item" href="/faq/" data-i18n="nav.faq">FAQ</a>
+              <a class="dropdown-item" href="/gallery/" data-i18n="nav.gallery">Gallery</a>
+              <a class="dropdown-item" href="/contact/" data-i18n="nav.contact">Contact</a>
+              <a class="dropdown-item" href="/contribute/" data-i18n="nav.contribute">Contribute</a>
+              <a class="dropdown-item" href="/coc/" data-i18n="nav.coc">Code of Conduct</a>
+            </div>
+          </li>
+        </ul></div>
+      </nav>
+    </div></div>
+
+    <div class="pg-page-wrapper" style="margin-top:1rem;"><div class="pg-content-area">
+
+      <aside class="pg-sidebar">
+        <div class="pg-sidebar-logo"><a href="/"><img src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a><div class="pg-sidebar-logo-text">Azerbaijan PostgreSQL<br>User Group</div></div>
+        <div class="pg-sidebar-section">
+          <h3>About</h3>
+          <ul>
+            <li><a href="/about/">About Us</a></li>
+            <li><a href="/faq/">FAQ</a></li>
+            <li><a href="/sponsors/">Sponsors</a></li>
+            <li><a href="/contact/">Contact</a></li>
+            <li><a href="/contribute/">Contribute</a></li>
+            <li><a href="/coc/" class="active">Code of Conduct</a></li>
+            <li><a href="/about/privacypolicy/">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="pg-sidebar-section">
+          <h3>Community</h3>
+          <ul>
+            <li><a href="/registration/">Register</a></li>
+            <li><a href="/members/">Members</a></li>
+            <li><a href="/blogs/">Blog Posts</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <main class="pg-main-content">
+
+        <h1 class="pg-page-title"><i class="fas fa-handshake" style="color:var(--pg-blue-dark);margin-right:8px;"></i> <span data-i18n="coc.title">Code of Conduct</span></h1>
+        <p class="pg-page-subtitle" data-i18n-html="coc.subtitle">Azerbaijan PostgreSQL User Group is committed to providing a welcoming, inclusive, and harassment-free experience for everyone. We explicitly adopt the <strong>PostgreSQL Community Code of Conduct</strong> as our own.</p>
+
+        <!-- Banner -->
+        <div class="pg-coc-banner">
+          <h2><i class="fas fa-shield-alt"></i> <span data-i18n="coc.commitment_title">Our Commitment</span></h2>
+          <p data-i18n="coc.commitment_text">As a recognized PostgreSQL User Group, Azerbaijan PostgreSQL User Group fully adopts the official PostgreSQL Community Code of Conduct. This policy applies to all community spaces — including meetups, events, online discussions, social media groups, and this website.</p>
+          <a href="https://www.postgresql.org/about/policies/coc/" target="_blank" rel="noopener" class="pg-btn" style="background:#fff;color:var(--pg-blue-dark);"><i class="fas fa-external-link-alt"></i> <span data-i18n="coc.read_official">Read the Official PostgreSQL Code of Conduct</span></a>
+        </div>
+
+        <!-- Summary -->
+        <h2 class="pg-section-title"><i class="fas fa-check-circle"></i> <span data-i18n="coc.summary_title">Summary of Key Principles</span></h2>
+
+        <div class="pg-coc-highlight" data-i18n-html="coc.summary_intro">
+          <strong>The PostgreSQL Community Code of Conduct</strong> is built on a simple idea: treat everyone with respect, professionalism, and consideration. It applies to all community interactions, whether in person or online.
+        </div>
+
+        <div class="pg-card">
+          <div class="pg-card-header"><i class="fas fa-thumbs-up"></i> <span data-i18n="coc.expected_title">Expected Behavior</span></div>
+          <div class="pg-card-body">
+            <ul class="pg-coc-list">
+              <li data-i18n="coc.expected_1">Be considerate, respectful, and collaborative</li>
+              <li data-i18n="coc.expected_2">Refrain from demeaning, discriminatory, or harassing behavior and speech</li>
+              <li data-i18n="coc.expected_3">Be mindful of your surroundings and fellow community members</li>
+              <li data-i18n="coc.expected_4">Attempt collaboration before conflict</li>
+              <li data-i18n="coc.expected_5">Alert community organizers if you notice violations or someone in distress</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pg-card">
+          <div class="pg-card-header" style="background:var(--pg-danger);"><i class="fas fa-ban"></i> <span data-i18n="coc.unacceptable_title">Unacceptable Behavior</span></div>
+          <div class="pg-card-body">
+            <ul class="pg-coc-list pg-coc-list-warn">
+              <li data-i18n="coc.unacceptable_1">Intimidating, harassing, abusive, discriminatory, or derogatory conduct</li>
+              <li data-i18n="coc.unacceptable_2">Offensive verbal comments related to gender, sexual orientation, race, religion, or disability</li>
+              <li data-i18n="coc.unacceptable_3">Inappropriate use of nudity, sexual images, or violent content in community spaces</li>
+              <li data-i18n="coc.unacceptable_4">Deliberate intimidation, stalking, or unwelcome photography/recording</li>
+              <li data-i18n="coc.unacceptable_5">Sustained disruption of talks, events, or online discussions</li>
+              <li data-i18n="coc.unacceptable_6">Any form of unwelcome physical contact or sexual attention</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Scope -->
+        <h2 class="pg-section-title"><i class="fas fa-globe"></i> <span data-i18n="coc.scope_title">Scope</span></h2>
+        <div class="pg-card">
+          <div class="pg-card-body">
+            <p data-i18n="coc.scope_intro">This Code of Conduct applies to all community spaces, including but not limited to:</p>
+            <ul class="pg-coc-list">
+              <li data-i18n="coc.scope_1">In-person meetups, workshops, and conferences organized by Azerbaijan PostgreSQL User Group</li>
+              <li data-i18n="coc.scope_2">Our website (postgresql.az) — blog posts, comments, and contact messages</li>
+              <li data-i18n="coc.scope_3">our social media groups (Facebook, LinkedIn, Telegram)</li>
+              <li data-i18n="coc.scope_4">our GitHub repositories and discussions</li>
+              <li data-i18n="coc.scope_5">Any communication conducted in the context of community activities</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Reporting -->
+        <h2 class="pg-section-title"><i class="fas fa-flag"></i> <span data-i18n="coc.reporting_title">Reporting Violations</span></h2>
+        <div class="pg-card">
+          <div class="pg-card-body">
+            <p data-i18n="coc.reporting_text">If you experience or witness behavior that violates this Code of Conduct, please report it immediately. All reports will be handled with discretion and confidentiality.</p>
+            <p data-i18n-html="coc.reporting_pg">You may also refer to the <a href="https://www.postgresql.org/about/policies/coc_committee/" target="_blank" rel="noopener" style="font-weight:700;">PostgreSQL Code of Conduct Committee</a> for guidance on the broader community process.</p>
+          </div>
+        </div>
+
+        <div class="pg-coc-contact">
+          <div class="pg-coc-contact-card">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <strong data-i18n="coc.contact_email">Email</strong>
+              <a href="mailto:info@postgresql.az">info@postgresql.az</a>
+            </div>
+          </div>
+          <div class="pg-coc-contact-card">
+            <i class="fas fa-paper-plane"></i>
+            <div>
+              <strong data-i18n="coc.contact_form">Contact Form</strong>
+              <a href="/contact/" data-i18n="coc.contact_form_link">Send a Message</a>
+            </div>
+          </div>
+          <div class="pg-coc-contact-card">
+            <i class="fab fa-telegram-plane"></i>
+            <div>
+              <strong>Telegram</strong>
+              <a href="https://t.me/postgresqlaz" target="_blank" rel="noopener">@postgresqlaz</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Official link -->
+        <h2 class="pg-section-title"><i class="fas fa-link"></i> <span data-i18n="coc.official_title">Official Reference</span></h2>
+        <div class="pg-coc-highlight" style="text-align:center;">
+          <p style="margin-bottom:12px;" data-i18n="coc.official_text">This page is a summary. The full, authoritative version is maintained by the PostgreSQL Global Development Group.</p>
+          <a href="https://www.postgresql.org/about/policies/coc/" target="_blank" rel="noopener" class="pg-btn pg-btn-primary"><i class="fas fa-external-link-alt"></i> <span data-i18n="coc.official_btn">PostgreSQL Code of Conduct (Full Text)</span></a>
+        </div>
+
+      </main>
+    </div></div></div>
+
+    <footer id="footer"><div class="container">
+      <a href="/"><img class="footer-logo" src="/pict/smal_AZERPUG.png" alt="AZERPUG"></a><br/>
+      <div style="margin-bottom:12px;"><a href="https://www.facebook.com/groups/www.postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="Facebook"><i class="fab fa-facebook"></i></a> <a href="https://github.com/valehdba/postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="GitHub"><i class="fab fa-github"></i></a> <a href="https://www.linkedin.com/groups/17977044/" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="LinkedIn"><i class="fab fa-linkedin"></i></a> <a href="https://t.me/postgresqlaz" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="Telegram"><i class="fab fa-telegram-plane"></i></a> <a href="https://www.youtube.com/@postgresqlaz" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="YouTube"><i class="fab fa-youtube"></i></a></div>
+      <a href="/about/privacypolicy/" data-i18n="footer.privacy">Privacy policy</a> | <a href="/coc/" data-i18n="footer.coc">Code of Conduct</a> | <a href="/about/website/" data-i18n="footer.website">About the website</a><br/>
+      Copyright &copy; 2018-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
+    </div></footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/js/navbar-auth.js"></script>
+    <script src="/js/lang.js"></script>
+</body>
+</html>
