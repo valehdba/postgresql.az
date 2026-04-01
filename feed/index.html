@@ -25,7 +25,7 @@ async function generateRSS(){
     xml+='  <language>en</language>\n';
     xml+='  <atom:link href="https://postgresql.az/feed/" rel="self" type="application/rss+xml"/>\n';
     xml+='  <lastBuildDate>'+new Date().toUTCString()+'</lastBuildDate>\n';
-    xml+='  <image>\n    <url>https://postgresql.az/pict/smal_AZERPUG.png</url>\n    <title>AZERPUG</title>\n    <link>https://postgresql.az/</link>\n  </image>\n';
+    xml+='  <image>\n    <url>https://postgresql.az/pict/smal.jpeg</url>\n    <title>AZERPUG</title>\n    <link>https://postgresql.az/</link>\n  </image>\n';
 
     posts.forEach(function(p){
       var desc=p.excerpt||strip(p.content||'').substring(0,300);
