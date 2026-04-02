@@ -1151,7 +1151,12 @@
 
       async function updateVolunteerStatus(id, newStatus) {
         try {
-          await rpc('admin_update_volunteer_status', { p_admin_id: admin.id, p_volunteer_id: id, p_status: newStatus });
+          var r = await fetch(SUPABASE_URL + '/rest/v1/rpc/admin_update_volunteer_status', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
+            body: JSON.stringify({ p_admin_id: admin.id, p_volunteer_id: id, p_status: newStatus })
+          });
+          if (!r.ok) { var e = await r.text(); throw new Error(e); }
           var v = allVolunteers.find(function(x) { return x.id === id; });
           if (v) v.status = newStatus;
           renderVolunteers();
