@@ -8,10 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/css/pgyum.css">
     <title>Sign In - Azerbaijan PostgreSQL User Group</title>
-    <script>
-      var __u=null;try{__u=JSON.parse(sessionStorage.getItem('azerpug_user'));}catch(e){}
-      if(__u&&__u.id){window.location.replace('/');}
-    </script>
     <style>
       :root{--pg-blue-dark:#336791;--pg-blue-light:#e7eef4;--pg-blue-hover:#264d6f;--pg-text:#515151;--pg-text-light:#6c757d;--pg-border:#d8dde3;--pg-white:#fff;--pg-danger:#dc3545}
       .pg-login-wrapper{max-width:420px;margin:40px auto;padding:0 15px}
@@ -122,15 +118,15 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="/js/google-auth.js"></script>
-    <script src="/js/navbar-auth.js"></script>
+    <script src="/js/google-auth-v2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/supabase-client.js"></script>
+    <script src="/js/navbar-auth-v2.js"></script>
     <script src="/js/lang.js"></script>
 
     <script>
-      var SB='https://qlyqwwhimwfcvuqdrxov.supabase.co';
-      var KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFseXF3d2hpbXdmY3Z1cWRyeG92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjg2ODYsImV4cCI6MjA4OTcwNDY4Nn0.6MKz72wGwthRL8hs-Iv3L9Iw_W4DdGh3UjrwcagtKfM';
-
-      async function hashPassword(pw){var d=new TextEncoder().encode(pw);var b=await crypto.subtle.digest('SHA-256',d);return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0')}).join('')}
+      // Redirect if already logged in
+      (async function(){ var s = await sbGetSession(); if(s) window.location.href='/'; })();
 
       // Allow Enter key to submit
       document.getElementById('loginPassword').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin()});
@@ -148,23 +144,11 @@
         err.style.display='none';
 
         try{
-          var hash=await hashPassword(pw);
-          var r=await fetch(SB+'/rest/v1/rpc/member_login',{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY},body:JSON.stringify({login_email:email,login_password_hash:hash})});
-          if(!r.ok)throw new Error();
-          var result=await r.json();
-
-          if(!result||!result.id){
-            err.textContent='Invalid email or password. Please try again.';
-            err.style.display='block';
-            btn.disabled=false;btn.innerHTML='<i class="fas fa-sign-in-alt"></i> Sign In';
-            return;
-          }
-
-          sessionStorage.setItem('azerpug_user',JSON.stringify(result));
-          if(result.is_admin){sessionStorage.setItem('azerpug_admin',JSON.stringify(result));}
+          // Try Supabase Auth login first, then legacy migration fallback
+          await sbMigrateLogin(email, pw);
           window.location.href='/';
         }catch(e){
-          err.textContent='Login failed. Please check your connection and try again.';
+          err.textContent='Invalid email or password. Please try again.';
           err.style.display='block';
           btn.disabled=false;btn.innerHTML='<i class="fas fa-sign-in-alt"></i> Sign In';
         }

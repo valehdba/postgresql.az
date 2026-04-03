@@ -431,33 +431,17 @@
       </div>
     </footer>
 
-    <script>
-      var SUPABASE_URL = 'https://qlyqwwhimwfcvuqdrxov.supabase.co';
-      var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFseXF3d2hpbXdmY3Z1cWRyeG92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjg2ODYsImV4cCI6MjA4OTcwNDY4Nn0.6MKz72wGwthRL8hs-Iv3L9Iw_W4DdGh3UjrwcagtKfM';
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/supabase-client.js"></script>
 
-      var user = JSON.parse(sessionStorage.getItem('azerpug_user') || 'null');
+    <script>
+      // SUPABASE_URL and SUPABASE_ANON_KEY are in supabase-client.js
+
+      var user = null;
       var profile = null;
 
-      async function rpc(fn, params) {
-        var r = await fetch(SUPABASE_URL + '/rest/v1/rpc/' + fn, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
-          body: JSON.stringify(params)
-        });
-        if (!r.ok) { var e = await r.text(); throw new Error(e); }
-        return await r.json();
-      }
-
-      async function hashPassword(pw) {
-        var d = new TextEncoder().encode(pw);
-        var b = await crypto.subtle.digest('SHA-256', d);
-        return Array.from(new Uint8Array(b)).map(function(x) { return x.toString(16).padStart(2,'0'); }).join('');
-      }
-
-      function esc(t) { if (!t) return ''; var d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
-
       // =============================================
-      // AUTH
+      // AUTH — Supabase Auth via supabase-client.js
       // =============================================
       async function doLogin() {
         var email = document.getElementById('loginEmail').value.trim();
@@ -466,23 +450,14 @@
         if (!email || !pw) { err.textContent = 'Enter email and password.'; err.style.display = 'block'; return; }
         try {
           err.style.display = 'none';
-          var hash = await hashPassword(pw);
-          var result = await rpc('member_login', { login_email: email, login_password_hash: hash });
-          if (!result || !result.id) { err.textContent = 'Invalid email or password.'; err.style.display = 'block'; return; }
-          user = result;
-          sessionStorage.setItem('azerpug_user', JSON.stringify(user));
-          // Sync admin session if admin
-          if (user.is_admin) { sessionStorage.setItem('azerpug_admin', JSON.stringify(user)); }
+          await sbMigrateLogin(email, pw);
           window.location.href = '/';
-        } catch (e) { err.textContent = 'Login failed.'; err.style.display = 'block'; }
+        } catch (e) { err.textContent = 'Invalid email or password.'; err.style.display = 'block'; }
       }
 
       function doLogout() {
         user = null; profile = null;
-        sessionStorage.removeItem('azerpug_user');
-        sessionStorage.removeItem('azerpug_admin');
-        window.location.hash = '';
-        route();
+        sbSignOut();
       }
 
       // =============================================
@@ -527,7 +502,7 @@
       async function loadProfile() {
         if (!user) return;
         try {
-          profile = await rpc('get_my_profile', { p_member_id: user.id });
+          profile = await rpc('get_my_profile', {});
           if (!profile) return;
 
           var initials = ((profile.first_name||'')[0]||'') + ((profile.last_name||'')[0]||'');
@@ -561,7 +536,7 @@
 
           // Get post count
           try {
-            var posts = await rpc('get_my_posts', { member_id: user.id });
+            var posts = await rpc('get_my_posts', {});
             document.getElementById('profilePostCount').textContent = posts ? posts.length : 0;
           } catch(e) { document.getElementById('profilePostCount').textContent = '0'; }
 
@@ -592,7 +567,6 @@
 
         try {
           var result = await rpc('update_my_profile', {
-            p_member_id: user.id,
             p_first_name: fn,
             p_last_name: ln,
             p_company: document.getElementById('editCompany').value.trim() || null,
@@ -604,7 +578,8 @@
           });
 
           // Update session
-          if (result) { user.first_name = fn; user.last_name = ln; sessionStorage.setItem('azerpug_user', JSON.stringify(user)); }
+          // Update local user object
+          if (result) { user.first_name = fn; user.last_name = ln; _cachedMember = null; }
           profile = null;
           window.location.hash = '#profile';
           setTimeout(function() {
@@ -632,7 +607,7 @@
         try {
           var oldHash = await hashPassword(cur);
           var newHash = await hashPassword(nw);
-          var result = await rpc('change_my_password', { p_member_id: user.id, p_old_password_hash: oldHash, p_new_password_hash: newHash });
+          var result = await rpc('change_my_password', { p_old_password_hash: oldHash, p_new_password_hash: newHash });
 
           if (!result) { alertEl.innerHTML = '<div class="pg-alert pg-alert-danger">Current password is incorrect.</div>'; return; }
 
@@ -651,7 +626,7 @@
       var myMessages = [];
       var mbFilter = 'all';
       var mbMembersLoaded = false;
-      var adminSession = null; try { adminSession = JSON.parse(sessionStorage.getItem('azerpug_admin')); } catch(e) {}
+      var adminSession = user; // admin check uses the same user object
       var isAdmin = (user && user.is_admin) || (adminSession && adminSession.is_admin);
       var adminId = isAdmin ? ((user && user.is_admin) ? user.id : adminSession.id) : null;
 
@@ -672,9 +647,9 @@
         try {
           var raw;
           if (isAdmin) {
-            raw = await rpc('admin_get_contact_messages', { p_admin_id: adminId });
+            raw = await rpc('admin_get_contact_messages', {});
           } else {
-            raw = await rpc('get_my_messages', { p_member_id: user.id });
+            raw = await rpc('get_my_messages', {});
           }
           if (typeof raw === 'string') { try { raw = JSON.parse(raw); } catch(e2) {} }
           if (typeof raw === 'string') { try { raw = JSON.parse(raw); } catch(e3) {} }
@@ -811,7 +786,7 @@
                   '<div style="font-size:.85rem;line-height:1.5;color:var(--pg-text);white-space:pre-wrap;">' + esc(r.body) + '</div>' +
                 '</div>';
               }
-              if (isNew && !isOwn) { rpc('mark_reply_read', { p_member_id: user.id, p_reply_id: r.id }).catch(function(){}); }
+              if (isNew && !isOwn) { rpc('mark_reply_read', { p_reply_id: r.id }).catch(function(){}); }
             });
           } else if (!isAdmin) {
             html += '<div style="text-align:center;padding:.75rem;color:var(--pg-text-light);font-size:.82rem;"><i class="fas fa-hourglass-half"></i> Awaiting reply</div>';
@@ -865,9 +840,9 @@
         if (!body) { alertEl.innerHTML = '<div class="pg-alert pg-alert-danger" style="font-size:.82rem;padding:8px 12px;">Enter a reply.</div>'; return; }
         try {
           if (isAdmin) {
-            await rpc('admin_reply_contact', { p_admin_id: adminId, p_message_id: msgId, p_body: body });
+            await rpc('admin_reply_contact', { p_message_id: msgId, p_body: body });
           } else {
-            await rpc('user_reply_message', { p_member_id: user.id, p_message_id: msgId, p_body: body });
+            await rpc('user_reply_message', { p_message_id: msgId, p_body: body });
           }
           alertEl.innerHTML = '<div class="pg-alert pg-alert-success" style="font-size:.82rem;padding:8px 12px;"><i class="fas fa-check"></i> Sent!</div>';
           document.getElementById('mbReply-' + msgId).value = '';
@@ -879,7 +854,7 @@
 
       async function mbToggleRead(msgId, isRead) {
         try {
-          await rpc('admin_toggle_message_read', { p_admin_id: adminId, p_message_id: msgId, p_is_read: isRead });
+          await rpc('admin_toggle_message_read', { p_message_id: msgId, p_is_read: isRead });
           loadMailbox();
         } catch(e) {}
       }
@@ -887,7 +862,7 @@
       async function mbDeleteMsg(msgId) {
         if (!confirm('Delete this message and all replies?')) return;
         try {
-          await rpc('admin_delete_contact_message', { p_admin_id: adminId, p_message_id: msgId });
+          await rpc('admin_delete_contact_message', { p_message_id: msgId });
           loadMailbox();
         } catch(e) { alert('Failed to delete.'); }
       }
@@ -896,7 +871,7 @@
       async function mbHideMsg(msgId) {
         if (!confirm('Move this message to Deleted? You can restore it later.')) return;
         try {
-          await rpc('user_hide_message', { p_member_id: user.id, p_message_id: msgId });
+          await rpc('user_hide_message', { p_message_id: msgId });
           loadMailbox();
         } catch(e) { alert('Failed to delete message.'); }
       }
@@ -904,7 +879,7 @@
       // User: Restore hidden message
       async function mbRestoreMsg(msgId) {
         try {
-          await rpc('user_restore_message', { p_member_id: user.id, p_message_id: msgId });
+          await rpc('user_restore_message', { p_message_id: msgId });
           loadMailbox();
         } catch(e) { alert('Failed to restore message.'); }
       }
@@ -913,7 +888,7 @@
       async function mbLoadMembers() {
         if (mbMembersLoaded) return;
         try {
-          var raw = await rpc('admin_get_all_members', { p_admin_id: adminId });
+          var raw = await rpc('admin_get_all_members', {});
           if (typeof raw === 'string') { try { raw = JSON.parse(raw); } catch(e2) {} }
           if (typeof raw === 'string') { try { raw = JSON.parse(raw); } catch(e3) {} }
           var members = Array.isArray(raw) ? raw : [];
@@ -944,10 +919,10 @@
         btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
         try {
           if (recipient === '__broadcast__') {
-            var res = await rpc('admin_send_broadcast', { p_admin_id: adminId, p_subject: subject, p_body: body });
+            var res = await rpc('admin_send_broadcast', { p_subject: subject, p_body: body });
             alertEl.innerHTML = '<div class="pg-alert pg-alert-success"><i class="fas fa-check"></i> Sent to ' + (res.sent_count || 0) + ' members!</div>';
           } else {
-            await rpc('admin_send_message', { p_admin_id: adminId, p_member_id: recipient, p_subject: subject, p_body: body });
+            await rpc('admin_send_message', { p_member_id: recipient, p_subject: subject, p_body: body });
             alertEl.innerHTML = '<div class="pg-alert pg-alert-success"><i class="fas fa-check"></i> Message sent!</div>';
           }
           document.getElementById('mbComposeBody').value = '';
@@ -963,7 +938,7 @@
       async function loadUnreadBadge() {
         if (!user) return;
         try {
-          var count = await rpc('get_my_unread_count', { p_member_id: user.id });
+          var count = await rpc('get_my_unread_count', {});
           var badge = document.getElementById('mailboxBadge');
           if (badge) {
             if (count > 0) { badge.textContent = count; badge.style.display = 'inline'; }
@@ -984,9 +959,16 @@
       } else {
         loadUnreadBadge();
       }
-      route();
+      // Init: load user from Supabase Auth then route
+      (async function() {
+        try {
+          var member = await sbGetMember();
+          if (member) { user = member; }
+        } catch(e) {}
+        route();
+      })();
     </script>
-    <script src="/js/navbar-auth.js"></script>
+    <script src="/js/navbar-auth-v2.js"></script>
     <script src="/js/lang.js"></script>
 </body>
 </html>

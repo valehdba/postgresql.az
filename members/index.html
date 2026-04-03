@@ -592,9 +592,11 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/supabase-client.js"></script>
+
     <script>
-      var SUPABASE_URL = 'https://qlyqwwhimwfcvuqdrxov.supabase.co';
-      var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFseXF3d2hpbXdmY3Z1cWRyeG92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjg2ODYsImV4cCI6MjA4OTcwNDY4Nn0.6MKz72wGwthRL8hs-Iv3L9Iw_W4DdGh3UjrwcagtKfM';
+      // SUPABASE_URL and SUPABASE_ANON_KEY are in supabase-client.js
 
       var allMembers = [];
 
@@ -603,7 +605,7 @@
           var response = await fetch(SUPABASE_URL + '/rest/v1/public_members?select=*&order=created_at.desc', {
             headers: {
               'apikey': SUPABASE_ANON_KEY,
-              'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
+              'Authorization': 'Bearer ' + (await sbGetToken())
             }
           });
 
@@ -691,13 +693,16 @@
 
       document.getElementById('searchInput').addEventListener('input', filterMembers);
 
-      function esc(t) { if (!t) return ''; var d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+      // esc() function is in supabase-client.js
 
-      loadMembers();
+      (async function initAuth(){
+        try { var m = await sbGetMember(); if(m) __u = m; } catch(e) {}
+        loadMembers();
+      })();
 
       // Show/hide CTAs based on login status
       var __u = null;
-      try { __u = JSON.parse(sessionStorage.getItem('azerpug_user')); } catch(e) {}
+      // __u set by initAuth() below
       if (__u && __u.id) {
         document.getElementById('joinCta').style.display = 'none';
         document.getElementById('welcomeCta').style.display = 'flex';
@@ -705,7 +710,7 @@
       }
     </script>
 
-    <script src="/js/navbar-auth.js"></script>
+    <script src="/js/navbar-auth-v2.js"></script>
     <script src="/js/lang.js"></script>
 </body>
 </html>

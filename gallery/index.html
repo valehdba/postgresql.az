@@ -141,7 +141,7 @@
         document.getElementById('pageSubtitle').textContent='Photos from our meetups, workshops, and PostgreSQL community events in Azerbaijan.';
         var el=document.getElementById('content');
         try{
-          var r=await fetch(SB+'/rest/v1/public_albums?select=*',{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}});
+          var r=await fetch(SUPABASE_URL+'/rest/v1/public_albums?select=*',{headers:{'apikey':SUPABASE_ANON_KEY,'Authorization':'Bearer '+(await sbGetToken())}});
           if(!r.ok)throw new Error();
           var albums=await r.json();
           if(!albums.length){el.innerHTML='<div class="pg-empty"><i class="fas fa-images"></i>No photo albums yet. Photos from upcoming events will appear here!</div>';return;}
@@ -163,7 +163,7 @@
         var el=document.getElementById('content');
         el.innerHTML='<div class="pg-loading"><i class="fas fa-spinner fa-spin"></i></div>';
         try{
-          var r=await fetch(SB+'/rest/v1/public_photos?album_id=eq.'+albumId+'&select=*&order=sort_order,created_at',{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}});
+          var r=await fetch(SUPABASE_URL+'/rest/v1/public_photos?album_id=eq.'+albumId+'&select=*&order=sort_order,created_at',{headers:{'apikey':SUPABASE_ANON_KEY,'Authorization':'Bearer '+(await sbGetToken())}});
           if(!r.ok)throw new Error();
           allPhotos=await r.json();
           if(!allPhotos.length){el.innerHTML='<div class="pg-empty"><i class="fas fa-image"></i>No photos in this album yet.</div>';return;}

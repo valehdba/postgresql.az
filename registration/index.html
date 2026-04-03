@@ -877,16 +877,12 @@
     <script>
       // =============================================
       // SUPABASE CONFIGURATION
-      // Replace these with your Supabase project values
-      // Found at: Supabase Dashboard → Settings → API
       // =============================================
-      var SUPABASE_URL = 'https://qlyqwwhimwfcvuqdrxov.supabase.co';
-      var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFseXF3d2hpbXdmY3Z1cWRyeG92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjg2ODYsImV4cCI6MjA4OTcwNDY4Nn0.6MKz72wGwthRL8hs-Iv3L9Iw_W4DdGh3UjrwcagtKfM';
+      // Supabase Auth — registration uses sbSignUp() from supabase-client.js
+      // SUPABASE_URL and SUPABASE_ANON_KEY are in supabase-client.js
+      // =============================================
 
-      // =============================================
-      // Simple SHA-256 hash for password
-      // (Not meant for production auth — use Supabase Auth for that)
-      // =============================================
+      // SHA-256 hash (only for email-exists check via old RPC if needed)
       async function hashPassword(password) {
         var encoder = new TextEncoder();
         var data = encoder.encode(password);
@@ -895,29 +891,7 @@
         return hashArray.map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
       }
 
-      // =============================================
-      // Supabase REST API helper
-      // =============================================
-      async function supabaseInsert(table, data) {
-        var response = await fetch(SUPABASE_URL + '/rest/v1/' + table, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': SUPABASE_ANON_KEY,
-            'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-            'Prefer': 'return=minimal'
-          },
-          body: JSON.stringify(data)
-        });
-
-        if (!response.ok) {
-          var errorBody = await response.json();
-          throw errorBody;
-        }
-
-        return true;
-      }
-
+      // Supabase REST helpers (for check_email_exists which is still a public RPC)
       async function supabaseRpc(fnName, params) {
         var response = await fetch(SUPABASE_URL + '/rest/v1/rpc/' + fnName, {
           method: 'POST',
@@ -1135,75 +1109,42 @@
             newsletter: document.getElementById('agreeNewsletter').checked
           };
 
-          console.log('Submitting via secure RPC...');
+          console.log('Submitting via Supabase Auth...');
 
-          // Insert via rate-limited RPC
-          var response = await fetch(SUPABASE_URL + '/rest/v1/rpc/register_member', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'apikey': SUPABASE_ANON_KEY,
-              'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
-            },
-            body: JSON.stringify({
-              p_first_name: firstName.value.trim(),
-              p_last_name: lastName.value.trim(),
-              p_email: email.value.trim().toLowerCase(),
-              p_password_hash: passwordHash,
-              p_company: document.getElementById('company').value.trim() || null,
-              p_job_title: document.getElementById('jobTitle').value.trim() || null,
-              p_linkedin: document.getElementById('linkedin').value.trim() || null,
-              p_phone: document.getElementById('phone').value.trim() || null,
-              p_personal_notes: document.getElementById('personalNotes').value.trim() || null,
-              p_newsletter: document.getElementById('agreeNewsletter').checked
-            })
-          });
-
-          console.log('Response status:', response.status);
-
-          if (!response.ok) {
-            var errorBody = await response.text();
-            console.error('Supabase error response:', errorBody);
-
-            // Try to parse as JSON for specific error handling
-            try {
-              var errorJson = JSON.parse(errorBody);
-              if (errorJson.code === '23505' || (errorJson.message && errorJson.message.includes('already registered'))) {
-                email.classList.remove('is-valid');
-                email.classList.add('is-invalid');
-                showError('emailError', 'This email is already registered.');
-                setSubmitLoading(false);
-                return;
+          // Register via Supabase Auth
+          try {
+            var signUpResult = await sbSignUp(
+              email.value.trim().toLowerCase(),
+              password.value,
+              {
+                first_name: firstName.value.trim(),
+                last_name: lastName.value.trim(),
+                company: document.getElementById('company').value.trim() || null,
+                job_title: document.getElementById('jobTitle').value.trim() || null,
+                linkedin: document.getElementById('linkedin').value.trim() || null,
+                phone: document.getElementById('phone').value.trim() || null,
+                personal_notes: document.getElementById('personalNotes').value.trim() || null,
+                newsletter: document.getElementById('agreeNewsletter').checked
               }
-              if (errorJson.message && errorJson.message.includes('Too many')) {
-                showFormError('Too many registration attempts. Please try again in 1 hour.');
-                setSubmitLoading(false);
-                return;
-              }
-              // Show the actual error for debugging
-              showFormError('Registration failed: ' + (errorJson.message || errorJson.msg || errorBody));
-            } catch (parseErr) {
-              showFormError('Registration failed: ' + errorBody);
+            );
+            console.log('SignUp result:', signUpResult);
+          } catch(signUpErr) {
+            console.error('SignUp error:', signUpErr);
+            if (signUpErr.message && signUpErr.message.includes('already registered')) {
+              email.classList.remove('is-valid');
+              email.classList.add('is-invalid');
+              showError('emailError', 'This email is already registered.');
+              setSubmitLoading(false);
+              return;
             }
-
+            showFormError('Registration failed: ' + (signUpErr.message || 'Please try again.'));
             setSubmitLoading(false);
             return;
           }
 
-          // Auto-login: store user session and redirect to home
+          // Auto-login after registration
           try {
-            var loginHash = await hashPassword(password.value);
-            var loginResult = await fetch(SUPABASE_URL + '/rest/v1/rpc/member_login', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
-              body: JSON.stringify({ login_email: email.value.trim().toLowerCase(), login_password_hash: loginHash })
-            });
-            if (loginResult.ok) {
-              var userData = await loginResult.json();
-              if (userData && userData.id) {
-                sessionStorage.setItem('azerpug_user', JSON.stringify(userData));
-              }
-            }
+            await sbSignIn(email.value.trim().toLowerCase(), password.value);
           } catch(loginErr) { console.warn('Auto-login failed:', loginErr); }
 
           // Send email notification for new registration
@@ -1243,13 +1184,15 @@
       }
     </script>
 
-    <script src="/js/navbar-auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/supabase-client.js"></script>
+    <script src="/js/navbar-auth-v2.js"></script>
     <script src="/js/lang.js"></script>
     <!-- EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>emailjs.init('1xXaZzZ874ZIGQM8Q');</script>
     <!-- Google Sign-In -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="/js/google-auth.js"></script>
+    <script src="/js/google-auth-v2.js"></script>
 </body>
 </html>

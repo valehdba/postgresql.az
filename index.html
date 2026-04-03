@@ -185,17 +185,20 @@
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="/js/navbar-auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/supabase-client.js"></script>
+    <script src="/js/navbar-auth-v2.js"></script>
     <script src="/js/lang.js"></script>
 
     <script>
-      var SB='https://qlyqwwhimwfcvuqdrxov.supabase.co';
-      var KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFseXF3d2hpbXdmY3Z1cWRyeG92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjg2ODYsImV4cCI6MjA4OTcwNDY4Nn0.6MKz72wGwthRL8hs-Iv3L9Iw_W4DdGh3UjrwcagtKfM';
-      var user=null;try{user=JSON.parse(sessionStorage.getItem('azerpug_user'));}catch(e){}
+      // SB and KEY are in supabase-client.js as SUPABASE_URL and SUPABASE_ANON_KEY
+      var user=null; // Set by initAuth() below
       function esc(t){if(!t)return'';var d=document.createElement('div');d.textContent=t;return d.innerHTML}
 
-      // Personalize hero if logged in
-      if(user&&user.id){
+      // Personalize hero if logged in (async)
+      (async function initAuth(){
+        try { var m = await sbGetMember(); if(m) user = m; } catch(e) {}
+        if(user&&user.id){
         document.getElementById('heroTitle').textContent='Xoş gəldiniz, '+user.first_name+'!';
         document.getElementById('heroSubtitle').textContent="You're part of the Azerbaijan PostgreSQL User Group community.";
         document.getElementById('heroSubtitleAz').textContent=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
@@ -206,7 +209,8 @@
           '<a href="/profile/#mailbox" class="pg-hero-btn pg-hero-btn-outline" style="position:relative;"><i class="fas fa-envelope"></i> Mailbox<span id="heroMailboxBadge" style="display:none;position:absolute;top:-8px;right:-8px;background:#dc3545;color:#fff;font-size:.65rem;font-weight:700;min-width:20px;height:20px;border-radius:10px;display:none;align-items:center;justify-content:center;padding:0 5px;"></span></a>';
         if(user.is_admin){document.getElementById('adminBar').style.display='flex';loadAdminPending();}
         loadUnreadCount();
-      }
+        }
+      })();
 
       async function loadUnreadCount(){
         try{
@@ -214,25 +218,25 @@
           if(!badge)return;
           if(user.is_admin){
             // Admin: show total unread contact messages
-            var r=await fetch(SB+'/rest/v1/rpc/admin_get_stats',{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY},body:JSON.stringify({p_admin_id:user.id})});
+            var r=await fetch(SUPABASE_URL+'/rest/v1/rpc/admin_get_stats',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_ANON_KEY,'Authorization':'Bearer '+(await sbGetToken())},body:JSON.stringify({p_admin_id:user.id})});
             if(r.ok){var s=await r.json();var count=s.unread_messages||0;if(count>0){badge.textContent=count;badge.style.display='flex';}else{badge.style.display='none';}}
           }else{
             // User: show unread replies
-            var r=await fetch(SB+'/rest/v1/rpc/get_my_unread_count',{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY},body:JSON.stringify({p_member_id:user.id})});
+            var r=await fetch(SUPABASE_URL+'/rest/v1/rpc/get_my_unread_count',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_ANON_KEY,'Authorization':'Bearer '+(await sbGetToken())},body:JSON.stringify({})});
             if(r.ok){var count=await r.json();if(count>0){badge.textContent=count;badge.style.display='flex';}else{badge.style.display='none';}}
           }
         }catch(e){}
       }
 
       async function loadAdminPending(){
-        try{var r=await fetch(SB+'/rest/v1/rpc/admin_get_stats',{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY},body:JSON.stringify({p_admin_id:user.id})});
+        try{var r=await fetch(SUPABASE_URL+'/rest/v1/rpc/admin_get_stats',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_ANON_KEY,'Authorization':'Bearer '+(await sbGetToken())},body:JSON.stringify({p_admin_id:user.id})});
         if(r.ok){var s=await r.json();document.getElementById('pendingCount').textContent=s.pending_posts||0;if(!s.pending_posts)document.getElementById('adminBar').style.display='none';}}catch(e){}
       }
 
       // Load posts
       async function loadPosts(){
         try{
-          var r=await fetch(SB+'/rest/v1/public_blog_posts?select=title,slug,published_at,author_first_name,author_last_name,excerpt,content&order=published_at.desc&limit=4',{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}});
+          var r=await fetch(SUPABASE_URL+'/rest/v1/public_blog_posts?select=title,slug,published_at,author_first_name,author_last_name,excerpt,content&order=published_at.desc&limit=4',{headers:{'apikey':SUPABASE_ANON_KEY,'Authorization':'Bearer '+(await sbGetToken())}});
           if(!r.ok)throw new Error();var posts=await r.json();
           var el=document.getElementById('blogPosts');
           if(!posts.length){el.innerHTML='<div class="pg-empty-posts"><i class="fas fa-newspaper"></i>No blog posts yet. <a href="/blogs/#editor">Be the first to write one!</a></div>';return;}
@@ -250,7 +254,7 @@
 
       async function loadStats(){
         try{
-          var r=await fetch(SB+'/rest/v1/public_members?select=id,company',{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}});
+          var r=await fetch(SUPABASE_URL+'/rest/v1/public_members?select=id,company',{headers:{'apikey':SUPABASE_ANON_KEY,'Authorization':'Bearer '+(await sbGetToken())}});
           if(!r.ok)return;var m=await r.json();
           var count=m.length;var orgs=new Set();m.forEach(function(x){if(x.company)orgs.add(x.company.toLowerCase().trim())});
           document.getElementById('statMembers').textContent=count;
