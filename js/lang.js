@@ -599,7 +599,7 @@
     'committees.member_valeh_bio': { en: 'AZERPUG founder · Baku · PostgreSQL DBA', az: 'AZERPUG təsisçisi · Bakı · PostgreSQL DBA' },
     'committees.member_gulay_bio': { en: 'AZERPUG community · Baku', az: 'AZERPUG icması · Bakı' },
     'committees.member_zaur_bio': { en: 'Database Expert · Baku', az: 'Verilənlər Bazası üzrə Mütəxəssis · Bakı' },
-    'committees.member_eltun_bio': { en: 'PgConf EU 2025 attendee · Baku', az: 'PgConf EU 2025 iştirakçısı · Bakı' },
+    'committees.member_eltun_bio': { en: 'Senior PostgreSQL DBA · Baku', az: 'Baş PostgreSQL DBA · Bakı' },
     'committees.member_mehman_bio': { en: 'AZERPUG community · Baku', az: 'AZERPUG icması · Bakı' },
     'committees.member_kamran_bio': { en: 'Oracle ACE Director · 2× OCM · AzerOUG founder · AzerCell', az: 'Oracle ACE Director · 2× OCM · AzerOUG təsisçisi · AzerCell' },
     'committees.member_mahir_bio': { en: 'Oracle ACE · AzerOUG board · Baku', az: 'Oracle ACE · AzerOUG idarə heyəti · Bakı' },
