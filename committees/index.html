@@ -288,14 +288,28 @@
        */
       var committeeData = {
         coc: [
-          { vacant: true, role: 'coordinator', label_key: 'committees.seat_coordinator', desc_key: 'committees.coc_seat_coordinator_desc' },
+          { name: 'Valeh Agayev', role: 'coordinator',
+            bio_key: 'committees.member_valeh_bio',
+            bio: 'AZERPUG founder · Baku · PostgreSQL DBA',
+            photo: '/pict/members/valeh.jpg',
+            linkedin: 'https://www.linkedin.com/in/valehagayev/',
+            github: 'https://github.com/valehdba',
+            website: 'http://valehagayev.wordpress.com',
+            email: 'valeh.agayev@gmail.com' },
           { vacant: true, role: 'coordinator', label_key: 'committees.seat_coordinator', desc_key: 'committees.coc_seat_coordinator_desc' },
           { vacant: true, role: 'diversity',   label_key: 'committees.seat_diversity',   desc_key: 'committees.coc_seat_diversity_desc' },
           { vacant: true, role: 'external',    label_key: 'committees.seat_external',    desc_key: 'committees.coc_seat_external_desc' },
           { vacant: true, role: 'member',      label_key: 'committees.seat_member',      desc_key: 'committees.coc_seat_member_desc' }
         ],
         program: [
-          { vacant: true, role: 'coordinator', label_key: 'committees.seat_coordinator', desc_key: 'committees.program_seat_coordinator_desc' },
+          { name: 'Valeh Agayev', role: 'coordinator',
+            bio_key: 'committees.member_valeh_bio',
+            bio: 'AZERPUG founder · Baku · PostgreSQL DBA',
+            photo: '/pict/members/valeh.jpg',
+            linkedin: 'https://www.linkedin.com/in/valehagayev/',
+            github: 'https://github.com/valehdba',
+            website: 'http://valehagayev.wordpress.com',
+            email: 'valeh.agayev@gmail.com' },
           { vacant: true, role: 'coordinator', label_key: 'committees.seat_coordinator', desc_key: 'committees.program_seat_coordinator_desc' },
           { vacant: true, role: 'member', label_key: 'committees.seat_reviewer', desc_key: 'committees.program_seat_reviewer_desc' },
           { vacant: true, role: 'member', label_key: 'committees.seat_reviewer', desc_key: 'committees.program_seat_reviewer_desc' },
@@ -346,7 +360,18 @@
         var photo = m.photo
           ? '<img src="'+m.photo+'" alt="'+m.name+'">'
           : '<span>'+initials(m.name)+'</span>';
-        var roleLabel = m.role_label || (m.role==='lead'?'Lead':m.role==='external'?'External':m.role==='diversity'?'Diversity':'Member');
+        // Localised role label, falls back to a sensible default if no i18n key
+        var labelMap = {
+          coordinator: 'committees.seat_coordinator',
+          lead: 'committees.seat_lead',
+          external: 'committees.seat_external',
+          diversity: 'committees.seat_diversity',
+          member: 'committees.seat_member'
+        };
+        var defaultLabels = { coordinator:'Coordinator', lead:'Lead', external:'External', diversity:'Diversity', member:'Member' };
+        var roleLabel = m.role_label || tt(labelMap[m.role || 'member'] || '', defaultLabels[m.role || 'member'] || 'Member');
+        // Localised bio (use bio_key if provided, otherwise fall back to bio)
+        var bio = m.bio_key ? tt(m.bio_key, m.bio || '') : (m.bio || '');
         var links = '';
         if(m.linkedin) links += '<a href="'+m.linkedin+'" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>';
         if(m.github)   links += '<a href="'+m.github+'" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>';
@@ -356,7 +381,7 @@
           '<div class="pg-member-photo">'+photo+'</div>'+
           '<div class="pg-member-name">'+m.name+'</div>'+
           '<div class="pg-member-role '+roleClass+'">'+roleLabel.toUpperCase()+'</div>'+
-          '<div class="pg-member-bio">'+(m.bio||'')+'</div>'+
+          '<div class="pg-member-bio">'+bio+'</div>'+
           '<div class="pg-member-links">'+links+'</div>'+
         '</div>';
       }

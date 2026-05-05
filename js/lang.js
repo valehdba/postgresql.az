@@ -595,6 +595,9 @@
     'committees.seat_press': { en: 'Press / Outreach', az: 'Mətbuat / Xarici Əlaqələr' },
     'committees.btn_apply_short': { en: 'Apply', az: 'Müraciət Et' },
 
+    // -------- Member bios --------
+    'committees.member_valeh_bio': { en: 'AZERPUG founder · Baku · PostgreSQL DBA', az: 'AZERPUG təsisçisi · Bakı · PostgreSQL DBA' },
+
     'committees.coc_seat_coordinator_desc': { en: 'Rotates every 6 months. Coordinates the committee, ensures the process is followed, serves as the primary point of contact. Not a leader — equal voice in decisions.', az: '6 ayda bir rotasiya olunur. Komitəni koordinasiya edir, prosesin gözlənilməsini təmin edir, əsas əlaqə nöqtəsi rolunu oynayır. Lider deyil — qərarlarda bərabər səs.' },
     'committees.coc_seat_member_desc': { en: 'Equal voice in committee decisions; no formal hierarchy among members.', az: 'Komitə qərarlarında bərabər səs; üzvlər arasında rəsmi ierarxiya yoxdur.' },
     'committees.coc_seat_diversity_desc': { en: 'Brings perspective from underrepresented groups; helps surface blind spots.', az: 'Təmsilçiliyi az olan qruplardan baxış gətirir; kor nöqtələri üzə çıxarmağa kömək edir.' },
