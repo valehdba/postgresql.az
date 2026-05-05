@@ -598,7 +598,7 @@
     // -------- Member bios --------
     'committees.member_valeh_bio': { en: 'AZERPUG founder · Baku · PostgreSQL DBA', az: 'AZERPUG təsisçisi · Bakı · PostgreSQL DBA' },
     'committees.member_gulay_bio': { en: 'AZERPUG community · Baku', az: 'AZERPUG icması · Bakı' },
-    'committees.member_zaur_bio': { en: 'PostgreSQL practitioner · Baku', az: 'PostgreSQL üzrə mütəxəssis · Bakı' },
+    'committees.member_zaur_bio': { en: 'Database Expert · Baku', az: 'Verilənlər Bazası üzrə Mütəxəssis · Bakı' },
     'committees.member_eltun_bio': { en: 'PgConf EU 2025 attendee · Baku', az: 'PgConf EU 2025 iştirakçısı · Bakı' },
     'committees.member_mehman_bio': { en: 'AZERPUG community · Baku', az: 'AZERPUG icması · Bakı' },
     'committees.member_maharram_bio': { en: 'Database Expert · PostgreSQL · Oracle · MongoDB · MySQL · MSSQL', az: 'Verilənlər Bazası üzrə Mütəxəssis · PostgreSQL · Oracle · MongoDB · MySQL · MSSQL' },
