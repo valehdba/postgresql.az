@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NDMJ7KJ');</script>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="AZERPUG Committees — Code of Conduct, Program, Organizing/Volunteers, and Advocacy/Marketing committees that govern the Azerbaijan PostgreSQL User Group.">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/pgyum.css">
+    <title>Committees - Azerbaijan PostgreSQL User Group</title>
+    <style>
+      :root{--pg-blue-dark:#336791;--pg-blue-light:#e7eef4;--pg-blue-hover:#264d6f;--pg-text:#515151;--pg-text-light:#6c757d;--pg-border:#d8dde3;--pg-bg-light:#f5f5f5;--pg-white:#fff;--pg-success:#28a745;--pg-danger:#dc3545;--pg-warning:#f59f00}
+      .pg-page-wrapper{max-width:1140px;margin:0 auto;padding:0 15px}
+      .pg-content-area{display:flex;gap:30px;margin-top:1rem}
+      .pg-sidebar{flex:0 0 220px;min-width:220px}
+      .pg-sidebar-logo{text-align:center;padding:16px 10px 20px;margin-bottom:1.5rem;border-bottom:2px solid var(--pg-border)}
+      .pg-sidebar-logo img{max-width:160px;height:auto;margin-bottom:10px}
+      .pg-sidebar-logo .pg-sidebar-logo-text{font-family:'Maven Pro',sans-serif;font-size:.72rem;font-weight:700;text-transform:uppercase;color:var(--pg-blue-dark);letter-spacing:.8px;line-height:1.4}
+      .pg-sidebar-section{margin-bottom:2rem}
+      .pg-sidebar-section h3{font-family:'Maven Pro',sans-serif;font-size:.85rem;font-weight:700;text-transform:uppercase;color:var(--pg-blue-dark);letter-spacing:.5px;padding-bottom:8px;border-bottom:2px solid var(--pg-blue-dark);margin-bottom:10px}
+      .pg-sidebar-section ul{list-style:none;padding:0;margin:0}
+      .pg-sidebar-section ul li a{display:block;padding:5px 10px;font-size:.9rem;font-weight:600;color:var(--pg-blue-dark);border-left:3px solid transparent;transition:all .15s}
+      .pg-sidebar-section ul li a:hover,.pg-sidebar-section ul li a.active{background:var(--pg-blue-light);border-left-color:var(--pg-blue-dark);text-decoration:none}
+      .pg-main-content{flex:1;min-width:0}
+      .pg-page-title{font-family:'Maven Pro',sans-serif;font-size:1.6rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;margin-bottom:.25rem;padding-bottom:10px;border-bottom:2px solid var(--pg-border)}
+      .pg-page-subtitle{font-size:.95rem;color:var(--pg-text-light);margin-bottom:1.5rem;line-height:1.6}
+      .pg-info-box{background:var(--pg-blue-light);border-left:4px solid var(--pg-blue-dark);padding:14px 18px;margin-bottom:1.5rem;border-radius:0 3px 3px 0;font-size:.9rem;color:var(--pg-text);line-height:1.6}
+      .pg-info-box i{color:var(--pg-blue-dark);margin-right:6px}
+
+      /* Committee section */
+      .pg-committee{background:var(--pg-white);border:1px solid var(--pg-border);border-radius:6px;margin-bottom:1.75rem;overflow:hidden}
+      .pg-committee-header{padding:18px 22px;display:flex;align-items:center;gap:14px;color:var(--pg-white);position:relative}
+      .pg-committee-header .pg-cm-icon{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+      .pg-committee-header h2{font-family:'Maven Pro',sans-serif;font-size:1.05rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin:0 0 2px;color:var(--pg-white)}
+      .pg-committee-header .pg-cm-tagline{font-size:.78rem;opacity:.92;font-weight:400;color:var(--pg-white)}
+      .pg-committee-body{padding:22px 24px}
+      .pg-committee-body p{font-size:.92rem;line-height:1.65;color:var(--pg-text);margin-bottom:.85rem}
+      .pg-committee-body p:last-child{margin-bottom:0}
+
+      .pg-cm-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:14px 0 18px;padding:14px 16px;background:var(--pg-bg-light);border-radius:4px}
+      .pg-cm-meta-item{font-size:.78rem;color:var(--pg-text-light)}
+      .pg-cm-meta-item strong{display:block;font-family:'Maven Pro',sans-serif;font-size:.72rem;text-transform:uppercase;color:var(--pg-blue-dark);letter-spacing:.4px;margin-bottom:3px}
+
+      .pg-cm-section-label{font-family:'Maven Pro',sans-serif;font-size:.78rem;font-weight:700;text-transform:uppercase;color:var(--pg-text-light);letter-spacing:.5px;margin:18px 0 10px;padding-bottom:6px;border-bottom:1px dashed var(--pg-border)}
+
+      /* Members grid */
+      .pg-members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+      .pg-member-card{background:var(--pg-white);border:1px solid var(--pg-border);border-radius:5px;padding:18px 16px;text-align:center;transition:box-shadow .15s,border-color .15s;display:flex;flex-direction:column;align-items:center}
+      .pg-member-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.06);border-color:var(--pg-blue-dark)}
+      .pg-member-photo{width:84px;height:84px;border-radius:50%;background:var(--pg-bg-light);display:flex;align-items:center;justify-content:center;font-family:'Maven Pro',sans-serif;font-size:1.6rem;font-weight:700;color:var(--pg-blue-dark);margin-bottom:12px;border:3px solid var(--pg-blue-light);overflow:hidden;flex-shrink:0}
+      .pg-member-photo img{width:100%;height:100%;object-fit:cover}
+      .pg-member-name{font-family:'Maven Pro',sans-serif;font-size:.95rem;font-weight:700;color:var(--pg-text);margin-bottom:4px;line-height:1.25}
+      .pg-member-role{display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:3px 9px;border-radius:11px;margin-bottom:8px}
+      .pg-role-lead{background:#fce4ec;color:#c62828}
+      .pg-role-member{background:#e3f2fd;color:#1565c0}
+      .pg-role-external{background:#f3e5f5;color:#7b1fa2}
+      .pg-role-diversity{background:#e0f2f1;color:#00838f}
+      .pg-role-vacant{background:#fff3e0;color:#e65100}
+      .pg-member-bio{font-size:.78rem;color:var(--pg-text-light);line-height:1.5;margin-bottom:10px;min-height:38px}
+      .pg-member-links{display:flex;gap:8px;justify-content:center;margin-top:auto}
+      .pg-member-links a{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--pg-bg-light);color:var(--pg-text-light);font-size:.85rem;transition:all .15s;text-decoration:none}
+      .pg-member-links a:hover{background:var(--pg-blue-dark);color:var(--pg-white);text-decoration:none}
+
+      .pg-vacant{border:2px dashed var(--pg-border);background:#fafbfc}
+      .pg-vacant .pg-member-photo{background:transparent;border-color:var(--pg-border);color:var(--pg-text-light)}
+      .pg-vacant .pg-member-name{color:var(--pg-text-light)}
+      .pg-vacant-note{font-size:.78rem;color:var(--pg-text-light);font-style:italic;margin-bottom:10px}
+
+      .pg-apply-banner{background:linear-gradient(135deg,var(--pg-blue-dark) 0%,#1a3d5c 100%);color:var(--pg-white);border-radius:8px;padding:28px 32px;margin:1.5rem 0 2rem;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+      .pg-apply-banner h3{font-family:'Maven Pro',sans-serif;font-size:1.15rem;font-weight:700;margin:0 0 6px;color:var(--pg-white)}
+      .pg-apply-banner p{font-size:.9rem;opacity:.9;margin:0;line-height:1.5;max-width:560px}
+
+      .pg-btn{display:inline-flex;align-items:center;gap:6px;font-family:'Maven Pro',sans-serif;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:10px 22px;border:none;border-radius:3px;cursor:pointer;transition:all .15s;text-decoration:none}
+      .pg-btn-primary{background:var(--pg-blue-dark);color:var(--pg-white)}.pg-btn-primary:hover{background:var(--pg-blue-hover);color:var(--pg-white);text-decoration:none}
+      .pg-btn-light{background:var(--pg-white);color:var(--pg-blue-dark)}.pg-btn-light:hover{background:var(--pg-bg-light);color:var(--pg-blue-dark);text-decoration:none}
+      .pg-btn-outline{background:transparent;color:var(--pg-blue-dark);border:1px solid var(--pg-blue-dark)}.pg-btn-outline:hover{background:var(--pg-blue-dark);color:var(--pg-white);text-decoration:none}
+      .pg-btn-sm{padding:6px 14px;font-size:.72rem}
+
+      .pg-principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:1.75rem}
+      .pg-principle{background:var(--pg-white);border:1px solid var(--pg-border);border-radius:5px;padding:16px 18px}
+      .pg-principle h4{font-family:'Maven Pro',sans-serif;font-size:.82rem;font-weight:700;text-transform:uppercase;color:var(--pg-blue-dark);margin:0 0 6px;display:flex;align-items:center;gap:7px}
+      .pg-principle p{font-size:.82rem;color:var(--pg-text-light);line-height:1.5;margin:0}
+
+      #footer img.footer-logo{height:36px;margin-bottom:10px;opacity:.6;transition:opacity .2s}#footer img.footer-logo:hover{opacity:1}
+      @media(max-width:768px){.pg-content-area{flex-direction:column}.pg-sidebar{flex:auto;order:2}.pg-main-content{order:1}.pg-apply-banner{flex-direction:column;text-align:center}.pg-members-grid{grid-template-columns:1fr 1fr}}
+      @media(max-width:480px){.pg-members-grid{grid-template-columns:1fr}}
+    </style>
+    <meta property="og:title" content="Committees - Azerbaijan PostgreSQL User Group">
+    <meta property="og:description" content="Meet the committees that govern AZERPUG: Code of Conduct, Program, Organizing/Volunteers, and Advocacy/Marketing.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://postgresql.az/committees/">
+    <meta property="og:site_name" content="Azerbaijan PostgreSQL User Group (AZERPUG)">
+    <meta property="og:image" content="https://postgresql.az/pict/smal.jpeg">
+    <link rel="canonical" href="https://postgresql.az/committees/">
+  </head>
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDMJ7KJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="container-fluid"><div class="row justify-content-md-center"><div class="col">
+      <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand p-0" aria-label="AZERPUG Home" href="/"><img class="logo" src="/pict/smal.jpeg" alt="AZERPUG"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="pgNavbar"><ul class="navbar-nav mr-auto">
+          <li class="nav-item p-2"><a href="/" data-i18n="nav.home">Home</a></li>
+          <li class="nav-item p-2"><a href="/blogs/" data-i18n="nav.blog">Blog Posts</a></li>
+          <li class="nav-item p-2"><a href="/events/" data-i18n="nav.events">Events</a></li>
+          <li class="nav-item p-2"><a href="/registration/" data-i18n="nav.registration">Registration</a></li>
+          <li class="nav-item p-2"><a href="/members/" data-i18n="nav.members">Members</a></li>
+          <li class="nav-item p-2"><a href="/community/" data-i18n="nav.community">Global Community</a></li>
+          <li class="nav-item p-2"><a href="/profile/" data-i18n="nav.profile">My Profile</a></li>
+          <li class="nav-item p-2 dropdown">
+            <a href="/about/" class="dropdown-toggle" data-toggle="dropdown" data-i18n="nav.about">About</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/about/" data-i18n="nav.about">About</a>
+              <a class="dropdown-item" href="/sponsors/" data-i18n="nav.sponsors">Sponsors</a>
+              <a class="dropdown-item" href="/faq/" data-i18n="nav.faq">FAQ</a>
+              <a class="dropdown-item" href="/gallery/" data-i18n="nav.gallery">Gallery</a>
+              <a class="dropdown-item" href="/contact/" data-i18n="nav.contact">Contact</a>
+              <a class="dropdown-item" href="/contribute/" data-i18n="nav.contribute">Contribute</a>
+              <a class="dropdown-item" href="/committees/" data-i18n="nav.committees">Committees</a>
+              <a class="dropdown-item" href="/coc/" data-i18n="nav.coc">Code of Conduct</a>
+            </div>
+          </li>
+        </ul></div>
+      </nav>
+    </div></div>
+
+    <div class="pg-page-wrapper" style="margin-top:1rem;"><div class="pg-content-area">
+      <aside class="pg-sidebar">
+        <div class="pg-sidebar-logo"><a href="/"><img src="/pict/smal.jpeg" alt="AZERPUG"></a><div class="pg-sidebar-logo-text">Azerbaijan PostgreSQL<br>User Group</div></div>
+        <div class="pg-sidebar-section"><h3 data-i18n="committees.sidebar_committees">Committees</h3><ul>
+          <li><a href="#coc" data-i18n="committees.coc_short">Code of Conduct</a></li>
+          <li><a href="#program" data-i18n="committees.program_short">Program</a></li>
+          <li><a href="#organizing" data-i18n="committees.organizing_short">Organizing</a></li>
+          <li><a href="#advocacy" data-i18n="committees.advocacy_short">Advocacy</a></li>
+        </ul></div>
+        <div class="pg-sidebar-section"><h3 data-i18n="committees.sidebar_get_involved">Get Involved</h3><ul>
+          <li><a href="/committees/apply/" data-i18n="committees.sidebar_apply">Apply to a Committee</a></li>
+          <li><a href="/contribute/" data-i18n="nav.contribute">Volunteer</a></li>
+          <li><a href="/coc/" data-i18n="nav.coc">Code of Conduct</a></li>
+          <li><a href="/about/" data-i18n="nav.about">About</a></li>
+        </ul></div>
+      </aside>
+
+      <main class="pg-main-content">
+        <h1 class="pg-page-title" data-i18n="committees.title">Community Committees</h1>
+        <p class="pg-page-subtitle" data-i18n="committees.subtitle">AZERPUG is governed by four volunteer-led committees. Following PostgreSQL global community practice, each committee has a clear charter, recommended composition, and an open application process — anyone in the community can apply.</p>
+
+        <div class="pg-info-box">
+          <i class="fas fa-info-circle"></i> <span data-i18n="committees.forming_notice"><strong>These committees are currently being formed.</strong> Open seats are highlighted below — apply through the <a href="/committees/apply/">application form</a>. Decisions follow the PostgreSQL community principle of openness and rotation: terms are limited and selections are made transparently.</span>
+        </div>
+
+        <!-- Governing principles -->
+        <div class="pg-principles">
+          <div class="pg-principle"><h4><i class="fas fa-balance-scale"></i> <span data-i18n="committees.principle_terms_h">Limited Terms</span></h4><p data-i18n="committees.principle_terms_p">Committee members serve fixed terms (typically 1–2 years), with rotation to prevent entrenchment.</p></div>
+          <div class="pg-principle"><h4><i class="fas fa-eye"></i> <span data-i18n="committees.principle_open_h">Open & Transparent</span></h4><p data-i18n="committees.principle_open_p">Charters, decisions, and meeting summaries are public. Applications are open to any community member.</p></div>
+          <div class="pg-principle"><h4><i class="fas fa-users"></i> <span data-i18n="committees.principle_diverse_h">Diverse Composition</span></h4><p data-i18n="committees.principle_diverse_p">Members are drawn from different companies and backgrounds; no single employer holds a majority on any committee.</p></div>
+        </div>
+
+        <!-- 1. Code of Conduct Committee -->
+        <section class="pg-committee" id="coc">
+          <div class="pg-committee-header" style="background:linear-gradient(135deg,#c62828 0%,#8e1c1c 100%);">
+            <div class="pg-cm-icon"><i class="fas fa-shield-alt"></i></div>
+            <div>
+              <h2 data-i18n="committees.coc_name">Code of Conduct Committee (CoCC)</h2>
+              <div class="pg-cm-tagline" data-i18n="committees.coc_tagline">Receives and investigates Code of Conduct complaints, ensuring a safe and welcoming community.</div>
+            </div>
+          </div>
+          <div class="pg-committee-body">
+            <p data-i18n="committees.coc_desc">The CoC Committee is the confidential body that handles all reports of Code of Conduct violations across AZERPUG events, channels, and activities. Members must demonstrate impartiality, discretion, and good judgement. The committee follows the official <a href="/coc/">PostgreSQL Code of Conduct</a> as adopted by AZERPUG.</p>
+
+            <div class="pg-cm-meta">
+              <div class="pg-cm-meta-item"><strong data-i18n="committees.meta_size">Size</strong><span data-i18n="committees.coc_size">3 members</span></div>
+              <div class="pg-cm-meta-item"><strong data-i18n="committees.meta_term">Term</strong><span data-i18n="committees.coc_term">1 year, renewable once</span></div>
+              <div class="pg-cm-meta-item"><strong data-i18n="committees.meta_composition">Composition</strong><span data-i18n="committees.coc_composition">Lead, Diversity Member, External Reviewer</span></div>
+              <div class="pg-cm-meta-item"><strong data-i18n="committees.meta_contact">Contact</strong><span><a href="mailto:coc@postgresql.az">coc@postgresql.az</a></span></div>
+            </div>
+
+            <div class="pg-cm-section-label" data-i18n="committees.label_members">Members</div>
+            <div class="pg-members-grid" id="cocMembers"></div>
+          </div>
+        </section>
+
+        <!-- 2. Program Committee -->
+        <section class="pg-committee" id="program">
+          <div class="pg-committee-header" style="background:linear-gradient(135deg,#1565c0 0%,#0d3a6e 100%);">
+            <div class="pg-cm-icon"><i class="fas fa-clipboard-check"></i></div>
+            <div>
+              <h2 data-i18n="committees.program_name">Program Committee</h2>
+              <div class="pg-cm-tagline" data-i18n="committees.program_tagline">Selects meetup and conference talks via double-blind review.</div>
+            </div>
+          </div>
+          <div class="pg-committee-body">
+            <p data-i18n="committees.program_desc">The Program Committee runs the Call for Papers (CFP) for AZERPUG meetups and conferences, evaluates proposals on merit, and shapes the technical agenda. To minimise bias, reviews are <strong>double-blind</strong>: speaker names and affiliations are hidden from reviewers during scoring. Members recuse themselves from reviewing proposals where they have a conflict of interest.</p>
+
+            <div class="pg-cm-meta">
+              <div class="pg-cm-meta-item"><strong data-i18n="committees.meta_size">Size</strong><span data-i18n="committees.program_size">5–7 members</span></div>
+              <div class="pg-cm-meta-item"><strong data-i18n="committees.meta_term">Term</strong><span data-i18n="committees.program_term">Per event cycle (with renewal)</span></div>
+              <div class="pg-cm-meta-item"><strong data-i18n="committees.meta_method">Method</strong><span data-i18n="committees.program_method">Double-blind review, conflict-of-interest recusal</span></div>
+              <div class="pg-cm-meta-item"><strong data-i18n="committees.meta_contact">Contact</strong><span><a href="mailto:program@postgresql.az">program@postgresql.az</a></span></div>
+            </div>
+
+            <div class="pg-cm-section-label" data-i18n="committees.label_members">Members</div>
+            <div class="pg-members-grid" id="programMembers"></div>
+          </div>
+        </section>
+
+        <!-- 3. Organizing / Volunteers -->
+        <section class="pg-committee" id="organizing">
+          <div class="pg-committee-header" style="background:linear-gradient(135deg,#2e7d32 0%,#1b5e20 100%);">
+            <div class="pg-cm-icon"><i class="fas fa-calendar-alt"></i></div>
+            <div>
+              <h2 data-i18n="committees.organizing_name">Organizing &amp; Volunteers Committee</h2>
+              <div class="pg-cm-tagline" data-i18n="committees.organizing_tagline">Runs event logistics: venue, registration, A/V, sponsors, on-site coordination.</div>
+            </div>
+          </div>
+          <div class="pg-committee-body">
+            <p data-i18n="committees.organizing_desc">This committee turns plans into reality. Responsibilities include venue scouting and contracts, sponsorship coordination, registration management, A/V and streaming, on-site signage, volunteer coordination, and post-event reporting. It works closely with the Program Committee for talks and the Advocacy Committee for promotion.</p>
+
+            <div class="pg-cm-meta">
+              <div class="pg-cm-meta-item"><strong data-i18n="committees.meta_size">Size</strong><span data-i18n="committees.organizing_size">4–8 members</span></div>
+              <div class="pg-cm-meta-item"><strong data-i18n="committees.meta_term">Term</strong><span data-i18n="committees.organizing_term">Per event, rolling</span></div>
+              <div class="pg-cm-meta-item"><strong data-i18n="committees.meta_skills">Useful skills</strong><span data-i18n="committees.organizing_skills">Logistics, vendor mgmt, A/V, hospitality</span></div>
+              <div class="pg-cm-meta-item"><strong data-i18n="committees.meta_contact">Contact</strong><span><a href="mailto:organizers@postgresql.az">organizers@postgresql.az</a></span></div>
+            </div>
+
+            <div class="pg-cm-section-label" data-i18n="committees.label_members">Members</div>
+            <div class="pg-members-grid" id="organizingMembers"></div>
+          </div>
+        </section>
+
+        <!-- 4. Advocacy / Marketing -->
+        <section class="pg-committee" id="advocacy">
+          <div class="pg-committee-header" style="background:linear-gradient(135deg,#7b1fa2 0%,#4a0072 100%);">
+            <div class="pg-cm-icon"><i class="fas fa-bullhorn"></i></div>
+            <div>
+              <h2 data-i18n="committees.advocacy_name">Advocacy &amp; Marketing Committee</h2>
+              <div class="pg-cm-tagline" data-i18n="committees.advocacy_tagline">Owns AZERPUG's voice — social media, press, brand, and community outreach.</div>
+            </div>
+          </div>
+          <div class="pg-committee-body">
+            <p data-i18n="committees.advocacy_desc">The Advocacy Committee promotes PostgreSQL and AZERPUG in Azerbaijan and abroad. Responsibilities include managing official channels (LinkedIn, Facebook, Telegram, YouTube, X), writing announcements, coordinating with PostgreSQL Europe / global press contacts, designing event posters, and engaging with universities and student groups to grow the next generation of contributors.</p>
+
+            <div class="pg-cm-meta">
+              <div class="pg-cm-meta-item"><strong data-i18n="committees.meta_size">Size</strong><span data-i18n="committees.advocacy_size">3–5 members</span></div>
+              <div class="pg-cm-meta-item"><strong data-i18n="committees.meta_term">Term</strong><span data-i18n="committees.advocacy_term">1 year, renewable</span></div>
+              <div class="pg-cm-meta-item"><strong data-i18n="committees.meta_skills">Useful skills</strong><span data-i18n="committees.advocacy_skills">Writing, design, social media, PR, AZ/EN/RU</span></div>
+              <div class="pg-cm-meta-item"><strong data-i18n="committees.meta_contact">Contact</strong><span><a href="mailto:advocacy@postgresql.az">advocacy@postgresql.az</a></span></div>
+            </div>
+
+            <div class="pg-cm-section-label" data-i18n="committees.label_members">Members</div>
+            <div class="pg-members-grid" id="advocacyMembers"></div>
+          </div>
+        </section>
+
+        <!-- Apply CTA -->
+        <div class="pg-apply-banner">
+          <div>
+            <h3 data-i18n="committees.cta_title">Want to help govern AZERPUG?</h3>
+            <p data-i18n="committees.cta_desc">All committees have open seats. Applications are reviewed openly and decisions are communicated to applicants. No prior committee experience required — just a commitment to PostgreSQL and to the community.</p>
+          </div>
+          <a href="/committees/apply/" class="pg-btn pg-btn-light"><i class="fas fa-paper-plane"></i> <span data-i18n="committees.cta_btn">Apply to a Committee</span></a>
+        </div>
+      </main>
+    </div></div></div>
+
+    <footer id="footer"><div class="container">
+      <a href="/"><img class="footer-logo" src="/pict/smal.jpeg" alt="AZERPUG"></a><br/>
+      <div style="margin-bottom:12px;"><a href="https://www.facebook.com/groups/www.postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="Facebook" aria-label="Facebook Group"><i class="fab fa-facebook"></i></a> <a href="https://github.com/valehdba/postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="GitHub" aria-label="our GitHub Repository"><i class="fab fa-github"></i></a> <a href="https://www.linkedin.com/groups/17977044/" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="LinkedIn" aria-label="LinkedIn Group"><i class="fab fa-linkedin"></i></a> <a href="https://t.me/postgresqlaz" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="Telegram" aria-label="Telegram Group"><i class="fab fa-telegram-plane"></i></a> <a href="https://www.youtube.com/@postgresqlaz" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="YouTube" aria-label="YouTube Channel"><i class="fab fa-youtube"></i></a></div>
+      <a href="/about/privacypolicy/" data-i18n="footer.privacy">Privacy policy</a> | <a href="/about/website/" data-i18n="footer.website">About the website</a> | <a href="/coc/" data-i18n="footer.coc">Code of Conduct</a><br/>
+      Copyright &copy; 2018-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
+    </div></footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/js/navbar-auth.js"></script>
+    <script src="/js/lang.js"></script>
+
+    <script>
+      /*
+       * Committee membership data
+       * --------------------------
+       * Edit this object to add/remove members. Each member supports:
+       *   name, role ('lead' | 'member' | 'external' | 'diversity'),
+       *   bio, photo (path under /pict/ or full URL), linkedin, github, email, website
+       * Roles "lead" / "external" / "diversity" get distinct color tags.
+       * To add a vacant seat, leave it as { vacant: true, role_label_key: '...' }.
+       */
+      var committeeData = {
+        coc: [
+          { vacant: true, role: 'lead', label_key: 'committees.seat_lead', desc_key: 'committees.coc_seat_lead_desc' },
+          { vacant: true, role: 'diversity', label_key: 'committees.seat_diversity', desc_key: 'committees.coc_seat_diversity_desc' },
+          { vacant: true, role: 'external', label_key: 'committees.seat_external', desc_key: 'committees.coc_seat_external_desc' }
+        ],
+        program: [
+          { vacant: true, role: 'lead', label_key: 'committees.seat_chair', desc_key: 'committees.program_seat_chair_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_reviewer', desc_key: 'committees.program_seat_reviewer_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_reviewer', desc_key: 'committees.program_seat_reviewer_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_reviewer', desc_key: 'committees.program_seat_reviewer_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_reviewer', desc_key: 'committees.program_seat_reviewer_desc' }
+        ],
+        organizing: [
+          { vacant: true, role: 'lead', label_key: 'committees.seat_lead', desc_key: 'committees.org_seat_lead_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_logistics', desc_key: 'committees.org_seat_logistics_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_sponsorship', desc_key: 'committees.org_seat_sponsorship_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_volunteer', desc_key: 'committees.org_seat_volunteer_desc' }
+        ],
+        advocacy: [
+          { vacant: true, role: 'lead', label_key: 'committees.seat_lead', desc_key: 'committees.adv_seat_lead_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_social', desc_key: 'committees.adv_seat_social_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_content', desc_key: 'committees.adv_seat_content_desc' }
+        ]
+      };
+
+      function initials(name){return (name||'').split(/\s+/).map(function(p){return p[0]||'';}).join('').slice(0,2).toUpperCase();}
+      function tt(key, fallback){ return (window.azT && window.azT(key)!==key) ? window.azT(key) : fallback; }
+
+      function renderMember(m){
+        var roleClass = 'pg-role-' + (m.role || 'member');
+        if(m.vacant){
+          var label = tt(m.label_key, m.label_key.split('.').pop().replace('seat_','').replace(/_/g,' '));
+          var desc = tt(m.desc_key, '');
+          return '<div class="pg-member-card pg-vacant">'+
+            '<div class="pg-member-photo"><i class="fas fa-user-plus"></i></div>'+
+            '<div class="pg-member-name">'+ tt('committees.seat_open','Open Seat') +'</div>'+
+            '<div class="pg-member-role '+roleClass+'">'+ label.toUpperCase() +'</div>'+
+            '<div class="pg-vacant-note">'+ desc +'</div>'+
+            '<a href="/committees/apply/" class="pg-btn pg-btn-outline pg-btn-sm"><i class="fas fa-paper-plane"></i> '+ tt('committees.btn_apply_short','Apply') +'</a>'+
+          '</div>';
+        }
+        var photo = m.photo
+          ? '<img src="'+m.photo+'" alt="'+m.name+'">'
+          : '<span>'+initials(m.name)+'</span>';
+        var roleLabel = m.role_label || (m.role==='lead'?'Lead':m.role==='external'?'External':m.role==='diversity'?'Diversity':'Member');
+        var links = '';
+        if(m.linkedin) links += '<a href="'+m.linkedin+'" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>';
+        if(m.github)   links += '<a href="'+m.github+'" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>';
+        if(m.website)  links += '<a href="'+m.website+'" target="_blank" rel="noopener" title="Website"><i class="fas fa-globe"></i></a>';
+        if(m.email)    links += '<a href="mailto:'+m.email+'" title="Email"><i class="fas fa-envelope"></i></a>';
+        return '<div class="pg-member-card">'+
+          '<div class="pg-member-photo">'+photo+'</div>'+
+          '<div class="pg-member-name">'+m.name+'</div>'+
+          '<div class="pg-member-role '+roleClass+'">'+roleLabel.toUpperCase()+'</div>'+
+          '<div class="pg-member-bio">'+(m.bio||'')+'</div>'+
+          '<div class="pg-member-links">'+links+'</div>'+
+        '</div>';
+      }
+
+      function renderAll(){
+        Object.keys(committeeData).forEach(function(key){
+          var el = document.getElementById(key+'Members');
+          if(!el) return;
+          el.innerHTML = committeeData[key].map(renderMember).join('');
+        });
+      }
+
+      // Initial render
+      renderAll();
+      // Re-render when language changes so vacant-seat labels update
+      window.addEventListener('langChanged', renderAll);
+      // Also re-render after lang.js initial pass (slight delay so azT is ready)
+      setTimeout(renderAll, 100);
+    </script>
+</body>
+</html>
