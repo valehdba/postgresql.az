@@ -57,6 +57,8 @@
     'feat.feedback_desc': { en: 'Share your thoughts, suggestions, and ideas to help us improve the community', az: 'İcmanı yaxşılaşdırmağa kömək etmək üçün fikir və təkliflərinizi paylaşın' },
     'feat.contribute': { en: 'Contribute to Local Community', az: 'Yerli İcmaya Töhfə Ver' },
     'feat.contribute_desc': { en: 'Volunteer, organize events, write content, and help grow PostgreSQL in Azerbaijan', az: 'Könüllü olun, tədbirlər təşkil edin, məzmun yazın və Azərbaycanda PostgreSQL-i inkişaf etdirin' },
+    'feat.committees': { en: 'Committees', az: 'Komitələr' },
+    'feat.committees_desc': { en: "Meet AZERPUG's four governing committees — Code of Conduct, Program, Organizing, Advocacy — and apply to join", az: 'AZERPUG-un dörd idarəetmə komitəsi ilə tanış olun — Davranış Qaydaları, Proqram, Təşkilatçılıq, Advocacy — və qoşulmaq üçün müraciət edin' },
 
     // Homepage - Mission
     'mission.title': { en: 'Our Mission', az: 'Missiyamız' },
