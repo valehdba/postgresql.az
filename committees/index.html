@@ -52,6 +52,7 @@
       .pg-member-name{font-family:'Maven Pro',sans-serif;font-size:.95rem;font-weight:700;color:var(--pg-text);margin-bottom:4px;line-height:1.25}
       .pg-member-role{display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:3px 9px;border-radius:11px;margin-bottom:8px}
       .pg-role-lead{background:#fce4ec;color:#c62828}
+      .pg-role-coordinator{background:#e8eaf6;color:#3949ab}
       .pg-role-member{background:#e3f2fd;color:#1565c0}
       .pg-role-external{background:#f3e5f5;color:#7b1fa2}
       .pg-role-diversity{background:#e0f2f1;color:#00838f}
@@ -287,27 +288,42 @@
        */
       var committeeData = {
         coc: [
-          { vacant: true, role: 'lead', label_key: 'committees.seat_lead', desc_key: 'committees.coc_seat_lead_desc' },
-          { vacant: true, role: 'diversity', label_key: 'committees.seat_diversity', desc_key: 'committees.coc_seat_diversity_desc' },
-          { vacant: true, role: 'external', label_key: 'committees.seat_external', desc_key: 'committees.coc_seat_external_desc' }
+          { vacant: true, role: 'coordinator', label_key: 'committees.seat_coordinator', desc_key: 'committees.coc_seat_coordinator_desc' },
+          { vacant: true, role: 'coordinator', label_key: 'committees.seat_coordinator', desc_key: 'committees.coc_seat_coordinator_desc' },
+          { vacant: true, role: 'diversity',   label_key: 'committees.seat_diversity',   desc_key: 'committees.coc_seat_diversity_desc' },
+          { vacant: true, role: 'external',    label_key: 'committees.seat_external',    desc_key: 'committees.coc_seat_external_desc' },
+          { vacant: true, role: 'member',      label_key: 'committees.seat_member',      desc_key: 'committees.coc_seat_member_desc' }
         ],
         program: [
-          { vacant: true, role: 'lead', label_key: 'committees.seat_chair', desc_key: 'committees.program_seat_chair_desc' },
+          { vacant: true, role: 'coordinator', label_key: 'committees.seat_coordinator', desc_key: 'committees.program_seat_coordinator_desc' },
+          { vacant: true, role: 'coordinator', label_key: 'committees.seat_coordinator', desc_key: 'committees.program_seat_coordinator_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_reviewer', desc_key: 'committees.program_seat_reviewer_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_reviewer', desc_key: 'committees.program_seat_reviewer_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_reviewer', desc_key: 'committees.program_seat_reviewer_desc' },
           { vacant: true, role: 'member', label_key: 'committees.seat_reviewer', desc_key: 'committees.program_seat_reviewer_desc' },
           { vacant: true, role: 'member', label_key: 'committees.seat_reviewer', desc_key: 'committees.program_seat_reviewer_desc' },
           { vacant: true, role: 'member', label_key: 'committees.seat_reviewer', desc_key: 'committees.program_seat_reviewer_desc' },
           { vacant: true, role: 'member', label_key: 'committees.seat_reviewer', desc_key: 'committees.program_seat_reviewer_desc' }
         ],
         organizing: [
-          { vacant: true, role: 'lead', label_key: 'committees.seat_lead', desc_key: 'committees.org_seat_lead_desc' },
-          { vacant: true, role: 'member', label_key: 'committees.seat_logistics', desc_key: 'committees.org_seat_logistics_desc' },
+          { vacant: true, role: 'coordinator', label_key: 'committees.seat_coordinator', desc_key: 'committees.org_seat_coordinator_desc' },
+          { vacant: true, role: 'coordinator', label_key: 'committees.seat_coordinator', desc_key: 'committees.org_seat_coordinator_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_logistics',   desc_key: 'committees.org_seat_logistics_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_logistics',   desc_key: 'committees.org_seat_logistics_desc' },
           { vacant: true, role: 'member', label_key: 'committees.seat_sponsorship', desc_key: 'committees.org_seat_sponsorship_desc' },
-          { vacant: true, role: 'member', label_key: 'committees.seat_volunteer', desc_key: 'committees.org_seat_volunteer_desc' }
+          { vacant: true, role: 'member', label_key: 'committees.seat_sponsorship', desc_key: 'committees.org_seat_sponsorship_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_volunteer',   desc_key: 'committees.org_seat_volunteer_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_volunteer',   desc_key: 'committees.org_seat_volunteer_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_comms',       desc_key: 'committees.org_seat_comms_desc' }
         ],
         advocacy: [
-          { vacant: true, role: 'lead', label_key: 'committees.seat_lead', desc_key: 'committees.adv_seat_lead_desc' },
-          { vacant: true, role: 'member', label_key: 'committees.seat_social', desc_key: 'committees.adv_seat_social_desc' },
-          { vacant: true, role: 'member', label_key: 'committees.seat_content', desc_key: 'committees.adv_seat_content_desc' }
+          { vacant: true, role: 'coordinator', label_key: 'committees.seat_coordinator', desc_key: 'committees.adv_seat_coordinator_desc' },
+          { vacant: true, role: 'coordinator', label_key: 'committees.seat_coordinator', desc_key: 'committees.adv_seat_coordinator_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_social',  desc_key: 'committees.adv_seat_social_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_social',  desc_key: 'committees.adv_seat_social_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_content', desc_key: 'committees.adv_seat_content_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_content', desc_key: 'committees.adv_seat_content_desc' },
+          { vacant: true, role: 'member', label_key: 'committees.seat_press',   desc_key: 'committees.adv_seat_press_desc' }
         ]
       };
 

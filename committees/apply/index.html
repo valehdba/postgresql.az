@@ -272,11 +272,12 @@
                   <label data-i18n="apply.label_coc_role">Which seat are you applying for?</label>
                   <select class="pg-form-control" id="aCocSeat">
                     <option value="" data-i18n="apply.opt_coc_pick">— Open to any —</option>
-                    <option value="lead" data-i18n="apply.opt_coc_lead">Lead</option>
+                    <option value="coordinator" data-i18n="apply.opt_coc_coordinator">Coordinator (rotating)</option>
                     <option value="diversity" data-i18n="apply.opt_coc_diversity">Diversity Member</option>
                     <option value="external" data-i18n="apply.opt_coc_external">External Reviewer (independent of AZERPUG board / sponsors)</option>
+                    <option value="member" data-i18n="apply.opt_coc_member">Member-at-large</option>
                   </select>
-                  <div class="pg-form-hint" data-i18n="apply.hint_coc_seat">Recommended composition: 3 members — Lead, Diversity, External.</div>
+                  <div class="pg-form-hint" data-i18n="apply.hint_coc_seat">Composition: 5 members — 2 Coordinators (rotating every 6 months), 1 Diversity, 1 External, 1 Member-at-large.</div>
                 </div>
                 <div class="pg-form-group">
                   <label data-i18n="apply.label_coc_independence">Conflicts of interest (please disclose)</label>
@@ -378,12 +379,11 @@
       }
 
       // Committee pick toggle + conditional sections
-      var picks = document.querySelectorAll('.pg-cm-pick');
-      picks.forEach(function(p){
-        var cb = p.querySelector('input[type="checkbox"]');
-        p.addEventListener('click', function(e){
-          if(e.target.tagName !== 'INPUT'){ cb.checked = !cb.checked; }
-          p.classList.toggle('checked', cb.checked);
+      // (Listen to the checkbox 'change' event — the <label> already toggles
+      //  the input natively, so we must NOT toggle it again from a click handler.)
+      document.querySelectorAll('.pg-cm-pick input[type="checkbox"]').forEach(function(cb){
+        cb.addEventListener('change', function(){
+          cb.closest('.pg-cm-pick').classList.toggle('checked', cb.checked);
           syncConditionals();
         });
       });
