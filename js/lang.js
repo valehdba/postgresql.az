@@ -28,7 +28,7 @@
     // Homepage - Hero
     'home.title': { en: 'Azerbaijan PostgreSQL User Group', az: 'Azərbaycan PostgreSQL İstifadəçiləri Qrupu' },
     'home.subtitle': { en: 'The open-source community for PostgreSQL enthusiasts in Azerbaijan', az: 'Azərbaycanda PostgreSQL həvəskarları üçün açıq-mənbə icması' },
-    'home.subtitle_az': { en: 'Azərbaycan PostgreSQL İstifadəçiləri Qrupu', az: 'Azerbaijan PostgreSQL User Group' },
+    'home.subtitle_az': { en: 'Azerbaijan PostgreSQL User Group', az: 'Azərbaycan PostgreSQL İstifadəçiləri Qrupu' },
     'home.join': { en: 'Join the Community', az: 'İcmaya Qoşul' },
     'home.signin': { en: 'Sign In', az: 'Daxil ol' },
     'home.members': { en: 'Members', az: 'Üzvlər' },
