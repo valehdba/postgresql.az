@@ -772,11 +772,11 @@
     var lang = getLang();
     var btn = document.createElement('button');
     btn.id = 'langToggleBtn';
-    btn.title = lang === 'en' ? 'Azərbaycanca' : 'English';
+    btn.title = lang === 'en' ? 'English' : 'Azərbaycanca';
     btn.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:transparent;border:1px solid #ccc;border-radius:50%;font-size:0.7rem;font-weight:700;color:#515151;cursor:pointer;transition:all 0.15s;font-family:Maven Pro,sans-serif;';
     btn.textContent = lang === 'en' ? 'EN' : 'AZ';
     btn.onclick = function() {
-      var newLang = getLang() === 'en' ? 'en' : 'az';
+      var newLang = getLang() === 'en' ? 'az' : 'en';
       setLang(newLang);
       applyTranslations();
       btn.textContent = newLang === 'en' ? 'EN' : 'AZ';
