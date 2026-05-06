@@ -22,18 +22,9 @@
       .mono{font-family:'JetBrains Mono','Fira Code',Menlo,Consolas,monospace}
 
       /* Layout */
-      .pg-page-wrapper{max-width:1140px;margin:0 auto;padding:0 15px}
-      .pg-content-area{display:flex;gap:30px;margin-top:1rem}
-      .pg-sidebar{flex:0 0 220px;min-width:220px}
-      .pg-sidebar-logo{text-align:center;padding:16px 10px 20px;margin-bottom:1.5rem;border-bottom:2px solid var(--pg-border)}
-      .pg-sidebar-logo img{max-width:160px;height:auto;margin-bottom:10px}
-      .pg-sidebar-logo .pg-sidebar-logo-text{font-family:'Maven Pro',sans-serif;font-size:.72rem;font-weight:700;text-transform:uppercase;color:var(--pg-blue-dark);letter-spacing:.8px;line-height:1.4}
-      .pg-sidebar-section{margin-bottom:2rem}
-      .pg-sidebar-section h3{font-family:'Maven Pro',sans-serif;font-size:.85rem;font-weight:700;text-transform:uppercase;color:var(--pg-blue-dark);letter-spacing:.5px;padding-bottom:8px;border-bottom:2px solid var(--pg-blue-dark);margin-bottom:10px}
-      .pg-sidebar-section ul{list-style:none;padding:0;margin:0}
-      .pg-sidebar-section ul li a{display:block;padding:5px 10px;font-size:.9rem;font-weight:600;color:var(--pg-blue-dark);border-left:3px solid transparent;transition:all .15s ease}
-      .pg-sidebar-section ul li a:hover,.pg-sidebar-section ul li a.active{background:var(--pg-blue-light);border-left-color:var(--pg-blue-dark);text-decoration:none}
-      .pg-main-content{flex:1;min-width:0}
+      .pg-page-wrapper{max-width:1180px;margin:0 auto;padding:0 15px}
+      .pg-content-area{margin-top:1rem}
+      .pg-main-content{min-width:0}
 
       /* Hero — terminal-ish */
       .ext-hero{
@@ -88,7 +79,7 @@
       .pg-section-title .count-badge{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:600;background:var(--pg-blue-light);color:var(--pg-blue-dark);padding:2px 8px;border-radius:10px;text-transform:none;letter-spacing:0}
 
       /* Cards grid */
-      .ext-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;margin-bottom:1.5rem}
+      .ext-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:18px;margin-bottom:1.5rem}
       .ext-card{
         background:var(--pg-white);border:1px solid var(--pg-border);border-radius:8px;padding:18px 20px;
         transition:box-shadow .2s ease,border-color .2s ease,transform .2s ease;
@@ -164,7 +155,6 @@
       #footer img.footer-logo{height:36px;margin-bottom:10px;opacity:.6;transition:opacity .2s}
       #footer img.footer-logo:hover{opacity:1}
       @media(max-width:768px){
-        .pg-content-area{flex-direction:column}.pg-sidebar{flex:auto;order:2}.pg-main-content{order:1}
         .ext-grid{grid-template-columns:1fr}
         .ext-form-row{grid-template-columns:1fr}
         .ext-hero h1{font-size:1.4rem}
@@ -255,26 +245,6 @@
     </div></div>
 
     <div class="pg-page-wrapper" style="margin-top:1rem;"><div class="pg-content-area">
-      <aside class="pg-sidebar">
-        <div class="pg-sidebar-logo"><a href="/"><img src="/pict/smal.jpeg" alt="AZERPUG"></a><div class="pg-sidebar-logo-text">Azerbaijan PostgreSQL<br>User Group</div></div>
-        <div class="pg-sidebar-section"><h3 data-i18n="ext.sidebar_browse">Browse</h3><ul>
-          <li><a href="#featured" class="active"><i class="fas fa-star" style="font-size:.7rem;margin-right:4px;color:#f0c674"></i> <span data-i18n="ext.featured">Featured</span></a></li>
-          <li><a href="#all"><i class="fas fa-cubes" style="font-size:.7rem;margin-right:4px"></i> <span data-i18n="ext.all_projects">All Projects</span></a></li>
-          <li><a href="#submit"><i class="fas fa-plus-circle" style="font-size:.7rem;margin-right:4px;color:var(--pg-success)"></i> <span data-i18n="ext.sidebar_submit">Submit Yours</span></a></li>
-        </ul></div>
-        <div class="pg-sidebar-section"><h3 data-i18n="ext.sidebar_categories">Categories</h3><ul>
-          <li><a href="#" data-cat="extension"><span data-i18n="ext.cat_extension">Extensions</span></a></li>
-          <li><a href="#" data-cat="tool"><span data-i18n="ext.cat_tool">Tools</span></a></li>
-          <li><a href="#" data-cat="cli"><span data-i18n="ext.cat_cli">CLIs</span></a></li>
-          <li><a href="#" data-cat="library"><span data-i18n="ext.cat_library">Libraries</span></a></li>
-        </ul></div>
-        <div class="pg-sidebar-section"><h3 data-i18n="ext.sidebar_links">Links</h3><ul>
-          <li><a href="/contribute/" data-i18n="ext.link_contribute">Contribute</a></li>
-          <li><a href="/blogs/" data-i18n="nav.blog">Blog Posts</a></li>
-          <li><a href="/resources/" data-i18n="feat.resources">Resources</a></li>
-        </ul></div>
-      </aside>
-
       <main class="pg-main-content">
 
         <!-- Hero -->
@@ -558,17 +528,6 @@
           ch.classList.add('active');
           activeCat = ch.getAttribute('data-cat');
           applyFilters();
-        });
-      });
-      // Sidebar category links — sync the chips
-      document.querySelectorAll('.pg-sidebar-section a[data-cat]').forEach(function(a){
-        a.addEventListener('click', function(e){
-          e.preventDefault();
-          var cat = a.getAttribute('data-cat');
-          var chip = document.querySelector('#extChips .ext-chip[data-cat="'+cat+'"]');
-          if(chip) chip.click();
-          var target = document.getElementById('all');
-          if(target) target.scrollIntoView({behavior:'smooth'});
         });
       });
 
