@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NDMJ7KJ');</script>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Open-source PostgreSQL extensions, tools and CLIs developed by the Azerbaijan PostgreSQL community. Browse, star, and submit your own project.">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/pgyum.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Community Extensions & Tools — Azerbaijan PostgreSQL User Group</title>
+
+    <style>
+      :root{
+        --pg-blue-dark:#336791;--pg-blue-light:#e7eef4;--pg-blue-hover:#264d6f;
+        --pg-text:#515151;--pg-text-light:#6c757d;--pg-border:#d8dde3;--pg-bg-light:#f5f5f5;--pg-white:#fff;
+        --pg-danger:#c62828;--pg-success:#2e7d32;
+        --code-bg:#0d1117;--code-bg-2:#161b22;--code-fg:#c9d1d9;--code-accent:#58a6ff;--code-purple:#bc8cff;--code-green:#7ee787;--code-yellow:#f0c674;
+      }
+      .mono{font-family:'JetBrains Mono','Fira Code',Menlo,Consolas,monospace}
+
+      /* Layout */
+      .pg-page-wrapper{max-width:1140px;margin:0 auto;padding:0 15px}
+      .pg-content-area{display:flex;gap:30px;margin-top:1rem}
+      .pg-sidebar{flex:0 0 220px;min-width:220px}
+      .pg-sidebar-logo{text-align:center;padding:16px 10px 20px;margin-bottom:1.5rem;border-bottom:2px solid var(--pg-border)}
+      .pg-sidebar-logo img{max-width:160px;height:auto;margin-bottom:10px}
+      .pg-sidebar-logo .pg-sidebar-logo-text{font-family:'Maven Pro',sans-serif;font-size:.72rem;font-weight:700;text-transform:uppercase;color:var(--pg-blue-dark);letter-spacing:.8px;line-height:1.4}
+      .pg-sidebar-section{margin-bottom:2rem}
+      .pg-sidebar-section h3{font-family:'Maven Pro',sans-serif;font-size:.85rem;font-weight:700;text-transform:uppercase;color:var(--pg-blue-dark);letter-spacing:.5px;padding-bottom:8px;border-bottom:2px solid var(--pg-blue-dark);margin-bottom:10px}
+      .pg-sidebar-section ul{list-style:none;padding:0;margin:0}
+      .pg-sidebar-section ul li a{display:block;padding:5px 10px;font-size:.9rem;font-weight:600;color:var(--pg-blue-dark);border-left:3px solid transparent;transition:all .15s ease}
+      .pg-sidebar-section ul li a:hover,.pg-sidebar-section ul li a.active{background:var(--pg-blue-light);border-left-color:var(--pg-blue-dark);text-decoration:none}
+      .pg-main-content{flex:1;min-width:0}
+
+      /* Hero — terminal-ish */
+      .ext-hero{
+        position:relative;border-radius:8px;overflow:hidden;margin-bottom:1.5rem;
+        background:radial-gradient(circle at 0% 0%,#1f2a44 0%,#0d1117 60%);
+        color:var(--code-fg);
+        border:1px solid #21262d;
+        box-shadow:0 4px 20px rgba(0,0,0,.18);
+      }
+      .ext-hero::before{
+        content:"";position:absolute;inset:0;
+        background-image:
+          radial-gradient(rgba(88,166,255,.07) 1px,transparent 1px),
+          radial-gradient(rgba(125,232,135,.05) 1px,transparent 1px);
+        background-size:22px 22px,22px 22px;
+        background-position:0 0,11px 11px;
+        pointer-events:none;
+      }
+      .ext-hero-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid #21262d;background:rgba(0,0,0,.25)}
+      .ext-hero-bar i{width:11px;height:11px;border-radius:50%;display:inline-block}
+      .ext-hero-bar .d1{background:#ff5f56}.ext-hero-bar .d2{background:#ffbd2e}.ext-hero-bar .d3{background:#27c93f}
+      .ext-hero-bar span{margin-left:10px;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:#8b949e}
+      .ext-hero-body{position:relative;padding:32px 28px 30px}
+      .ext-hero-prompt{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:#7ee787;margin:0 0 6px}
+      .ext-hero-prompt .promptchar{color:var(--code-accent);margin-right:6px}
+      .ext-hero h1{font-family:'Maven Pro',sans-serif;font-size:2rem;font-weight:700;color:#fff;margin:.25rem 0 .5rem;letter-spacing:-.5px}
+      .ext-hero h1 .bracket{color:var(--code-accent);font-family:'JetBrains Mono',monospace;font-weight:500}
+      .ext-hero p.tagline{font-size:.98rem;line-height:1.65;color:#c9d1d9;margin:0 0 18px;max-width:680px}
+      .ext-hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+      .ext-btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--code-accent);color:#0d1117;font-family:'Maven Pro',sans-serif;font-size:.85rem;font-weight:700;padding:11px 18px;border-radius:6px;text-decoration:none;text-transform:uppercase;letter-spacing:.5px;transition:transform .15s ease,box-shadow .15s ease;border:none;cursor:pointer}
+      .ext-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(88,166,255,.35);color:#0d1117;text-decoration:none}
+      .ext-btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#c9d1d9;font-family:'Maven Pro',sans-serif;font-size:.85rem;font-weight:700;padding:10px 17px;border-radius:6px;text-decoration:none;text-transform:uppercase;letter-spacing:.5px;border:1px solid #30363d;transition:all .15s ease}
+      .ext-btn-ghost:hover{background:#21262d;color:#fff;text-decoration:none;border-color:#58a6ff}
+      .ext-hero-stats{display:flex;gap:24px;margin-top:22px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace}
+      .ext-hero-stat{font-size:.78rem;color:#8b949e}
+      .ext-hero-stat strong{color:#fff;font-size:1.4rem;font-weight:700;display:block;line-height:1}
+
+      /* Filter bar */
+      .ext-toolbar{background:var(--pg-white);border:1px solid var(--pg-border);border-radius:6px;padding:14px 16px;margin-bottom:1.25rem;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+      .ext-search{flex:1;min-width:220px;position:relative}
+      .ext-search input{width:100%;padding:9px 14px 9px 36px;border:1px solid var(--pg-border);border-radius:6px;font-size:.9rem;font-family:'JetBrains Mono',monospace;background:#fafbfc}
+      .ext-search input:focus{outline:none;border-color:var(--pg-blue-dark);box-shadow:0 0 0 2px rgba(51,103,145,.15);background:#fff}
+      .ext-search i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--pg-text-light);font-size:.85rem}
+      .ext-chips{display:flex;gap:6px;flex-wrap:wrap}
+      .ext-chip{padding:6px 12px;border-radius:20px;border:1px solid var(--pg-border);background:#fafbfc;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--pg-text);cursor:pointer;transition:all .12s;font-weight:500;user-select:none}
+      .ext-chip:hover{border-color:var(--pg-blue-dark);color:var(--pg-blue-dark)}
+      .ext-chip.active{background:var(--pg-blue-dark);border-color:var(--pg-blue-dark);color:#fff}
+
+      /* Section heading */
+      .pg-section-title{font-family:'Maven Pro',sans-serif;font-size:1.05rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;padding-bottom:8px;border-bottom:2px solid var(--pg-border);margin:1.75rem 0 1.1rem;display:flex;align-items:center;gap:8px}
+      .pg-section-title i{color:var(--pg-blue-dark)}
+      .pg-section-title .count-badge{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:600;background:var(--pg-blue-light);color:var(--pg-blue-dark);padding:2px 8px;border-radius:10px;text-transform:none;letter-spacing:0}
+
+      /* Cards grid */
+      .ext-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;margin-bottom:1.5rem}
+      .ext-card{
+        background:var(--pg-white);border:1px solid var(--pg-border);border-radius:8px;padding:18px 20px;
+        transition:box-shadow .2s ease,border-color .2s ease,transform .2s ease;
+        display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden;
+      }
+      .ext-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.08);border-color:var(--pg-blue-dark);transform:translateY(-2px)}
+      .ext-card.featured{border-color:#f0c674;background:linear-gradient(180deg,#fffbef 0%,#fff 35%)}
+      .ext-card.featured::before{
+        content:"FEATURED";position:absolute;top:10px;right:-26px;
+        background:#f0c674;color:#5b3a00;font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;
+        letter-spacing:1px;padding:2px 30px;transform:rotate(35deg);transform-origin:center;
+      }
+      .ext-card-head{display:flex;gap:12px;align-items:flex-start}
+      .ext-avatar{flex:0 0 36px;width:36px;height:36px;border-radius:6px;background:var(--code-bg);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.95rem;overflow:hidden}
+      .ext-avatar img{width:100%;height:100%;object-fit:cover}
+      .ext-card-id{flex:1;min-width:0}
+      .ext-repo{font-family:'JetBrains Mono',monospace;font-size:.92rem;font-weight:600;color:var(--pg-blue-dark);text-decoration:none;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+      .ext-repo:hover{color:var(--pg-blue-hover);text-decoration:underline}
+      .ext-repo .owner{color:var(--pg-text-light);font-weight:500}
+      .ext-repo .slash{color:var(--pg-text-light);margin:0 1px}
+      .ext-card-name{font-family:'Maven Pro',sans-serif;font-size:.85rem;font-weight:700;color:var(--pg-text);margin-top:2px}
+      .ext-card-desc{font-size:.86rem;line-height:1.55;color:var(--pg-text);margin:2px 0 6px;flex:1}
+      .ext-card-meta{display:flex;gap:14px;flex-wrap:wrap;align-items:center;font-size:.78rem;color:var(--pg-text-light);font-family:'JetBrains Mono',monospace}
+      .ext-card-meta span{display:inline-flex;align-items:center;gap:5px}
+      .ext-lang-dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+      .ext-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
+      .ext-tag{font-family:'JetBrains Mono',monospace;font-size:.7rem;background:var(--pg-blue-light);color:var(--pg-blue-dark);padding:2px 8px;border-radius:10px;font-weight:500}
+      .ext-card-actions{display:flex;gap:8px;margin-top:8px;padding-top:10px;border-top:1px dashed var(--pg-border)}
+      .ext-card-btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:7px 12px;border-radius:5px;font-family:'Maven Pro',sans-serif;font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;text-decoration:none;border:1px solid var(--pg-border);background:#fafbfc;color:var(--pg-text);transition:all .12s}
+      .ext-card-btn:hover{background:var(--pg-blue-dark);color:#fff;border-color:var(--pg-blue-dark);text-decoration:none}
+      .ext-card-btn.primary{background:var(--code-bg);color:#fff;border-color:var(--code-bg)}
+      .ext-card-btn.primary:hover{background:#000;border-color:#000;color:#fff}
+
+      /* Submit panel */
+      .ext-submit-panel{
+        background:linear-gradient(135deg,#f8fafc 0%,#eef2f7 100%);
+        border:1px solid var(--pg-border);border-radius:8px;padding:24px 26px;margin:1.25rem 0 1rem;
+      }
+      .ext-submit-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;flex-wrap:wrap}
+      .ext-submit-head h3{font-family:'Maven Pro',sans-serif;font-size:1rem;font-weight:700;color:var(--pg-text);margin:0;text-transform:uppercase;letter-spacing:.5px}
+      .ext-submit-head .badge-mono{font-family:'JetBrains Mono',monospace;background:var(--code-bg);color:#7ee787;padding:3px 10px;border-radius:4px;font-size:.72rem}
+      .ext-form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
+      .ext-form-field{display:flex;flex-direction:column}
+      .ext-form-field.full{grid-column:1/-1}
+      .ext-form-field label{font-family:'Maven Pro',sans-serif;font-size:.74rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+      .ext-form-field label .req{color:var(--pg-danger);margin-left:2px}
+      .ext-form-field input,.ext-form-field select,.ext-form-field textarea{
+        padding:9px 12px;border:1px solid var(--pg-border);border-radius:5px;font-size:.88rem;
+        font-family:'JetBrains Mono',monospace;background:#fff;
+      }
+      .ext-form-field textarea{font-family:'Open Sans',sans-serif;resize:vertical;min-height:84px}
+      .ext-form-field input:focus,.ext-form-field select:focus,.ext-form-field textarea:focus{outline:none;border-color:var(--pg-blue-dark);box-shadow:0 0 0 2px rgba(51,103,145,.15)}
+      .ext-form-help{font-size:.74rem;color:var(--pg-text-light);margin-top:3px;font-family:'JetBrains Mono',monospace}
+      .ext-form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+      .ext-submit-btn{display:inline-flex;align-items:center;gap:8px;background:var(--pg-blue-dark);color:#fff;font-family:'Maven Pro',sans-serif;font-size:.82rem;font-weight:700;padding:10px 18px;border-radius:5px;border:none;cursor:pointer;text-transform:uppercase;letter-spacing:.4px;transition:background .15s}
+      .ext-submit-btn:hover{background:var(--pg-blue-hover)}
+      .ext-submit-btn:disabled{opacity:.55;cursor:not-allowed}
+      .ext-issue-link{font-size:.78rem;color:var(--pg-text-light);text-decoration:none;display:inline-flex;align-items:center;gap:4px;margin-left:auto}
+      .ext-issue-link:hover{color:var(--pg-blue-dark);text-decoration:underline}
+      .ext-alert{padding:10px 14px;border-radius:5px;font-size:.85rem;margin-top:12px}
+      .ext-alert-success{background:#e8f5e9;color:#2e7d32;border:1px solid #c8e6c9}
+      .ext-alert-error{background:#ffebee;color:#c62828;border:1px solid #ffcdd2}
+      .ext-alert-info{background:var(--pg-blue-light);color:var(--pg-blue-dark);border:1px solid #c5d6e3}
+
+      /* Empty / loading state */
+      .ext-empty{padding:40px 20px;text-align:center;color:var(--pg-text-light);background:#fafbfc;border:1px dashed var(--pg-border);border-radius:8px}
+      .ext-empty i{font-size:2.4rem;color:#cfd6dd;margin-bottom:10px;display:block}
+      .ext-empty h4{font-family:'Maven Pro',sans-serif;color:var(--pg-text);margin:0 0 6px;font-size:1rem}
+      .ext-empty p{font-size:.88rem;margin:0}
+      .ext-skel{background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.4s linear infinite;border-radius:6px;height:130px}
+      @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+      #footer img.footer-logo{height:36px;margin-bottom:10px;opacity:.6;transition:opacity .2s}
+      #footer img.footer-logo:hover{opacity:1}
+      @media(max-width:768px){
+        .pg-content-area{flex-direction:column}.pg-sidebar{flex:auto;order:2}.pg-main-content{order:1}
+        .ext-grid{grid-template-columns:1fr}
+        .ext-form-row{grid-template-columns:1fr}
+        .ext-hero h1{font-size:1.4rem}
+        .ext-hero-body{padding:22px 18px}
+        .ext-hero-stats{gap:18px}
+      }
+    </style>
+
+    <meta property="og:title" content="Community Extensions & Tools — Azerbaijan PostgreSQL User Group">
+    <meta property="og:description" content="Open-source PostgreSQL extensions, tools and CLIs developed by the Azerbaijan PostgreSQL community. Browse, star, and submit your own project.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://postgresql.az/extensions/">
+    <meta property="og:site_name" content="Azerbaijan PostgreSQL User Group (AZERPUG)">
+    <meta property="og:image" content="https://postgresql.az/pict/smal.jpeg">
+    <meta name="twitter:card" content="summary">
+    <link rel="canonical" href="https://postgresql.az/extensions/">
+  </head>
+  <body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDMJ7KJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="container-fluid"><div class="row justify-content-md-center"><div class="col">
+      <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand p-0" aria-label="AZERPUG Home" href="/"><img class="logo" src="/pict/smal.jpeg" alt="AZERPUG"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="pgNavbar"><ul class="navbar-nav mr-auto">
+          <li class="nav-item p-2"><a href="/" data-i18n="nav.home">Home</a></li>
+          <li class="nav-item p-2"><a href="/blogs/" data-i18n="nav.blog">Blog Posts</a></li>
+          <li class="nav-item p-2"><a href="/events/" data-i18n="nav.events">Events</a></li>
+          <li class="nav-item p-2"><a href="/registration/" data-i18n="nav.registration">Registration</a></li>
+          <li class="nav-item p-2"><a href="/members/" data-i18n="nav.members">Members</a></li>
+          <li class="nav-item p-2"><a href="/extensions/" data-i18n="nav.extensions">Extensions</a></li>
+          <li class="nav-item p-2"><a href="/community/" data-i18n="nav.community">Global Community</a></li>
+          <li class="nav-item p-2"><a href="/profile/" data-i18n="nav.profile">My Profile</a></li>
+          <li class="nav-item p-2 dropdown">
+            <a href="/about/" class="dropdown-toggle" data-toggle="dropdown" data-i18n="nav.about">About</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/about/" data-i18n="nav.about">About</a>
+              <a class="dropdown-item" href="/sponsors/" data-i18n="nav.sponsors">Sponsors</a>
+              <a class="dropdown-item" href="/faq/" data-i18n="nav.faq">FAQ</a>
+              <a class="dropdown-item" href="/gallery/" data-i18n="nav.gallery">Gallery</a>
+              <a class="dropdown-item" href="/contact/" data-i18n="nav.contact">Contact</a>
+              <a class="dropdown-item" href="/contribute/" data-i18n="nav.contribute">Contribute</a>
+              <a class="dropdown-item" href="/committees/" data-i18n="nav.committees">Committees</a>
+              <a class="dropdown-item" href="/coc/" data-i18n="nav.coc">Code of Conduct</a>
+            </div>
+          </li>
+        </ul></div>
+      </nav>
+    </div></div>
+
+    <div class="pg-page-wrapper" style="margin-top:1rem;"><div class="pg-content-area">
+      <aside class="pg-sidebar">
+        <div class="pg-sidebar-logo"><a href="/"><img src="/pict/smal.jpeg" alt="AZERPUG"></a><div class="pg-sidebar-logo-text">Azerbaijan PostgreSQL<br>User Group</div></div>
+        <div class="pg-sidebar-section"><h3 data-i18n="ext.sidebar_browse">Browse</h3><ul>
+          <li><a href="#featured" class="active"><i class="fas fa-star" style="font-size:.7rem;margin-right:4px;color:#f0c674"></i> <span data-i18n="ext.featured">Featured</span></a></li>
+          <li><a href="#all"><i class="fas fa-cubes" style="font-size:.7rem;margin-right:4px"></i> <span data-i18n="ext.all_projects">All Projects</span></a></li>
+          <li><a href="#submit"><i class="fas fa-plus-circle" style="font-size:.7rem;margin-right:4px;color:var(--pg-success)"></i> <span data-i18n="ext.sidebar_submit">Submit Yours</span></a></li>
+        </ul></div>
+        <div class="pg-sidebar-section"><h3 data-i18n="ext.sidebar_categories">Categories</h3><ul>
+          <li><a href="#" data-cat="extension"><span data-i18n="ext.cat_extension">Extensions</span></a></li>
+          <li><a href="#" data-cat="tool"><span data-i18n="ext.cat_tool">Tools</span></a></li>
+          <li><a href="#" data-cat="cli"><span data-i18n="ext.cat_cli">CLIs</span></a></li>
+          <li><a href="#" data-cat="library"><span data-i18n="ext.cat_library">Libraries</span></a></li>
+        </ul></div>
+        <div class="pg-sidebar-section"><h3 data-i18n="ext.sidebar_links">Links</h3><ul>
+          <li><a href="/contribute/" data-i18n="ext.link_contribute">Contribute</a></li>
+          <li><a href="/blogs/" data-i18n="nav.blog">Blog Posts</a></li>
+          <li><a href="/resources/" data-i18n="feat.resources">Resources</a></li>
+        </ul></div>
+      </aside>
+
+      <main class="pg-main-content">
+
+        <!-- Hero -->
+        <section class="ext-hero">
+          <div class="ext-hero-bar"><i class="d1"></i><i class="d2"></i><i class="d3"></i><span>azerpug ~ /extensions</span></div>
+          <div class="ext-hero-body">
+            <p class="ext-hero-prompt"><span class="promptchar">$</span> ls -al /community/extensions</p>
+            <h1><span class="bracket">{</span> <span data-i18n="ext.hero_title">Community Extensions &amp; Tools</span> <span class="bracket">}</span></h1>
+            <p class="tagline" data-i18n="ext.hero_tagline">Open-source PostgreSQL extensions, CLIs, and developer tools — built by AZERPUG community members. Browse what's already there, star what you like, and submit your own work to help the next developer ship faster.</p>
+            <div class="ext-hero-cta">
+              <a href="#submit" class="ext-btn-primary"><i class="fas fa-paper-plane"></i> <span data-i18n="ext.cta_submit">Submit Your Project</span></a>
+              <a href="#all" class="ext-btn-ghost"><i class="fas fa-binoculars"></i> <span data-i18n="ext.cta_browse">Browse Projects</span></a>
+            </div>
+            <div class="ext-hero-stats">
+              <div class="ext-hero-stat"><strong id="statCount">—</strong>projects</div>
+              <div class="ext-hero-stat"><strong id="statStars">—</strong>github&nbsp;stars</div>
+              <div class="ext-hero-stat"><strong id="statContribs">—</strong>contributors</div>
+              <div class="ext-hero-stat"><strong id="statLangs">—</strong>languages</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Toolbar -->
+        <div class="ext-toolbar">
+          <div class="ext-search">
+            <i class="fas fa-search"></i>
+            <input type="text" id="extSearch" placeholder="Search by name, description, or tag…" data-i18n-placeholder="ext.search_ph">
+          </div>
+          <div class="ext-chips" id="extChips">
+            <span class="ext-chip active" data-cat="all" data-i18n="ext.cat_all">All</span>
+            <span class="ext-chip" data-cat="extension" data-i18n="ext.cat_extension">Extensions</span>
+            <span class="ext-chip" data-cat="tool" data-i18n="ext.cat_tool">Tools</span>
+            <span class="ext-chip" data-cat="cli" data-i18n="ext.cat_cli">CLIs</span>
+            <span class="ext-chip" data-cat="library" data-i18n="ext.cat_library">Libraries</span>
+          </div>
+        </div>
+
+        <!-- Featured -->
+        <h2 class="pg-section-title" id="featured">
+          <i class="fas fa-star" style="color:#f0c674"></i>
+          <span data-i18n="ext.featured_title">Featured Projects</span>
+          <span class="count-badge" id="featuredCount">—</span>
+        </h2>
+        <div class="ext-grid" id="featuredGrid">
+          <div class="ext-skel"></div><div class="ext-skel"></div>
+        </div>
+
+        <!-- All -->
+        <h2 class="pg-section-title" id="all">
+          <i class="fas fa-cubes"></i>
+          <span data-i18n="ext.all_title">All Community Projects</span>
+          <span class="count-badge" id="allCount">—</span>
+        </h2>
+        <div class="ext-grid" id="allGrid">
+          <div class="ext-skel"></div><div class="ext-skel"></div><div class="ext-skel"></div>
+        </div>
+
+        <!-- Submit -->
+        <h2 class="pg-section-title" id="submit">
+          <i class="fas fa-paper-plane"></i>
+          <span data-i18n="ext.submit_title">Submit Your Tool / Extension</span>
+        </h2>
+        <div class="ext-submit-panel">
+          <div class="ext-submit-head">
+            <h3 data-i18n="ext.submit_subtitle">Share your open-source PostgreSQL project</h3>
+            <span class="badge-mono">$ git push community</span>
+          </div>
+          <p style="font-size:.88rem;color:var(--pg-text);margin:0 0 14px;line-height:1.6" data-i18n="ext.submit_intro">Built a PostgreSQL extension, CLI, monitoring tool, library, or sample app and want to share it with the AZERPUG community? Drop the GitHub URL below — we'll review and add it to the list. All projects must be open-source.</p>
+
+          <form id="extForm" onsubmit="return submitExtension(event)">
+            <div class="ext-form-row">
+              <div class="ext-form-field full">
+                <label for="extGithubUrl" data-i18n="ext.lbl_github">GitHub URL <span class="req">*</span></label>
+                <input type="url" id="extGithubUrl" placeholder="https://github.com/owner/repo" required>
+                <div class="ext-form-help">https://github.com/&lt;owner&gt;/&lt;repo&gt;</div>
+              </div>
+              <div class="ext-form-field">
+                <label for="extName" data-i18n="ext.lbl_name">Project Name <span class="req">*</span></label>
+                <input type="text" id="extName" placeholder="pgclone" required>
+              </div>
+              <div class="ext-form-field">
+                <label for="extCategory" data-i18n="ext.lbl_category">Category <span class="req">*</span></label>
+                <select id="extCategory" required>
+                  <option value="extension" data-i18n="ext.cat_extension">Extension</option>
+                  <option value="tool" data-i18n="ext.cat_tool">Tool</option>
+                  <option value="cli" data-i18n="ext.cat_cli">CLI</option>
+                  <option value="library" data-i18n="ext.cat_library">Library</option>
+                  <option value="sample" data-i18n="ext.cat_sample">Sample / Example</option>
+                  <option value="other" data-i18n="ext.cat_other">Other</option>
+                </select>
+              </div>
+              <div class="ext-form-field">
+                <label for="extLang" data-i18n="ext.lbl_lang">Primary Language</label>
+                <input type="text" id="extLang" placeholder="C, Python, Rust, PLpgSQL…">
+              </div>
+              <div class="ext-form-field">
+                <label for="extTags" data-i18n="ext.lbl_tags">Tags</label>
+                <input type="text" id="extTags" placeholder="monitoring, replication, performance">
+                <div class="ext-form-help" data-i18n="ext.lbl_tags_help">Comma-separated</div>
+              </div>
+              <div class="ext-form-field full">
+                <label for="extDesc" data-i18n="ext.lbl_desc">Short Description <span class="req">*</span></label>
+                <textarea id="extDesc" rows="3" maxlength="600" placeholder="What does it do? Why would another DBA / developer use it?" required></textarea>
+              </div>
+              <div class="ext-form-field" id="anonName" style="display:none">
+                <label for="extSubmitterName" data-i18n="ext.lbl_your_name">Your Name <span class="req">*</span></label>
+                <input type="text" id="extSubmitterName" placeholder="Valeh Agayev">
+              </div>
+              <div class="ext-form-field" id="anonEmail" style="display:none">
+                <label for="extSubmitterEmail" data-i18n="ext.lbl_your_email">Your Email <span class="req">*</span></label>
+                <input type="email" id="extSubmitterEmail" placeholder="you@example.com">
+              </div>
+            </div>
+
+            <div class="ext-form-actions">
+              <button type="submit" class="ext-submit-btn" id="extSubmitBtn"><i class="fas fa-paper-plane"></i> <span data-i18n="ext.btn_submit">Submit Project</span></button>
+              <span style="font-size:.78rem;color:var(--pg-text-light)" data-i18n="ext.submit_note">Reviewed within a few days.</span>
+              <a href="https://github.com/valehdba/postgresql.az/issues/new?labels=community-extension&title=%5BExtension%5D+&body=**GitHub+URL%3A**+%0A**Description%3A**+%0A**Category%3A**+%0A**Language%3A**+" target="_blank" rel="noopener" class="ext-issue-link"><i class="fab fa-github"></i> <span data-i18n="ext.via_issue">Or submit via a GitHub issue</span> <i class="fas fa-external-link-alt" style="font-size:.65rem"></i></a>
+            </div>
+            <div id="extAlert"></div>
+          </form>
+        </div>
+
+      </main>
+    </div></div></div>
+
+    <footer id="footer"><div class="container">
+      <a href="/"><img class="footer-logo" src="/pict/smal.jpeg" alt="AZERPUG"></a><br/>
+      <div style="margin-bottom:12px;">
+        <a href="https://www.facebook.com/groups/www.postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="Facebook" aria-label="Facebook Group"><i class="fab fa-facebook"></i></a>
+        <a href="https://github.com/valehdba/postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="GitHub" aria-label="our GitHub Repository"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/groups/17977044/" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="LinkedIn" aria-label="LinkedIn Group"><i class="fab fa-linkedin"></i></a>
+        <a href="https://t.me/postgresqlaz" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="Telegram" aria-label="Telegram Group"><i class="fab fa-telegram-plane"></i></a>
+      </div>
+      <a href="/about/privacypolicy/" data-i18n="footer.privacy">Privacy policy</a> | <a href="/about/website/" data-i18n="footer.website">About the website</a> | <a href="/coc/" data-i18n="footer.coc">Code of Conduct</a><br/>
+      Copyright &copy; 2018-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
+    </div></footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/js/navbar-auth.js"></script>
+    <script src="/js/lang.js"></script>
+
+    <!-- v1.0 -->
+    <script>
+    (function(){
+      var SB  = 'https://qlyqwwhimwfcvuqdrxov.supabase.co';
+      var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFseXF3d2hpbXdmY3Z1cWRyeG92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjg2ODYsImV4cCI6MjA4OTcwNDY4Nn0.6MKz72wGwthRL8hs-Iv3L9Iw_W4DdGh3UjrwcagtKfM';
+
+      var user = null;
+      try{ user = JSON.parse(sessionStorage.getItem('azerpug_user')); }catch(e){}
+
+      // --- Hard-coded fallback (used if Supabase table is not yet created) ---
+      // These mirror the seeds in /sql/community_extensions.sql so the page is
+      // useful even before the SQL is run.
+      var FALLBACK = [
+        { name:'pgclone', github_owner:'valehdba', github_repo:'pgclone',
+          github_url:'https://github.com/valehdba/pgclone',
+          description:'PostgreSQL extension for cloning, masking and post-clone checking of databases, schemas, tables, and functions between hosts — without leaving your database session.',
+          category:'extension', language:'C', tags:['cloning','masking','dba'],
+          stars:34, forks:0, is_featured:true },
+        { name:'pgx_permission_sync', github_owner:'valehdba', github_repo:'pgx_permission_sync',
+          github_url:'https://github.com/valehdba/pgx_permission_sync',
+          description:'Automatically synchronizes role and permission changes (CREATE ROLE, GRANT, REVOKE, ALTER ROLE, DROP ROLE) across multiple environments via event triggers and dblink — full audit log, encrypted credentials, retry queue.',
+          category:'extension', language:'PLpgSQL', tags:['security','rbac','event-triggers','dblink'],
+          stars:5, forks:0, is_featured:true },
+        { name:'pgx_warnings', github_owner:'valehdba', github_repo:'pgx_warnings',
+          github_url:'https://github.com/valehdba/pgx_warnings',
+          description:'PostgreSQL extension that watches and collects warnings/errors from the PostgreSQL log file and pushes notifications to a Telegram channel.',
+          category:'extension', language:'C', tags:['monitoring','alerting','telegram','logs'],
+          stars:4, forks:0, is_featured:false },
+        { name:'PgWatchtower', github_owner:'valehdba', github_repo:'PgWatchtower',
+          github_url:'https://github.com/valehdba/PgWatchtower',
+          description:'Collects, visualizes, and predicts database growth and other capacity-planning metrics over time.',
+          category:'tool', language:'HTML', tags:['monitoring','capacity-planning','growth'],
+          stars:4, forks:0, is_featured:false }
+      ];
+
+      // GitHub-style language → color map (subset).
+      var LANG_COLORS = {
+        'C':'#555555','C++':'#f34b7d','Go':'#00ADD8','Rust':'#dea584','Python':'#3572A5',
+        'JavaScript':'#f1e05a','TypeScript':'#3178c6','Java':'#b07219','Ruby':'#701516',
+        'Shell':'#89e051','Bash':'#89e051','HTML':'#e34c26','CSS':'#563d7c',
+        'PLpgSQL':'#336790','PL/pgSQL':'#336790','SQL':'#336791','Perl':'#0298c3',
+        'Elixir':'#6e4a7e','PHP':'#4F5D95','Kotlin':'#A97BFF','Swift':'#F05138',
+        'R':'#198CE7','Scala':'#c22d40','Lua':'#000080','Haskell':'#5e5086',
+        'Dockerfile':'#384d54','Makefile':'#427819'
+      };
+      function langColor(l){ return l && LANG_COLORS[l] ? LANG_COLORS[l] : '#8b949e'; }
+
+      function esc(t){ if(!t) return ''; var d=document.createElement('div'); d.textContent=t; return d.innerHTML; }
+      function ttext(key, fb){ try{ return (window.azT && window.azT(key)) || fb; }catch(e){ return fb; } }
+
+      // ---- Card rendering -----------------------------------------------------
+      function buildCard(p){
+        var owner = p.github_owner || (p.github_url||'').replace(/^https?:\/\/github\.com\//i,'').split('/')[0] || '';
+        var repo  = p.github_repo  || (p.github_url||'').replace(/^https?:\/\/github\.com\//i,'').split('/')[1] || '';
+        var avatar = owner ? '<img src="https://github.com/'+esc(owner)+'.png?size=72" alt="" loading="lazy" onerror="this.replaceWith(document.createTextNode((\''+esc(owner.charAt(0).toUpperCase())+'\')))">' :
+                             esc((repo||'?').charAt(0).toUpperCase());
+        var langDot = p.language ? '<span><span class="ext-lang-dot" style="background:'+langColor(p.language)+'"></span>'+esc(p.language)+'</span>' : '';
+        var tags = (p.tags||[]).slice(0,4).map(function(t){ return '<span class="ext-tag">'+esc(t)+'</span>'; }).join('');
+        var stars = (p.stars==null?0:p.stars);
+        var forks = (p.forks==null?0:p.forks);
+        var feat = p.is_featured ? ' featured' : '';
+        return ''+
+          '<article class="ext-card'+feat+'" data-cat="'+esc(p.category||'tool')+'" data-search="'+esc(((p.name||'')+' '+(p.description||'')+' '+((p.tags||[]).join(' '))+' '+(p.language||'')).toLowerCase())+'">'+
+            '<div class="ext-card-head">'+
+              '<div class="ext-avatar" aria-hidden="true">'+avatar+'</div>'+
+              '<div class="ext-card-id">'+
+                '<a class="ext-repo" href="'+esc(p.github_url)+'" target="_blank" rel="noopener">'+
+                  '<span class="owner">'+esc(owner)+'</span><span class="slash">/</span>'+esc(repo)+
+                '</a>'+
+                (p.name && p.name.toLowerCase()!==repo.toLowerCase() ? '<div class="ext-card-name">'+esc(p.name)+'</div>':'')+
+              '</div>'+
+            '</div>'+
+            '<p class="ext-card-desc">'+esc(p.description||'')+'</p>'+
+            (tags ? '<div class="ext-tags">'+tags+'</div>' : '')+
+            '<div class="ext-card-meta">'+
+              langDot+
+              '<span data-stars-of="'+esc(p.github_url)+'"><i class="fas fa-star" style="color:#f0c674"></i> '+stars+'</span>'+
+              '<span data-forks-of="'+esc(p.github_url)+'"><i class="fas fa-code-branch"></i> '+forks+'</span>'+
+              '<span style="text-transform:uppercase;letter-spacing:.5px;font-size:.7rem;color:var(--pg-blue-dark);font-weight:700">'+esc(p.category||'tool')+'</span>'+
+            '</div>'+
+            '<div class="ext-card-actions">'+
+              '<a class="ext-card-btn primary" href="'+esc(p.github_url)+'" target="_blank" rel="noopener"><i class="fab fa-github"></i> View on GitHub</a>'+
+              '<a class="ext-card-btn" href="'+esc(p.github_url)+'/stargazers" target="_blank" rel="noopener"><i class="far fa-star"></i> Star</a>'+
+            '</div>'+
+          '</article>';
+      }
+
+      function renderAll(items){
+        var feat = items.filter(function(x){ return x.is_featured; });
+        var rest = items.filter(function(x){ return !x.is_featured; });
+
+        var fEl = document.getElementById('featuredGrid');
+        var aEl = document.getElementById('allGrid');
+
+        if(feat.length){
+          fEl.innerHTML = feat.map(buildCard).join('');
+        } else {
+          fEl.innerHTML = '<div class="ext-empty" style="grid-column:1/-1"><i class="fas fa-star"></i><h4>No featured projects yet</h4><p>Submit your project — exceptional ones get featured.</p></div>';
+        }
+
+        if(rest.length){
+          aEl.innerHTML = rest.map(buildCard).join('');
+        } else if(!feat.length){
+          aEl.innerHTML = '<div class="ext-empty" style="grid-column:1/-1"><i class="fas fa-cube"></i><h4>Be the first to submit</h4><p>The community list is empty — share your open-source PG project below.</p></div>';
+        } else {
+          aEl.innerHTML = '';
+        }
+
+        document.getElementById('featuredCount').textContent = feat.length;
+        document.getElementById('allCount').textContent = rest.length;
+
+        // Hero stats
+        var totalStars = items.reduce(function(s,x){ return s+(x.stars||0); }, 0);
+        var owners = {}; var langs = {};
+        items.forEach(function(x){ if(x.github_owner) owners[x.github_owner]=1; if(x.language) langs[x.language]=1; });
+        document.getElementById('statCount').textContent  = items.length;
+        document.getElementById('statStars').textContent  = totalStars;
+        document.getElementById('statContribs').textContent = Object.keys(owners).length;
+        document.getElementById('statLangs').textContent  = Object.keys(langs).length;
+      }
+
+      // ---- Filtering ----------------------------------------------------------
+      var activeCat = 'all';
+      function applyFilters(){
+        var q = (document.getElementById('extSearch').value||'').toLowerCase().trim();
+        document.querySelectorAll('.ext-card').forEach(function(c){
+          var cat = c.getAttribute('data-cat');
+          var hay = c.getAttribute('data-search') || '';
+          var catOk = (activeCat==='all' || cat===activeCat);
+          var qOk = !q || hay.indexOf(q) !== -1;
+          c.style.display = (catOk && qOk) ? '' : 'none';
+        });
+      }
+      document.getElementById('extSearch').addEventListener('input', applyFilters);
+      document.querySelectorAll('#extChips .ext-chip').forEach(function(ch){
+        ch.addEventListener('click', function(){
+          document.querySelectorAll('#extChips .ext-chip').forEach(function(c){ c.classList.remove('active'); });
+          ch.classList.add('active');
+          activeCat = ch.getAttribute('data-cat');
+          applyFilters();
+        });
+      });
+      // Sidebar category links — sync the chips
+      document.querySelectorAll('.pg-sidebar-section a[data-cat]').forEach(function(a){
+        a.addEventListener('click', function(e){
+          e.preventDefault();
+          var cat = a.getAttribute('data-cat');
+          var chip = document.querySelector('#extChips .ext-chip[data-cat="'+cat+'"]');
+          if(chip) chip.click();
+          var target = document.getElementById('all');
+          if(target) target.scrollIntoView({behavior:'smooth'});
+        });
+      });
+
+      // ---- Live GitHub star refresh ------------------------------------------
+      // Best-effort, unauthenticated. Anonymous limit is 60/hr per IP — fine for
+      // a small list. Failures are silent (we keep the cached values).
+      function refreshGithubStars(items){
+        items.forEach(function(p){
+          if(!p.github_owner || !p.github_repo) return;
+          var api = 'https://api.github.com/repos/'+encodeURIComponent(p.github_owner)+'/'+encodeURIComponent(p.github_repo);
+          fetch(api, { headers:{'Accept':'application/vnd.github+json'} })
+            .then(function(r){ return r.ok ? r.json() : null; })
+            .then(function(d){
+              if(!d) return;
+              p.stars = d.stargazers_count; p.forks = d.forks_count;
+              if(d.language && !p.language) p.language = d.language;
+              document.querySelectorAll('[data-stars-of="'+p.github_url+'"]').forEach(function(el){
+                el.innerHTML = '<i class="fas fa-star" style="color:#f0c674"></i> '+d.stargazers_count;
+              });
+              document.querySelectorAll('[data-forks-of="'+p.github_url+'"]').forEach(function(el){
+                el.innerHTML = '<i class="fas fa-code-branch"></i> '+d.forks_count;
+              });
+            })
+            .catch(function(){ /* ignore */ });
+        });
+      }
+
+      // ---- Load -------------------------------------------------------------
+      async function loadProjects(){
+        try{
+          var ctrl = new AbortController();
+          var t = setTimeout(function(){ ctrl.abort(); }, 6000);
+          var r = await fetch(SB+'/rest/v1/public_community_extensions?select=*&order=is_featured.desc,stars.desc,created_at.desc',
+            { headers:{ 'apikey':KEY, 'Authorization':'Bearer '+KEY }, signal:ctrl.signal });
+          clearTimeout(t);
+          if(!r.ok) throw new Error('Supabase: '+r.status);
+          var data = await r.json();
+          if(!Array.isArray(data) || !data.length) throw new Error('empty');
+          renderAll(data);
+          refreshGithubStars(data);
+        } catch(e){
+          // Fall back to seeded list
+          renderAll(FALLBACK);
+          refreshGithubStars(FALLBACK);
+        }
+      }
+      loadProjects();
+
+      // ---- Submission --------------------------------------------------------
+      function showAlert(html, kind){
+        var el = document.getElementById('extAlert');
+        el.innerHTML = '<div class="ext-alert ext-alert-'+(kind||'info')+'">'+html+'</div>';
+      }
+      function clearAlert(){ document.getElementById('extAlert').innerHTML=''; }
+
+      // Show name/email fields if the user is not signed in
+      if(!user){
+        document.getElementById('anonName').style.display='';
+        document.getElementById('anonEmail').style.display='';
+      }
+
+      window.submitExtension = async function(ev){
+        ev.preventDefault();
+        clearAlert();
+        var btn = document.getElementById('extSubmitBtn');
+
+        var url  = document.getElementById('extGithubUrl').value.trim();
+        var name = document.getElementById('extName').value.trim();
+        var desc = document.getElementById('extDesc').value.trim();
+        var cat  = document.getElementById('extCategory').value;
+        var lang = document.getElementById('extLang').value.trim() || null;
+        var tagsRaw = document.getElementById('extTags').value;
+        var tags = tagsRaw.split(',').map(function(s){return s.trim();}).filter(Boolean);
+
+        var subName  = user ? (user.full_name || user.name || null)
+                            : document.getElementById('extSubmitterName').value.trim();
+        var subEmail = user ? (user.email || null)
+                            : document.getElementById('extSubmitterEmail').value.trim();
+
+        if(!/^https:\/\/github\.com\/[A-Za-z0-9][A-Za-z0-9-]*\/[A-Za-z0-9][A-Za-z0-9._-]*\/?$/.test(url)){
+          showAlert(ttext('ext.err_url','GitHub URL must look like https://github.com/owner/repo'),'error');
+          return false;
+        }
+        if(!user && (!subName || !subEmail)){
+          showAlert(ttext('ext.err_anon','Please provide your name and email — or <a href="/login/">sign in</a>.'),'error');
+          return false;
+        }
+
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> '+ttext('ext.sending','Submitting…');
+
+        try{
+          var r = await fetch(SB+'/rest/v1/rpc/submit_community_extension',{
+            method:'POST',
+            headers:{ 'Content-Type':'application/json', 'apikey':KEY, 'Authorization':'Bearer '+KEY },
+            body: JSON.stringify({
+              p_name:name, p_github_url:url, p_description:desc,
+              p_category:cat, p_language:lang, p_tags:tags.length?tags:null,
+              p_member_id: user && user.id ? user.id : null,
+              p_submitter_name: subName, p_submitter_email: subEmail
+            })
+          });
+          if(!r.ok){
+            var msg = await r.text();
+            // RPC absent (table not yet created) — guide user to GitHub Issue
+            if(r.status === 404){
+              showAlert(ttext('ext.err_no_rpc',
+                'Submission service is not yet enabled on the server. Please <a href="https://github.com/valehdba/postgresql.az/issues/new?labels=community-extension&title=%5BExtension%5D+'+encodeURIComponent(name)+'" target="_blank" rel="noopener">submit via a GitHub issue</a> for now.'),'info');
+            } else {
+              showAlert((ttext('ext.err_failed','Submission failed:')+' '+esc(msg)),'error');
+            }
+            return false;
+          }
+          showAlert(ttext('ext.ok_submitted',
+            '<i class="fas fa-check-circle"></i> Thanks! Your project has been submitted for review. We\'ll publish it on the page once approved.'),'success');
+          document.getElementById('extForm').reset();
+        } catch(err){
+          showAlert(ttext('ext.err_net','Network error. Please try again, or submit via a GitHub issue.'),'error');
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fas fa-paper-plane"></i> '+ttext('ext.btn_submit','Submit Project');
+        }
+        return false;
+      };
+    })();
+    </script>
+  </body>
+</html>
