@@ -767,13 +767,13 @@
     btn.id = 'langToggleBtn';
     btn.title = lang === 'en' ? 'Azərbaycanca' : 'English';
     btn.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:transparent;border:1px solid #ccc;border-radius:50%;font-size:0.7rem;font-weight:700;color:#515151;cursor:pointer;transition:all 0.15s;font-family:Maven Pro,sans-serif;';
-    btn.textContent = lang === 'en' ? 'AZ' : 'EN';
+    btn.textContent = lang === 'en' ? 'EN' : 'AZ';
     btn.onclick = function() {
-      var newLang = getLang() === 'en' ? 'az' : 'en';
+      var newLang = getLang() === 'en' ? 'en' : 'az';
       setLang(newLang);
       applyTranslations();
-      btn.textContent = newLang === 'en' ? 'AZ' : 'EN';
-      btn.title = newLang === 'en' ? 'Azərbaycanca' : 'English';
+      btn.textContent = newLang === 'en' ? 'EN' : 'AZ';
+      btn.title = newLang === 'en' ? 'English' : 'Azərbaycanca';
       // Dispatch event for page-specific translations
       window.dispatchEvent(new CustomEvent('langChanged', { detail: { lang: newLang } }));
     };
