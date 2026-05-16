@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NDMJ7KJ');</script>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="PostgreSQL best practices, how-to guides, performance tips, and hard-won lessons shared by the Azerbaijan PostgreSQL community.">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/pgyum.css">
+    <title>Knowledge Base — Azerbaijan PostgreSQL User Group</title>
+
+    <style>
+      :root{
+        --pg-blue-dark:#336791;--pg-blue-light:#e7eef4;--pg-blue-hover:#264d6f;
+        --pg-text:#515151;--pg-text-light:#6c757d;--pg-border:#d8dde3;--pg-bg-light:#f5f5f5;--pg-white:#fff;
+        --pg-danger:#c62828;--pg-success:#2e7d32;--kb-teal:#00695c;--kb-teal-dark:#004d40;
+      }
+
+      /* Layout */
+      .pg-page-wrapper{max-width:1180px;margin:0 auto;padding:0 15px}
+      .pg-content-area{margin-top:1rem}
+      .pg-main-content{min-width:0}
+
+      /* Hero */
+      .kb-hero{
+        position:relative;border-radius:8px;overflow:hidden;margin-bottom:1.5rem;
+        background:linear-gradient(135deg,#00695c 0%,#004d40 100%);
+        color:#e0f2f1;border:1px solid #00564a;box-shadow:0 4px 20px rgba(0,0,0,.14);
+        padding:34px 30px 30px;
+      }
+      .kb-hero::before{
+        content:"";position:absolute;top:-60px;right:-40px;width:260px;height:260px;
+        background:radial-gradient(circle,rgba(255,255,255,.10) 0%,transparent 70%);pointer-events:none;
+      }
+      .kb-hero-eyebrow{font-family:'JetBrains Mono','Maven Pro',monospace;font-size:.74rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#80cbc4;margin:0 0 8px}
+      .kb-hero h1{font-family:'Maven Pro',sans-serif;font-size:2rem;font-weight:700;color:#fff;margin:0 0 .5rem;letter-spacing:-.5px}
+      .kb-hero p.tagline{font-size:.98rem;line-height:1.65;color:#cfe8e4;margin:0 0 18px;max-width:680px}
+      .kb-hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+      .kb-btn-primary{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#00564a;font-family:'Maven Pro',sans-serif;font-size:.85rem;font-weight:700;padding:11px 18px;border-radius:6px;text-decoration:none;text-transform:uppercase;letter-spacing:.5px;transition:transform .15s ease,box-shadow .15s ease;border:none;cursor:pointer}
+      .kb-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(0,0,0,.25);color:#00564a;text-decoration:none}
+      .kb-btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#e0f2f1;font-family:'Maven Pro',sans-serif;font-size:.85rem;font-weight:700;padding:10px 17px;border-radius:6px;text-decoration:none;text-transform:uppercase;letter-spacing:.5px;border:1px solid rgba(255,255,255,.35);transition:all .15s ease}
+      .kb-btn-ghost:hover{background:rgba(255,255,255,.12);color:#fff;text-decoration:none;border-color:#fff}
+      .kb-hero-stats{display:flex;gap:26px;margin-top:22px;flex-wrap:wrap}
+      .kb-hero-stat{font-size:.78rem;color:#9fd3cd;text-transform:uppercase;letter-spacing:.5px}
+      .kb-hero-stat strong{color:#fff;font-size:1.5rem;font-weight:700;display:block;line-height:1;font-family:'Maven Pro',sans-serif}
+
+      /* Toolbar */
+      .kb-toolbar{background:var(--pg-white);border:1px solid var(--pg-border);border-radius:6px;padding:14px 16px;margin-bottom:1.25rem;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+      .kb-search{flex:1;min-width:220px;position:relative}
+      .kb-search input{width:100%;padding:9px 14px 9px 36px;border:1px solid var(--pg-border);border-radius:6px;font-size:.9rem;background:#fafbfc}
+      .kb-search input:focus{outline:none;border-color:var(--kb-teal);box-shadow:0 0 0 2px rgba(0,105,92,.15);background:#fff}
+      .kb-search i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--pg-text-light);font-size:.85rem}
+      .kb-chips{display:flex;gap:6px;flex-wrap:wrap}
+      .kb-chip{padding:6px 12px;border-radius:20px;border:1px solid var(--pg-border);background:#fafbfc;font-size:.78rem;color:var(--pg-text);cursor:pointer;transition:all .12s;font-weight:600;user-select:none}
+      .kb-chip:hover{border-color:var(--kb-teal);color:var(--kb-teal)}
+      .kb-chip.active{background:var(--kb-teal);border-color:var(--kb-teal);color:#fff}
+
+      /* Section heading */
+      .pg-section-title{font-family:'Maven Pro',sans-serif;font-size:1.05rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;padding-bottom:8px;border-bottom:2px solid var(--pg-border);margin:1.75rem 0 1.1rem;display:flex;align-items:center;gap:8px}
+      .pg-section-title i{color:var(--kb-teal)}
+      .pg-section-title .count-badge{margin-left:auto;font-size:.72rem;font-weight:600;background:#e0f2f1;color:var(--kb-teal-dark);padding:2px 8px;border-radius:10px;text-transform:none;letter-spacing:0}
+
+      /* Article grid + cards */
+      .kb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:18px;margin-bottom:1.5rem}
+      .kb-card{
+        background:var(--pg-white);border:1px solid var(--pg-border);border-radius:8px;
+        display:flex;flex-direction:column;overflow:hidden;
+        transition:box-shadow .2s ease,border-color .2s ease,transform .2s ease;
+      }
+      .kb-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.08);border-color:var(--kb-teal);transform:translateY(-2px)}
+      .kb-card.featured{border-color:#80cbc4}
+      .kb-card-accent{height:4px;width:100%}
+      .kb-card-body{padding:18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+      .kb-card-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+      .kb-cat-badge{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;padding:3px 9px;border-radius:4px;color:#fff}
+      .kb-featured-tag{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#00695c;display:inline-flex;align-items:center;gap:3px}
+      .kb-read{margin-left:auto;font-size:.74rem;color:var(--pg-text-light)}
+      .kb-card h3{font-family:'Maven Pro',sans-serif;font-size:1.08rem;font-weight:700;color:var(--pg-text);margin:0;line-height:1.35}
+      .kb-card-summary{font-size:.88rem;line-height:1.6;color:var(--pg-text);margin:0;flex:1}
+      .kb-tags{display:flex;gap:5px;flex-wrap:wrap}
+      .kb-tag{font-size:.7rem;background:#eef2f5;color:var(--pg-text-light);padding:2px 8px;border-radius:10px;font-weight:600}
+      .kb-card-foot{display:flex;align-items:center;gap:10px;padding-top:10px;border-top:1px dashed var(--pg-border)}
+      .kb-author{font-size:.76rem;color:var(--pg-text-light);display:inline-flex;align-items:center;gap:5px}
+      .kb-read-btn{margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:5px;font-family:'Maven Pro',sans-serif;font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;border:1px solid var(--kb-teal);background:var(--kb-teal);color:#fff;cursor:pointer;transition:all .12s}
+      .kb-read-btn:hover{background:var(--kb-teal-dark);border-color:var(--kb-teal-dark)}
+      .kb-read-btn.collapsed-state{background:#fff;color:var(--kb-teal)}
+      .kb-read-btn.collapsed-state:hover{background:var(--kb-teal);color:#fff}
+
+      /* Expandable article content */
+      .kb-content{display:none;padding:0 20px 20px;border-top:1px solid var(--pg-border);margin-top:-1px}
+      .kb-content.open{display:block}
+      .kb-content-inner{font-size:.9rem;line-height:1.7;color:var(--pg-text);padding-top:16px}
+      .kb-content-inner p{margin:0 0 .9rem}
+      .kb-content-inner strong{color:#2a2a2a;font-weight:700}
+      .kb-content-inner ul{margin:0 0 .9rem;padding-left:1.3rem}
+      .kb-content-inner li{margin-bottom:.35rem}
+      .kb-content-inner code{background:#f0f2f4;border-radius:3px;padding:1px 5px;font-family:'JetBrains Mono',Menlo,monospace;font-size:.84em;color:#00564a}
+      .kb-content-inner h4{font-family:'Maven Pro',sans-serif;font-size:.96rem;font-weight:700;color:var(--pg-text);margin:1.1rem 0 .5rem}
+      .kb-source{margin-top:10px;display:inline-flex;align-items:center;gap:6px;font-size:.82rem;color:var(--kb-teal);text-decoration:none;font-weight:600}
+      .kb-source:hover{text-decoration:underline;color:var(--kb-teal-dark)}
+
+      /* Submit panel */
+      .kb-submit-panel{background:linear-gradient(135deg,#f3f8f7 0%,#e8f3f1 100%);border:1px solid #cfe3df;border-radius:8px;padding:24px 26px;margin:1.25rem 0 1rem}
+      .kb-submit-head{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+      .kb-submit-head h3{font-family:'Maven Pro',sans-serif;font-size:1rem;font-weight:700;color:var(--pg-text);margin:0;text-transform:uppercase;letter-spacing:.5px}
+      .kb-form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
+      .kb-form-field{display:flex;flex-direction:column}
+      .kb-form-field.full{grid-column:1/-1}
+      .kb-form-field label{font-family:'Maven Pro',sans-serif;font-size:.74rem;font-weight:700;color:var(--pg-text);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+      .kb-form-field label .req{color:var(--pg-danger);margin-left:2px}
+      .kb-form-field input,.kb-form-field select,.kb-form-field textarea{padding:9px 12px;border:1px solid var(--pg-border);border-radius:5px;font-size:.88rem;background:#fff;font-family:inherit}
+      .kb-form-field textarea{resize:vertical;min-height:90px}
+      .kb-form-field input:focus,.kb-form-field select:focus,.kb-form-field textarea:focus{outline:none;border-color:var(--kb-teal);box-shadow:0 0 0 2px rgba(0,105,92,.15)}
+      .kb-form-help{font-size:.74rem;color:var(--pg-text-light);margin-top:3px}
+      .kb-form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+      .kb-submit-btn{display:inline-flex;align-items:center;gap:8px;background:var(--kb-teal);color:#fff;font-family:'Maven Pro',sans-serif;font-size:.82rem;font-weight:700;padding:10px 18px;border-radius:5px;border:none;cursor:pointer;text-transform:uppercase;letter-spacing:.4px;transition:background .15s}
+      .kb-submit-btn:hover{background:var(--kb-teal-dark)}
+      .kb-submit-btn:disabled{opacity:.55;cursor:not-allowed}
+      .kb-issue-link{font-size:.78rem;color:var(--pg-text-light);text-decoration:none;display:inline-flex;align-items:center;gap:4px;margin-left:auto}
+      .kb-issue-link:hover{color:var(--kb-teal);text-decoration:underline}
+      .kb-alert{padding:10px 14px;border-radius:5px;font-size:.85rem;margin-top:12px}
+      .kb-alert-success{background:#e8f5e9;color:#2e7d32;border:1px solid #c8e6c9}
+      .kb-alert-error{background:#ffebee;color:#c62828;border:1px solid #ffcdd2}
+      .kb-alert-info{background:#e0f2f1;color:var(--kb-teal-dark);border:1px solid #b2dfdb}
+
+      /* Empty / loading */
+      .kb-empty{padding:40px 20px;text-align:center;color:var(--pg-text-light);background:#fafbfc;border:1px dashed var(--pg-border);border-radius:8px}
+      .kb-empty i{font-size:2.4rem;color:#cfd6dd;margin-bottom:10px;display:block}
+      .kb-empty h4{font-family:'Maven Pro',sans-serif;color:var(--pg-text);margin:0 0 6px;font-size:1rem}
+      .kb-skel{background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.4s linear infinite;border-radius:8px;height:160px}
+      @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+      #footer img.footer-logo{height:36px;margin-bottom:10px;opacity:.6;transition:opacity .2s}
+      #footer img.footer-logo:hover{opacity:1}
+      @media(max-width:768px){
+        .kb-grid{grid-template-columns:1fr}
+        .kb-form-row{grid-template-columns:1fr}
+        .kb-hero h1{font-size:1.4rem}
+        .kb-hero{padding:24px 20px}
+        .kb-hero-stats{gap:18px}
+      }
+
+      /* Dark mode (page-scoped) */
+      [data-theme="dark"] .kb-toolbar{background:#252525!important;border-color:#3a3a3a}
+      [data-theme="dark"] .kb-toolbar input,[data-theme="dark"] .kb-search input{background:#1e1e1e!important;border-color:#3a3a3a!important;color:#d4d4d4!important}
+      [data-theme="dark"] .kb-form-field input,[data-theme="dark"] .kb-form-field select,[data-theme="dark"] .kb-form-field textarea{background:#1e1e1e!important;border-color:#3a3a3a!important;color:#d4d4d4!important}
+      [data-theme="dark"] .kb-chip{background:#1e1e1e;border-color:#3a3a3a;color:#b0b0b0}
+      [data-theme="dark"] .kb-chip:hover{border-color:#4db6ac;color:#4db6ac}
+      [data-theme="dark"] .kb-chip.active{background:#00695c;border-color:#00695c;color:#fff}
+      [data-theme="dark"] .kb-card{background:#252525!important;border-color:#3a3a3a!important}
+      [data-theme="dark"] .kb-card:hover{border-color:#4db6ac}
+      [data-theme="dark"] .kb-card h3{color:#e4e4e4}
+      [data-theme="dark"] .kb-card-summary{color:#c9d1d9}
+      [data-theme="dark"] .kb-tag{background:#1e1e1e;color:#a0a0a0}
+      [data-theme="dark"] .kb-card-foot,[data-theme="dark"] .kb-content{border-color:#3a3a3a}
+      [data-theme="dark"] .kb-content-inner{color:#c9d1d9}
+      [data-theme="dark"] .kb-content-inner strong,[data-theme="dark"] .kb-content-inner h4{color:#e4e4e4}
+      [data-theme="dark"] .kb-content-inner code{background:#1a1a1a;color:#4db6ac}
+      [data-theme="dark"] .kb-submit-panel{background:linear-gradient(135deg,#1e1e1e 0%,#252525 100%)!important;border-color:#3a3a3a}
+      [data-theme="dark"] .kb-submit-head h3,[data-theme="dark"] .kb-form-field label{color:#d4d4d4}
+      [data-theme="dark"] .kb-submit-panel p{color:#c9d1d9!important}
+      [data-theme="dark"] .kb-form-help{color:#a0a0a0}
+      [data-theme="dark"] .kb-empty{background:#1e1e1e;border-color:#3a3a3a}
+      [data-theme="dark"] .kb-empty h4{color:#d4d4d4}
+      [data-theme="dark"] .pg-section-title .count-badge{background:#1a3a36;color:#4db6ac}
+      [data-theme="dark"] .kb-skel{background:linear-gradient(90deg,#252525 25%,#2e2e2e 50%,#252525 75%);background-size:200% 100%}
+
+    </style>
+
+    <meta property="og:title" content="Knowledge Base — Azerbaijan PostgreSQL User Group">
+    <meta property="og:description" content="PostgreSQL best practices, how-to guides, performance tips, and hard-won lessons shared by the Azerbaijan PostgreSQL community.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://postgresql.az/knowledge-base/">
+    <meta property="og:site_name" content="Azerbaijan PostgreSQL User Group (AZERPUG)">
+    <meta property="og:image" content="https://postgresql.az/pict/smal.png">
+    <link rel="canonical" href="https://postgresql.az/knowledge-base/">
+  </head>
+  <body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDMJ7KJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="container-fluid"><div class="row justify-content-md-center"><div class="col">
+      <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand p-0" aria-label="AZERPUG Home" href="/"><img class="logo" src="/pict/smal.png" alt="AZERPUG"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="pgNavbar"><ul class="navbar-nav mr-auto">
+          <li class="nav-item p-2"><a href="/" data-i18n="nav.home">Home</a></li>
+          <li class="nav-item p-2"><a href="/blogs/" data-i18n="nav.blog">Blog Posts</a></li>
+          <li class="nav-item p-2"><a href="/events/" data-i18n="nav.events">Events</a></li>
+          <li class="nav-item p-2"><a href="/registration/" data-i18n="nav.registration">Registration</a></li>
+          <li class="nav-item p-2"><a href="/members/" data-i18n="nav.members">Members</a></li>
+          <li class="nav-item p-2"><a href="/knowledge-base/" data-i18n="nav.kb">Knowledge Base</a></li>
+          <li class="nav-item p-2"><a href="/community/" data-i18n="nav.community">Global Community</a></li>
+          <li class="nav-item p-2"><a href="/profile/" data-i18n="nav.profile">My Profile</a></li>
+          <li class="nav-item p-2 dropdown">
+            <a href="/about/" class="dropdown-toggle" data-toggle="dropdown" data-i18n="nav.about">About</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/about/" data-i18n="nav.about">About</a>
+              <a class="dropdown-item" href="/sponsors/" data-i18n="nav.sponsors">Sponsors</a>
+              <a class="dropdown-item" href="/faq/" data-i18n="nav.faq">FAQ</a>
+              <a class="dropdown-item" href="/gallery/" data-i18n="nav.gallery">Gallery</a>
+              <a class="dropdown-item" href="/contact/" data-i18n="nav.contact">Contact</a>
+              <a class="dropdown-item" href="/extensions/" data-i18n="nav.extensions">Extensions &amp; Tools</a>
+              <a class="dropdown-item" href="/contribute/" data-i18n="nav.contribute">Contribute</a>
+              <a class="dropdown-item" href="/committees/" data-i18n="nav.committees">Committees</a>
+              <a class="dropdown-item" href="/coc/" data-i18n="nav.coc">Code of Conduct</a>
+            </div>
+          </li>
+        </ul></div>
+      </nav>
+    </div></div>
+
+    <div class="pg-page-wrapper" style="margin-top:1rem;"><div class="pg-content-area">
+      <main class="pg-main-content">
+
+        <!-- Hero -->
+        <section class="kb-hero">
+          <p class="kb-hero-eyebrow" data-i18n="kb.eyebrow">AZERPUG · Knowledge Base</p>
+          <h1 data-i18n="kb.hero_title">PostgreSQL Best Practices &amp; Guides</h1>
+          <p class="tagline" data-i18n="kb.hero_tagline">Practical, battle-tested PostgreSQL knowledge — performance tuning, security, backups, replication and more. Curated and contributed by the AZERPUG community so the next engineer doesn't have to learn it the hard way.</p>
+          <div class="kb-hero-cta">
+            <a href="#contribute" class="kb-btn-primary"><i class="fas fa-feather-alt"></i> <span data-i18n="kb.cta_contribute">Contribute an Article</span></a>
+            <a href="#articles" class="kb-btn-ghost"><i class="fas fa-book-open"></i> <span data-i18n="kb.cta_browse">Browse Articles</span></a>
+          </div>
+          <div class="kb-hero-stats">
+            <div class="kb-hero-stat"><strong id="statArticles">—</strong><span data-i18n="kb.stat_articles">articles</span></div>
+            <div class="kb-hero-stat"><strong id="statCats">—</strong><span data-i18n="kb.stat_topics">topics</span></div>
+            <div class="kb-hero-stat"><strong id="statAuthors">—</strong><span data-i18n="kb.stat_contributors">contributors</span></div>
+          </div>
+        </section>
+
+        <!-- Toolbar -->
+        <div class="kb-toolbar">
+          <div class="kb-search">
+            <i class="fas fa-search"></i>
+            <input type="text" id="kbSearch" placeholder="Search articles, topics, or tags…" data-i18n-placeholder="kb.search_ph">
+          </div>
+          <div class="kb-chips" id="kbChips">
+            <span class="kb-chip active" data-cat="all" data-i18n="kb.cat_all">All</span>
+            <span class="kb-chip" data-cat="performance" data-i18n="kb.cat_performance">Performance</span>
+            <span class="kb-chip" data-cat="security" data-i18n="kb.cat_security">Security</span>
+            <span class="kb-chip" data-cat="backup-recovery" data-i18n="kb.cat_backup">Backup &amp; Recovery</span>
+            <span class="kb-chip" data-cat="replication" data-i18n="kb.cat_replication">Replication</span>
+            <span class="kb-chip" data-cat="administration" data-i18n="kb.cat_admin">Administration</span>
+            <span class="kb-chip" data-cat="development" data-i18n="kb.cat_development">Development</span>
+            <span class="kb-chip" data-cat="monitoring" data-i18n="kb.cat_monitoring">Monitoring</span>
+            <span class="kb-chip" data-cat="migration" data-i18n="kb.cat_migration">Migration</span>
+          </div>
+        </div>
+
+        <!-- Featured -->
+        <h2 class="pg-section-title" id="featured">
+          <i class="fas fa-star"></i>
+          <span data-i18n="kb.featured_title">Featured Articles</span>
+          <span class="count-badge" id="featuredCount">—</span>
+        </h2>
+        <div class="kb-grid" id="featuredGrid">
+          <div class="kb-skel"></div><div class="kb-skel"></div>
+        </div>
+
+        <!-- All -->
+        <h2 class="pg-section-title" id="articles">
+          <i class="fas fa-book"></i>
+          <span data-i18n="kb.all_title">All Articles</span>
+          <span class="count-badge" id="allCount">—</span>
+        </h2>
+        <div class="kb-grid" id="allGrid">
+          <div class="kb-skel"></div><div class="kb-skel"></div><div class="kb-skel"></div>
+        </div>
+
+        <!-- Contribute -->
+        <h2 class="pg-section-title" id="contribute">
+          <i class="fas fa-feather-alt"></i>
+          <span data-i18n="kb.contribute_title">Contribute an Article</span>
+        </h2>
+        <div class="kb-submit-panel">
+          <div class="kb-submit-head">
+            <h3 data-i18n="kb.contribute_subtitle">Share a best practice with the community</h3>
+          </div>
+          <p style="font-size:.88rem;color:var(--pg-text);margin:0 0 14px;line-height:1.6" data-i18n="kb.contribute_intro">Learned something the hard way? Write it up so the next engineer doesn't have to. Submit a best practice, how-to, or lessons-learned article below — we'll review and publish it to the Knowledge Base.</p>
+
+          <form id="kbForm" onsubmit="return submitKbArticle(event)">
+            <div class="kb-form-row">
+              <div class="kb-form-field full">
+                <label for="kbTitle" data-i18n="kb.lbl_title">Article Title <span class="req">*</span></label>
+                <input type="text" id="kbTitle" maxlength="160" placeholder="e.g. Avoid SELECT * in production queries" required>
+              </div>
+              <div class="kb-form-field">
+                <label for="kbCategory" data-i18n="kb.lbl_category">Category <span class="req">*</span></label>
+                <select id="kbCategory" required>
+                  <option value="performance" data-i18n="kb.cat_performance">Performance</option>
+                  <option value="security" data-i18n="kb.cat_security">Security</option>
+                  <option value="backup-recovery" data-i18n="kb.cat_backup">Backup &amp; Recovery</option>
+                  <option value="replication" data-i18n="kb.cat_replication">Replication</option>
+                  <option value="administration" selected data-i18n="kb.cat_admin">Administration</option>
+                  <option value="development" data-i18n="kb.cat_development">Development</option>
+                  <option value="monitoring" data-i18n="kb.cat_monitoring">Monitoring</option>
+                  <option value="migration" data-i18n="kb.cat_migration">Migration</option>
+                  <option value="other" data-i18n="kb.cat_other">Other</option>
+                </select>
+              </div>
+              <div class="kb-form-field">
+                <label for="kbReadMin" data-i18n="kb.lbl_readmin">Read Time (min)</label>
+                <input type="number" id="kbReadMin" min="1" max="60" value="5">
+              </div>
+              <div class="kb-form-field full">
+                <label for="kbSummary" data-i18n="kb.lbl_summary">Summary <span class="req">*</span></label>
+                <textarea id="kbSummary" rows="2" maxlength="400" placeholder="One or two sentences describing the takeaway." required></textarea>
+              </div>
+              <div class="kb-form-field full">
+                <label for="kbContent" data-i18n="kb.lbl_content">Article Body</label>
+                <textarea id="kbContent" rows="6" placeholder="The full guide. Markdown supported: **bold**, - bullet lists, `code`, blank line between paragraphs."></textarea>
+                <div class="kb-form-help" data-i18n="kb.lbl_content_help">Markdown supported — bold, bullet lists, inline code.</div>
+              </div>
+              <div class="kb-form-field">
+                <label for="kbTags" data-i18n="kb.lbl_tags">Tags</label>
+                <input type="text" id="kbTags" placeholder="indexes, vacuum, performance">
+                <div class="kb-form-help" data-i18n="kb.lbl_tags_help">Comma-separated</div>
+              </div>
+              <div class="kb-form-field">
+                <label for="kbSourceUrl" data-i18n="kb.lbl_source">Further Reading (URL)</label>
+                <input type="url" id="kbSourceUrl" placeholder="https://www.postgresql.org/docs/...">
+              </div>
+              <div class="kb-form-field" id="kbAnonName" style="display:none">
+                <label for="kbAuthorName" data-i18n="kb.lbl_your_name">Your Name <span class="req">*</span></label>
+                <input type="text" id="kbAuthorName" placeholder="Valeh Agayev">
+              </div>
+              <div class="kb-form-field" id="kbAnonEmail" style="display:none">
+                <label for="kbAuthorEmail" data-i18n="kb.lbl_your_email">Your Email <span class="req">*</span></label>
+                <input type="email" id="kbAuthorEmail" placeholder="you@example.com">
+              </div>
+            </div>
+            <div class="kb-form-actions">
+              <button type="submit" class="kb-submit-btn" id="kbSubmitBtn"><i class="fas fa-paper-plane"></i> <span data-i18n="kb.btn_submit">Submit Article</span></button>
+              <span style="font-size:.78rem;color:var(--pg-text-light)" data-i18n="kb.submit_note">Reviewed within a few days.</span>
+              <a href="https://github.com/valehdba/postgresql.az/issues/new?labels=knowledge-base&title=%5BKB%5D+&body=**Category%3A**+%0A**Summary%3A**+%0A**Article%3A**+" target="_blank" rel="noopener" class="kb-issue-link"><i class="fab fa-github"></i> <span data-i18n="kb.via_issue">Or submit via a GitHub issue</span> <i class="fas fa-external-link-alt" style="font-size:.65rem"></i></a>
+            </div>
+            <div id="kbAlert"></div>
+          </form>
+        </div>
+
+      </main>
+    </div></div></div>
+
+    <footer id="footer"><div class="container">
+      <a href="/"><img class="footer-logo" src="/pict/smal.png" alt="AZERPUG"></a><br/>
+      <div style="margin-bottom:12px;">
+        <a href="https://www.facebook.com/groups/www.postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="Facebook" aria-label="Facebook Group"><i class="fab fa-facebook"></i></a>
+        <a href="https://github.com/valehdba/postgresql.az" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="GitHub" aria-label="our GitHub Repository"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/groups/17977044/" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="LinkedIn" aria-label="LinkedIn Group"><i class="fab fa-linkedin"></i></a>
+        <a href="https://t.me/postgresqlaz" target="_blank" rel="noopener" style="margin:0 6px;color:#515151;font-size:1.1rem;" title="Telegram" aria-label="Telegram Group"><i class="fab fa-telegram-plane"></i></a>
+      </div>
+      <a href="/about/privacypolicy/" data-i18n="footer.privacy">Privacy policy</a> | <a href="/about/website/" data-i18n="footer.website">About the website</a> | <a href="/coc/" data-i18n="footer.coc">Code of Conduct</a><br/>
+      Copyright &copy; 2018-2025 Azerbaijan PostgreSQL User Group (AZERPUG)
+    </div></footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/js/navbar-auth.js"></script>
+    <script src="/js/lang.js"></script>
+
+    <!-- v1.0 -->
+    <script>
+    (function(){
+      var SB  = 'https://qlyqwwhimwfcvuqdrxov.supabase.co';
+      var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFseXF3d2hpbXdmY3Z1cWRyeG92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjg2ODYsImV4cCI6MjA4OTcwNDY4Nn0.6MKz72wGwthRL8hs-Iv3L9Iw_W4DdGh3UjrwcagtKfM';
+
+      var user = null;
+      try{ user = JSON.parse(sessionStorage.getItem('azerpug_user')); }catch(e){}
+
+      // Category → color + label
+      var CATS = {
+        'performance':     {c:'#c62828', label:'Performance'},
+        'security':        {c:'#283593', label:'Security'},
+        'backup-recovery': {c:'#00695c', label:'Backup & Recovery'},
+        'replication':     {c:'#e65100', label:'Replication'},
+        'administration':  {c:'#336791', label:'Administration'},
+        'development':     {c:'#6a1b9a', label:'Development'},
+        'monitoring':      {c:'#00838f', label:'Monitoring'},
+        'migration':       {c:'#558b2f', label:'Migration'},
+        'other':           {c:'#555555', label:'Other'}
+      };
+      function catColor(k){ return (CATS[k]||CATS.other).c; }
+      function catLabel(k){ return (CATS[k]||CATS.other).label; }
+
+      // --- Fallback content (mirrors sql/knowledge_base.sql seed) ---
+      var FALLBACK = [
+        {title:'Use connection pooling in front of PostgreSQL', category:'performance',
+         summary:'Every PostgreSQL connection is a separate OS process with real memory cost. Past a few hundred connections, performance degrades sharply — put a pooler like PgBouncer in front.',
+         content:"PostgreSQL forks a backend process per connection. Each one consumes memory (work_mem, temp buffers) and adds scheduling overhead, so opening thousands of direct connections is wasteful and unstable.\n\n**Recommended approach**\n\n- Run PgBouncer (or pgcat) in transaction-pooling mode for web/API workloads.\n- Size the pool to your CPU/IO capacity, not your client count.\n- Keep `max_connections` on the server modest (100-200) and let the pooler multiplex.\n- Watch for prepared statements / session state: transaction pooling does not preserve session state between transactions.\n\n**Why it matters**\n\nA pooler turns thousands of idle app connections into a few dozen busy server connections, reducing memory pressure and smoothing out latency spikes under load.",
+         tags:['pgbouncer','connections','scaling'], read_minutes:6,
+         source_url:'https://www.pgbouncer.org/', author_name:'AZERPUG', is_featured:true},
+
+        {title:'Tune autovacuum before bloat becomes a problem', category:'administration',
+         summary:'Autovacuum reclaims dead tuples and keeps statistics fresh. Default settings are conservative — busy tables need more aggressive thresholds to avoid table and index bloat.',
+         content:"Every UPDATE and DELETE leaves dead tuples behind. Autovacuum cleans them up, but its defaults are tuned for small, low-traffic databases.\n\n**Practical tuning**\n\n- Lower `autovacuum_vacuum_scale_factor` for large, write-heavy tables so vacuum triggers sooner.\n- Raise `autovacuum_max_workers` and `autovacuum_vacuum_cost_limit` on capable hardware.\n- Set per-table overrides with `ALTER TABLE ... SET (...)` rather than changing global defaults for everything.\n- Monitor `n_dead_tup` in `pg_stat_user_tables` and watch for transaction-ID wraparound warnings.\n\n**Warning signs**\n\nGrowing table size with stable row counts, slow index scans, and VACUUM taking longer each run all point to autovacuum falling behind.",
+         tags:['autovacuum','bloat','maintenance'], read_minutes:7,
+         source_url:'https://www.postgresql.org/docs/current/routine-vacuuming.html', author_name:'AZERPUG', is_featured:true},
+
+        {title:'Read EXPLAIN ANALYZE before optimizing a query', category:'performance',
+         summary:'Guessing why a query is slow wastes time. EXPLAIN ANALYZE shows the real plan, actual row counts, and where time is spent — let it guide the fix.',
+         content:"`EXPLAIN ANALYZE` runs the query and reports the plan the planner chose alongside actual timings and row counts.\n\n**How to read it**\n\n- Compare estimated vs actual rows — a large gap means stale statistics; run `ANALYZE`.\n- Look for `Seq Scan` on large tables inside selective filters — often a missing index.\n- Watch for `Nested Loop` joins over big row counts.\n- Note `Sort` and `Hash` nodes spilling to disk — a sign `work_mem` is too low for that query.\n\n**Tips**\n\nUse `EXPLAIN (ANALYZE, BUFFERS)` to see cache vs disk reads. Optimize the node that dominates total time — not the one that looks scariest.",
+         tags:['explain','query-tuning','indexes'], read_minutes:6,
+         source_url:'https://www.postgresql.org/docs/current/using-explain.html', author_name:'AZERPUG', is_featured:false},
+
+        {title:'Choose the right index type for the job', category:'performance',
+         summary:'B-tree is the default, but GIN, GiST, BRIN, and partial/expression indexes solve problems B-tree cannot. Match the index to the query pattern.',
+         content:"PostgreSQL ships several index types, each suited to different access patterns.\n\n**Quick guide**\n\n- **B-tree** — equality and range on scalar columns. The default, and right most of the time.\n- **GIN** — multi-value columns: `jsonb`, arrays, full-text search.\n- **GiST** — geometric data, ranges, nearest-neighbour search.\n- **BRIN** — very large tables with naturally ordered data; tiny and cheap.\n- **Partial index** — index only the rows you actually query.\n- **Expression index** — index `lower(email)` if you always query case-insensitively.\n\n**Cost reminder**\n\nEvery index slows writes and consumes space. Index for the queries you actually run; drop indexes that `pg_stat_user_indexes` shows are never scanned.",
+         tags:['indexes','b-tree','gin','brin'], read_minutes:7,
+         source_url:'https://www.postgresql.org/docs/current/indexes-types.html', author_name:'AZERPUG', is_featured:false},
+
+        {title:'Have a backup strategy you have actually tested', category:'backup-recovery',
+         summary:'A backup you have never restored is a hope, not a strategy. Combine logical and physical backups, automate them, and rehearse recovery.',
+         content:"Backups exist to be restored. The only way to know they work is to practise restoring them.\n\n**Layers**\n\n- **Logical** (`pg_dump` / `pg_dumpall`) — portable, good for single databases and migrations, but slow to restore at scale.\n- **Physical** (`pg_basebackup` + WAL archiving) — enables Point-In-Time Recovery and fast restores of large clusters.\n- Consider pgBackRest or Barman for retention, compression, and parallelism.\n\n**Discipline**\n\n- Automate backups and monitor that they succeed.\n- Store copies off-host and off-site.\n- Schedule regular restore drills and measure RTO/RPO against the business requirement.\n- Document the recovery procedure so anyone on the team can follow it under pressure.",
+         tags:['backup','pitr','pgbackrest','disaster-recovery'], read_minutes:8,
+         source_url:'https://www.postgresql.org/docs/current/backup.html', author_name:'AZERPUG', is_featured:true},
+
+        {title:'Harden access with least-privilege roles', category:'security',
+         summary:'Applications should never connect as a superuser. Create dedicated roles, grant only what is needed, and lock down pg_hba.conf.',
+         content:"Most PostgreSQL security incidents come from over-privileged accounts and permissive host-based authentication.\n\n**Roles**\n\n- Never let an application log in as `postgres` or any superuser.\n- Create a role per application with exactly the privileges it needs.\n- Use GROUP roles to manage permissions centrally; revoke default `PUBLIC` privileges.\n\n**Connection security**\n\n- In `pg_hba.conf`, prefer `scram-sha-256` over `md5`, and restrict each entry to the narrowest CIDR range possible.\n- Require SSL/TLS for connections crossing untrusted networks.\n- Keep superuser access to local, audited sessions only.\n\n**Bonus**\n\nConsider Row-Level Security for multi-tenant data, and review `pg_hba.conf` whenever the network changes.",
+         tags:['security','roles','pg_hba','ssl'], read_minutes:7,
+         source_url:'https://www.postgresql.org/docs/current/auth-pg-hba-conf.html', author_name:'AZERPUG', is_featured:false}
+      ];
+
+      function esc(t){ if(t==null) return ''; var d=document.createElement('div'); d.textContent=t; return d.innerHTML; }
+      function ttext(key, fb){ try{ return (window.azT && window.azT(key)) || fb; }catch(e){ return fb; } }
+
+      // Tiny Markdown → HTML (bold, inline code, bullet lists, paragraphs)
+      function mdToHtml(md){
+        if(!md) return '';
+        var blocks = md.split(/\n\n+/);
+        var html = '';
+        blocks.forEach(function(block){
+          var lines = block.split('\n');
+          var isList = lines.every(function(l){ return l.trim().indexOf('- ') === 0 || l.trim()===''; }) &&
+                       lines.some(function(l){ return l.trim().indexOf('- ')===0; });
+          if(isList){
+            html += '<ul>';
+            lines.forEach(function(l){
+              l = l.trim();
+              if(l.indexOf('- ')===0) html += '<li>'+inline(l.slice(2))+'</li>';
+            });
+            html += '</ul>';
+          } else {
+            html += '<p>'+inline(block.replace(/\n/g,' '))+'</p>';
+          }
+        });
+        return html;
+      }
+      function inline(s){
+        s = esc(s);
+        s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+        s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+        return s;
+      }
+
+      var cardSeq = 0;
+      function buildCard(a){
+        var id = 'kb-art-' + (cardSeq++);
+        var col = catColor(a.category);
+        var tags = (a.tags||[]).slice(0,5).map(function(t){ return '<span class="kb-tag">'+esc(t)+'</span>'; }).join('');
+        var feat = a.is_featured ? ' featured' : '';
+        var featTag = a.is_featured ? '<span class="kb-featured-tag"><i class="fas fa-star"></i> '+ttext('kb.featured','Featured')+'</span>' : '';
+        var source = a.source_url ?
+          '<a class="kb-source" href="'+esc(a.source_url)+'" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> '+ttext('kb.further_reading','Further reading')+'</a>' : '';
+        var body = a.content ? mdToHtml(a.content) :
+          '<p style="color:var(--pg-text-light)">'+ttext('kb.no_body','Full article coming soon.')+'</p>';
+        return ''+
+          '<article class="kb-card'+feat+'" data-cat="'+esc(a.category)+'" data-search="'+
+            esc(((a.title||'')+' '+(a.summary||'')+' '+((a.tags||[]).join(' '))+' '+(a.category||'')).toLowerCase())+'">'+
+            '<div class="kb-card-accent" style="background:'+col+'"></div>'+
+            '<div class="kb-card-body">'+
+              '<div class="kb-card-top">'+
+                '<span class="kb-cat-badge" style="background:'+col+'">'+esc(catLabel(a.category))+'</span>'+
+                featTag+
+                '<span class="kb-read"><i class="far fa-clock"></i> '+(a.read_minutes||5)+' '+ttext('kb.min_read','min read')+'</span>'+
+              '</div>'+
+              '<h3>'+esc(a.title)+'</h3>'+
+              '<p class="kb-card-summary">'+esc(a.summary)+'</p>'+
+              (tags ? '<div class="kb-tags">'+tags+'</div>' : '')+
+              '<div class="kb-card-foot">'+
+                '<span class="kb-author"><i class="fas fa-user-edit"></i> '+esc(a.author_name||'AZERPUG')+'</span>'+
+                '<button class="kb-read-btn collapsed-state" data-target="'+id+'" type="button">'+
+                  '<i class="fas fa-book-open"></i> <span class="kb-rb-label">'+ttext('kb.read_article','Read article')+'</span></button>'+
+              '</div>'+
+            '</div>'+
+            '<div class="kb-content" id="'+id+'"><div class="kb-content-inner">'+body+source+'</div></div>'+
+          '</article>';
+      }
+
+      function wireExpanders(scope){
+        scope.querySelectorAll('.kb-read-btn').forEach(function(btn){
+          btn.addEventListener('click', function(){
+            var panel = document.getElementById(btn.getAttribute('data-target'));
+            if(!panel) return;
+            var open = panel.classList.toggle('open');
+            btn.classList.toggle('collapsed-state', !open);
+            var label = btn.querySelector('.kb-rb-label');
+            var icon = btn.querySelector('i');
+            if(open){ label.textContent = ttext('kb.hide_article','Hide article'); icon.className='fas fa-chevron-up'; }
+            else    { label.textContent = ttext('kb.read_article','Read article'); icon.className='fas fa-book-open'; }
+          });
+        });
+      }
+
+      function renderAll(items){
+        var feat = items.filter(function(x){ return x.is_featured; });
+        var rest = items.filter(function(x){ return !x.is_featured; });
+        var fEl = document.getElementById('featuredGrid');
+        var aEl = document.getElementById('allGrid');
+
+        fEl.innerHTML = feat.length ? feat.map(buildCard).join('') :
+          '<div class="kb-empty" style="grid-column:1/-1"><i class="fas fa-star"></i><h4>'+ttext('kb.empty_featured_h','No featured articles yet')+'</h4><p>'+ttext('kb.empty_featured_p','Great submissions get featured here.')+'</p></div>';
+        aEl.innerHTML = rest.length ? rest.map(buildCard).join('') :
+          (feat.length ? '' : '<div class="kb-empty" style="grid-column:1/-1"><i class="fas fa-book"></i><h4>'+ttext('kb.empty_h','No articles yet')+'</h4><p>'+ttext('kb.empty_p','Be the first to contribute a best practice below.')+'</p></div>');
+
+        document.getElementById('featuredCount').textContent = feat.length;
+        document.getElementById('allCount').textContent = rest.length;
+
+        var cats = {}, authors = {};
+        items.forEach(function(x){ if(x.category) cats[x.category]=1; if(x.author_name) authors[x.author_name]=1; });
+        document.getElementById('statArticles').textContent = items.length;
+        document.getElementById('statCats').textContent = Object.keys(cats).length;
+        document.getElementById('statAuthors').textContent = Object.keys(authors).length;
+
+        wireExpanders(document);
+      }
+
+      // Filtering
+      var activeCat = 'all';
+      function applyFilters(){
+        var q = (document.getElementById('kbSearch').value||'').toLowerCase().trim();
+        document.querySelectorAll('.kb-card').forEach(function(c){
+          var catOk = (activeCat==='all' || c.getAttribute('data-cat')===activeCat);
+          var qOk = !q || (c.getAttribute('data-search')||'').indexOf(q) !== -1;
+          c.style.display = (catOk && qOk) ? '' : 'none';
+        });
+      }
+      document.getElementById('kbSearch').addEventListener('input', applyFilters);
+      document.querySelectorAll('#kbChips .kb-chip').forEach(function(ch){
+        ch.addEventListener('click', function(){
+          document.querySelectorAll('#kbChips .kb-chip').forEach(function(c){ c.classList.remove('active'); });
+          ch.classList.add('active');
+          activeCat = ch.getAttribute('data-cat');
+          applyFilters();
+        });
+      });
+
+      // Load
+      async function loadArticles(){
+        try{
+          var ctrl = new AbortController();
+          var t = setTimeout(function(){ ctrl.abort(); }, 6000);
+          var r = await fetch(SB+'/rest/v1/public_knowledge_base?select=*&order=is_featured.desc,created_at.desc',
+            { headers:{ 'apikey':KEY, 'Authorization':'Bearer '+KEY }, signal:ctrl.signal });
+          clearTimeout(t);
+          if(!r.ok) throw new Error('Supabase '+r.status);
+          var data = await r.json();
+          if(!Array.isArray(data) || !data.length) throw new Error('empty');
+          renderAll(data);
+        } catch(e){
+          renderAll(FALLBACK);
+        }
+      }
+      loadArticles();
+
+      // Submission
+      function showAlert(html, kind){
+        document.getElementById('kbAlert').innerHTML = '<div class="kb-alert kb-alert-'+(kind||'info')+'">'+html+'</div>';
+      }
+      if(!user){
+        document.getElementById('kbAnonName').style.display='';
+        document.getElementById('kbAnonEmail').style.display='';
+      }
+
+      window.submitKbArticle = async function(ev){
+        ev.preventDefault();
+        document.getElementById('kbAlert').innerHTML='';
+        var btn = document.getElementById('kbSubmitBtn');
+
+        var title   = document.getElementById('kbTitle').value.trim();
+        var cat     = document.getElementById('kbCategory').value;
+        var summary = document.getElementById('kbSummary').value.trim();
+        var content = document.getElementById('kbContent').value.trim() || null;
+        var tagsRaw = document.getElementById('kbTags').value;
+        var tags    = tagsRaw.split(',').map(function(s){return s.trim();}).filter(Boolean);
+        var srcUrl  = document.getElementById('kbSourceUrl').value.trim() || null;
+        var readMin = parseInt(document.getElementById('kbReadMin').value,10) || 5;
+
+        var aName  = user ? (user.full_name || user.name || null)
+                          : document.getElementById('kbAuthorName').value.trim();
+        var aEmail = user ? (user.email || null)
+                          : document.getElementById('kbAuthorEmail').value.trim();
+
+        if(summary.length < 20){
+          showAlert(ttext('kb.err_summary','Summary is too short — describe the article in at least 20 characters.'),'error');
+          return false;
+        }
+        if(!user && (!aName || !aEmail)){
+          showAlert(ttext('kb.err_anon','Please provide your name and email — or <a href="/login/">sign in</a>.'),'error');
+          return false;
+        }
+
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> '+ttext('kb.sending','Submitting…');
+        try{
+          var r = await fetch(SB+'/rest/v1/rpc/submit_kb_article',{
+            method:'POST',
+            headers:{ 'Content-Type':'application/json', 'apikey':KEY, 'Authorization':'Bearer '+KEY },
+            body: JSON.stringify({
+              p_title:title, p_category:cat, p_summary:summary, p_content:content,
+              p_tags:tags.length?tags:null, p_source_url:srcUrl, p_read_minutes:readMin,
+              p_member_id: user && user.id ? user.id : null,
+              p_author_name:aName, p_author_email:aEmail
+            })
+          });
+          if(!r.ok){
+            var msg = await r.text();
+            if(r.status === 404){
+              showAlert(ttext('kb.err_no_rpc',
+                'Submission service is not yet enabled on the server. Please <a href="https://github.com/valehdba/postgresql.az/issues/new?labels=knowledge-base&title=%5BKB%5D+'+encodeURIComponent(title)+'" target="_blank" rel="noopener">submit via a GitHub issue</a> for now.'),'info');
+            } else {
+              showAlert(ttext('kb.err_failed','Submission failed:')+' '+esc(msg),'error');
+            }
+            return false;
+          }
+          showAlert(ttext('kb.ok_submitted',
+            '<i class="fas fa-check-circle"></i> Thanks! Your article has been submitted for review. We\'ll publish it once approved.'),'success');
+          document.getElementById('kbForm').reset();
+        } catch(err){
+          showAlert(ttext('kb.err_net','Network error. Please try again, or submit via a GitHub issue.'),'error');
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fas fa-paper-plane"></i> '+ttext('kb.btn_submit','Submit Article');
+        }
+        return false;
+      };
+    })();
+    </script>
+  </body>
+</html>
